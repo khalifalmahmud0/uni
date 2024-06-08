@@ -1,0 +1,22 @@
+.page-wrapper .page-body-wrapper .page-body {
+    overflow: hidden;
+}
+
+.page_content {
+    position: relative;
+    animation: color_change .6s forwards;
+}
+
+@keyframes color_change {
+    from {
+        opacity: 0;
+        top: 30px;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        top: 0px;
+        transform: scale(1);
+    }
+}

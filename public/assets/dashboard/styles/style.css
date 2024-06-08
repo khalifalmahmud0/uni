@@ -271,41 +271,6 @@ img {
   display: none !important;
 }
 
-body {
-  height: 100vh;
-  background: url("/assets/dashboard/images/bg2.jpg");
-  background-size: cover;
-  overflow-y: hidden;
-}
-
-.checking_auth_div {
-  height: 100vh;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-.checking_auth_div h2 {
-  text-transform: capitalize;
-}
-
-#app {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-size: cover;
-  padding: 10px;
-  overflow: hidden;
-}
-#app .app_body {
-  flex: 1;
-  width: calc(100vw - 60px);
-  height: calc(100vh - 60px);
-  margin: 0 auto;
-  max-width: var(--container_width);
-  padding-bottom: 10px;
-  position: relative;
-}
-
 .app_nav {
   width: calc(100vw - 60px);
   max-width: var(--container_width);
@@ -1299,7 +1264,7 @@ input.form_checkbox:checked::after {
 .explore_window.fixed_size {
   position: unset;
   width: unset;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 200px);
 }
 .explore_window:nth-child(1) {
   top: 50px;
@@ -1928,7 +1893,7 @@ td.col_id {
   min-width: 300px;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 10;
   border: 1px solid var(--brand_color2);
 }
 .off_canvas.quick_view {
@@ -2065,3 +2030,6 @@ td.col_id {
   text-transform: capitalize;
 }
 
+/** public/assets/dashboard/scss/style.scss **/
+
+/*# sourceMappingURL=style.css.map */
