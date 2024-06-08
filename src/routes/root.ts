@@ -26,7 +26,7 @@ module.exports = async function (fastify: FastifyInstance) {
             '/admin',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
-                return reply.view('dashboard/admin.ejs');
+                return reply.view('dashboard/admin_uni.ejs');
             },
         );
 
