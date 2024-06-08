@@ -14,27 +14,27 @@ export default defineConfig({
     plugins: [react()],
     resolve: {
         alias: {
-            src: path.resolve('./public/management/central_branch/index.tsx'),
+            src: path.resolve('./public/management/super_admin/index.tsx'),
         },
     },
     publicDir: false,
     build: {
-        outDir: './public/management_build/central_branch',
+        outDir: './public/management_build/super_admin',
         manifest: false,
         sourcemap: true,
         rollupOptions: {
             input: resolve(
                 __dirname,
-                'public/management/central_branch/index.tsx',
+                'public/management/super_admin/index.tsx',
             ),
             output: {
-                entryFileNames: 'central_branch.js',
+                entryFileNames: 'super_admin.js',
             },
         },
     },
     esbuild: {
         loader: 'tsx',
-        include: /public\/management\/central_branch\/.*\.tsx?$/,
+        include: /public\/management\/super_admin\/.*\.tsx?$/,
         exclude: [],
     },
     optimizeDeps: {
@@ -45,7 +45,7 @@ export default defineConfig({
                     setup(build) {
                         build.onLoad(
                             {
-                                filter: /public\/management\/central_branch\/.*\.js$/,
+                                filter: /public\/management\/super_admin\/.*\.js$/,
                             },
                             async (args) => ({
                                 loader: 'tsx',
