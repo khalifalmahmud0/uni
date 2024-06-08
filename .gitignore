@@ -5,4 +5,4 @@ node_modules
 public/management_build/central_branch/central_branch.js.map
 
 public/management/super_admin_old
-public/management/admin
+public/management/admin_old
