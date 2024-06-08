@@ -37,7 +37,7 @@
     &.fixed_size {
         position: unset;
         width: unset;
-        height: calc(100vh - 140px);
+        height: calc(100vh - 200px);
     }
 
     @for $i from 1 through 15 {
