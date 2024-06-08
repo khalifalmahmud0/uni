@@ -4,3 +4,4 @@ logs
 /src/bootstrap
 .gitignore
 /public/management/central_branch/views/components/Rect
+/public/assets/dashboard_uni
