@@ -30,15 +30,20 @@ type Infer = InferAttributes<DataModel>;
 type InferCreation = InferCreationAttributes<DataModel>;
 type status = 'active' | 'deactive' | 'block';
 type role = 'super_admin' | 'admin' | 'accountant' | 'employee' | 'customer';
+type designation = 'ed' | 'gm' | 'agm' | 'mo';
 
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
 
     declare name: string;
     declare role?: role;
+    declare reference?: number;
+    declare desingnation?: designation;
+
     declare email: string | null;
     declare phone_number?: string | null;
     declare image?: string | null;
+
     declare password?: string;
     declare token?: string | null;
     declare forget_code?: string | null;
@@ -55,9 +60,13 @@ function init(sequelize: Sequelize) {
     DataModel.init(
         {
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: DataTypes.BIGINT.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true,
+            },
+            reference: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
             },
             role: {
                 type: new DataTypes.ENUM(
@@ -68,6 +77,15 @@ function init(sequelize: Sequelize) {
                     'customer',
                 ),
                 defaultValue: 'customer',
+            },
+            desingnation: {
+                type: new DataTypes.ENUM(
+                    'ed',
+                    'gm',
+                    'agm',
+                    'mo',
+                ),
+                allowNull: true,
             },
             name: {
                 type: new DataTypes.STRING(120),

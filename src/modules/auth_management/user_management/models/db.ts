@@ -13,8 +13,6 @@ let pass = process?.env.DB_PASSWORD || '';
 let database = process?.env.DB_DATABASE || '';
 let db_string = `mysql://${user}:${pass}@${host}:${port}/${database}`;
 
-console.log('loading user management');
-
 const sequelize = new Sequelize(db_string, {
     logging: false,
 });

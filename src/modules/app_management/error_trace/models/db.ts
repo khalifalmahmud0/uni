@@ -17,9 +17,6 @@ const sequelize = new Sequelize(
         logging: false,
     },
 );
-
-console.log('loading error trace management');
-
 interface models {
     ErrorTraceModel: typeof error_traces_model.DataModel;
     sequelize: Sequelize;

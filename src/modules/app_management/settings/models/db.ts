@@ -19,8 +19,6 @@ const sequelize = new Sequelize(
     },
 );
 
-console.log('loading setting management');
-
 interface models {
     SettingModel: typeof setting_model.DataModel;
     sequelize: Sequelize;

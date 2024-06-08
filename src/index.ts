@@ -101,6 +101,7 @@ async function boot() {
     await findAllRoutesFiles('./src/modules')
         .then((files: string[]) => {
             files.forEach((routes: string) => {
+                console.log(`setting up: ${routes}`);
                 fastify.register(require(path.resolve(appDir, routes)), {
                     prefix: 'api/v1',
                 });
@@ -111,7 +112,7 @@ async function boot() {
         });
 
     /** register all dependencies */
-    console.log('loading plugins');
+    console.log('\n loading plugins');
 
     fastify
         .register(AutoLoad, {

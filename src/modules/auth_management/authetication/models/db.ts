@@ -15,8 +15,6 @@ const sequelize = new Sequelize(
     `mysql://${user}:${pass}@${host}:${post}/${database}`,
 );
 
-console.log('loading auth management');
-
 interface models {
     User: typeof user_model.DataModel;
     sequelize: Sequelize;
