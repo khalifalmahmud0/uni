@@ -13,17 +13,22 @@ import DropDownSelectedItem from './DropDownSelectedItem';
 
 export interface Props {
     name: string;
-    get_selected_data?: Function;
+    get_selected_data?: (anyObject) => void;
+    multiple: true | false;
+    default_value?: anyObject[] | [];
 }
 
-const DropDown: React.FC<Props> = ({ name, get_selected_data }) => {
+const DropDown: React.FC<Props> = ({ name, get_selected_data, multiple, default_value }) => {
     const state: typeof initialState = useSelector(
         (state: RootState) => state[setup.module_name],
     );
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(storeSlice.actions.set_only_latest_data(true));
-        dispatch(all({}) as any);
+        dispatch(all({}));
+        if(default_value){
+            setSelectedList(default_value);
+        }
     }, []);
 
     /** local states */
@@ -47,7 +52,7 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data }) => {
     return (
         <>
             <div className="custom_drop_down">
-                <input type="hidden" ref={selected_items_input} name={name} />
+                <input type="hidden" ref={selected_items_input} id={name} name={name} />
                 <div
                     className="selected_list"
                     onClick={() => setShowDropDownList(true)}
@@ -73,26 +78,33 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data }) => {
                         </div>
 
                         <ul className="option_list custom_scroll">
-                            {(state.all as any)?.data?.map((i: anyObject) => {
-                                return (
-                                    <li className="option_item" key={i.id}>
-                                        <label htmlFor={`drop_item_${i.id}`}>
-                                            <div className="check_box">
-                                                <DropDownCheckbox
-                                                    item={i}
-                                                    selectedList={selectedList}
-                                                    setSelectedList={
-                                                        setSelectedList
-                                                    }
-                                                />
-                                            </div>
-                                            <div className="label">
-                                                {i.name}
-                                            </div>
-                                        </label>
-                                    </li>
-                                );
-                            })}
+                            {(state.all as anyObject)?.data?.map(
+                                (i: anyObject) => {
+                                    return (
+                                        <li className="option_item" key={i.id}>
+                                            <label
+                                                htmlFor={`drop_item_${i.id}`}
+                                            >
+                                                <div className="check_box">
+                                                    <DropDownCheckbox
+                                                        item={i}
+                                                        selectedList={
+                                                            selectedList
+                                                        }
+                                                        setSelectedList={
+                                                            setSelectedList
+                                                        }
+                                                        multiple={multiple}
+                                                    />
+                                                </div>
+                                                <div className="label">
+                                                    {i.name}
+                                                </div>
+                                            </label>
+                                        </li>
+                                    );
+                                },
+                            )}
                         </ul>
 
                         <div className="drop_down_footer data_list">
@@ -101,7 +113,7 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data }) => {
                                 set_paginate={storeSlice.actions.set_paginate}
                                 set_page={storeSlice.actions.set_page}
                                 all={all}
-                                data={state.all as any}
+                                data={state.all}
                                 selected_paginate={state.paginate}
                             ></Paginate>
                         </div>
