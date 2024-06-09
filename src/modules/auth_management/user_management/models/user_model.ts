@@ -38,7 +38,7 @@ class DataModel extends Model<Infer, InferCreation> {
     declare name: string;
     declare role?: role;
     declare reference?: number;
-    declare desingnation?: designation;
+    declare designation?: designation;
 
     declare email: string | null;
     declare phone_number?: string | null;
@@ -78,13 +78,8 @@ function init(sequelize: Sequelize) {
                 ),
                 defaultValue: 'customer',
             },
-            desingnation: {
-                type: new DataTypes.ENUM(
-                    'ed',
-                    'gm',
-                    'agm',
-                    'mo',
-                ),
+            designation: {
+                type: new DataTypes.ENUM('ed', 'gm', 'agm', 'mo'),
                 allowNull: true,
             },
             name: {
