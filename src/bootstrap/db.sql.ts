@@ -13,7 +13,7 @@ export interface sequelize_response {
 
 export const sequelize = function (): Promise<sequelize_response> {
     return new Promise(async (resolve, reject) => {
-        
+
         let db = process.env.DB_DATABASE || '';
         let user = process.env.DB_USER || '';
         let pass = process.env.DB_PASSWORD || '';
@@ -25,7 +25,11 @@ export const sequelize = function (): Promise<sequelize_response> {
             dialect: 'mysql',
             port: parseInt(port),
             dialectOptions: {
-                // Your mysql2 options here
+                charset: 'utf8mb4',
+            },
+            define: {
+                charset: 'utf8mb4',
+                collate: 'utf8mb4_unicode_520_ci',
             },
             pool: {
                 max: 10,
