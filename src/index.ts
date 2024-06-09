@@ -56,7 +56,6 @@ async function boot() {
 
     /** conver input files into buffer string */
     async function onFile(part: any) {
-        console.log({ part });
         if (part.type == 'file') {
             const buff = await part.toBuffer();
             part.value = {};
