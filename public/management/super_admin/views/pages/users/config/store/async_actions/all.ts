@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, RootState } from '../../../../../../store';
+import { AppDispatch } from '../../../../../../store';
 import { initialState } from '../inital_state';
-import axios from 'axios';
 import setup from '../../setup';
 import { end_point } from '../../../../../../config/api';
 import storeSlice from '..';
@@ -14,6 +13,12 @@ type PayloadType = { [key: string]: any };
 type ThunkArgument = {
     dispatch: AppDispatch;
     state: typeof initialState;
+    extra?: unknown;
+    rejectValue?: unknown;
+    serializedErrorType?: unknown;
+    pendingMeta?: unknown;
+    fulfilledMeta?: unknown;
+    rejectedMeta?: unknown;
 };
 
 const store_prefix = setup.store_prefix;
@@ -79,7 +84,4 @@ const fetch_api = async (param, thunkAPI) => {
     return response.data;
 };
 
-export const all = createAsyncThunk<ReturnType, PayloadType, ThunkArgument>(
-    `${store_prefix}/all`,
-    fetch_api,
-);
+export const all = createAsyncThunk(`${store_prefix}/all`, fetch_api);
