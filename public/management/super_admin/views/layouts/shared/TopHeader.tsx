@@ -12,16 +12,16 @@ const TopHeader: React.FC<Props> = (props: Props) => {
                     semilight-bg-color="bg-default-light-colo"
                 >
                     <div className="logo-wrapper">
-                        <a href="http://admin.pixelstrap.com/universal/default/index.html">
+                        <a href="#/">
                             <img
-                                src="/assets/dashboard_uni/logo-light.png"
+                                style={{ filter: 'invert(1)' }}
+                                src="https://uniflexlimited.com/wp-content/uploads/2024/05/Untitled-1.png"
                                 className="image-dark"
-                                alt
                             />
                             <img
-                                src="/assets/dashboard_uni/logo-light-dark-layout.png"
+                                style={{ filter: 'invert(1)' }}
+                                src="https://uniflexlimited.com/wp-content/uploads/2024/05/Untitled-1.png"
                                 className="image-light"
-                                alt
                             />
                         </a>
                     </div>
@@ -44,11 +44,7 @@ const TopHeader: React.FC<Props> = (props: Props) => {
                       </form>
                   </li> */}
                             <li>
-                                <a
-                                    href="#!"
-                                    onclick="javascript:toggleFullScreen()"
-                                    className="text-dark"
-                                >
+                                <a href="#!" className="text-dark">
                                     <img
                                         className="align-self-center pull-right me-2"
                                         src="/assets/dashboard_uni/browser.png"
