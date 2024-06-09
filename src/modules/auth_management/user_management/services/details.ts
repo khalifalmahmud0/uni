@@ -25,8 +25,18 @@ async function details(
                 id: params.id,
             },
             attributes: {
-                exclude: ['password'],
+                exclude: ['password', 'token', 'forget_code', 'user_agent'],
             },
+            include: [
+                {
+                    model: models.UserInformationModel,
+                    as: 'info',
+                },
+                {
+                    model: models.UserModel,
+                    as: 'reference_info',
+                },
+            ],
         });
 
         if (data) {
