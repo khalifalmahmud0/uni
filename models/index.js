@@ -24,7 +24,11 @@ if (config.use_env_variable) {
         dialect: 'mysql',
         port: parseInt(port),
         dialectOptions: {
-            // Your mysql2 options here
+            charset: 'utf8mb4',
+        },
+        define: {
+            charset: 'utf8mb4',
+            collate: 'utf8mb4_unicode_520_ci',
         },
     });
 }
