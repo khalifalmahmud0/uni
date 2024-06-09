@@ -36,6 +36,10 @@
     }
 }
 
+.grid_full_width {
+    grid-column: 1 / -1; /* Span from the first to the last column */
+}
+
 .form-vertical {
     label {
         display: block;
@@ -52,4 +56,10 @@
             width: unset;
         }
     }
+}
+
+.form_auto_fit {
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
