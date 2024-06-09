@@ -9,9 +9,10 @@ $(document).ready(function(){
 });
 
 $(window).on('load',function(){
-    $('.loader-wrapper').fadeOut('slow', function() {
-        $(this).remove();
-    });
+    // $('.loader-wrapper').fadeOut('slow', function() {
+    //     $(this).remove();
+    // });
+    window.$('.loader-wrapper').fadeOut('slow', function () {});
 })
 
 $(window).on('scroll', function() {
