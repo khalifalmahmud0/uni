@@ -28,9 +28,9 @@ const All: React.FC<Props> = (props: Props) => {
 
     useEffect(() => {
         dispatch(
-            storeSlice.actions.set_select_fields('id, name, email, status'),
+            storeSlice.actions.set_select_fields('id, name, email, image, status'),
         );
-        dispatch(all({}) as any);
+        dispatch(all({}));
     }, []);
 
     function quick_view(data: anyObject = {}) {
@@ -101,7 +101,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>{i.email}</td>
                                                     <td>
                                                         <img
-                                                            src="/assets/dashboard/images/avatar.png"
+                                                            src={i.image ? `/${i.image}` : "/assets/dashboard/images/avatar.png"}
                                                             alt=""
                                                             style={{
                                                                 height: 30,
