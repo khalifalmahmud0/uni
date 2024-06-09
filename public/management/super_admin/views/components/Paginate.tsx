@@ -1,22 +1,25 @@
 import React from 'react';
 import parse from 'html-react-parser';
 import { useAppDispatch } from '../../store';
+import { anyObject } from '../../common_types/object';
 export interface Props {
-    data: {
-        current_page: number;
-        data: [{ [key: string]: any }];
-        first_page_url: string;
-        from: number;
-        last_page: number;
-        last_page_url: string;
-        links: [{ [key: string]: any }];
-        next_page_url: string | null;
-        path: string;
-        per_page: number;
-        prev_page_url: string | null;
-        to: number;
-        total: number;
-    };
+    data:
+        | {
+              current_page: number;
+              data: [{ [key: string]: any }];
+              first_page_url: string;
+              from: number;
+              last_page: number;
+              last_page_url: string;
+              links: [{ [key: string]: any }];
+              next_page_url: string | null;
+              path: string;
+              per_page: number;
+              prev_page_url: string | null;
+              to: number;
+              total: number;
+          }
+        | anyObject;
     set_url: Function;
     all: Function;
     set_paginate: Function;
