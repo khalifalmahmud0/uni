@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import CommonAppWindow from '../components/CommonAppWindow';
-import AppNav from './shared/AppNav';
 import { Outlet } from 'react-router-dom';
 import TopHeader from './shared/TopHeader';
 import SideBar from './shared/menu/SideBar';
