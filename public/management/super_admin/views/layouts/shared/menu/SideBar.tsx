@@ -18,20 +18,87 @@ const SideBar: React.FC<Props> = (props: Props) => {
 
                 <MenuDropDown
                     section_title="Management"
-                    group_title="Users"
+                    group_title="HRM"
                     icon="icon-desktop"
                 >
-                    <MenuDropDownItem label="All users" to="/users" />
-                    <MenuDropDownItem label="Create user" to="/users/create" />
+                    <MenuDropDownItem label="All Employee" to="/users" />
+                    <MenuDropDownItem label="" to="/users" />
+                    <MenuDropDownItem
+                        label="Create Employee"
+                        to="/users/create"
+                    />
+                    <MenuDropDownItem
+                        label="Employee History"
+                        to="/users/create"
+                    />
                 </MenuDropDown>
 
                 <MenuDropDown
                     section_title=""
-                    group_title="Insetive setup"
+                    group_title="Insentive"
                     icon="icon-money"
                 >
-                    <MenuDropDownItem label="All users" to="/users" />
-                    <MenuDropDownItem label="Create user" to="/users/create" />
+                    <MenuDropDownItem label="Setup" to="/users" />
+                    <MenuDropDownItem label="Overview" to="/users/create" />
+                </MenuDropDown>
+
+                <MenuDropDown
+                    section_title=""
+                    group_title="Accounts"
+                    icon="icon-money"
+                >
+                    <MenuDropDownItem label="Accounts" to="/users" />
+                    <MenuDropDownItem label="Categories" to="/users" />
+                    <MenuDropDownItem label="Add Expense" to="/users" />
+                    <MenuDropDownItem label="Create Money Reset" to="/users" />
+                    <MenuDropDownItem
+                        label="Profit and Loss"
+                        to="/users/create"
+                    />
+                    <MenuDropDownItem
+                        label="Balance Sheet"
+                        to="/users/create"
+                    />
+                    <MenuDropDownItem
+                        label="Employee Payments"
+                        to="/users/create"
+                    />
+                </MenuDropDown>
+
+                <MenuDropDown
+                    section_title=""
+                    group_title="Field Force"
+                    icon="icon-money"
+                >
+                    <MenuDropDownItem label="Visit apartments" to="/users" />
+                    <MenuDropDownItem
+                        label="Daily report submission"
+                        to="/users/create"
+                    />
+                </MenuDropDown>
+
+                <MenuDropDown
+                    section_title=""
+                    group_title="Report"
+                    icon="icon-money"
+                >
+                    <MenuDropDownItem label="Sales Report" to="/users" />
+                </MenuDropDown>
+
+                <MenuDropDown
+                    section_title=""
+                    group_title="Booking"
+                    icon="icon-money"
+                >
+                    <MenuDropDownItem label="Registration" to="/users" />
+                    <MenuDropDownItem label="All" to="/users" />
+                    <MenuDropDownItem label="Down Payements" to="/users" />
+                    <MenuDropDownItem label="Booking Payements" to="/users" />
+                    <MenuDropDownItem label="Others Payements" to="/users" />
+                    <MenuDropDownItem
+                        label="Installment Payements"
+                        to="/users"
+                    />
                 </MenuDropDown>
 
                 <MenuSingle to="/" icon="icon-anchor" label="Starter kit" />
@@ -52,14 +119,16 @@ const SideBar: React.FC<Props> = (props: Props) => {
 
 function active_link(hash) {
     let url = new URL(hash);
-    $(`.sidebar-submenu a`).removeClass('active');
-    $(`.sidebar-submenu a[href="${url.hash}"]`).addClass('active');
+    (window as any).$(`.sidebar-submenu a`).removeClass('active');
+    (window as any)
+        .$(`.sidebar-submenu a[href="${url.hash}"]`)
+        .addClass('active');
 }
 function init_nav_action() {
     var animationSpeed = 300,
         subMenuSelector = '.sidebar-submenu';
-    $('.sidebar-menu').on('click', 'li a', function (e) {
-        var $this = $(this);
+    (window as any).$('.sidebar-menu').on('click', 'li a', function (e) {
+        var $this = (window as any).$(this);
         var checkElement = $this.next();
         if (checkElement.is(subMenuSelector) && checkElement.is(':visible')) {
             checkElement.slideUp(animationSpeed, function () {
