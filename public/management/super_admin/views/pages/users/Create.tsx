@@ -34,6 +34,12 @@ const Create: React.FC<Props> = (props: Props) => {
                             <div>
                                 <h5 className="mb-4">Personal Informations</h5>
                                 <div className="form_auto_fit">
+                                    <div className="form-group form-vertical">
+                                        <Input
+                                            name={'uid'}
+                                            label="Employee ID"
+                                        />
+                                    </div>
                                     {[
                                         'name',
                                         'email',
@@ -82,7 +88,10 @@ const Create: React.FC<Props> = (props: Props) => {
                                     </div>
 
                                     <div className="form-group grid_full_width form-vertical">
-                                        <InputImage label={"image"} name={"image"} />
+                                        <InputImage
+                                            label={'image'}
+                                            name={'image'}
+                                        />
                                     </div>
                                 </div>
                             </div>
