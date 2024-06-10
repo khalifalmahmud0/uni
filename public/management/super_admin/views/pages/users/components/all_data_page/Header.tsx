@@ -2,7 +2,9 @@ import React from 'react';
 import HeadSearch from './HeadSearch';
 import HeadTitle from './HeadTitle';
 import HeadRightButtons from './HeadRightButtons';
-export interface Props {}
+export interface Props {
+    title?: string;
+}
 
 const Header: React.FC<Props> = (props: Props) => {
     return (
@@ -15,7 +17,7 @@ const Header: React.FC<Props> = (props: Props) => {
                         </li>
                     </ul>
                 </div>
-                <HeadTitle></HeadTitle>
+                <HeadTitle title={props.title}></HeadTitle>
                 <div className="control">
                     <HeadRightButtons></HeadRightButtons>
                 </div>
