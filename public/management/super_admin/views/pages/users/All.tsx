@@ -28,7 +28,9 @@ const All: React.FC<Props> = (props: Props) => {
 
     useEffect(() => {
         dispatch(
-            storeSlice.actions.set_select_fields('id, name, email, image, status'),
+            storeSlice.actions.set_select_fields(
+                'id, name, email, image, status',
+            ),
         );
         dispatch(all({}));
     }, []);
@@ -58,17 +60,17 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`id`}
                                             sort={true}
                                         />
+                                        <th>Image</th>
                                         <TableHeading
                                             label={`Name`}
                                             col_name={`name`}
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Preferred Name`}
+                                            label={`Email`}
                                             col_name={`email`}
                                             sort={true}
                                         />
-                                        <th>Image</th>
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -89,6 +91,19 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     <td>{i.id}</td>
                                                     <td>
+                                                        <img
+                                                            src={
+                                                                i.image
+                                                                    ? `/${i.image}`
+                                                                    : '/assets/dashboard/images/avatar.png'
+                                                            }
+                                                            alt=""
+                                                            style={{
+                                                                height: 30,
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
                                                         <span
                                                             className="quick_view_trigger"
                                                             onClick={() =>
@@ -99,15 +114,6 @@ const All: React.FC<Props> = (props: Props) => {
                                                         </span>
                                                     </td>
                                                     <td>{i.email}</td>
-                                                    <td>
-                                                        <img
-                                                            src={i.image ? `/${i.image}` : "/assets/dashboard/images/avatar.png"}
-                                                            alt=""
-                                                            style={{
-                                                                height: 30,
-                                                            }}
-                                                        />
-                                                    </td>
                                                 </tr>
                                             );
                                         },
