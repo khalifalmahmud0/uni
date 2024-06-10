@@ -14,11 +14,11 @@ const TopHeader: React.FC<Props> = (props: Props) => {
                     <div className="logo-wrapper">
                         <a href="#/">
                             <img
-                                src="/assets/dashboard_uni/logo-light.png"
+                                src="https://uniflexlimited.com/wp-content/uploads/2024/05/Untitled-1.png"
                                 className="image-dark"
                             />
                             <img
-                                src="/assets/dashboard_uni/logo-light-dark-layout.png"
+                                src="https://uniflexlimited.com/wp-content/uploads/2024/05/Untitled-1.png"
                                 className="image-light"
                             />
                         </a>
