@@ -83,6 +83,12 @@ const Edit: React.FC<Props> = (props: Props) => {
                                         Personal Informations
                                     </h5>
                                     <div className="form_auto_fit">
+                                        <div className="form-group form-vertical">
+                                            <Input
+                                                name={'uid'}
+                                                label="Employee ID"
+                                            />
+                                        </div>
                                         {[
                                             'name',
                                             'email',
