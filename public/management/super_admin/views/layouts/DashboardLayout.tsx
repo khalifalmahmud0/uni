@@ -24,7 +24,7 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
                                 alt="#"
                             />
                         </div>
-                        <h6 className="mt-3 f-12">Johan Deo</h6>
+                        <h6 className="mt-3 f-12">Super Admin</h6>
                     </div>
                     <SideBar />
                 </div>
