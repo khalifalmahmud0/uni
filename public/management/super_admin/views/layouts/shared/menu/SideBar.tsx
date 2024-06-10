@@ -22,14 +22,13 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     icon="icon-desktop"
                 >
                     <MenuDropDownItem label="All Employee" to="/users" />
-                    <MenuDropDownItem label="" to="/users" />
                     <MenuDropDownItem
                         label="Create Employee"
                         to="/users/create"
                     />
                     <MenuDropDownItem
                         label="Employee History"
-                        to="/users/create"
+                        to="/users/history"
                     />
                 </MenuDropDown>
 
