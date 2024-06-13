@@ -1,5 +1,5 @@
 import React from 'react';
-export interface Props { 
+export interface Props {
     label?: string;
     name: string;
     placeholder?: string;
@@ -7,7 +7,13 @@ export interface Props {
     value?: string;
 }
 
-const Input: React.FC<Props> = ({ label, name, placeholder, type, value }: Props) => {
+const Input: React.FC<Props> = ({
+    label,
+    name,
+    placeholder,
+    type,
+    value,
+}: Props) => {
     return (
         <>
             <label htmlFor={name}>
