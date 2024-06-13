@@ -8,3 +8,6 @@ public/management/super_admin_old
 public/management/admin_old
 public/uploads/users/*
 /**/*.log
+
+.history
+yarn.lock
