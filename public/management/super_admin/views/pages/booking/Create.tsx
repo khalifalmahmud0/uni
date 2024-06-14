@@ -31,6 +31,7 @@ const Create: React.FC<Props> = (props: Props) => {
                             onSubmit={(e) => handle_submit(e)}
                             className="mx-auto pt-3"
                         >
+                            {/* Booking type  */}
                             <div>
                                 <div className="form_auto_fit">
                                     <div className="form-group form-vertical">

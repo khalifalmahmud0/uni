@@ -34,6 +34,7 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 </MenuDropDown>
                 {/* Booking  */}
                 <MenuDropDown group_title="Booking" icon="icon-desktop">
+                    <MenuDropDownItem label="All Bookings" to="/booking" />
                     <MenuDropDownItem label="Create New" to="/booking/create" />
                 </MenuDropDown>
             </ul>

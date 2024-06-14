@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
+                'id, name, image',
             ),
         );
         dispatch(all({}));
@@ -56,7 +56,7 @@ const All: React.FC<Props> = (props: Props) => {
                                             <SelectAll />
                                         </th>
                                         <TableHeading
-                                            label={`ID`}
+                                            label={`Customer ID`}
                                             col_name={`id`}
                                             sort={true}
                                         />
@@ -64,11 +64,6 @@ const All: React.FC<Props> = (props: Props) => {
                                         <TableHeading
                                             label={`Name`}
                                             col_name={`name`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Email`}
-                                            col_name={`email`}
                                             sort={true}
                                         />
                                     </tr>
@@ -113,7 +108,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                             {i.name}
                                                         </span>
                                                     </td>
-                                                    <td>{i.email}</td>
+                                                   
                                                 </tr>
                                             );
                                         },
