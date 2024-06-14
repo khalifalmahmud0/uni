@@ -14,8 +14,9 @@ const SideBar: React.FC<Props> = (props: Props) => {
     return (
         <>
             <ul className="sidebar-menu">
+                {/* Dashboard  */}
                 <MenuSingle to="/" icon="icon-dashboard" label="Dashboard" />
-
+                {/* HRM  */}
                 <MenuDropDown
                     section_title="Management"
                     group_title="HRM"
@@ -31,86 +32,11 @@ const SideBar: React.FC<Props> = (props: Props) => {
                         to="/users/history"
                     />
                 </MenuDropDown>
-
-                <MenuDropDown
-                    section_title=""
-                    group_title="Insentive"
-                    icon="icon-money"
-                >
-                    <MenuDropDownItem label="Setup" to="/users" />
-                    <MenuDropDownItem label="Overview" to="/users/create" />
+                {/* Booking  */}
+                <MenuDropDown group_title="Booking" icon="icon-desktop">
+                    <MenuDropDownItem label="All Bookings" to="/booking" />
+                    <MenuDropDownItem label="Create New" to="/booking/create" />
                 </MenuDropDown>
-
-                <MenuDropDown
-                    section_title=""
-                    group_title="Accounts"
-                    icon="icon-money"
-                >
-                    <MenuDropDownItem label="Accounts" to="/users" />
-                    <MenuDropDownItem label="Categories" to="/users" />
-                    <MenuDropDownItem label="Add Expense" to="/users" />
-                    <MenuDropDownItem label="Create Money Reset" to="/users" />
-                    <MenuDropDownItem
-                        label="Profit and Loss"
-                        to="/users/create"
-                    />
-                    <MenuDropDownItem
-                        label="Balance Sheet"
-                        to="/users/create"
-                    />
-                    <MenuDropDownItem
-                        label="Employee Payments"
-                        to="/users/create"
-                    />
-                </MenuDropDown>
-
-                <MenuDropDown
-                    section_title=""
-                    group_title="Field Force"
-                    icon="icon-money"
-                >
-                    <MenuDropDownItem label="Visit apartments" to="/users" />
-                    <MenuDropDownItem
-                        label="Daily report submission"
-                        to="/users/create"
-                    />
-                </MenuDropDown>
-
-                <MenuDropDown
-                    section_title=""
-                    group_title="Report"
-                    icon="icon-money"
-                >
-                    <MenuDropDownItem label="Sales Report" to="/users" />
-                </MenuDropDown>
-
-                <MenuDropDown
-                    section_title=""
-                    group_title="Booking"
-                    icon="icon-money"
-                >
-                    <MenuDropDownItem label="Registration" to="/users" />
-                    <MenuDropDownItem label="All" to="/users" />
-                    <MenuDropDownItem label="Down Payements" to="/users" />
-                    <MenuDropDownItem label="Booking Payements" to="/users" />
-                    <MenuDropDownItem label="Others Payements" to="/users" />
-                    <MenuDropDownItem
-                        label="Installment Payements"
-                        to="/users"
-                    />
-                </MenuDropDown>
-
-                <MenuSingle to="/" icon="icon-anchor" label="Starter kit" />
-
-                {/* <li>
-                    <a
-                        href="http://admin.pixelstrap.com/universal/default/maintenance.html"
-                        className="sidebar-header"
-                    >
-                        <i className="icon-settings" />
-                        <span>Maintenance</span>
-                    </a>
-                </li> */}
             </ul>
         </>
     );

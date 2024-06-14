@@ -15,24 +15,7 @@ import moment from 'moment';
 /** validation rules */
 async function validate(req: Request) {
     let field = '';
-    let fields = [
-        'name',
-        'email',
-        'father_name',
-        'mother_name',
-        'husband_spouse',
-        'phone_number',
-        'nid',
-        'education',
-        'permanent_address',
-        'present_address',
-        'reference',
-        'password',
-
-        'bank_name',
-        'branch_name',
-        'bank_account_no',
-    ];
+    let fields = ['name', 'email', 'subject', 'description'];
 
     for (let index = 0; index < fields.length; index++) {
         const field = fields[index];
@@ -44,24 +27,6 @@ async function validate(req: Request) {
             )
             .run(req);
     }
-
-    field = 'reference';
-    await body(field)
-        .not()
-        .isEmpty()
-        .custom(async (value) => {
-            const length = value.length;
-            if (length <= 2) {
-                throw new Error(
-                    `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
-                );
-            }
-        })
-        .withMessage(
-            `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
-        )
-        .run(req);
-
     let result = await validationResult(req);
 
     return result;
@@ -86,18 +51,6 @@ async function store(
     let models = await db();
     let body = req.body as anyObject;
     let data = new models.ContactMessage();
-    let user_information = new models.ContactMessage();
-    const bcrypt = require('bcrypt');
-    const saltRounds = 10;
-    let password = await bcrypt.hash(body.password, saltRounds);
-
-    let image_path =
-        'uploads/users/' +
-        moment().format('YYYYMMDDHHmmss') +
-        body['image'].ext;
-    await (fastify_instance as any).upload(body['image'], image_path);
-
-    let reference = JSON.parse(body.reference)[0];
 
     let inputs: InferCreationAttributes<typeof data> = {
         name: body.name,
