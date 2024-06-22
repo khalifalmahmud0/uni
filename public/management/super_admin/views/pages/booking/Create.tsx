@@ -523,6 +523,18 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label: 'Date',
                                         },
                                         {
+                                            name: 'total_share',
+                                            placeholder: 'Total Share',
+                                            type: 'text',
+                                            label: 'Total Share',
+                                        },
+                                        {
+                                            name: 'have_to_pay_amount',
+                                            placeholder: 'Have to pay amount',
+                                            type: 'text',
+                                            label: 'Have to pay amount',
+                                        },
+                                        {
                                             name: 'witness_name_1',
                                             placeholder:
                                                 "Enter witness's name (1st)",
