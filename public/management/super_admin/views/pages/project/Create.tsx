@@ -112,16 +112,11 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div>
                                          <div>
                                         {/* Button  */}
-                                        {entries.length > 1 && (
-                                            <button
-                                                style={{"float":"right"}}
-                                                type="button"
-                                                onClick={() =>
+                                            {entries.length > 1 && (
+                                                <i style={{"float":"right","cursor":"pointer"}} onClick={() =>
                                                     removeEntry(entry.id)
-                                                }
-                                            >
-                                                Remove
-                                            </button>
+                                                } className="fa fa-trash" aria-hidden="true"></i>
+                                            
                                         )}
                                     </div>
                                     <div
@@ -185,9 +180,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                 ))}
 
                                 {/* Add Another  */}
-                                <button style={{"float":"right"}} type="button" onClick={addEntry}>
-                                    Add Another
-                                </button>
+                                
+                              <i style={{"float":"right","cursor":"pointer"}} onClick={addEntry} className="fa fa-plus" aria-hidden="true"></i>
                             </div>
 
                             <div className="form-group form-vertical">
