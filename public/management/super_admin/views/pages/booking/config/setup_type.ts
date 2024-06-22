@@ -13,4 +13,5 @@ export default interface RouteConfig {
     details_page_title: string;
     create_page_title: string;
     edit_page_title: string;
+    payment_page_title: string;
 }

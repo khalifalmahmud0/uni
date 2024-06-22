@@ -1,15 +1,14 @@
 import React from 'react';
-import Header from '../components/management_data_page/Header';
-import Footer from '../components/management_data_page/Footer';
-import setup from '../config/setup';
+import Header from '../../project/components/management_data_page/Header';
+import Footer from '../../project/components/management_data_page/Footer';
 import { useAppDispatch } from '../../../../store';
-import { store } from '../config/store/async_actions/store';
-import Input from '../components/management_data_page/Input';
+import { store } from '../../project/config/store/async_actions/store';
+import Input from '../../project/components/management_data_page/Input';
 import Select from '../../users/components/management_data_page/Select';
 
 export interface Props {}
 
-const Create: React.FC<Props> = (props: Props) => {
+const Payment: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
 
     async function handle_submit(e) {
@@ -24,7 +23,7 @@ const Create: React.FC<Props> = (props: Props) => {
         <>
             <div className="page_content">
                 <div className="explore_window fixed_size">
-                    <Header page_title={setup.payment_page_title}></Header>
+                    <Header page_title="Pay Payment"></Header>
                     <div className="content_body custom_scroll">
                         <form
                             onSubmit={(e) => handle_submit(e)}
@@ -112,4 +111,4 @@ const Create: React.FC<Props> = (props: Props) => {
     );
 };
 
-export default Create;
+export default Payment;

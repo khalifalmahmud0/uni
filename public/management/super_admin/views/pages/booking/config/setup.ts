@@ -17,6 +17,7 @@ const setup: setup_type = {
     details_page_title: 'Details ' + prefix,
     create_page_title: 'Create ' + prefix,
     edit_page_title: 'Edit ' + prefix,
+    payment_page_title: "Payment Details"
 };
 
 export default setup;
