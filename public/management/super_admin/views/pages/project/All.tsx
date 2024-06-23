@@ -66,6 +66,26 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`name`}
                                             sort={true}
                                         />
+                                        <TableHeading
+                                            label={`Location`}
+                                            col_name={`location`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Per Share Cost`}
+                                            col_name={`per_share_cost`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Description`}
+                                            col_name={`description`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Documents`}
+                                            col_name={`documents`}
+                                            sort={true}
+                                        />
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -105,10 +125,19 @@ const All: React.FC<Props> = (props: Props) => {
                                                                 quick_view(i)
                                                             }
                                                         >
-                                                            {i.name}
+                                                            Jason P. Gallagher
                                                         </span>
                                                     </td>
-                                                   
+                                                   <td>
+                                                        <span
+                                                            className="quick_view_trigger"
+                                                        >
+                                                            South Banasree
+                                                        </span>
+                                                    </td>
+                                                    <td>10/-</td>
+                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                                                    <td>PDF, URL</td>
                                                 </tr>
                                             );
                                         },

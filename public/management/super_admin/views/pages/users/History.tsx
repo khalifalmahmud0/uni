@@ -195,7 +195,6 @@ const History: React.FC<Props> = (props: Props) => {
                                                             Math.random() *
                                                                 10,
                                                         )}
-                                                        
                                                     </td>
                                                     {/* From Total Income  */}
                                                     <td>
