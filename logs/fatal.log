@@ -35,3 +35,8 @@
 {"level":60,"time":1719077518333,"pid":2566,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/22/2024 11:31:58 PM","message":"target not found."}
 {"level":60,"time":1719077518418,"pid":2566,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/22/2024 11:31:58 PM","message":"target not found."}
 {"level":60,"time":1719161274986,"pid":4317,"hostname":"Khalifs-MacBook-Pro.local","file":"services/all.ts:109:15)","time":"6/23/2024 10:47:54 PM","message":"Unknown column 'uid' in 'field list'"}
+{"level":60,"time":1719168556850,"pid":4317,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/24/2024 12:49:16 AM","message":"target not found."}
+{"level":60,"time":1719168586715,"pid":4317,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/24/2024 12:49:46 AM","message":"target not found."}
+{"level":60,"time":1719168586848,"pid":4317,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/24/2024 12:49:46 AM","message":"target not found."}
+{"level":60,"time":1719168683874,"pid":4317,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/24/2024 12:51:23 AM","message":"target not found."}
+{"level":60,"time":1719168683884,"pid":4317,"hostname":"Khalifs-MacBook-Pro.local","file":"","time":"6/24/2024 12:51:23 AM","message":"target not found."}
