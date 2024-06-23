@@ -56,14 +56,44 @@ const All: React.FC<Props> = (props: Props) => {
                                             <SelectAll />
                                         </th>
                                         <TableHeading
-                                            label={`Customer ID`}
+                                            label={`ID`}
                                             col_name={`id`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Customer ID`}
+                                            col_name={`uid`}
                                             sort={true}
                                         />
                                         <th>Image</th>
                                         <TableHeading
                                             label={`Name`}
                                             col_name={`name`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Project Name`}
+                                            col_name={`project_name`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Share`}
+                                            col_name={`share`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Payable Amount`}
+                                            col_name={`payable_amount`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Paid`}
+                                            col_name={`paid`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Due`}
+                                            col_name={`Due`}
                                             sort={true}
                                         />
                                     </tr>
@@ -84,7 +114,11 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
+                                                    {/* ID  */}
                                                     <td>{i.id}</td>
+                                                    {/* Customer ID  */}
+                                                    <td>{i.id}</td>
+                                                    {/* Image  */}
                                                     <td>
                                                         <img
                                                             src={
@@ -98,6 +132,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                             }}
                                                         />
                                                     </td>
+                                                    {/* Name  */}
                                                     <td>
                                                         <span
                                                             className="quick_view_trigger"
@@ -105,10 +140,49 @@ const All: React.FC<Props> = (props: Props) => {
                                                                 quick_view(i)
                                                             }
                                                         >
-                                                            {i.name}
+                                                           Raseal Dunel
                                                         </span>
                                                     </td>
-                                                   
+                                                    {/* Project Name  */}
+                                                     <td>
+                                                        <span
+                                                            className="quick_view_trigger"
+                                                        >
+                                                           Bashundhara Residential Area
+                                                        </span>
+                                                    </td>
+                                                    {/* Share  */}
+                                                     <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Payabale Amount  */}
+                                                     <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Paid  */}
+                                                     <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Due  */}
+                                                     <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
                                                 </tr>
                                             );
                                         },
