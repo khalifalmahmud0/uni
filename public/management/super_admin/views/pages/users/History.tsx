@@ -60,14 +60,52 @@ const History: React.FC<Props> = (props: Props) => {
                                             col_name={`id`}
                                             sort={true}
                                         />
+                                        <TableHeading
+                                            label={`Customer ID (uid)`}
+                                            col_name={`uid`}
+                                            sort={true}
+                                        />
                                         <th>Image</th>
                                         <TableHeading
                                             label={`Name`}
                                             col_name={`name`}
                                             sort={true}
                                         />
-                                        <th>Ins Total</th>
-                                        <th>Ref Total</th>
+                                         <TableHeading
+                                            label={`Month`}
+                                            col_name={`month`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Booking Money`}
+                                            col_name={`booking_money`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Down payment`}
+                                            col_name={`down_payment`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Installment`}
+                                            col_name={`installment`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Reference`}
+                                            col_name={`reference`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`From Total Income`}
+                                            col_name={`from_total_income`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Total`}
+                                            col_name={`total`}
+                                            sort={true}
+                                        />
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -83,10 +121,15 @@ const History: React.FC<Props> = (props: Props) => {
                                                             item={i}
                                                         />
                                                     </td>
+                                                    
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
+                                                    {/* ID  */}
                                                     <td>{i.id}</td>
+                                                    {/* UID  */}
+                                                    <td>{i.id}</td>
+                                                    {/* IMAGE  */}
                                                     <td>
                                                         <img
                                                             src={
@@ -100,6 +143,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                             }}
                                                         />
                                                     </td>
+                                                    {/* Name  */}
                                                     <td>
                                                         <span
                                                             className="quick_view_trigger"
@@ -107,9 +151,21 @@ const History: React.FC<Props> = (props: Props) => {
                                                                 quick_view(i)
                                                             }
                                                         >
-                                                            {i.name}
+                                                            Marc E. Diebold
                                                         </span>
                                                     </td>
+                                                    {/* Month  */}
+                                                    <td>
+                                                        <span
+                                                            className="quick_view_trigger"
+                                                            onClick={() =>
+                                                                quick_view(i)
+                                                            }
+                                                        >
+                                                            january
+                                                        </span>
+                                                    </td>
+                                                    {/* Booking Money  */}
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
@@ -117,6 +173,39 @@ const History: React.FC<Props> = (props: Props) => {
                                                         )}
                                                         /-
                                                     </td>
+                                                    {/* Down Payment  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Installment  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Referance  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10,
+                                                        )}
+                                                        
+                                                    </td>
+                                                    {/* From Total Income  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                                10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Total  */}
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
