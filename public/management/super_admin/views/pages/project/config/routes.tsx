@@ -6,8 +6,6 @@ import Create from '../Create.js';
 import Details from '../Details.js';
 import Edit from '../Edit.js';
 import History from '../History.js';
-import Payment from '../payment/Payment.js';
-
 // export { default as DashboardCounterAll} from "./All.jsx";
 
 export default {
@@ -34,9 +32,6 @@ export default {
             path: 'details/:id',
             element: <Details />,
         },
-        {
-            path: 'payment',
-            element: <Payment />,
-        },
+        
     ],
 };
