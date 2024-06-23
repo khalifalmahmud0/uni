@@ -36,11 +36,34 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 <MenuDropDown group_title="Projects" icon="icon-desktop">
                     <MenuDropDownItem label="All Projects" to="/project" />
                     <MenuDropDownItem label="Create Project" to="/project/create" />
-                    {/* <MenuDropDownItem label="Project Payment" to="/project/payment" /> */}
-                    <MenuDropDownItem label="Create Payment" to="/booking/payment" />
-                     <MenuDropDownItem label="Project Payment" to="/booking/payments" />
-                     <MenuDropDownItem label="All Bookings" to="/booking" />
+                    <MenuDropDownItem label="All Bookings" to="/booking" />
                     <MenuDropDownItem label="Create Booking" to="/booking/create" />
+                     <MenuDropDownItem label="Project Payment" to="/booking/payments" />
+                </MenuDropDown>
+                {/* Account  */}
+                <MenuDropDown group_title="Account" icon="icon-desktop">
+                    <MenuDropDownItem label="Internal Income" to="#" />
+                    <MenuDropDownItem label="Project Income" to="/booking/payment" />
+                    <MenuDropDownItem label="Expense" to="#" />
+                    <MenuDropDownItem label="All Account" to="#" />
+                    <MenuDropDownItem label="All Account Number" to="#" />
+                    <MenuDropDownItem label="All Account Categories" to="#" />
+                    <MenuDropDownItem label="Debit Credit" to="#" />
+                </MenuDropDown>
+                {/* Reports  */}
+                <MenuDropDown group_title="Reports" icon="icon-desktop">
+                    <MenuDropDownItem label="Income Statement" to="#" />
+                    <MenuDropDownItem label="Expense Statement" to="#" />
+                    <MenuDropDownItem label="Closing Balance" to="#" />
+                    <MenuDropDownItem label="Project Report" to="#" />
+                    <MenuDropDownItem label="Customer Report" to="#" />
+                    <MenuDropDownItem label="Due Report" to="#" />
+                    <MenuDropDownItem label="Incentive Report" to="#" />
+                </MenuDropDown>
+                {/* Project Visits  */}
+                <MenuDropDown group_title="Project Visits" icon="icon-desktop">
+                    <MenuDropDownItem label="Visit History" to="#" />
+                    <MenuDropDownItem label="Assign Visit" to="#" />
                 </MenuDropDown>
             </ul>
         </>
