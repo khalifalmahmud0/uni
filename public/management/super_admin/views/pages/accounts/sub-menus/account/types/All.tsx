@@ -13,9 +13,9 @@ import QuickView from '../../../components/canvas/QuickView';
 import storeSlice from '../../../config/store';
 import { anyObject } from '../../../../../../common_types/object';
 import TableRowAction from '../../../components/all_data_page/TableRowAction';
-import SelectItem from '../../../components/all_data_page/SelectItem';
 import SelectAll from '../../../components/all_data_page/SelectIAll';
 import TableHeading from '../../../components/all_data_page/TableHeading';
+import SelectItem from '../../../components/all_data_page/SelectItem';
 
 export interface Props {}
 
@@ -44,7 +44,6 @@ const AccountType: React.FC<Props> = (props: Props) => {
         <div className="page_content">
             <div className="explore_window fixed_size">
                 <Header></Header>
-
                 <div className="content_body">
                     <div className="data_list">
                         <div className="table_responsive custom_scroll">
@@ -61,39 +60,18 @@ const AccountType: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Customer ID`}
-                                            col_name={`uid`}
-                                            sort={true}
-                                        />
-                                        <th>Image</th>
-                                        <TableHeading
-                                            label={`Name`}
-                                            col_name={`name`}
-                                            sort={true}
-                                        />
-                                         <TableHeading
-                                            label={`Project Name`}
-                                            col_name={`project_name`}
+                                            label={`title`}
+                                            col_name={`title`}
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Share`}
-                                            col_name={`share`}
+                                            label={`Description`}
+                                            col_name={`description`}
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Payable Amount`}
-                                            col_name={`payable_amount`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Paid`}
-                                            col_name={`paid`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Due`}
-                                            col_name={`Due`}
+                                            label={`Opening Date`}
+                                            col_name={`opening_date`}
                                             sort={true}
                                         />
                                     </tr>
@@ -116,73 +94,13 @@ const AccountType: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     {/* ID  */}
                                                     <td>{i.id}</td>
-                                                    {/* Customer ID  */}
-                                                    <td>{i.id}</td>
-                                                    {/* Image  */}
-                                                    <td>
-                                                        <img
-                                                            src={
-                                                                i.image
-                                                                    ? `/${i.image}`
-                                                                    : '/assets/dashboard/images/avatar.png'
-                                                            }
-                                                            alt=""
-                                                            style={{
-                                                                height: 30,
-                                                            }}
-                                                        />
-                                                    </td>
-                                                    {/* Name  */}
-                                                    <td>
-                                                        <span
-                                                            // className="quick_view_trigger"
-                                                            // onClick={() =>
-                                                            //     quick_view(i)
-                                                            // }
-                                                        >
-                                                           Raseal Dunel
-                                                        </span>
-                                                    </td>
-                                                    {/* Project Name  */}
-                                                     <td>
-                                                        <span
-                                                            // className="quick_view_trigger"
-                                                        >
-                                                           Bashundhara Residential Area
-                                                        </span>
-                                                    </td>
-                                                    {/* Share  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
-                                                    {/* Payabale Amount  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
-                                                    {/* Paid  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
-                                                    {/* Due  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
+                                                    {/* Title  */}
+                                                    <td>Bkash</td>
+                                                    {/* Description  */}
+                                                    <td>Mobile Banking</td>
+                                                    {/* Opening Date  */}
+                                                    <td>12 January 2024</td>
+                                                    
                                                 </tr>
                                             );
                                         },

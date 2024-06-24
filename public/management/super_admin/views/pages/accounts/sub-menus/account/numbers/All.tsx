@@ -61,39 +61,13 @@ const AccountNumbers: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Customer ID`}
-                                            col_name={`uid`}
-                                            sort={true}
-                                        />
-                                        <th>Image</th>
-                                        <TableHeading
-                                            label={`Name`}
-                                            col_name={`name`}
-                                            sort={true}
-                                        />
-                                         <TableHeading
-                                            label={`Project Name`}
-                                            col_name={`project_name`}
+                                            label={`Account Type`}
+                                            col_name={`account_type`}
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Share`}
-                                            col_name={`share`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Payable Amount`}
-                                            col_name={`payable_amount`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Paid`}
-                                            col_name={`paid`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Due`}
-                                            col_name={`Due`}
+                                            label={`Account Number`}
+                                            col_name={`account_number`}
                                             sort={true}
                                         />
                                     </tr>
@@ -117,72 +91,9 @@ const AccountNumbers: React.FC<Props> = (props: Props) => {
                                                     {/* ID  */}
                                                     <td>{i.id}</td>
                                                     {/* Customer ID  */}
-                                                    <td>{i.id}</td>
+                                                    <td>Bkash</td>
                                                     {/* Image  */}
-                                                    <td>
-                                                        <img
-                                                            src={
-                                                                i.image
-                                                                    ? `/${i.image}`
-                                                                    : '/assets/dashboard/images/avatar.png'
-                                                            }
-                                                            alt=""
-                                                            style={{
-                                                                height: 30,
-                                                            }}
-                                                        />
-                                                    </td>
-                                                    {/* Name  */}
-                                                    <td>
-                                                        <span
-                                                            // className="quick_view_trigger"
-                                                            // onClick={() =>
-                                                            //     quick_view(i)
-                                                            // }
-                                                        >
-                                                           Raseal Dunel
-                                                        </span>
-                                                    </td>
-                                                    {/* Project Name  */}
-                                                     <td>
-                                                        <span
-                                                            // className="quick_view_trigger"
-                                                        >
-                                                           Bashundhara Residential Area
-                                                        </span>
-                                                    </td>
-                                                    {/* Share  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
-                                                    {/* Payabale Amount  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
-                                                    {/* Paid  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
-                                                    {/* Due  */}
-                                                     <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
-                                                        /-
-                                                    </td>
+                                                     <td>5566770923423</td>
                                                 </tr>
                                             );
                                         },
