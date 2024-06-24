@@ -5,16 +5,14 @@ import commonStore from './slices/common_slice';
 import users from '../views/pages/users/config/store';
 import booking from '../views/pages/booking/config/store';
 import project from '../views/pages/project/config/store';
-// import contact_messages from '../views/pages/contact_messages/config/store';
-// import projects from '../views/pages/projects/config/store';
+import accounts from '../views/pages/accounts/config/store';
 
 const store = configureStore({
     reducer: {
         users: users.reducer,
         booking: booking.reducer,
         project: project.reducer,
-        // contact_messages: contact_messages.reducer,
-        // projects: projects.reducer,
+        accounts: accounts.reducer,
         common_store: commonStore.reducer,
     },
     devTools: true,
