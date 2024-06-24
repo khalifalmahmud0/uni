@@ -135,10 +135,10 @@ const All: React.FC<Props> = (props: Props) => {
                                                     {/* Name  */}
                                                     <td>
                                                         <span
-                                                            className="quick_view_trigger"
-                                                            onClick={() =>
-                                                                quick_view(i)
-                                                            }
+                                                            // className="quick_view_trigger"
+                                                            // onClick={() =>
+                                                            //     quick_view(i)
+                                                            // }
                                                         >
                                                            Raseal Dunel
                                                         </span>
@@ -146,7 +146,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                     {/* Project Name  */}
                                                      <td>
                                                         <span
-                                                            className="quick_view_trigger"
+                                                            // className="quick_view_trigger"
                                                         >
                                                            Bashundhara Residential Area
                                                         </span>

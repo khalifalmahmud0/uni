@@ -120,17 +120,17 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     <td>
                                                         <span
-                                                            className="quick_view_trigger"
-                                                            onClick={() =>
-                                                                quick_view(i)
-                                                            }
+                                                            // className="quick_view_trigger"
+                                                            // onClick={() =>
+                                                            //     quick_view(i)
+                                                            // }
                                                         >
                                                             Jason P. Gallagher
                                                         </span>
                                                     </td>
                                                    <td>
                                                         <span
-                                                            className="quick_view_trigger"
+                                                            // className="quick_view_trigger"
                                                         >
                                                             South Banasree
                                                         </span>
