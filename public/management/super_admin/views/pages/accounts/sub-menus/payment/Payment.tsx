@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '../../project/components/management_data_page/Header';
-import Footer from '../../project/components/management_data_page/Footer';
-import { useAppDispatch } from '../../../../store';
-import { store } from '../../project/config/store/async_actions/store';
-import Input from '../../project/components/management_data_page/Input';
-import Select from '../../users/components/management_data_page/Select';
+import Header from '../../../project/components/management_data_page/Header';
+import Footer from '../../../project/components/management_data_page/Footer';
+import { useAppDispatch } from '../../../../../store';
+import { store } from '../../../project/config/store/async_actions/store';
+import Input from '../../../project/components/management_data_page/Input';
+import Select from '../../../users/components/management_data_page/Select';
 
 export interface Props {}
 
