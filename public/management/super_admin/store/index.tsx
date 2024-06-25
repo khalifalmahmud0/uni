@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-
 import commonStore from './slices/common_slice';
 import users from '../views/pages/users/config/store';
 import booking from '../views/pages/booking/config/store';
@@ -10,6 +9,18 @@ import account_types from '../views/pages/accounts/menus/accounts/account_types/
 import account_categories from '../views/pages/accounts/menus/accounts/account_categories/config/store';
 import account_numbers from '../views/pages/accounts/menus/accounts/account_numbers/config/store';
 import project_income from '../views/pages/accounts/menus/payments/project_income/config/store';
+import internal_income from '../views/pages/accounts/menus/payments/internal_income/config/store';
+import expense from '../views/pages/accounts/menus/payments/expense/config/store';
+import debit_credit from '../views/pages/accounts/menus/payments/debit_credit/config/store';
+// Reports 
+import closing_balance from '../views/pages/reports/menus/closing_balance/config/store';
+import customer_report from '../views/pages/reports/menus/customer_report/config/store';
+import due_report from '../views/pages/reports/menus/due_report/config/store';
+import expense_statement from '../views/pages/reports/menus/expense_statement/config/store';
+import incentive_report from '../views/pages/reports/menus/incentive_report/config/store';
+import income_statement from '../views/pages/reports/menus/income_statement/config/store';
+import project_report from '../views/pages/reports/menus/project_report/config/store';
+
 const store = configureStore({
     reducer: {
         users: users.reducer,
@@ -20,7 +31,18 @@ const store = configureStore({
         account_categories: account_categories.reducer,
         account_numbers: account_numbers.reducer,
         project_income: project_income.reducer,
+        internal_income: internal_income.reducer,
+        expense: expense.reducer,
         common_store: commonStore.reducer,
+        debit_credit: debit_credit.reducer,
+        // Reports 
+        closing_balance: closing_balance.reducer,
+        customer_report: customer_report.reducer,
+        due_report: due_report.reducer,
+        expense_statement: expense_statement.reducer,
+        incentive_report: incentive_report.reducer,
+        income_statement: income_statement.reducer,
+        project_report: project_report.reducer,
     },
     devTools: true,
 });
