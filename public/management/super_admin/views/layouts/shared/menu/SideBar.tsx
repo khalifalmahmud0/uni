@@ -40,7 +40,7 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     <MenuDropDownItem label="Create Booking" to="/booking/create" />
                      <MenuDropDownItem label="Project Payment" to="/booking/payments" />
                 </MenuDropDown>
-                {/* Accounts  */}
+                {/* Account  */}
                 <MenuDropDown group_title="Account" icon="icon-desktop">
                     <MenuDropDownItem label="Internal Income" to="#" />
                     <MenuDropDownItem label="Project Income" to="/accounts/payment" />
