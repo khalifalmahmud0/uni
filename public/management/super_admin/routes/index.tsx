@@ -6,7 +6,6 @@ import booking from '../views/pages/booking/config/routes';
 import project from '../views/pages/project/config/routes';
 import accounts from '../views/pages/accounts/config/routes';
 
-
 import React from 'react';
 
 interface RouteTypes extends NonIndexRouteObject {}
@@ -23,7 +22,6 @@ const router: RouteTypes[] = [
             booking,
             project,
             accounts
-         
         ],
     },
 ];

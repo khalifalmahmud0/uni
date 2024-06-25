@@ -1,0 +1,7 @@
+copy folder
+
+rename all dummy
+
+add to store > index 
+
+add to routes > index
