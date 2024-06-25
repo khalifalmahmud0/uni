@@ -42,7 +42,7 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 </MenuDropDown>
                 {/* Account  */}
                 <MenuDropDown group_title="Account" icon="icon-desktop">
-                    <MenuDropDownItem label="Internal Income" to="#" />
+                    <MenuDropDownItem label="Internal Income" to="/" />
                     <MenuDropDownItem label="Project Income" to="/accounts/payment" />
                     <MenuDropDownItem label="Expense" to="#" />
                     <MenuDropDownItem label="All Account" to="/accounts/type" />
