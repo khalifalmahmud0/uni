@@ -38,27 +38,27 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     <MenuDropDownItem label="Create Project" to="/project/create" />
                     <MenuDropDownItem label="All Bookings" to="/booking" />
                     <MenuDropDownItem label="Create Booking" to="/booking/create" />
-                     <MenuDropDownItem label="Project Payment" to="/booking/payments" />
+                    <MenuDropDownItem label="Project Payment" to="/booking/payments" />
                 </MenuDropDown>
                 {/* Account  */}
                 <MenuDropDown group_title="Account" icon="icon-desktop">
-                    <MenuDropDownItem label="Internal Income" to="/" />
-                    <MenuDropDownItem label="Project Income" to="/accounts/payment" />
-                    <MenuDropDownItem label="Expense" to="#" />
-                    <MenuDropDownItem label="All Account" to="/accounts/type" />
-                    <MenuDropDownItem label="All Account Number" to="/accounts/number" />
-                    <MenuDropDownItem label="All Account Categories" to="/accounts/category" />
-                    <MenuDropDownItem label="Debit Credit" to="/" />
+                    <MenuDropDownItem label="Internal Income" to="/internal_income" />
+                    <MenuDropDownItem label="Project Income" to="/project_income" />
+                    <MenuDropDownItem label="Expense" to="/expense" />
+                    <MenuDropDownItem label="All Account" to="/account_types" />
+                    <MenuDropDownItem label="All Account Number" to="/account_numbers" />
+                    <MenuDropDownItem label="All Account Categories" to="/account_categories" />
+                    <MenuDropDownItem label="Debit Credit" to="/debit_credit" />
                 </MenuDropDown>
                 {/* Reports  */}
                 <MenuDropDown group_title="Reports" icon="icon-desktop">
-                    <MenuDropDownItem label="Income Statement" to="#" />
-                    <MenuDropDownItem label="Expense Statement" to="#" />
-                    <MenuDropDownItem label="Closing Balance" to="#" />
-                    <MenuDropDownItem label="Project Report" to="#" />
-                    <MenuDropDownItem label="Customer Report" to="#" />
-                    <MenuDropDownItem label="Due Report" to="#" />
-                    <MenuDropDownItem label="Incentive Report" to="#" />
+                    <MenuDropDownItem label="Income Statement" to="/income_statement" />
+                    <MenuDropDownItem label="Expense Statement" to="/expense_statement" />
+                    <MenuDropDownItem label="Closing Balance" to="/closing_balance" />
+                    <MenuDropDownItem label="Project Report" to="/project_report" />
+                    <MenuDropDownItem label="Customer Report" to="/customer_report" />
+                    <MenuDropDownItem label="Due Report" to="/due_report" />
+                    <MenuDropDownItem label="Incentive Report" to="/incentive_report" />
                 </MenuDropDown>
                 {/* Project Visits  */}
                 <MenuDropDown group_title="Project Visits" icon="icon-desktop">
