@@ -38,7 +38,7 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     <MenuDropDownItem label="Create Project" to="/project/create" />
                     <MenuDropDownItem label="All Bookings" to="/booking" />
                     <MenuDropDownItem label="Create Booking" to="/booking/create" />
-                    <MenuDropDownItem label="Project Payment" to="/booking/payments" />
+                    <MenuDropDownItem label="Project Payment" to="/project_payment" />
                 </MenuDropDown>
                 {/* Account  */}
                 <MenuDropDown group_title="Account" icon="icon-desktop">
@@ -62,8 +62,8 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 </MenuDropDown>
                 {/* Project Visits  */}
                 <MenuDropDown group_title="Project Visits" icon="icon-desktop">
-                    <MenuDropDownItem label="Visit History" to="#" />
-                    <MenuDropDownItem label="Assign Visit" to="#" />
+                    <MenuDropDownItem label="Visit History" to="/assign_visit" />
+                    <MenuDropDownItem label="Assign Visit" to="/visit_history" />
                 </MenuDropDown>
             </ul>
         </>
