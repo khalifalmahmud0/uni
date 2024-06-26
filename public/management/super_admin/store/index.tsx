@@ -21,11 +21,14 @@ import incentive_report from '../views/pages/reports/menus/incentive_report/conf
 import income_statement from '../views/pages/reports/menus/income_statement/config/store';
 import project_report from '../views/pages/reports/menus/project_report/config/store';
 
+<<<<<<< HEAD
 import assign_visit from '../views/pages/project_visit/menus/assign_visit/config/store';
 import visit_history from '../views/pages/project_visit/menus/visit_history/config/store';
 
 import project_payment from '../views/pages/project/menus/project_payment/config/store';
 
+=======
+>>>>>>> origin/main
 const store = configureStore({
     reducer: {
         users: users.reducer,
@@ -48,9 +51,12 @@ const store = configureStore({
         incentive_report: incentive_report.reducer,
         income_statement: income_statement.reducer,
         project_report: project_report.reducer,
+<<<<<<< HEAD
         assign_visit: assign_visit.reducer,
         visit_history: visit_history.reducer,
         project_payment: project_payment.reducer
+=======
+>>>>>>> origin/main
     },
     devTools: true,
 });

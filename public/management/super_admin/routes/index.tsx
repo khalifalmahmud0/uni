@@ -20,12 +20,15 @@ import expense_statement from '../views/pages/reports/menus/expense_statement/co
 import incentive_report from '../views/pages/reports/menus/incentive_report/config/routes';
 import income_statement from '../views/pages/reports/menus/income_statement/config/routes';
 import project_report from '../views/pages/reports/menus/project_report/config/routes';
+<<<<<<< HEAD
 
 import assign_visit from '../views/pages/project_visit/menus/assign_visit/config/routes';
 import visit_history from '../views/pages/project_visit/menus/visit_history/config/routes';
 
 
 import project_payment from '../views/pages/project/menus/project_payment/config/routes';
+=======
+>>>>>>> origin/main
 
 interface RouteTypes extends NonIndexRouteObject {}
 const router: RouteTypes[] = [
@@ -54,10 +57,14 @@ const router: RouteTypes[] = [
             expense_statement,
             incentive_report,
             income_statement,
+<<<<<<< HEAD
             project_report,
             assign_visit,
             visit_history,
             project_payment
+=======
+            project_report
+>>>>>>> origin/main
         ],
     },
 ];
