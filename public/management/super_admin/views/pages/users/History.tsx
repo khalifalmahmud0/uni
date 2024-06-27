@@ -61,7 +61,7 @@ const History: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Customer ID (uid)`}
+                                            label={`User ID`}
                                             col_name={`uid`}
                                             sort={true}
                                         />
@@ -128,7 +128,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                     {/* ID  */}
                                                     <td>{i.id}</td>
                                                     {/* UID  */}
-                                                    <td>{i.id}</td>
+                                                    <td>{`100${i.id}`}</td>
                                                     {/* IMAGE  */}
                                                     <td>
                                                         <img
