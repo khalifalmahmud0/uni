@@ -12,8 +12,6 @@ import Filter from './components/canvas/Filter';
 import QuickView from './components/canvas/QuickView';
 import storeSlice from './config/store';
 import { anyObject } from '../../../../../common_types/object';
-import TableRowAction from './components/all_data_page/TableRowAction';
-import SelectItem from './components/all_data_page/SelectItem';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
@@ -80,7 +78,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                     key={i.id}
                                                     className={`table_rows table_row_${i.id}`}
                                                 >
-                                                    <td>
+                                                    {/* <td>
                                                         <TableRowAction
                                                             item={i}
                                                         />
@@ -88,22 +86,17 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
-                                                    {/* ID  */}
+                                                   
                                                     <td>{i.id}</td>
-                                                    {/* Title  */}
-                                                    <td>
-                                                        Bill
-                                                    </td>
-                                                    {/* Description  */}
-                                                    <td>
-                                                        Lorem Ipsum
-                                                    </td>
+                                                    */}
                                                 </tr>
                                             );
                                         },
                                     )}
                                 </tbody>
+                               
                             </table>
+                            <h1> In Progress .. </h1>
                         </div>
 
                         <Paginate

@@ -41,44 +41,18 @@ const Details: React.FC<Props> = (props: Props) => {
 
                     {Object.keys(state.item).length && (
                         <div className="content_body custom_scroll">
-                            <div className="details_page_profile_image">
-                                <img
-                                    src={
-                                        state.item.image
-                                            ? `/${state.item.image}`
-                                            : '/assets/dashboard/images/avatar.png'
-                                    }
-                                />
-                            </div>
                             <table className="table quick_modal_table table-hover">
                                 <tbody>
                                     {[
-                                        'name',
-                                        'email',
-                                        'designation',
-                                        'phone_number',
-                                    ].map((i) => (
-                                        <tr>
-                                            <td>{i.replaceAll('_', ' ')}</td>
-                                            <td>:</td>
-                                            <td>{get_value(i)}</td>
-                                        </tr>
-                                    ))}
-                                    {[
-                                        'father_name',
-                                        'mother_name',
-                                        'husband_spouse',
-                                        'nid',
-                                        'education',
-                                        'permanent_address',
-                                        'present_address',
-
-                                        'bank_name',
-                                        'branch_name',
-                                        'bank_account_no',
-                                        'bank_routing_no',
-                                        'mobile_banking_portal',
-                                        'mobile_banking_ac_no',
+                                        'Project',
+                                        'User',
+                                        'Date',
+                                        'Amount',
+                                        'Amount In Text',
+                                        'Category',
+                                        'Account',
+                                        'Account Number',
+                                        'Type',
                                     ].map((i) => (
                                         <tr>
                                             <td>{i.replaceAll('_', ' ')}</td>

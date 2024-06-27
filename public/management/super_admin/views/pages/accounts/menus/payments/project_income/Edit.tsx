@@ -10,8 +10,6 @@ import { Link, useParams } from 'react-router-dom';
 import storeSlice from './config/store';
 import { update } from './config/store/async_actions/update';
 import Input from './components/management_data_page/Input';
-import InputImage from './components/management_data_page/InputImage';
-import DropDown from './components/dropdown/DropDown';
 import Select from './components/management_data_page/Select';
 import { anyObject } from '../../../../../../common_types/object';
 export interface Props {}
@@ -78,101 +76,201 @@ const Edit: React.FC<Props> = (props: Props) => {
                                     defaultValue={state.item.id}
                                 />
 
-                                <div>
-                                    <h5 className="mb-4">
-                                        Personal Informations
-                                    </h5>
-                                    <div className="form_auto_fit">
-                                        <div className="form-group form-vertical">
+                            {/* Project Income  */}
+                            <div>
+                                <h5 className="mb-4">Edit Project Income</h5>
+                                <div className="form_auto_fit">
+                                    {/* Project  */}
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Project"
+                                            name="project"
+                                            values={[
+                                                {
+                                                    text: 'Project 1',
+                                                    value: '01',
+                                                },
+                                                {
+                                                    text: 'Project 2',
+                                                    value: '02',
+                                                },
+                                                {
+                                                    text: 'Project 3',
+                                                    value: '03',
+                                                },
+                                                {
+                                                    text: 'Project 4',
+                                                    value: '04',
+                                                },
+                                                {
+                                                    text: 'Project 5',
+                                                    value: '05',
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                     {/* User  */}
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="User"
+                                            name="user"
+                                            values={[
+                                                {
+                                                    text: 'User 1',
+                                                    value: '01',
+                                                },
+                                                {
+                                                    text: 'User 2',
+                                                    value: '02',
+                                                },
+                                                {
+                                                    text: 'User 3',
+                                                    value: '03',
+                                                },
+                                                {
+                                                    text: 'User 4',
+                                                    value: '04',
+                                                },
+                                                {
+                                                    text: 'User 5',
+                                                    value: '05',
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                    {/* Date, Amount, Amount in Text */}
+                                      {[
+                                     {
+                                            name: 'date',
+                                            placeholder: 'Date',
+                                            type: 'date',
+                                            label: 'Date',
+                                        },
+                                        {
+                                            name: 'amount',
+                                            placeholder: 'Amount',
+                                            type: 'text',
+                                            label: 'Amount',
+                                        },
+                                         {
+                                            name: 'amount_in_text',
+                                            placeholder: 'Amount In Text',
+                                            type: 'text',
+                                            label: 'Amount In Text',
+                                        },
+                                       
+                                    ].map((field) => (
+                                        <div
+                                            className="form-group form-vertical"
+                                            key={field.name}
+                                        >
                                             <Input
-                                                name={'uid'}
-                                                label="Employee ID"
+                                                name={field.name}
+                                                placeholder={field.placeholder}
+                                                type={field.type}
+                                                label={field.label}
                                             />
                                         </div>
-                                        {[
-                                            'name',
-                                            'email',
-                                            'father_name',
-                                            'mother_name',
-                                            'husband_spouse',
-                                            'phone_number',
-                                            'nid',
-                                            'education',
-                                            'permanent_address',
-                                            'present_address',
-                                        ].map((i) => (
-                                            <div className="form-group form-vertical">
-                                                <Input
-                                                    name={i}
-                                                    value={get_value(i)}
-                                                />
-                                            </div>
-                                        ))}
-
-                                        <div className="form-group form-vertical">
-                                            <Select
-                                                value={state.item.designation}
-                                                label="Designation"
-                                                name="designation"
-                                                values={[
-                                                    { text: 'ED', value: 'ed' },
-                                                    { text: 'GM', value: 'gm' },
-                                                    {
-                                                        text: 'AGM',
-                                                        value: 'agm',
-                                                    },
-                                                    { text: 'MO', value: 'mo' },
-                                                ]}
-                                            />
-                                        </div>
-
-                                        <div className="form-group form-vertical">
-                                            <label>Reference</label>
-                                            <div className="form_elements">
-                                                <DropDown
-                                                    multiple={false}
-                                                    get_selected_data={(
-                                                        result,
-                                                    ) => console.log(result)}
-                                                    default_value={get_reference()}
-                                                    name={`reference`}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="form-group form-vertical">
-                                            <Input name={'password'} />
-                                        </div>
-
-                                        <div className="form-group grid_full_width form-vertical">
-                                            <InputImage
-                                                label={'image'}
-                                                name={'image'}
-                                            />
-                                        </div>
+                                    ))}
+                                     {/* Category  */}
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Category"
+                                            name="account_category"
+                                            values={[
+                                                {
+                                                    text: 'Booking Money',
+                                                    value: 'bm',
+                                                },
+                                                {
+                                                    text: 'Down Payments',
+                                                    value: 'dp',
+                                                },
+                                                {
+                                                    text: 'Installments',
+                                                    value: 'install',
+                                                },
+                                            ]}
+                                        />
                                     </div>
-                                </div>
-
-                                <div>
-                                    <h5 className="mb-4">Bank Informations</h5>
-                                    <div className="form_auto_fit">
-                                        {[
-                                            'bank_name',
-                                            'branch_name',
-                                            'bank_account_no',
-                                            'bank_routing_no',
-                                            'mobile_banking_portal',
-                                            'mobile_banking_ac_no',
-                                        ].map((i) => (
-                                            <div className="form-group form-vertical">
-                                                <Input
-                                                    name={i}
-                                                    value={get_value(i)}
-                                                />
-                                            </div>
-                                        ))}
+                                    {/* Account  */}
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Account"
+                                            name="account"
+                                            values={[
+                                                {
+                                                    text: 'Bank',
+                                                    value: '01',
+                                                },
+                                                {
+                                                    text: 'Bkash',
+                                                    value: '02',
+                                                },
+                                                {
+                                                    text: 'Nagad',
+                                                    value: '03',
+                                                },
+                                                {
+                                                    text: 'Rocket',
+                                                    value: '04',
+                                                },
+                                                {
+                                                    text: 'Cash',
+                                                    value: '05',
+                                                },
+                                            ]}
+                                        />
                                     </div>
+                                     {/* Account Number  */}
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Account Number"
+                                            name="account_number"
+                                            values={[
+                                                {
+                                                    text: '001122334455',
+                                                    value: '01',
+                                                },
+                                                {
+                                                    text: '3355338899',
+                                                    value: '02',
+                                                },
+                                                {
+                                                    text: '0066443211',
+                                                    value: '03',
+                                                },
+                                                {
+                                                    text: '543432342432',
+                                                    value: '04',
+                                                },
+                                                {
+                                                    text: '345345345',
+                                                    value: '05',
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                     {/* Type */}
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Type"
+                                            name="type"
+                                            values={[
+                                                {
+                                                    text: 'Income',
+                                                    value: '01',
+                                                },
+                                                {
+                                                    text: 'Expenses',
+                                                    value: '02',
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                   
                                 </div>
+                            </div>
 
                                 <div className="form-group form-vertical">
                                     <label></label>

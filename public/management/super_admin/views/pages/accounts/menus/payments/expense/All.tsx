@@ -61,13 +61,43 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Title`}
-                                            col_name={`title`}
+                                            label={`Project`}
+                                            col_name={`project`}
                                             sort={true}
                                         />
-                                        <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
+                                         <TableHeading
+                                            label={`Date`}
+                                            col_name={`date`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Amount`}
+                                            col_name={`amount`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Amount In Text`}
+                                            col_name={`amount_in_text`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Category`}
+                                            col_name={`category`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Account`}
+                                            col_name={`account`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Account Number`}
+                                            col_name={`account_number`}
+                                            sort={true}
+                                        />
+                                         <TableHeading
+                                            label={`Type`}
+                                            col_name={`type`}
                                             sort={true}
                                         />
                                     </tr>
@@ -88,15 +118,32 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
-                                                    {/* ID  */}
-                                                    <td>{i.id}</td>
-                                                    {/* Title  */}
-                                                    <td>
-                                                        Bill
+                                                   <td>
+                                                       Project 1
                                                     </td>
-                                                    {/* Description  */}
                                                     <td>
-                                                        Lorem Ipsum
+                                                       User 1
+                                                    </td>
+                                                    <td>
+                                                      27 June 2024
+                                                    </td>
+                                                    <td>
+                                                      5000/-
+                                                    </td>
+                                                    <td>
+                                                      Five Thousand taka only
+                                                    </td>
+                                                     <td>
+                                                      Booking Money
+                                                    </td>
+                                                     <td>
+                                                      Bkash
+                                                    </td>
+                                                    <td>
+                                                     12564565464
+                                                    </td>
+                                                    <td>
+                                                     Income
                                                     </td>
                                                 </tr>
                                             );

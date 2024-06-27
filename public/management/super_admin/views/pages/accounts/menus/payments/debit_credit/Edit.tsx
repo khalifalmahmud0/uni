@@ -79,9 +79,9 @@ const Edit: React.FC<Props> = (props: Props) => {
                                 />
 
                                 <div>
-                                    <h5 className="mb-4">
+                                    {/* <h5 className="mb-4">
                                         Personal Informations
-                                    </h5>
+                                    </h5> */}
                                     <div className="form_auto_fit">
                                         <div className="form-group form-vertical">
                                             <Input

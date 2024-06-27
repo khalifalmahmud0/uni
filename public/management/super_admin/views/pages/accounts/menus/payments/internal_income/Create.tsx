@@ -28,9 +28,9 @@ const Create: React.FC<Props> = (props: Props) => {
                             onSubmit={(e) => handle_submit(e)}
                             className="mx-auto pt-3"
                         >
-                            {/* Project Information  */}
+                            {/* Project Income  */}
                             <div>
-                                <h5 className="mb-4">Personal Informations</h5>
+                                <h5 className="mb-4">Add Internal Income</h5>
                                 <div className="form_auto_fit">
                                     {/* Project  */}
                                     <div className="form-group form-vertical">
@@ -223,7 +223,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                    
                                 </div>
                             </div>
-
+                            
                             <div className="form-group form-vertical">
                                 <div className="form_elements">
                                     <button className="btn btn_1 btn-outline-info">
