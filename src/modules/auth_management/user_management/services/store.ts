@@ -1,5 +1,5 @@
 import db from '../models/db';
-import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
+import { FastifyInstance, FastifyRequest } from 'fastify';
 import { body, validationResult } from 'express-validator';
 import {
     anyObject,
@@ -16,6 +16,7 @@ import moment from 'moment';
 async function validate(req: Request) {
     let field = '';
     let fields = [
+        'uid',
         'name',
         'email',
         'father_name',
@@ -100,6 +101,7 @@ async function store(
     let reference = JSON.parse(body.reference)[0];
 
     let inputs: InferCreationAttributes<typeof data> = {
+        uid: body.uid,
         name: body.name,
         email: body.email,
         phone_number: body.phone_number,
