@@ -87,6 +87,7 @@ const Edit: React.FC<Props> = (props: Props) => {
                                             <Input
                                                 name={'uid'}
                                                 label="Employee ID"
+                                                value={get_value("uid")}
                                             />
                                         </div>
                                         {[

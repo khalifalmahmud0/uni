@@ -16,6 +16,7 @@ import moment from 'moment';
 async function validate(req: Request) {
     let field = '';
     let fields = [
+        'uid',
         'name',
         'email',
         'father_name',
@@ -106,6 +107,7 @@ async function update(
     let reference = JSON.parse(body.reference)[0];
 
     let inputs: InferCreationAttributes<typeof user_model> = {
+        uid: body.uid,
         name: body.name,
         email: body.email,
         phone_number: body.phone_number,

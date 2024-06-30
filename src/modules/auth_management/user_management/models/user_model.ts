@@ -18,9 +18,6 @@ import {
     InferAttributes,
     InferCreationAttributes,
     CreationOptional,
-    DefaultSetOptions,
-    // NonAttribute,
-    // ForeignKey,
 } from 'sequelize';
 
 const tableName = 'users';
@@ -34,7 +31,7 @@ type designation = 'ed' | 'gm' | 'agm' | 'mo';
 
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
-
+    declare uid: string;
     declare name: string;
     declare role?: role;
     declare reference?: number;
@@ -63,6 +60,10 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.BIGINT.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true,
+            },
+            uid: {
+                type: new DataTypes.STRING(20),
+                allowNull: true,
             },
             reference: {
                 type: DataTypes.BIGINT.UNSIGNED,
