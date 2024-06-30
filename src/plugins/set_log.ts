@@ -58,12 +58,15 @@ export default fp(function (fastify, opts = {}, done) {
                         new Date().toLocaleTimeString(),
                     message: error.message,
                 };
-                if (stacks.length) {
+                if (stacks.length && stacks[1]) {
                     const regex = /services[^)]*\)/;
-                    const match = stacks[1].match(regex);
-                    if (match) {
-                        errors.file = match[0];
+                    if (Object.prototype.hasOwnProperty.call(stacks[1], 'match')) {
+                        const match = stacks[1].match(regex);
+                        if (match) {
+                            errors.file = match[0];
+                        }
                     }
+                    
                 }
             }
 

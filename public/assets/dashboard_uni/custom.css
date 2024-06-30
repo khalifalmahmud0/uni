@@ -39,3 +39,11 @@ thead, tbody, tfoot, tr, td, th {
         object-position: center;
     }
 }
+
+body[main-theme-layout="main-theme-layout-4"] .loader-wrapper {
+    background-color: #323a4282;
+}
+
+body[main-theme-layout="main-theme-layout-4"] .loader-wrapper .loader {
+    background-color: #30384100 !important;
+}

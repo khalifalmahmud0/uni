@@ -1749,7 +1749,8 @@ td.col_id {
   text-align: center;
   font-size: 14px;
   color: var(--brand_white);
-  padding: 5px;
+  padding: 5px 10px;
+  text-wrap: nowrap;
 }
 .table_responsive table thead {
   position: sticky;
@@ -1763,7 +1764,7 @@ td.col_id {
 .table_responsive table thead tr th,
 .table_responsive table thead tr td {
   text-transform: capitalize;
-  padding: 10px 0px;
+  padding: 10px 10px;
   user-select: none;
 }
 .table_responsive table tbody tr {
