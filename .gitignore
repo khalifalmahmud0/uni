@@ -13,3 +13,4 @@ public/uploads/users/*
 yarn.lock
 package-lock.json
 *.lock
+.env
