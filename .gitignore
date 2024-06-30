@@ -7,10 +7,11 @@ public/management_build/central_branch/central_branch.js.map
 public/management/super_admin_old
 public/management/admin_old
 public/uploads/users/*
-# /**/*.log
+/**/*.log
 
 .history
 yarn.lock
 package-lock.json
 *.lock
 .env
+./logs
