@@ -97,13 +97,7 @@ async function update(
         const saltRounds = 10;
         password = await bcrypt.hash(body.password, saltRounds);
     }
-
-    let image_path =
-        'uploads/users/' +
-        moment().format('YYYYMMDDHHmmss') +
-        body['image'].ext;
-    await (fastify_instance as any).upload(body['image'], image_path);
-
+    
     let reference = JSON.parse(body.reference)[0];
 
     let inputs: InferCreationAttributes<typeof user_model> = {
@@ -112,7 +106,7 @@ async function update(
         email: body.email,
         phone_number: body.phone_number,
         designation: body.designation,
-        image: image_path,
+        // image: image_path,
         password: password,
         reference: reference,
     };
@@ -151,6 +145,18 @@ async function update(
         if (data) {
             data.update(inputs);
             await data.save();
+
+            if(body['image']['ext']){
+                
+                let image_path =
+                    'uploads/users/' +
+                    moment().format('YYYYMMDDHHmmss') +
+                    body['image'].ext;
+                await (fastify_instance as any).upload(body['image'], image_path);
+
+                data.image = image_path;
+                await data.save();
+            }
 
             let user_information = await models.UserInformationModel.findOne({
                 where: {

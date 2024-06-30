@@ -75,7 +75,7 @@ const Edit: React.FC<Props> = (props: Props) => {
                                 <input
                                     type="hidden"
                                     name="id"
-                                    defaultValue={state.item.id}
+                                    defaultValue={get_value(`id`)}
                                 />
 
                                 <div>
@@ -149,6 +149,7 @@ const Edit: React.FC<Props> = (props: Props) => {
                                             <InputImage
                                                 label={'image'}
                                                 name={'image'}
+                                                defalut_preview={get_value("image")}
                                             />
                                         </div>
                                     </div>
