@@ -60,6 +60,11 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`id`}
                                             sort={true}
                                         />
+                                        <TableHeading
+                                            label={`User ID`}
+                                            col_name={`user_id`}
+                                            sort={true}
+                                        />
                                         <th>Image</th>
                                         <TableHeading
                                             label={`Name`}
@@ -90,6 +95,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                         <SelectItem item={i} />
                                                     </td>
                                                     <td>{i.id}</td>
+                                                    <td>{`100${i.id}`}</td>
                                                     <td>
                                                         <img
                                                             src={

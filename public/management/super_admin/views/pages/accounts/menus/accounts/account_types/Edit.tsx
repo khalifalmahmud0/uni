@@ -10,7 +10,6 @@ import { Link, useParams } from 'react-router-dom';
 import storeSlice from './config/store';
 import { update } from './config/store/async_actions/update';
 import { anyObject } from '../../../../../../common_types/object';
-import Select from './components/management_data_page/Select';
 import Input from './components/management_data_page/Input';
 export interface Props {}
 
@@ -75,10 +74,10 @@ const Edit: React.FC<Props> = (props: Props) => {
                                     name="id"
                                     defaultValue={state.item.id}
                                 />
-                            <div>
-                                <h5 className="mb-4">Edit Account Type</h5>
-                                <div className="form_auto_fit">
-                                    <div className="form-group form-vertical">
+                                <div>
+                                    <h5 className="mb-4">Edit Account Type</h5>
+                                    <div className="form_auto_fit">
+                                        {/* <div className="form-group form-vertical">
                                         <Select
                                             label="Title"
                                             name="title"
@@ -89,36 +88,43 @@ const Edit: React.FC<Props> = (props: Props) => {
                                                 { text: 'Rocket', value: 'rocket' },
                                             ]}
                                         />
+                                    </div> */}
+                                        {[
+                                            {
+                                                name: 'title',
+                                                placeholder: 'Title',
+                                                type: 'text',
+                                                label: 'Title',
+                                            },
+                                            {
+                                                name: 'description',
+                                                placeholder: 'Description',
+                                                type: 'text',
+                                                label: 'Description',
+                                            },
+                                            {
+                                                name: 'opening_date',
+                                                placeholder: 'Opening Date',
+                                                type: 'date',
+                                                label: 'Opening Date',
+                                            },
+                                        ].map((field) => (
+                                            <div
+                                                className="form-group form-vertical"
+                                                key={field.name}
+                                            >
+                                                <Input
+                                                    name={field.name}
+                                                    placeholder={
+                                                        field.placeholder
+                                                    }
+                                                    type={field.type}
+                                                    label={field.label}
+                                                />
+                                            </div>
+                                        ))}
                                     </div>
-                                   {[
-                                        {
-                                            name: 'description',
-                                            placeholder: 'Description',
-                                            type: 'text',
-                                            label: 'Description',
-                                        },
-                                        {
-                                            name: 'opening_date',
-                                            placeholder: 'Opening Date',
-                                            type: 'date',
-                                            label: 'Opening Date',
-                                        },
-                                    ].map((field) => (
-                                        <div
-                                            className="form-group form-vertical"
-                                            key={field.name}
-                                        >
-                                            <Input
-                                                name={field.name}
-                                                placeholder={field.placeholder}
-                                                type={field.type}
-                                                label={field.label}
-                                            />
-                                        </div>
-                                    ))}
-                                  
                                 </div>
-                            </div>
 
                                 <div className="form-group form-vertical">
                                     <label></label>

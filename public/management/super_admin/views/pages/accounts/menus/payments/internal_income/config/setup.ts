@@ -1,6 +1,6 @@
 import setup_type from './setup_type';
 
-const prefix: string = 'internal_income';
+const prefix: string = 'Internal Income';
 const setup: setup_type = {
     prefix,
     module_name: 'internal_income',

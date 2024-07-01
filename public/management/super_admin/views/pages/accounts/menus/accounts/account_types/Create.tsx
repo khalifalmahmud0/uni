@@ -5,7 +5,6 @@ import setup from './config/setup';
 import { useAppDispatch } from '../../../../../../store';
 import { store } from './config/store/async_actions/store';
 import Input from './components/management_data_page/Input';
-import Select from './components/management_data_page/Select';
 export interface Props {}
 
 const Create: React.FC<Props> = (props: Props) => {
@@ -32,7 +31,7 @@ const Create: React.FC<Props> = (props: Props) => {
                             <div>
                                 <h5 className="mb-4">Add Account Type</h5>
                                 <div className="form_auto_fit">
-                                    <div className="form-group form-vertical">
+                                    {/* <div className="form-group form-vertical">
                                         <Select
                                             label="Title"
                                             name="title"
@@ -43,8 +42,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 { text: 'Rocket', value: 'rocket' },
                                             ]}
                                         />
-                                    </div>
-                                   {[
+                                    </div> */}
+                                    {[
+                                        {
+                                            name: 'title',
+                                            placeholder: 'Title',
+                                            type: 'text',
+                                            label: 'Title',
+                                        },
                                         {
                                             name: 'description',
                                             placeholder: 'Description',
@@ -70,11 +75,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                             />
                                         </div>
                                     ))}
-                                  
                                 </div>
                             </div>
-
-                            
 
                             <div className="form-group form-vertical">
                                 <label></label>

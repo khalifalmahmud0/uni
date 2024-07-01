@@ -61,7 +61,7 @@ const History: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`EMP ID`}
+                                            label={`User ID`}
                                             col_name={`uid`}
                                             sort={true}
                                         />

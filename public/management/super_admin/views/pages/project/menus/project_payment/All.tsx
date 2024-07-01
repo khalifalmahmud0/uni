@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { projectPayment } from '../../../dummy.js';
 // import setup from './config/setup';
 import { RootState, useAppDispatch } from '../../../../../store';
 import { all } from './config/store/async_actions/all';
@@ -14,7 +15,8 @@ import storeSlice from './config/store';
 import { anyObject } from '../../../../../common_types/object';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
-
+import TableRowAction from './components/all_data_page/TableRowAction';
+import SelectItem from './components/all_data_page/SelectItem';
 export interface Props {}
 
 const All: React.FC<Props> = (props: Props) => {
@@ -59,26 +61,41 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Title`}
-                                            col_name={`title`}
+                                            label={`Project Name`}
+                                            col_name={`project_name`}
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
+                                            label={`Customer ID`}
+                                            col_name={`customer_id`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Payment Type`}
+                                            col_name={`payment_type`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Amount`}
+                                            col_name={`amount`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Date`}
+                                            col_name={`date`}
                                             sort={true}
                                         />
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {(state.all as any)?.data?.map(
+                                    {/* {(state.all as any)?.data?.map(
                                         (i: { [key: string]: any }) => {
                                             return (
                                                 <tr
                                                     key={i.id}
                                                     className={`table_rows table_row_${i.id}`}
                                                 >
-                                                    {/* <td>
+                                                    <td>
                                                         <TableRowAction
                                                             item={i}
                                                         />
@@ -88,15 +105,33 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                    
                                                     <td>{i.id}</td>
-                                                    */}
+                                                   
                                                 </tr>
                                             );
                                         },
-                                    )}
+                                    )} */}
+                                    {/* Dummy Data  */}
+                                    {  projectPayment.map((i) => (
+                                        <tr key={i.id} className={`table_rows table_row_${i.id}`}>
+                                            <td>
+                                                <TableRowAction item={i} />
+                                            </td>
+                                            <td>
+                                                <SelectItem item={i} />
+                                            </td>
+                                            <td>{i.id}</td>
+                                            <td>{i.project_name}</td>
+                                            <td>{i.customer_id}</td>
+                                            <td>{i.payment_type}</td>
+                                            <td>{i.amount}</td>
+                                            <td>{i.date}</td>
+                                        </tr>
+                                    ))}
+
                                 </tbody>
                                
                             </table>
-                            <h1> In Progress .. </h1>
+                           
                         </div>
 
                         <Paginate

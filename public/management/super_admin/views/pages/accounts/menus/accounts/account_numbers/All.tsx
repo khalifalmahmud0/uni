@@ -70,6 +70,26 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`account_number`}
                                             sort={true}
                                         />
+                                        <TableHeading
+                                            label={`Income`}
+                                            col_name={`income`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Expence`}
+                                            col_name={`expence`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Balance`}
+                                            col_name={`balance`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Total`}
+                                            col_name={`total`}
+                                            sort={true}
+                                        />
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -93,11 +113,30 @@ const All: React.FC<Props> = (props: Props) => {
                                                     {/* Customer ID  */}
                                                     <td>Bkash</td>
                                                     {/* Image  */}
-                                                     <td>5566770923423</td>
+                                                    <td>5566770923423</td>
+                                                    <td>1200/-</td>
+                                                    <td>1300/-</td>
+                                                    <td>1400/-</td>
+                                                    <td>1000/-</td>
                                                 </tr>
                                             );
                                         },
                                     )}
+                                     <tr style={{ backgroundColor: 'gray' }}>
+                                        <td></td>
+                                        <td></td>
+                                        {/* ID  */}
+                                        <td></td>
+                                        {/* Title  */}
+                                        <td></td>
+                                        {/* Description  */}
+                                        <td></td>
+                                      
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

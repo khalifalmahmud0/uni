@@ -33,7 +33,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                 <h5 className="mb-4">Add Internal Income</h5>
                                 <div className="form_auto_fit">
                                     {/* Project  */}
-                                    <div className="form-group form-vertical">
+                                    {/* <div className="form-group form-vertical">
                                         <Select
                                             label="Project"
                                             name="project"
@@ -60,8 +60,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 },
                                             ]}
                                         />
-                                    </div>
-                                     {/* User  */}
+                                    </div> */}
+                                    {/* User  */}
                                     <div className="form-group form-vertical">
                                         <Select
                                             label="User"
@@ -91,8 +91,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                         />
                                     </div>
                                     {/* Date, Amount, Amount in Text */}
-                                      {[
-                                     {
+                                    {[
+                                        {
                                             name: 'date',
                                             placeholder: 'Date',
                                             type: 'date',
@@ -104,7 +104,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             type: 'text',
                                             label: 'Amount',
                                         },
-                                         {
+                                        {
                                             name: 'amount_in_text',
                                             placeholder: 'Amount In Text',
                                             type: 'text',
@@ -124,7 +124,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             />
                                         </div>
                                     ))}
-                                     {/* Category  */}
+                                    {/* Category  */}
                                     <div className="form-group form-vertical">
                                         <Select
                                             label="Category"
@@ -174,7 +174,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             ]}
                                         />
                                     </div>
-                                     {/* Account Number  */}
+                                    {/* Account Number  */}
                                     <div className="form-group form-vertical">
                                         <Select
                                             label="Account Number"
@@ -203,8 +203,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                             ]}
                                         />
                                     </div>
-                                     {/* Type */}
-                                    <div className="form-group form-vertical">
+                                    {/* Type */}
+                                    {/* <div className="form-group form-vertical">
                                         <Select
                                             label="Type"
                                             name="type"
@@ -219,11 +219,10 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 },
                                             ]}
                                         />
-                                    </div>
-                                   
+                                    </div> */}
                                 </div>
                             </div>
-                            
+
                             <div className="form-group form-vertical">
                                 <div className="form_elements">
                                     <button className="btn btn_1 btn-outline-info">

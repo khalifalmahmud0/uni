@@ -70,6 +70,16 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`description`}
                                             sort={true}
                                         />
+                                        <TableHeading
+                                            label={`Income`}
+                                            col_name={`income`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Expense`}
+                                            col_name={`expense`}
+                                            sort={true}
+                                        />
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -98,10 +108,27 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         Lorem Ipsum
                                                     </td>
+                                                    <td>
+                                                        1200/-
+                                                    </td>
+                                                    <td>
+                                                        1400/-
+                                                    </td>
                                                 </tr>
                                             );
                                         },
                                     )}
+                                    <tr style={{ backgroundColor: 'gray' }}>
+                                        <td></td>
+                                        <td></td>
+                                        {/* ID  */}
+                                        <td></td>
+                                        {/* Title  */}
+                                        <td></td>
+                                        <td></td>
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

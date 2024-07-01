@@ -61,8 +61,8 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Project`}
-                                            col_name={`project`}
+                                            label={`User`}
+                                            col_name={`user`}
                                             sort={true}
                                         />
                                          <TableHeading
@@ -95,11 +95,11 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`account_number`}
                                             sort={true}
                                         />
-                                         <TableHeading
+                                         {/* <TableHeading
                                             label={`Type`}
                                             col_name={`type`}
                                             sort={true}
-                                        />
+                                        /> */}
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -118,9 +118,12 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
-                                                   <td>
-                                                       Project 1
+                                                    <td>
+                                                       {i.id}
                                                     </td>
+                                                   {/* <td>
+                                                       Project 1
+                                                    </td> */}
                                                     <td>
                                                        User 1
                                                     </td>
@@ -142,9 +145,9 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                      12564565464
                                                     </td>
-                                                    <td>
+                                                    {/* <td>
                                                      Income
-                                                    </td>
+                                                    </td> */}
                                                 </tr>
                                             );
                                         },

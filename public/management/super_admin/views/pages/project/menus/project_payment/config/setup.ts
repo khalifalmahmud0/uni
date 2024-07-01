@@ -1,6 +1,6 @@
 import setup_type from './setup_type';
 
-const prefix: string = 'project_payment';
+const prefix: string = 'Project Payment';
 const setup: setup_type = {
     prefix,
     module_name: 'project_payment',

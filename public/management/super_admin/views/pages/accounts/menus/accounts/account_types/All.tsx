@@ -74,6 +74,26 @@ const All: React.FC<Props> = (props: Props) => {
                                             col_name={`opening_date`}
                                             sort={true}
                                         />
+                                        <TableHeading
+                                            label={`Income`}
+                                            col_name={`income`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Expense`}
+                                            col_name={`expense`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Balance`}
+                                            col_name={`balance`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Total`}
+                                            col_name={`total`}
+                                            sort={true}
+                                        />
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
@@ -100,11 +120,30 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>Mobile Banking</td>
                                                     {/* Opening Date  */}
                                                     <td>12 January 2024</td>
-                                                    
+                                                    <td>1200/-</td>
+                                                    <td>1300/-</td>
+                                                    <td>1400/-</td>
+                                                    <td>1000/-</td>
                                                 </tr>
                                             );
                                         },
                                     )}
+                                    <tr style={{ backgroundColor: 'gray' }}>
+                                        <td></td>
+                                        <td></td>
+                                        {/* ID  */}
+                                        <td></td>
+                                        {/* Title  */}
+                                        <td></td>
+                                        {/* Description  */}
+                                        <td></td>
+                                        {/* Opening Date  */}
+                                        <td></td>
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                        <td>total: 1000/-</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

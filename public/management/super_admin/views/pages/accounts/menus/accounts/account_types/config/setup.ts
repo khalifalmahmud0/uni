@@ -1,6 +1,6 @@
 import setup_type from './setup_type';
 
-const prefix: string = 'account_types';
+const prefix: string = 'Account Types';
 const setup: setup_type = {
     prefix,
     module_name: 'account_types',
