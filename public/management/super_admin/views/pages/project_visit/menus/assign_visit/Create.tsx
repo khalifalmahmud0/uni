@@ -8,7 +8,7 @@ import DropDown from './components/dropdown/DropDown';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import InputImage from './components/management_data_page/InputImage';
-export interface Props {}
+export interface Props { }
 
 const Create: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
@@ -32,85 +32,41 @@ const Create: React.FC<Props> = (props: Props) => {
                             className="mx-auto pt-3"
                         >
                             <div>
-                                <h5 className="mb-4">Personal Informations</h5>
+                                <h5 className="mb-4">
+                                    Select Project
+                                </h5>
                                 <div className="form_auto_fit">
                                     <div className="form-group form-vertical">
-                                        <Input
-                                            name={'uid'}
-                                            label="Employee ID"
-                                        />
-                                    </div>
-                                    {[
-                                        'name',
-                                        'email',
-                                        'father_name',
-                                        'mother_name',
-                                        'husband_spouse',
-                                        'phone_number',
-                                        'nid',
-                                        'education',
-                                        'permanent_address',
-                                        'present_address',
-                                    ].map((i) => (
-                                        <div className="form-group form-vertical">
-                                            <Input name={i} />
-                                        </div>
-                                    ))}
-
-                                    <div className="form-group form-vertical">
                                         <Select
-                                            label="Designation"
-                                            name="designation"
+                                            label="Project"
+                                            name="project"
                                             values={[
-                                                { text: 'ED', value: 'ed' },
-                                                { text: 'GM', value: 'gm' },
-                                                { text: 'AGM', value: 'agm' },
-                                                { text: 'MO', value: 'mo' },
+                                                { text: 'Dooreen tower', value: 'ed' },
+                                                { text: 'Paltan tower', value: 'gm' },
                                             ]}
                                         />
                                     </div>
-
                                     <div className="form-group form-vertical">
-                                        <label>Reference</label>
-                                        <div className="form_elements">
-                                            <DropDown
-                                                multiple={false}
-                                                get_selected_data={(result) =>
-                                                    console.log(result)
-                                                }
-                                                name={`reference`}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group form-vertical">
-                                        <Input name={'password'} />
-                                    </div>
-
-                                    <div className="form-group grid_full_width form-vertical">
-                                        <InputImage
-                                            label={'image'}
-                                            name={'image'}
+                                        <Select
+                                            label="Employee"
+                                            name="project"
+                                            values={[
+                                                { text: 'Mr kasem', value: 'ed' },
+                                                { text: 'Mr selim', value: 'gm' },
+                                            ]}
                                         />
                                     </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h5 className="mb-4">Bank Informations</h5>
-                                <div className="form_auto_fit">
                                     {[
-                                        'bank_name',
-                                        'branch_name',
-                                        'bank_account_no',
-                                        'bank_routing_no',
-                                        'mobile_banking_portal',
-                                        'mobile_banking_ac_no',
+                                        'time',
                                     ].map((i) => (
                                         <div className="form-group form-vertical">
                                             <Input name={i} />
                                         </div>
                                     ))}
+
+                                    <div className="form-group form-vertical">
+                                        <Input name="description" />
+                                    </div>
                                 </div>
                             </div>
 
