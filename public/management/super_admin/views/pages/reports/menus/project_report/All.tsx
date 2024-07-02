@@ -15,7 +15,7 @@ import { anyObject } from '../../../../../common_types/object';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -38,6 +38,28 @@ const All: React.FC<Props> = (props: Props) => {
         dispatch(storeSlice.actions.set_show_quick_view_canvas(true));
     }
 
+    interface data {
+        [key: string]: any;
+    }
+    const datas: data[] = [
+        {
+            id: 1,
+            project: 'dureen tower',
+            payable: 4005000,
+            paid: 4005000,
+            expense: 4005000,
+            due: 4005000,
+        },
+        {
+            id: 2,
+            project: 'Alif DOM',
+            payable: 4005000,
+            paid: 505650,
+            expense: 308000,
+            due: 40000,
+        },
+    ];
+
     return (
         <div className="page_content">
             <div className="explore_window fixed_size">
@@ -49,54 +71,40 @@ const All: React.FC<Props> = (props: Props) => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th />
-                                        <th>
-                                            <SelectAll />
-                                        </th>
-                                        <TableHeading
-                                            label={`ID`}
-                                            col_name={`id`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Title`}
-                                            col_name={`title`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
-                                            sort={true}
-                                        />
+                                        <th></th>
+                                        <th>Serial</th>
+                                        <th>Project</th>
+                                        <th>Payable</th>
+                                        <th>Paid</th>
+                                        <th>Expense</th>
+                                        <th>Due</th>
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {(state.all as any)?.data?.map(
-                                        (i: { [key: string]: any }) => {
-                                            return (
-                                                <tr
-                                                    key={i.id}
-                                                    className={`table_rows table_row_${i.id}`}
-                                                >
-                                                    {/* <td>
-                                                        <TableRowAction
-                                                            item={i}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        <SelectItem item={i} />
-                                                    </td>
-                                                   
-                                                    <td>{i.id}</td>
-                                                    */}
-                                                </tr>
-                                            );
-                                        },
-                                    )}
+                                    {datas?.map((i: { [key: string]: any }) => {
+                                        return (
+                                            <tr>
+                                                <td></td>
+                                                <td>{i.id}</td>
+                                                <td>{i.project}</td>
+                                                <td>{i.payable} tk</td>
+                                                <td>{i.paid} tk</td>
+                                                <td>{i.expense} tk</td>
+                                                <td>{i.due} tk</td>
+                                            </tr>
+                                        );
+                                    })}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total:</td>
+                                        <td>4056200</td>
+                                        <td>9900343</td>
+                                        <td>2332544</td>
+                                        <td>1809600 tk</td>
+                                    </tr>
                                 </tbody>
-                               
                             </table>
-                            <h1> In Progress .. </h1>
                         </div>
 
                         <Paginate
