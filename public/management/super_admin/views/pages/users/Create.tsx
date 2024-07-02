@@ -71,7 +71,23 @@ const Create: React.FC<Props> = (props: Props) => {
                                     </div>
 
                                     <div className="form-group form-vertical">
-                                        <label>Reference</label>
+                                        <label>Joining Reference</label>
+                                        <div className="form_elements">
+                                            <DropDown
+                                                multiple={false}
+                                                get_selected_data={(result) =>
+                                                    console.log(result)
+                                                }
+                                                name={`reference`}
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="form-group form-vertical">
+                                        <label>
+                                            Designation Parent 
+                                            ( under which position ) 
+                                        </label>
                                         <div className="form_elements">
                                             <DropDown
                                                 multiple={false}

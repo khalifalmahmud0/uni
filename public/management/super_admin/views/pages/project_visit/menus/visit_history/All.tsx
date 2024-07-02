@@ -59,7 +59,17 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Title`}
+                                            label={`Project`}
+                                            col_name={`title`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Person`}
+                                            col_name={`title`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Time`}
                                             col_name={`title`}
                                             sort={true}
                                         />
@@ -71,7 +81,15 @@ const All: React.FC<Props> = (props: Props) => {
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {(state.all as any)?.data?.map(
+                                    {/* {(state.all as any)?.data?.map( */}
+                                    {[
+                                        {
+                                            id: 1,
+                                            project: "Doreen Tower",
+                                            person: "Mr Abul Kashem",
+                                            time: "12:45 pm",
+                                        }
+                                    ].map(
                                         (i: { [key: string]: any }) => {
                                             return (
                                                 <tr
@@ -85,10 +103,13 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     <td>
                                                         <SelectItem item={i} />
-                                                    </td>
+                                                    </td> */}
                                                    
                                                     <td>{i.id}</td>
-                                                    */}
+                                                    <td>{i.project}</td>
+                                                    <td>{i.person}</td>
+                                                    <td>{i.time}</td>
+                                                   
                                                 </tr>
                                             );
                                         },
@@ -96,7 +117,6 @@ const All: React.FC<Props> = (props: Props) => {
                                 </tbody>
                                
                             </table>
-                            <h1> In Progress .. </h1>
                         </div>
 
                         <Paginate

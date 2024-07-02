@@ -99,7 +99,13 @@ const All: React.FC<Props> = (props: Props) => {
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {(state.all as any)?.data?.map(
+                                    {/* {(state.all as any)?.data?.map( */}
+                                    {[
+                                        {
+                                            id: 1,
+                                            
+                                        }
+                                    ].map(
                                         (i: { [key: string]: any }) => {
                                             return (
                                                 <tr
