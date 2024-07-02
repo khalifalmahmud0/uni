@@ -15,7 +15,7 @@ import { anyObject } from '../../../../../../common_types/object';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -38,6 +38,92 @@ const All: React.FC<Props> = (props: Props) => {
         dispatch(storeSlice.actions.set_show_quick_view_canvas(true));
     }
 
+    interface data {
+        [key: string]: any;
+    }
+    const datas: data[] = [
+        {
+            id: 1,
+            date: '10 Feb, 2024',
+            amount_in_text: 'Three thousand taka only',
+            purpose: 'hostel rent',
+            credit: '',
+            debit: '3000',
+            balance: '-3000',
+            name: 'Shahin',
+        },
+        {
+            id: 2,
+            date: '14 Feb, 2024',
+            amount_in_text: 'Ten thousand taka only',
+            purpose: 'admission bill',
+            credit: '3000',
+            debit: '',
+            balance: '',
+            name: 'Tamim',
+        },
+        {
+            id: 3,
+            date: '15 Feb, 2024',
+            amount_in_text: 'Five thousand taka only',
+            purpose: 'transport bill',
+            credit: '3000',
+            debit: '',
+            balance: '3000',
+            name: 'Ramim',
+        },
+        {
+            id: 4,
+            date: '23 Feb, 2024',
+            amount_in_text: 'Threee thousand taka only',
+            purpose: 'Tution fee',
+            credit: '3000',
+            debit: '',
+            balance: '6000',
+            name: 'Ramim',
+        },
+        {
+            id: 5,
+            date: '23 Feb, 2024',
+            amount_in_text: 'Fifteen thousand taka only',
+            purpose: 'Tution fee',
+            credit: '15000',
+            debit: '',
+            balance: '21000',
+            name: 'Riaz',
+        },
+        {
+            id: 6,
+            date: '23 Feb, 2024',
+            amount_in_text: 'Twenty thousand taka only',
+            purpose: 'Tution fee',
+            credit: '20000',
+            debit: '',
+            balance: '41000',
+            name: 'Areeba',
+        },
+        {
+            id: 7,
+            date: '23 Feb, 2024',
+            amount_in_text: 'Twenty thousand taka only',
+            purpose: 'Sallary',
+            credit: '',
+            debit: '20000',
+            balance: '21000',
+            name: 'Employee1',
+        },
+        {
+            id: 8,
+            date: '23 Feb, 2024',
+            amount_in_text: 'Ten thousand taka only',
+            purpose: 'Sallary',
+            credit: '',
+            debit: '10000',
+            balance: '11000',
+            name: 'Employee2',
+        },
+    ];
+
     return (
         <div className="page_content">
             <div className="explore_window fixed_size">
@@ -49,52 +135,45 @@ const All: React.FC<Props> = (props: Props) => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th />
-                                        <th>
-                                            <SelectAll />
-                                        </th>
-                                        <TableHeading
-                                            label={`ID`}
-                                            col_name={`id`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Title`}
-                                            col_name={`title`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
-                                            sort={true}
-                                        />
+                                        <th></th>
+                                        <th>Serial</th>
+                                        <th>Purpose</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Amount in Text</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {(state.all as any)?.data?.map(
-                                        (i: { [key: string]: any }) => {
-                                            return (
-                                                <tr
-                                                    key={i.id}
-                                                    className={`table_rows table_row_${i.id}`}
-                                                >
-                                                    {/* <td>
-                                                        <TableRowAction
-                                                            item={i}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        <SelectItem item={i} />
-                                                    </td>
-                                                   
-                                                    <td>{i.id}</td>
-                                                    */}
-                                                </tr>
-                                            );
-                                        },
-                                    )}
+                                    {datas?.map((i: { [key: string]: any }) => {
+                                        return (
+                                            <tr>
+                                                <td></td>
+                                                <td>{i.id}</td>
+                                                <td>{i.purpose}</td>
+                                                <td>{i.name}</td>
+                                                <td>{i.date}</td>
+                                                <td>{i.amount_in_text}</td>
+                                                <td>{i.debit} tk</td>
+                                                <td>{i.credit} tk</td>
+                                                <td>{i.balance} tk</td>
+                                            </tr>
+                                        );
+                                    })}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total:</td>
+                                        <td>dbt : 33000 tk</td>
+                                        <td>Cr : 44000 tk</td>
+                                        <td>Bal : 11000 tk</td>
+                                    </tr>
                                 </tbody>
-                               
                             </table>
                             <h1> In Progress .. </h1>
                         </div>

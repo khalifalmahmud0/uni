@@ -38,6 +38,26 @@ const All: React.FC<Props> = (props: Props) => {
         dispatch(storeSlice.actions.set_show_quick_view_canvas(true));
     }
 
+    interface data {
+        [key: string]: any;
+    }
+    const datas: data[] = [
+        {
+            id: 1,
+            customer: 'Mr Jayed Khan',
+            last_date: '27 aug, 2024',
+            paid: 4005000,
+            due: 4005000,
+        },
+        {
+            id: 2,
+            customer: 'Sufiya Kamal',
+            last_date: '27 aug, 2024',
+            paid: 505650,
+            due: 40000,
+        },
+    ];
+
     return (
         <div className="page_content">
             <div className="explore_window fixed_size">
@@ -49,54 +69,34 @@ const All: React.FC<Props> = (props: Props) => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th />
-                                        <th>
-                                            <SelectAll />
-                                        </th>
-                                        <TableHeading
-                                            label={`ID`}
-                                            col_name={`id`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Title`}
-                                            col_name={`title`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
-                                            sort={true}
-                                        />
+                                        <th></th>
+                                        <th>Serial</th>
+                                        <th>Customer</th>
+                                        <th>Last Date</th>
+                                        <th>Due</th>
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {(state.all as any)?.data?.map(
-                                        (i: { [key: string]: any }) => {
-                                            return (
-                                                <tr
-                                                    key={i.id}
-                                                    className={`table_rows table_row_${i.id}`}
-                                                >
-                                                    {/* <td>
-                                                        <TableRowAction
-                                                            item={i}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        <SelectItem item={i} />
-                                                    </td>
-                                                   
-                                                    <td>{i.id}</td>
-                                                    */}
-                                                </tr>
-                                            );
-                                        },
-                                    )}
+                                    {datas?.map((i: { [key: string]: any }) => {
+                                        return (
+                                            <tr>
+                                                <td></td>
+                                                <td>{i.id}</td>
+                                                <td>{i.customer}</td>
+                                                <td>{i.last_date} tk</td>
+                                                <td>{i.due} tk</td>
+                                            </tr>
+                                        );
+                                    })}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total:</td>
+                                        <td>9900343</td>
+                                        <td>1809600 tk</td>
+                                    </tr>
                                 </tbody>
-                               
                             </table>
-                            <h1> In Progress .. </h1>
                         </div>
 
                         <Paginate
