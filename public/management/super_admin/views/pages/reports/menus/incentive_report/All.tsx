@@ -15,7 +15,7 @@ import { anyObject } from '../../../../../common_types/object';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -59,13 +59,49 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Title`}
-                                            col_name={`title`}
+                                            label={`User ID`}
+                                            col_name={`uid`}
+                                            sort={true}
+                                        />
+                                        <th>Image</th>
+                                        <TableHeading
+                                            label={`Name`}
+                                            col_name={`name`}
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
+                                            label={`Month`}
+                                            col_name={`month`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Booking Money`}
+                                            col_name={`booking_money`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Down payment`}
+                                            col_name={`down_payment`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Installment`}
+                                            col_name={`installment`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Reference`}
+                                            col_name={`reference`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`From Total Income`}
+                                            col_name={`from_total_income`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Total`}
+                                            col_name={`total`}
                                             sort={true}
                                         />
                                     </tr>
@@ -78,25 +114,105 @@ const All: React.FC<Props> = (props: Props) => {
                                                     key={i.id}
                                                     className={`table_rows table_row_${i.id}`}
                                                 >
-                                                    {/* <td>
-                                                        <TableRowAction
-                                                            item={i}
+                                                    <td>
+                                                    </td>
+
+                                                    <td>
+                                                    </td>
+                                                    {/* ID  */}
+                                                    <td>{i.id}</td>
+                                                    {/* UID  */}
+                                                    <td>{`100${i.id}`}</td>
+                                                    {/* IMAGE  */}
+                                                    <td>
+                                                        <img
+                                                            src={
+                                                                i.image
+                                                                    ? `/${i.image}`
+                                                                    : '/assets/dashboard/images/avatar.png'
+                                                            }
+                                                            alt=""
+                                                            style={{
+                                                                height: 30,
+                                                            }}
                                                         />
                                                     </td>
+                                                    {/* Name  */}
                                                     <td>
-                                                        <SelectItem item={i} />
+                                                        <span
+                                                            className="quick_view_trigger"
+                                                            onClick={() =>
+                                                                quick_view(i)
+                                                            }
+                                                        >
+                                                            Marc E. Diebold
+                                                        </span>
                                                     </td>
-                                                   
-                                                    <td>{i.id}</td>
-                                                    */}
+                                                    {/* Month  */}
+                                                    <td>
+                                                        <span
+                                                            className="quick_view_trigger"
+                                                            onClick={() =>
+                                                                quick_view(i)
+                                                            }
+                                                        >
+                                                            january
+                                                        </span>
+                                                    </td>
+                                                    {/* Booking Money  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                            10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Down Payment  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                            10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Installment  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                            10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Referance  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                            10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* From Total Income  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                            10000,
+                                                        )}
+                                                        /-
+                                                    </td>
+                                                    {/* Total  */}
+                                                    <td>
+                                                        {Math.round(
+                                                            Math.random() *
+                                                            10000,
+                                                        )}
+                                                        /-
+                                                    </td>
                                                 </tr>
                                             );
                                         },
                                     )}
                                 </tbody>
-                               
                             </table>
-                            <h1> In Progress .. </h1>
                         </div>
 
                         <Paginate
