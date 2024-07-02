@@ -1,6 +1,6 @@
 import setup_type from './setup_type';
 
-const prefix: string = 'Users';
+const prefix: string = 'Eployee';
 const setup: setup_type = {
     prefix,
     module_name: 'users',
