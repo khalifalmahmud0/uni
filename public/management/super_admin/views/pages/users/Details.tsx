@@ -54,6 +54,7 @@ const Details: React.FC<Props> = (props: Props) => {
                             <table className="table quick_modal_table table-hover">
                                 <tbody>
                                     {[
+                                        'uid',
                                         'name',
                                         'email',
                                         'designation',
