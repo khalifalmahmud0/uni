@@ -95,7 +95,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                         <SelectItem item={i} />
                                                     </td>
                                                     <td>{i.id}</td>
-                                                    <td>{`100${i.id}`}</td>
+                                                    <td>{i.uid || ''}</td>
                                                     <td>
                                                         <img
                                                             src={
