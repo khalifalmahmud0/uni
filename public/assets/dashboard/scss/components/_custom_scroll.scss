@@ -4,10 +4,12 @@
     &:hover{
         &::-webkit-scrollbar {
             width: 7px;
+            height: 10px;
         }
     }
     &::-webkit-scrollbar {
         width: 0px;
+        height: 0px;
     }
 
     /* Track */
