@@ -41,14 +41,15 @@
     }
 
     .drop_down_items {
-        border: 1px solid #795548a8;
+        border: 1px solid rgba(121, 85, 72, 0.6588235294);
         border-radius: 5px;
         padding: 10px;
         position: absolute;
         backdrop-filter: blur(8px);
-        background: #292d3694;
+        background: rgb(54 64 74 / 92%);
         top: calc(100% + 5px);
         width: 100%;
+        z-index: 9;
 
         .drop_down_data_search {
             display: flex;
