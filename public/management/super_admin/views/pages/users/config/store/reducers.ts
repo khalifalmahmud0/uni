@@ -16,6 +16,10 @@ export const store_reducers = {
         state.loading_text = action.payload;
     },
 
+    set_role: (state: typeof initialState, action: PayloadAction<string>) => {
+        state.role = action.payload;
+    },
+
     set_url: (state: typeof initialState, action: PayloadAction<string>) => {
         state.url = action.payload;
     },

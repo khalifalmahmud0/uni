@@ -33,6 +33,8 @@ async function getDataWithPagination(
         ...query,
     });
 
+    // console.log(query);
+
     const totalPages = Math.ceil(data.count / pageSize);
     // let baseUrl = req.protocol + '://' + req.hostname + req.url.split('?')[0];
 

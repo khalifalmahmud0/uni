@@ -26,7 +26,7 @@ const modelName = 'UserModels';
 type Infer = InferAttributes<DataModel>;
 type InferCreation = InferCreationAttributes<DataModel>;
 type status = 'active' | 'deactive' | 'block';
-type role = 'super_admin' | 'admin' | 'accountant' | 'employee' | 'customer';
+type role = 'super_admin' | 'admin' | 'accountant' | 'marketing' | 'staff' | 'management' | 'customer' | 'hrm';
 type designation = 'ed' | 'gm' | 'agm' | 'mo';
 
 class DataModel extends Model<Infer, InferCreation> {
@@ -34,8 +34,13 @@ class DataModel extends Model<Infer, InferCreation> {
     declare uid: string;
     declare name: string;
     declare role?: role;
-    declare reference?: number;
+
     declare designation?: designation;
+    declare reference?: number;
+    declare mo?: number;
+    declare agm?: number;
+    declare gm?: number;
+    declare ed?: number;
 
     declare email: string | null;
     declare phone_number?: string | null;
@@ -69,12 +74,31 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.BIGINT.UNSIGNED,
                 allowNull: true,
             },
+            mo: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            agm: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            gm: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            ed: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
             role: {
                 type: new DataTypes.ENUM(
                     'super_admin',
                     'admin',
                     'accountant',
-                    'employee',
+                    'marketing',
+                    'staff',
+                    'management',
+                    'hrm',
                     'customer',
                 ),
                 defaultValue: 'customer',

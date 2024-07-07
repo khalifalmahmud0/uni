@@ -33,8 +33,28 @@ async function details(
                     as: 'info',
                 },
                 {
+                    model: models.UserNomineeModel,
+                    as: 'nominee_infos',
+                },
+                {
                     model: models.UserModel,
                     as: 'reference_info',
+                },
+                {
+                    model: models.UserModel,
+                    as: 'mo_info',
+                },
+                {
+                    model: models.UserModel,
+                    as: 'gm_info',
+                },
+                {
+                    model: models.UserModel,
+                    as: 'agm_info',
+                },
+                {
+                    model: models.UserModel,
+                    as: 'ed_info',
                 },
             ],
         });

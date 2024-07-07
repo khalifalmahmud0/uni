@@ -27,7 +27,7 @@ async function validate(req: Request) {
         'education',
         'permanent_address',
         'present_address',
-        'reference',
+        // 'reference',
         // 'password',
 
         'bank_name',
@@ -100,15 +100,47 @@ async function update(
     
     let reference = JSON.parse(body.reference)[0];
 
+    let mo = null;
+    let agm = null;
+    let gm = null;
+    let ed = null;
+    let nominees = [];
+
+    if(body.mo){
+        mo = JSON.parse(body.mo)[0];
+    }
+    if(body.agm){
+        agm = JSON.parse(body.agm)[0];
+    }
+    if(body.gm){
+        gm = JSON.parse(body.gm)[0];
+    }
+    if(body.ed){
+        ed = JSON.parse(body.ed)[0];
+    }
+    if(body.nominees){
+        try {
+            nominees = JSON.parse(body.nominees);
+        } catch (error) {
+            
+        }
+    }
+
     let inputs: InferCreationAttributes<typeof user_model> = {
         uid: body.uid,
+        role: body.role,
         name: body.name,
         email: body.email,
         phone_number: body.phone_number,
         designation: body.designation,
         // image: image_path,
         password: password,
+
         reference: reference,
+        mo: mo,
+        agm: agm,
+        gm: gm,
+        ed: ed,
     };
 
     if (password) {
@@ -147,7 +179,6 @@ async function update(
             await data.save();
 
             if(body['image']['ext']){
-                
                 let image_path =
                     'uploads/users/' +
                     moment().format('YYYYMMDDHHmmss') +
@@ -172,6 +203,28 @@ async function update(
                 user_information = await models.UserInformationModel.create(
                     user_information_inputs,
                 );
+            }
+            
+            /** delete all previous nominees and insert latest */
+            await models.UserNomineeModel.destroy({
+                where: {
+                    user_id: data.id,
+                }
+            });
+
+            let nominee_instance = new models.UserNomineeModel();
+            type NomineeType = InferCreationAttributes< typeof nominee_instance >
+            
+            for (let index = 0; index < nominees.length; index++) {
+                const nominee = nominees[index] as NomineeType;
+                let user_nominee = new models.UserNomineeModel();
+                user_nominee.user_id = data.id || 1;
+                user_nominee.name = nominee.name;
+                user_nominee.relation = nominee.relation;
+                user_nominee.age = nominee.age;
+                user_nominee.mobile_number = nominee.mobile_number;
+                user_nominee.percentage = nominee.percentage;
+                await user_nominee.save();
             }
 
             return response(201, 'data updated', { data, user_information });

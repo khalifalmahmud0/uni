@@ -4,6 +4,7 @@ import {
 } from 'sequelize';
 import * as user_model from './user_model';
 import * as user_information_model from './user_information_model';
+import * as user_nominee_model from './user_nominee_model';
 // import * as project_model from '../../user_admin copy/models/project_model';
 require('dotenv').config();
 
@@ -28,12 +29,14 @@ const sequelize = new Sequelize(db_string, {
 interface models {
     UserModel: typeof user_model.DataModel;
     UserInformationModel: typeof user_information_model.DataModel;
+    UserNomineeModel: typeof user_nominee_model.DataModel;
     // Project: typeof project_model.DataModel;
     sequelize: Sequelize;
 }
 const db = async function (): Promise<models> {
     const UserModel = user_model.init(sequelize);
     const UserInformationModel = user_information_model.init(sequelize);
+    const UserNomineeModel = user_nominee_model.init(sequelize);
     // const Project = project_model.init(sequelize);
 
     await sequelize.sync();
@@ -49,6 +52,37 @@ const db = async function (): Promise<models> {
         targetKey: 'id',
         as: 'reference_info',
     });
+  
+    UserModel.belongsTo(UserModel, {
+        foreignKey: 'mo',
+        targetKey: 'id',
+        as: 'mo_info',
+    });
+
+    UserModel.belongsTo(UserModel, {
+        foreignKey: 'gm',
+        targetKey: 'id',
+        as: 'gm_info',
+    });
+  
+    UserModel.belongsTo(UserModel, {
+        foreignKey: 'agm',
+        targetKey: 'id',
+        as: 'agm_info',
+    });
+  
+    UserModel.belongsTo(UserModel, {
+        foreignKey: 'ed',
+        targetKey: 'id',
+        as: 'ed_info',
+    });
+  
+    
+    UserModel.hasMany(UserNomineeModel, {
+        foreignKey: 'user_id',
+        as: 'nominee_infos',
+    });
+    
 
     // User.hasMany(Project, {
     //     sourceKey: 'id',
@@ -72,6 +106,7 @@ const db = async function (): Promise<models> {
     let models: models = {
         UserModel,
         UserInformationModel,
+        UserNomineeModel,
         // Project,
 
         sequelize,

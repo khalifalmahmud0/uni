@@ -19,7 +19,10 @@ export default function (fastify: FastifyInstance) {
     return {
         all: async function (req: FastifyRequest, res: FastifyReply) {
             let data: responseObject = await all(fastify, req);
-            res.code(data.status).send(data);
+            res
+            .code(data.status)
+            .header('Cache-Control', 'public, max-age=30') 
+            .send(data);
         },
 
         find: async function (req: FastifyRequest, res: FastifyReply) {

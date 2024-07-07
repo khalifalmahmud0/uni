@@ -1,13 +1,23 @@
 import React from 'react';
-export interface Props { 
+export interface Props {
     label?: string;
     name: string;
     placeholder?: string;
     type?: string;
-    value?: string;
+    value?: string | number | null;
+    setter?: (response: unknown) => void;
+    referance_data?: object;
 }
 
-const Input: React.FC<Props> = ({ label, name, placeholder, type, value }: Props) => {
+const Input: React.FC<Props> = ({ label, name, placeholder, type, value, setter, ...props }: Props) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (setter) {
+            setter({
+                value: event.target.value,
+                referance_data: props.referance_data,
+            });
+        }
+    };
     return (
         <>
             <label htmlFor={name}>
@@ -21,7 +31,8 @@ const Input: React.FC<Props> = ({ label, name, placeholder, type, value }: Props
                     }
                     name={name}
                     id={name}
-                    defaultValue={value}
+                    defaultValue={value? value : ''}
+                    onChange={handleChange}
                 />
             </div>
         </>
