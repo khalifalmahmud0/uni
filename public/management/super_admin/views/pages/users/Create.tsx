@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/management_data_page/Header';
 import Footer from './components/management_data_page/Footer';
 import setup from './config/setup';
@@ -8,16 +8,37 @@ import DropDown from './components/dropdown/DropDown';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import InputImage from './components/management_data_page/InputImage';
-export interface Props {}
+import Nominee from './components/Nominee';
+import { anyObject } from '../../../common_types/object';
+import { NomineeType, set_nominee } from './helpers/nominee_helpers';
+
+export interface Props { }
+
 
 const Create: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
+    const [FormPageNominees, setFromPageNominees] = useState<NomineeType[]>([]);
+
+    useEffect(() => {
+        init_nominee()
+    }, []);
+
+    function init_nominee() {
+        setFromPageNominees([
+            set_nominee(),
+            set_nominee(),
+        ]);
+    }
 
     async function handle_submit(e) {
         e.preventDefault();
-        const response = await dispatch(store(new FormData(e.target)) as any);
+        let form_data = new FormData(e.target);
+        form_data.append('nominees', JSON.stringify(FormPageNominees));
+
+        const response = await dispatch(store(form_data) as any);
         if (!Object.prototype.hasOwnProperty.call(response, 'error')) {
-            e.target.reset();
+            // e.target.reset();
+            // init_nominee();
         }
     }
 
@@ -40,6 +61,19 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label="Employee ID"
                                         />
                                     </div>
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Role"
+                                            name="role"
+                                            values={[
+                                                { text: 'Marketing', value: 'marketing' },
+                                                { text: 'Staff', value: 'staff' },
+                                                { text: 'Accountant', value: 'accountant' },
+                                                { text: 'HRM', value: 'hrm' },
+                                                { text: 'Management', value: 'management' },
+                                            ]}
+                                        />
+                                    </div>
                                     {[
                                         'name',
                                         'email',
@@ -56,6 +90,39 @@ const Create: React.FC<Props> = (props: Props) => {
                                             <Input name={i} />
                                         </div>
                                     ))}
+
+                                    <div className="form-group form-vertical">
+                                        <Input name={'password'} />
+                                    </div>
+
+                                    <div className="form-group grid_full_width form-vertical">
+                                        <InputImage
+                                            label={'image'}
+                                            name={'image'}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 className="mb-4">Nominee Informations</h5>
+                                {
+                                    FormPageNominees.map((i, key) => (
+                                        <div key={key}>
+                                            <h6>Nominee {key + 1}</h6>
+                                            <Nominee
+                                                FormPageNominees={FormPageNominees}
+                                                setFromPageNominees={setFromPageNominees}
+                                                nominee_index={key} />
+                                        </div>
+
+                                    ))
+                                }
+                            </div>
+
+                            <div>
+                                <h5 className="mb-4">Agent Positions</h5>
+                                <div className="form_auto_fit">
 
                                     <div className="form-group form-vertical">
                                         <Select
@@ -82,11 +149,10 @@ const Create: React.FC<Props> = (props: Props) => {
                                             />
                                         </div>
                                     </div>
-                                    
+
                                     <div className="form-group form-vertical">
                                         <label>
-                                            Designation Parent 
-                                            ( under which position ) 
+                                            MO
                                         </label>
                                         <div className="form_elements">
                                             <DropDown
@@ -94,20 +160,54 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 get_selected_data={(result) =>
                                                     console.log(result)
                                                 }
-                                                name={`reference`}
+                                                name={`mo`}
                                             />
                                         </div>
                                     </div>
 
                                     <div className="form-group form-vertical">
-                                        <Input name={'password'} />
+                                        <label>
+                                            AGM
+                                        </label>
+                                        <div className="form_elements">
+                                            <DropDown
+                                                multiple={false}
+                                                get_selected_data={(result) =>
+                                                    console.log(result)
+                                                }
+                                                name={`agm`}
+                                            />
+                                        </div>
                                     </div>
 
-                                    <div className="form-group grid_full_width form-vertical">
-                                        <InputImage
-                                            label={'image'}
-                                            name={'image'}
-                                        />
+                                    <div className="form-group form-vertical">
+                                        <label>
+                                            GM
+                                        </label>
+                                        <div className="form_elements">
+                                            <DropDown
+                                                multiple={false}
+                                                get_selected_data={(result) =>
+                                                    console.log(result)
+                                                }
+                                                name={`gm`}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group form-vertical">
+                                        <label>
+                                            ED
+                                        </label>
+                                        <div className="form_elements">
+                                            <DropDown
+                                                multiple={false}
+                                                get_selected_data={(result) =>
+                                                    console.log(result)
+                                                }
+                                                name={`ed`}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
