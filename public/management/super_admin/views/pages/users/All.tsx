@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 // import setup from './config/setup';
 import { RootState, useAppDispatch } from '../../../store';
@@ -16,24 +16,36 @@ import TableRowAction from './components/all_data_page/TableRowAction';
 import SelectItem from './components/all_data_page/SelectItem';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
+import { useSearchParams } from 'react-router-dom';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
         (state: RootState) => state[setup.module_name],
     );
 
+    const [pageTitle, setPageTitle] = useState('');
+
     const dispatch = useAppDispatch();
+    let [searchParams] = useSearchParams();
 
     useEffect(() => {
+        let role = searchParams.get('role');
+        if (role) {
+            setPageTitle(role);
+            dispatch(storeSlice.actions.set_role(role));
+        } else {
+            dispatch(storeSlice.actions.set_role('all'));
+        }
+
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
+                'id, uid, role, name, email, image, status',
             ),
         );
         dispatch(all({}));
-    }, []);
+    }, [searchParams]);
 
     function quick_view(data: anyObject = {}) {
         dispatch(storeSlice.actions.set_item(data));
@@ -43,7 +55,7 @@ const All: React.FC<Props> = (props: Props) => {
     return (
         <div className="page_content">
             <div className="explore_window fixed_size">
-                <Header></Header>
+                <Header title={pageTitle+' user'}></Header>
 
                 <div className="content_body">
                     <div className="data_list">
@@ -62,7 +74,7 @@ const All: React.FC<Props> = (props: Props) => {
                                         />
                                         <TableHeading
                                             label={`User ID`}
-                                            col_name={`user_id`}
+                                            col_name={`uid`}
                                             sort={true}
                                         />
                                         <th>Image</th>
