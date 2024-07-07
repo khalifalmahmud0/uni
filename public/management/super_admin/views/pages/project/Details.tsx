@@ -54,28 +54,24 @@ const Details: React.FC<Props> = (props: Props) => {
                                 <tbody>
                                     {[
                                         {
-                                            "name": "name",
-                                            "label": "Name"
+                                            "name": "title",
+                                            "label": "Project Title"
                                         },
-                                       {
+                                        {
                                             "name": "location",
                                             "label": "Location"
                                         },
-                                       {
-                                            "name": "per_share",
+                                        {
+                                            "name": "per_share_cost",
                                             "label": "Per Share"
                                         },
-                                       {
+                                        {
                                             "name": "description",
                                             "label": "Description"
                                         },
-                                       {
-                                            "name": "name",
-                                            "label": "Name"
-                                        },
-                                       {
-                                            "name": "documents",
-                                            "label": "Documents"
+                                        {
+                                            "name": "map",
+                                            "label": "Map"
                                         },
                                     ]
                                         .map((i) => (
