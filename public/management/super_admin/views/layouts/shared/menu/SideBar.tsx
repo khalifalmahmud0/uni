@@ -22,19 +22,12 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     group_title="HRM"
                     icon="icon-desktop"
                 >
-                    <MenuDropDownItem label="All Marketting " to="/users" />
-                    <MenuDropDownItem label="All Staffs" to="/users" />
-                    <MenuDropDownItem label="All Management" to="/users" />
+                    <MenuDropDownItem label="All Marketting " to="/users?role=marketing" />
+                    <MenuDropDownItem label="All Staffs" to="/users?role=staff" />
+                    <MenuDropDownItem label="All Management" to="/users?role=management" />
+                    <MenuDropDownItem label="All Customer" to="/users?role=customer" />
                     <MenuDropDownItem
-                        label="Create Employee"
-                        to="/users/create"
-                    />
-                    <MenuDropDownItem
-                        label="Create Management"
-                        to="/users/create"
-                    />
-                    <MenuDropDownItem
-                        label="Create Staff"
+                        label="Create User"
                         to="/users/create"
                     />
                     <MenuDropDownItem
