@@ -17,7 +17,7 @@ import SelectItem from './components/all_data_page/SelectItem';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const History: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -27,9 +27,10 @@ const History: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        dispatch(storeSlice.actions.set_role('marketing'));
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
+                'id, uid, mo, gm, agm, ed, name, email, image, status',
             ),
         );
         dispatch(all({}));
@@ -71,7 +72,7 @@ const History: React.FC<Props> = (props: Props) => {
                                             col_name={`name`}
                                             sort={true}
                                         />
-                                         <TableHeading
+                                        <TableHeading
                                             label={`Month`}
                                             col_name={`month`}
                                             sort={true}
@@ -121,7 +122,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                             item={i}
                                                         />
                                                     </td>
-                                                    
+
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
@@ -151,7 +152,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                                 quick_view(i)
                                                             }
                                                         >
-                                                            Marc E. Diebold
+                                                            {i.name}
                                                         </span>
                                                     </td>
                                                     {/* Month  */}
@@ -169,7 +170,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
-                                                                10000,
+                                                            0,
                                                         )}
                                                         /-
                                                     </td>
@@ -177,7 +178,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
-                                                                10000,
+                                                            0,
                                                         )}
                                                         /-
                                                     </td>
@@ -185,7 +186,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
-                                                                10000,
+                                                            0,
                                                         )}
                                                         /-
                                                     </td>
@@ -193,14 +194,14 @@ const History: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
-                                                                10,
+                                                            0,
                                                         )}
                                                     </td>
                                                     {/* From Total Income  */}
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
-                                                                10000,
+                                                            0,
                                                         )}
                                                         /-
                                                     </td>
@@ -208,7 +209,7 @@ const History: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         {Math.round(
                                                             Math.random() *
-                                                                10000,
+                                                            0,
                                                         )}
                                                         /-
                                                     </td>
