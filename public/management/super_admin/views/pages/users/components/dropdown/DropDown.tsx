@@ -26,7 +26,7 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data, multiple, default_
     useEffect(() => {
         dispatch(storeSlice.actions.set_only_latest_data(true));
         dispatch(all({}));
-        if(default_value){
+        if (default_value) {
             setSelectedList(default_value);
         }
     }, []);
@@ -98,6 +98,7 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data, multiple, default_
                                                     />
                                                 </div>
                                                 <div className="label">
+                                                    {i.uid} -
                                                     {i.name}
                                                 </div>
                                             </label>
