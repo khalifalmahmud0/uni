@@ -17,7 +17,7 @@ import SelectItem from './components/all_data_page/SelectItem';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, image',
+                'id,title,location,image,per_share_cost',
             ),
         );
         dispatch(all({}));
@@ -56,14 +56,19 @@ const All: React.FC<Props> = (props: Props) => {
                                             <SelectAll />
                                         </th>
                                         <TableHeading
-                                            label={`Customer ID`}
+                                            label={`ID`}
                                             col_name={`id`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Project ID`}
+                                            col_name={`uid`}
                                             sort={true}
                                         />
                                         <th>Image</th>
                                         <TableHeading
-                                            label={`Name`}
-                                            col_name={`name`}
+                                            label={`Title`}
+                                            col_name={`title`}
                                             sort={true}
                                         />
                                         <TableHeading
@@ -74,16 +79,6 @@ const All: React.FC<Props> = (props: Props) => {
                                         <TableHeading
                                             label={`Per Share Cost`}
                                             col_name={`per_share_cost`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Description`}
-                                            col_name={`description`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Documents`}
-                                            col_name={`documents`}
                                             sort={true}
                                         />
                                     </tr>
@@ -105,6 +100,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                         <SelectItem item={i} />
                                                     </td>
                                                     <td>{i.id}</td>
+                                                    <td>{i.uid}</td>
                                                     <td>
                                                         <img
                                                             src={
@@ -120,24 +116,22 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     <td>
                                                         <span
-                                                            // className="quick_view_trigger"
-                                                            // onClick={() =>
-                                                            //     quick_view(i)
-                                                            // }
+                                                        // className="quick_view_trigger"
+                                                        // onClick={() =>
+                                                        //     quick_view(i)
+                                                        // }
                                                         >
-                                                            Jason P. Gallagher
+                                                            {i.title}
                                                         </span>
                                                     </td>
-                                                   <td>
+                                                    <td>
                                                         <span
-                                                            // className="quick_view_trigger"
+                                                        // className="quick_view_trigger"
                                                         >
-                                                            South Banasree
+                                                            {i.location}
                                                         </span>
                                                     </td>
-                                                    <td>10/-</td>
-                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                                    <td>PDF, URL</td>
+                                                    <td>{i.per_share_cost}/-</td>
                                                 </tr>
                                             );
                                         },
