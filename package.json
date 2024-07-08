@@ -68,6 +68,7 @@
   "scripts": {
     "test": "jest",
     "server": "nodemon",
+    "serve": "ts-node src/index.ts",
     "super-admin": "vite build --config vite-config-super-admin.js --watch",
     "admin": "vite build --config vite-config-admin.js --watch",
     "server:lint": "npx esw --ext .ts src --fix",
