@@ -115,10 +115,13 @@ const Edit: React.FC<Props> = (props: Props) => {
                                                 name: 'location',
                                             },
                                             {
-                                                name: 'map',
-                                                placeholder: 'Project Map',
-                                                type: 'text',
-                                                label: 'Project Map',
+                                                name: 'aveneue',
+                                            },
+                                            {
+                                                name: 'plot',
+                                            },
+                                            {
+                                                name: 'road',
                                             },
                                             {
                                                 name: 'per_share_cost',
