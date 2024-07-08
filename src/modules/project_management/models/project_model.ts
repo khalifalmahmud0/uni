@@ -36,6 +36,9 @@ class DataModel extends Model<Infer, InferCreation> {
     declare description?: string;
     declare location?: string;
     declare map?: string;
+    declare aveneue?: string;
+    declare plot?: string;
+    declare road?: string;
 
     declare per_share_cost?: number;
 
@@ -65,10 +68,6 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.TEXT,
                 allowNull: true,
             },
-            location: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
             video: {
                 type: DataTypes.TEXT,
                 allowNull: true,
@@ -77,7 +76,23 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.STRING(100),
                 allowNull: true,
             },
+            location: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+            },
             map: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+            },
+            aveneue: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+            },
+            plot: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+            },
+            road: {
                 type: DataTypes.TEXT,
                 allowNull: true,
             },

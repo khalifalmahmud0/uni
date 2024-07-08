@@ -65,8 +65,11 @@ async function update(
         description: body.description,
         location: body.location,
         map: body.map,
+        aveneue: body.aveneue,
+        plot: body.plot,
+        road: body.road,
 
-        per_share_cost: body.per_share_cost,
+        per_share_cost: body.per_share_cost || 0,
 
         video: body.video,
     };

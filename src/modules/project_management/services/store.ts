@@ -85,13 +85,16 @@ async function store(
     
     let inputs: InferCreationAttributes<typeof data> = {
         uid: body.uid,
-        title: body.name,
+        title: body.title,
 
         description: body.description,
         location: body.location,
         map: body.map,
+        aveneue: body.aveneue,
+        plot: body.plot,
+        road: body.road,
 
-        per_share_cost: body.per_share_cost,
+        per_share_cost: body.per_share_cost || 0,
 
         video: body.video,
         image: image_path,

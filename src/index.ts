@@ -33,6 +33,7 @@ async function boot() {
                     '.ico',
                     '.jpg',
                     '.jpeg',
+                    '.webp',
                     '.png',
                     '.gif',
                     '.svg',
