@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id,title,location,image,per_share_cost',
+                'id,uid,title,location,image,per_share_cost,aveneue,plot,road,description',
             ),
         );
         dispatch(all({}));
@@ -77,6 +77,21 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
+                                            label={`aveneue`}
+                                            col_name={`aveneue`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`plot`}
+                                            col_name={`plot`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`road`}
+                                            col_name={`road`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
                                             label={`Per Share Cost`}
                                             col_name={`per_share_cost`}
                                             sort={true}
@@ -116,19 +131,32 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     <td>
                                                         <span
-                                                        // className="quick_view_trigger"
-                                                        // onClick={() =>
-                                                        //     quick_view(i)
-                                                        // }
+                                                            className="quick_view_trigger"
+                                                            onClick={() =>
+                                                                quick_view(i)
+                                                            }
                                                         >
                                                             {i.title}
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <span
-                                                        // className="quick_view_trigger"
-                                                        >
+                                                        <span>
                                                             {i.location}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            {i.aveneue}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            {i.plot}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            {i.road}
                                                         </span>
                                                     </td>
                                                     <td>{i.per_share_cost}/-</td>
