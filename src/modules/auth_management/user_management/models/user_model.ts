@@ -26,8 +26,8 @@ const modelName = 'UserModels';
 type Infer = InferAttributes<DataModel>;
 type InferCreation = InferCreationAttributes<DataModel>;
 type status = 'active' | 'deactive' | 'block';
-type role = 'super_admin' | 'admin' | 'accountant' | 'marketing' | 'staff' | 'management' | 'customer' | 'hrm';
-type designation = 'ed' | 'gm' | 'agm' | 'mo';
+type role = 'super_admin' | 'admin' | 'agency' | 'accountant' | 'marketing' | 'staff' | 'management' | 'customer' | 'hrm';
+type designation = 'ed' | 'gm' | 'agm' | 'mo' | 'office_incharge';
 
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
@@ -100,11 +100,12 @@ function init(sequelize: Sequelize) {
                     'management',
                     'hrm',
                     'customer',
+                    'agency',
                 ),
                 defaultValue: 'customer',
             },
             designation: {
-                type: new DataTypes.ENUM('ed', 'gm', 'agm', 'mo'),
+                type: new DataTypes.ENUM('ed', 'gm', 'agm', 'mo', 'office_incharge'),
                 allowNull: true,
             },
             name: {

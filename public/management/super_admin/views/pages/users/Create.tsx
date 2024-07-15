@@ -71,6 +71,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 { text: 'Accountant', value: 'accountant' },
                                                 { text: 'HRM', value: 'hrm' },
                                                 { text: 'Management', value: 'management' },
+                                                { text: 'Agency', value: 'agency' },
                                             ]}
                                         />
                                     </div>
@@ -133,6 +134,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 { text: 'GM', value: 'gm' },
                                                 { text: 'AGM', value: 'agm' },
                                                 { text: 'MO', value: 'mo' },
+                                                { text: 'Office Incharge', value: 'office_incharge' },
                                             ]}
                                         />
                                     </div>

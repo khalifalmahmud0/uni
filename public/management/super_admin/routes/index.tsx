@@ -27,6 +27,8 @@ import visit_history from '../views/pages/project_visit/menus/visit_history/conf
 
 import project_payment from '../views/pages/project/menus/project_payment/config/routes';
 
+import contact_management_routes from '../views/pages/contact_management/config/routes';
+
 interface RouteTypes extends NonIndexRouteObject {}
 const router: RouteTypes[] = [
     {
@@ -57,7 +59,8 @@ const router: RouteTypes[] = [
             project_report,
             assign_visit,
             visit_history,
-            project_payment
+            project_payment,
+            contact_management_routes
         ],
     },
 ];

@@ -68,6 +68,8 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     <MenuDropDownItem label="Visit History" to="/assign_visit" />
                     <MenuDropDownItem label="Assign Visit" to="/visit_history" />
                 </MenuDropDown>
+
+                <MenuSingle to="/contact-management" icon="icon-envelope" label="Dashboard" />
             </ul>
         </>
     );

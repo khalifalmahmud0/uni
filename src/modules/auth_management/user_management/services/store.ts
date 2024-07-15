@@ -47,22 +47,22 @@ async function validate(req: Request) {
             .run(req);
     }
 
-    field = 'reference';
-    await body(field)
-        .not()
-        .isEmpty()
-        .custom(async (value) => {
-            const length = value.length;
-            if (length <= 2) {
-                throw new Error(
-                    `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
-                );
-            }
-        })
-        .withMessage(
-            `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
-        )
-        .run(req);
+    // field = 'reference';
+    // await body(field)
+    //     .not()
+    //     .isEmpty()
+    //     .custom(async (value) => {
+    //         const length = value.length;
+    //         if (length <= 2) {
+    //             throw new Error(
+    //                 `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
+    //             );
+    //         }
+    //     })
+    //     .withMessage(
+    //         `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
+    //     )
+    //     .run(req);
 
     let result = await validationResult(req);
 
