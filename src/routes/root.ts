@@ -28,6 +28,26 @@ module.exports = async function (fastify: FastifyInstance) {
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 return reply.view('dashboard/admin_uni.ejs');
             },
+        )
+        .get(
+            '/customer',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.view('dashboard/customer.ejs');
+            },
+        )
+        .get(
+            '/employee',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.view('dashboard/employee.ejs');
+            },
+        )
+        .get(
+            '/print-invoice',
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.view('print/invoice.ejs');
+            },
         );
 
     // .get(
