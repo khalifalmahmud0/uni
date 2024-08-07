@@ -20,30 +20,25 @@ import {
     CreationOptional,
 } from 'sequelize';
 
-const tableName = 'projects';
-const modelName = 'ProjectModel';
+const tableName = 'project_payments';
+const modelName = 'ProjectPaymentModel';
 
 type Infer = InferAttributes<DataModel>;
 type InferCreation = InferCreationAttributes<DataModel>;
 type status = 'active' | 'deactive' | 'block';
+type payemnt_types = 'booking_money' | 'down_payments' | 'installments';
 
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
 
-    declare uid: string;
-    declare title: string;
+    declare project_id?: number;
+    declare user_id?: number;
+    declare reference_user_id?: number;
+    declare account_log_id?: number;
 
-    declare description?: string;
-    declare location?: string;
-    declare map?: string;
-    declare aveneue?: string;
-    declare plot?: string;
-    declare road?: string;
-
-    declare per_share_cost?: number;
-
-    declare video?: string;
-    declare image?: string;
+    declare date?: string;
+    declare amount?: string;
+    declare type?: payemnt_types;
 
     declare status?: status;
     declare creator?: number;
@@ -60,49 +55,34 @@ function init(sequelize: Sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            uid: {
-                type: new DataTypes.STRING(20),
+            project_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
-            title: {
-                type: DataTypes.TEXT,
+            user_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
-            video: {
-                type: DataTypes.TEXT,
+            reference_user_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
-            image: {
-                type: DataTypes.STRING(100),
+            account_log_id: {
+                type: DataTypes.FLOAT().UNSIGNED,
                 allowNull: true,
             },
-            location: {
-                type: DataTypes.TEXT,
+            date: {
+                type: DataTypes.DATE,
                 allowNull: true,
             },
-            map: {
-                type: DataTypes.TEXT,
+            
+            amount: {
+                type: DataTypes.FLOAT().UNSIGNED,
                 allowNull: true,
             },
-            aveneue: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            plot: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            road: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            per_share_cost: {
-                type: DataTypes.DOUBLE,
-                allowNull: true,
-            },
-          
-            description: {
-                type: DataTypes.TEXT,
+
+            type: {
+                type: DataTypes.ENUM('booking_money','down_payments','installments'),
                 allowNull: true,
             },
           

@@ -75,7 +75,7 @@ async function store(
 
     let image_path = "";
 
-    if(body['image'].ext){
+    if(body['image']?.ext){
         image_path =
             'uploads/projects/' +
             moment().format('YYYYMMDDHHmmss') +
