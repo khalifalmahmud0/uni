@@ -1,4 +1,4 @@
-import { FindAndCountOptions, Model } from 'sequelize';
+import { FindAndCountOptions, Model, Op } from 'sequelize';
 import db from '../models/db';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import response from '../helpers/response';
@@ -61,8 +61,14 @@ async function login(
         if (body) {
             data = await models.User.findOne({
                 where: {
-                    email: body.email,
+                    // email: body.email,
+                    [Op.or]: [
+                        { email: `${body.email}` },
+                        { uid: `${body.email}` },
+                        // { id: { [Op.like]: `%${body.email}%` } },
+                    ],
                 },
+                
             });
 
             if (!data) {
@@ -108,7 +114,7 @@ async function login(
                 }
             }
         }
-        return response(201, 'authentication success', { token });
+        return response(201, 'authentication success', { token, role: data.role });
     } catch (error: any) {
         let uid = await error_trace(models, error, req.url, req.params);
         if (error instanceof custom_error) {
