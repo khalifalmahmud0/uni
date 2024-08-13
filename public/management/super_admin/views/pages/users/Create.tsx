@@ -4,6 +4,7 @@ import Footer from './components/management_data_page/Footer';
 import setup from './config/setup';
 import { useAppDispatch } from '../../../store';
 import { store } from './config/store/async_actions/store';
+import { all } from './config/store/async_actions/all';
 import DropDown from './components/dropdown/DropDown';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
@@ -20,6 +21,7 @@ const Create: React.FC<Props> = (props: Props) => {
     const [FormPageNominees, setFromPageNominees] = useState<NomineeType[]>([]);
 
     useEffect(() => {
+        dispatch(all({}));
         init_nominee()
     }, []);
 
@@ -66,6 +68,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label="Role"
                                             name="role"
                                             values={[
+                                                { text: '--select--', value: '' },
                                                 { text: 'Marketing', value: 'marketing' },
                                                 { text: 'Staff', value: 'staff' },
                                                 { text: 'Accountant', value: 'accountant' },
@@ -130,6 +133,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label="Designation"
                                             name="designation"
                                             values={[
+                                                { text: '--select--', value: '' },
                                                 { text: 'ED', value: 'ed' },
                                                 { text: 'GM', value: 'gm' },
                                                 { text: 'AGM', value: 'agm' },
