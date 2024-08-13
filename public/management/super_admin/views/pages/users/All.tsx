@@ -41,7 +41,7 @@ const All: React.FC<Props> = (props: Props) => {
 
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, uid, role, name, email, image, status',
+                'id,uid,role,designation,name,email,image,status'
             ),
         );
         dispatch(all({}));

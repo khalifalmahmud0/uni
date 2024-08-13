@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch } from '../../../../../../../../../store';
+import { AppDispatch } from '../../../../../../store';
 import { initialState } from '../inital_state';
 import setup from '../../setup';
-import { end_point } from '../../../../../../../../../config/api';
+import { end_point } from '../../../../../../config/api';
 import storeSlice from '..';
-import { anyObject } from '../../../../../../../../../common_types/object';
-import commonStore from '../../../../../../../../../store/slices/common_slice';
-import fetchDataAndUpdateCache from '../../../../../../../../../config/http';
+import fetchDataAndUpdateCache from '../../../../../../config/http';
+import { anyObject } from '../../../../../../common_types/object';
+import commonStore from '../../../../../../store/slices/common_slice';
 
 type ReturnType = void;
 type PayloadType = { [key: string]: any };
@@ -41,6 +41,7 @@ const fetch_api = async (param, thunkAPI) => {
             orderByAsc: state[`orderByAsc`],
             show_active_data: state[`show_active_data`],
             select_fields: state[`select_fields`],
+            role: state[`role`],
         },
     };
 
@@ -56,6 +57,8 @@ const fetch_api = async (param, thunkAPI) => {
     for (let param in state.filter_criteria) {
         full_url.searchParams.set(param, state.filter_criteria[param]);
     }
+
+    full_url.searchParams.set('user_type', 'employee');
 
     if (
         state[`url`] &&
@@ -84,4 +87,4 @@ const fetch_api = async (param, thunkAPI) => {
     return response.data;
 };
 
-export const all = createAsyncThunk(`${store_prefix}/all`, fetch_api);
+export const all_employee = createAsyncThunk(`${store_prefix}/all`, fetch_api);

@@ -24,8 +24,8 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data, multiple, default_
     );
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(storeSlice.actions.set_only_latest_data(true));
-        dispatch(all({}));
+        // dispatch(storeSlice.actions.set_only_latest_data(true));
+        // dispatch(all({}));
         if (default_value) {
             setSelectedList(default_value);
         }
