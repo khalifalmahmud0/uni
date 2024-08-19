@@ -5,8 +5,12 @@ import setup from './config/setup';
 import { useAppDispatch } from '../../../../../store';
 import { store } from './config/store/async_actions/store';
 import Input from './components/management_data_page/Input';
+import ProjectDropdown from '../../../project/components/dropdown/DropDown';
+import UserDropdown from '../../../users/components/dropdown/DropDown';
+import Select from '../project_payment/components/management_data_page/Select';
+import numberToWords from 'number-to-words'
 
-export interface Props {}
+export interface Props { }
 
 const Create: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
@@ -42,6 +46,16 @@ const Create: React.FC<Props> = (props: Props) => {
         );
     };
 
+    function set_amount_to_text(e){
+        if(e.target.value){
+            let amountInText = numberToWords.toWords(e.target.value);
+            let el = document.querySelector('input[name="amount_in_txt"') as HTMLInputElement;
+            if(el){
+                el.value = amountInText + " TK only";
+            }
+        }
+    }
+
     return (
         <>
             <div className="page_content">
@@ -56,42 +70,42 @@ const Create: React.FC<Props> = (props: Props) => {
                             <div>
                                 <h5 className="mb-4">Personal Informations</h5>
                                 <div className="form_auto_fit">
+                                    <div className="form-group form-vertical">
+                                        <label>Customer</label>
+                                        <UserDropdown name={"user_id"} multiple={false} />
+                                    </div>
+
+                                    <div className="form-group form-vertical">
+                                        <label>Project</label>
+                                        <ProjectDropdown name={"project_id"} multiple={false} />
+                                    </div>
+
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Income Type"
+                                            name="type"
+                                            values={[
+                                                { text: '--select--', value: '' },
+                                                { text: 'Booking Money', value: 'booking_money' },
+                                                { text: 'Down Payments', value: 'down_payments' },
+                                                { text: 'Installment', value: 'installments' },
+                                            ]}
+                                        />
+                                    </div>
+
                                     {[
-                                        {
-                                            name: 'customer_id',
-                                            placeholder: 'Customer Id',
-                                            type: 'text',
-                                            label: 'Customer ID',
-                                        },
-                                        {
-                                            name: 'project',
-                                            placeholder: 'Project',
-                                            type: 'text',
-                                            label: 'Project',
-                                        },
                                         {
                                             name: 'date',
                                             placeholder: 'Date',
                                             type: 'date',
                                             label: 'Date',
                                         },
-                                       {
-                                            name: 'payment_type',
-                                            placeholder: 'Payment Type',
-                                            type: 'text',
-                                            label: 'Payment Type',
-                                        },
-                                       {
+                                        {
                                             name: 'amount',
                                             placeholder: 'Amount',
                                             type: 'text',
                                             label: 'Amount',
-                                        },
-                                        {
-                                            name: 'amount_in_txt',
-                                            placeholder: 'Amount In Text',
-                                            type: 'text',
-                                            label: 'Amount In Text',
+                                            onChange: set_amount_to_text,
                                         },
                                     ].map((field) => (
                                         <div
@@ -103,9 +117,19 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 placeholder={field.placeholder}
                                                 type={field.type}
                                                 label={field.label}
+                                                onChange={field.onChange}
                                             />
                                         </div>
                                     ))}
+
+                                    <div className="form-group form-vertical">
+                                        <Input
+                                            name={'amount_in_txt'}
+                                            placeholder={'Amount In Text'}
+                                            type={'text'}
+                                            label={'Amount In Text'}
+                                        />
+                                    </div>
                                 </div>
                                 {/* <div className="form-group form-vertical">
                                     <label htmlFor="description">
@@ -149,7 +173,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     Select Input Type:
                                                 </label>
                                                 <select
-                                                    style={{"width":"100%"}}
+                                                    style={{ "width": "100%" }}
                                                     id={`type-${entry.id}`}
                                                     name={`type-${entry.id}`}
                                                     value={entry.type}
@@ -174,14 +198,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                                         placeholder="Upload File"
                                                         type="file"
                                                         label="Upload File"
-                                                        onChange={(e) =>
-                                                            handleChange(
-                                                                entry.id,
-                                                                'file',
-                                                                e?.target
-                                                                    ?.files?.[0],
-                                                            )
-                                                        }
+                                                    // onChange={(e) =>
+                                                    //     handleChange(
+                                                    //         entry.id,
+                                                    //         'file',
+                                                    //         e?.target
+                                                    //             ?.files?.[0],
+                                                    //     )
+                                                    // }
                                                     />
                                                 </div>
                                             ) : (
@@ -192,13 +216,13 @@ const Create: React.FC<Props> = (props: Props) => {
                                                         name={`url-${entry.id}`}
                                                         placeholder="Enter URL"
                                                         value={entry.url}
-                                                        onChange={(e) =>
-                                                            handleChange(
-                                                                entry.id,
-                                                                'url',
-                                                                e.target.value,
-                                                            )
-                                                        }
+                                                    // onChange={(e) =>
+                                                    //     handleChange(
+                                                    //         entry.id,
+                                                    //         'url',
+                                                    //         e.target.value,
+                                                    //     )
+                                                    // }
                                                     />
                                                 </div>
                                             )}
@@ -211,13 +235,13 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     type="text"
                                                     label="Description"
                                                     value={entry.description}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            entry.id,
-                                                            'description',
-                                                            e.target.value,
-                                                        )
-                                                    }
+                                                // onChange={(e) =>
+                                                //     handleChange(
+                                                //         entry.id,
+                                                //         'description',
+                                                //         e.target.value,
+                                                //     )
+                                                // }
                                                 />
                                             </div>
                                         </div>
