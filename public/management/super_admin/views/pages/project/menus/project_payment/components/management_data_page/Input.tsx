@@ -1,13 +1,14 @@
 import React from 'react';
-export interface Props { 
+export interface Props {
     label?: string;
     name: string;
     placeholder?: string;
     type?: string;
     value?: string;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<Props> = ({ label, name, placeholder, type, value }: Props) => {
+const Input: React.FC<Props> = ({ label, name, placeholder, type, value, onChange }: Props) => {
     return (
         <>
             <label htmlFor={name}>
@@ -22,6 +23,7 @@ const Input: React.FC<Props> = ({ label, name, placeholder, type, value }: Props
                     name={name}
                     id={name}
                     defaultValue={value}
+                    onChange={onChange}
                 />
             </div>
         </>
