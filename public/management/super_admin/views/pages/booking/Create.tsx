@@ -5,6 +5,8 @@ import setup from './config/setup';
 import { useAppDispatch } from '../../../store';
 import { store } from './config/store/async_actions/store';
 import DropDown from './components/dropdown/DropDown';
+import ProjectDropDown from '../project/components/dropdown/DropDown';
+import UserDropDown from '../users/components/dropdown/DropDown';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import InputImage from './components/management_data_page/InputImage';
@@ -39,10 +41,19 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label="Booking Type"
                                             name="booking_type"
                                             values={[
+                                                { text: '--select--', value: '' },
                                                 { text: 'FLAT', value: 'flat' },
                                                 { text: 'PLOT', value: 'plot' },
                                             ]}
                                         />
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>Project</label>
+                                        <ProjectDropDown multiple={false} name={"project_id"}/>
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>Reference</label>
+                                        <UserDropDown multiple={false} name={"reference_user_id"}/>
                                     </div>
                                 </div>
                             </div>
@@ -54,15 +65,16 @@ const Create: React.FC<Props> = (props: Props) => {
                                         {
                                             name: 'customer_id',
                                             placeholder: 'Customer ID',
-                                            type: 'number',
+                                            type: 'text',
                                             label: 'Customer ID',
                                         },
                                         {
-                                            name: 'project_name',
-                                            placeholder: 'Enter project name',
+                                            name: 'customer_password',
+                                            placeholder: 'Customer Login Password',
+                                            label: 'Customer Login Password',
                                             type: 'text',
-                                            label: 'Project Name',
                                         },
+
                                         {
                                             name: 'application_date',
                                             placeholder:
@@ -347,7 +359,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                         {
                                             name: 'property_location',
                                             placeholder:
-                                                'Enter property location',
+                                                'Enter plot location',
                                             type: 'text',
                                             label: 'Property Location',
                                         },
@@ -359,7 +371,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                         },
                                         {
                                             name: 'property_no',
-                                            placeholder: 'Enter property no.',
+                                            placeholder: 'Enter plot/flat no.',
                                             type: 'text',
                                             label: 'Property No.',
                                         },
@@ -383,14 +395,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                         },
                                         {
                                             name: 'property_type',
-                                            placeholder: 'Enter property type',
+                                            placeholder: 'Enter plot type',
                                             type: 'text',
                                             label: 'Property Type',
                                         },
                                         {
                                             name: 'size_of_property_katha',
                                             placeholder:
-                                                'Size Of Property (Katha)',
+                                                'Size Of Plot/Flat (Katha)',
                                             type: 'number',
                                             label: 'Size Of Property (Katha)',
                                         },
@@ -398,7 +410,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             name: 'size_Of_property_land_percentage',
                                             placeholder:
                                                 'Size Of Property Land (Percentage)',
-                                            type: 'number',
+                                            type: 'text',
                                             label: 'Size Of Property Land (Percentage)',
                                         },
                                         {
@@ -490,16 +502,24 @@ const Create: React.FC<Props> = (props: Props) => {
                                         name="payment_method"
                                         values={[
                                             {
-                                                text: 'INSTALLMENT',
-                                                value: 'installment',
+                                                text: '--select--',
+                                                value: '',
+                                            },
+                                            {
+                                                text: 'BOOKING MONEY',
+                                                value: 'booking_money',
                                             },
                                             {
                                                 text: 'DOWNPAYMENT',
                                                 value: 'downpayment',
                                             },
                                             {
-                                                text: 'ONE TIME',
-                                                value: 'onetime',
+                                                text: 'INSTALLMENT',
+                                                value: 'installment',
+                                            },
+                                            {
+                                                text: 'OTHERS',
+                                                value: 'others',
                                             },
                                         ]}
                                     />
