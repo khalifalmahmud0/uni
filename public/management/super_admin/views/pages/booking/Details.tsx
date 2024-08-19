@@ -25,9 +25,13 @@ const Details: React.FC<Props> = (props: Props) => {
     }, []);
 
     function get_value(key) {
+        // console.log(state.item);
+
         try {
-            if (state.item[key]) return state.item[key];
-            if (state.item?.info[key]) return state.item?.info[key];
+            if (state.item[key]) 
+                return state.item[key];
+            if (state.item?.details.customer_informations[key])
+                return state.item?.details.customer_informations[key];
         } catch (error) {
             return '';
         }
