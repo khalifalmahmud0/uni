@@ -19,6 +19,7 @@ First, run the development server:
 ```bash
 npm run dev
 npm run server
+npm run super-admin
 # or
 yarn dev
 # or
