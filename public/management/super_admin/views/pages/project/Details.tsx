@@ -41,41 +41,46 @@ const Details: React.FC<Props> = (props: Props) => {
 
                     {Object.keys(state.item).length && (
                         <div className="content_body custom_scroll">
-                            {/* <div className="details_page_profile_image">
+                            <div className="text-center">
                                 <img
+                                    style={{ maxHeight: '150px', }}
                                     src={
                                         state.item.image
                                             ? `/${state.item.image}`
-                                            : '/assets/dashboard/images/avatar.png'
+                                            : ''
                                     }
                                 />
-                            </div> */}
+                            </div>
                             <table className="table quick_modal_table table-hover">
                                 <tbody>
                                     {[
                                         {
-                                            "name": "name",
-                                            "label": "Name"
+                                            "name": "title",
+                                            "label": "Project Title"
                                         },
-                                       {
+                                        {
                                             "name": "location",
                                             "label": "Location"
                                         },
-                                       {
-                                            "name": "per_share",
+                                        {
+                                            "name": "aveneue",
+                                            "label": "Aveneue"
+                                        },
+                                        {
+                                            "name": "plot",
+                                            "label": "Plot"
+                                        },
+                                        {
+                                            "name": "road",
+                                            "label": "Road"
+                                        },
+                                        {
+                                            "name": "per_share_cost",
                                             "label": "Per Share"
                                         },
-                                       {
+                                        {
                                             "name": "description",
                                             "label": "Description"
-                                        },
-                                       {
-                                            "name": "name",
-                                            "label": "Name"
-                                        },
-                                       {
-                                            "name": "documents",
-                                            "label": "Documents"
                                         },
                                     ]
                                         .map((i) => (

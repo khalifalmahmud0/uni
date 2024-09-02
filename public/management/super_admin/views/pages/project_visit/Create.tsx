@@ -4,7 +4,9 @@ import Footer from './components/management_data_page/Footer';
 import setup from './config/setup';
 import { useAppDispatch } from '../../../store';
 import { store } from './config/store/async_actions/store';
-import DropDown from './components/dropdown/DropDown';
+// import DropDown from './components/dropdown/DropDown';
+import UserDropDown from '../users/components/dropdown/DropDown';
+import ProjectDropDown from '../project/components/dropdown/DropDown';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import InputImage from './components/management_data_page/InputImage';
@@ -33,6 +35,38 @@ const Create: React.FC<Props> = (props: Props) => {
                         >
                             {/* Booking type  */}
                             <div>
+
+                                <div className="form_auto_fit">
+                                    <div className="form-group form-vertical">
+                                        <label>
+                                            Select employee
+                                        </label>
+                                        <div className="form_elements">
+                                            <UserDropDown
+                                                multiple={false}
+                                                get_selected_data={(result) =>
+                                                    console.log(result)
+                                                }
+                                                name={`user_id`}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>
+                                            Select Project
+                                        </label>
+                                        <div className="form_elements">
+                                            <ProjectDropDown
+                                                multiple={false}
+                                                get_selected_data={(result) =>
+                                                    console.log(result)
+                                                }
+                                                name={`poject_id`}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="form_auto_fit">
                                     <div className="form-group form-vertical">
                                         <Select
@@ -57,165 +91,6 @@ const Create: React.FC<Props> = (props: Props) => {
                                             type: 'number',
                                             label: 'Customer ID',
                                         },
-                                        {
-                                            name: 'project_name',
-                                            placeholder: 'Enter project name',
-                                            type: 'text',
-                                            label: 'Project Name',
-                                        },
-                                        {
-                                            name: 'application_date',
-                                            placeholder:
-                                                'Enter application date',
-                                            type: 'date',
-                                            label: 'Application Date',
-                                        },
-                                        {
-                                            name: 'applicant_name_bengali',
-                                            placeholder:
-                                                "Enter applicant's name in Bengali",
-                                            type: 'text',
-                                            label: "Applicant's Name (Bengali)",
-                                        },
-                                        {
-                                            name: 'applicant_name_english',
-                                            placeholder:
-                                                "Enter applicant's name in English",
-                                            type: 'text',
-                                            label: "Applicant's Name (English)",
-                                        },
-                                        {
-                                            name: 'father_name_bengali',
-                                            placeholder:
-                                                "Enter father's name in Bengali",
-                                            type: 'text',
-                                            label: "Father's Name (Bengali)",
-                                        },
-                                        {
-                                            name: 'father_name_english',
-                                            placeholder:
-                                                "Enter father's name in English",
-                                            type: 'text',
-                                            label: "Father's Name (English)",
-                                        },
-                                        {
-                                            name: 'mother_name_bengali',
-                                            placeholder:
-                                                "Enter mother's name in Bengali",
-                                            type: 'text',
-                                            label: "Mother's Name (Bengali)",
-                                        },
-                                        {
-                                            name: 'mother_name_english',
-                                            placeholder:
-                                                "Enter mother's name in English",
-                                            type: 'text',
-                                            label: "Mother's Name (English)",
-                                        },
-                                        {
-                                            name: 'husband_wife_name_bengali',
-                                            placeholder:
-                                                "Enter husband/wife's name in Bengali",
-                                            type: 'text',
-                                            label: "Husband/Wife's Name (Bengali)",
-                                        },
-                                        {
-                                            name: 'husband_wife_name_english',
-                                            placeholder:
-                                                "Enter husband/wife's name in English",
-                                            type: 'text',
-                                            label: "Husband/Wife's Name (English)",
-                                        },
-                                        {
-                                            name: 'email',
-                                            placeholder: 'Enter email',
-                                            type: 'email',
-                                            label: 'Email',
-                                        },
-                                        {
-                                            name: 'current_address_bengali',
-                                            placeholder:
-                                                'Enter current address in Bengali',
-                                            type: 'text',
-                                            label: 'Current Address (Bengali)',
-                                        },
-                                        {
-                                            name: 'current_address_english',
-                                            placeholder:
-                                                'Enter current address in English',
-                                            type: 'text',
-                                            label: 'Current Address (English)',
-                                        },
-                                        {
-                                            name: 'permanent_address_bengali',
-                                            placeholder:
-                                                'Enter permanent address in Bengali',
-                                            type: 'text',
-                                            label: 'Permanent Address (Bengali)',
-                                        },
-                                        {
-                                            name: 'permanent_address_english',
-                                            placeholder:
-                                                'Enter permanent address in English',
-                                            type: 'text',
-                                            label: 'Permanent Address (English)',
-                                        },
-                                        {
-                                            name: 'date_of_birth',
-                                            placeholder: 'Enter date of birth',
-                                            type: 'date',
-                                            label: 'Date of Birth',
-                                        },
-                                        {
-                                            name: 'mobile',
-                                            placeholder: 'Enter mobile number',
-                                            type: 'tel',
-                                            label: 'Mobile',
-                                        },
-                                        {
-                                            name: 'national_id_passport_no',
-                                            placeholder:
-                                                'Enter national ID No. / Passport No.',
-                                            type: 'text',
-                                            label: 'National ID No. / Passport No.',
-                                        },
-                                        {
-                                            name: 'emergency_mobile_no',
-                                            placeholder:
-                                                'Enter emergency mobile number',
-                                            type: 'tel',
-                                            label: 'Emergency Mobile No.',
-                                        },
-                                        {
-                                            name: 'nationality',
-                                            placeholder: 'Enter nationality',
-                                            type: 'text',
-                                            label: 'Nationality',
-                                        },
-                                        {
-                                            name: 'religion',
-                                            placeholder: 'Enter religion',
-                                            type: 'text',
-                                            label: 'Religion',
-                                        },
-                                        {
-                                            name: 'tin_no',
-                                            placeholder: 'Enter TIN No.',
-                                            type: 'text',
-                                            label: 'TIN No.',
-                                        },
-                                        {
-                                            name: 'profession',
-                                            placeholder: 'Enter profession',
-                                            type: 'text',
-                                            label: 'Profession',
-                                        },
-                                        {
-                                            name: 'customer_image',
-                                            placeholder: 'Customer photo',
-                                            type: 'file',
-                                            label: 'Customer photo',
-                                        },
                                     ].map((field) => (
                                         <div
                                             className="form-group form-vertical"
@@ -229,6 +104,21 @@ const Create: React.FC<Props> = (props: Props) => {
                                             />
                                         </div>
                                     ))}
+                                </div>
+
+                                <div className="form-group form-vertical">
+                                    <Input
+                                        name={'date'}
+                                        label="visiting date"
+                                        type="date"
+                                    />
+                                </div>
+                                <div className="form-group form-vertical">
+                                    <Input
+                                        name={'time'}
+                                        label="visiting time"
+                                        type="time"
+                                    />
                                 </div>
                             </div>
                             {/* Nominee's Information  */}

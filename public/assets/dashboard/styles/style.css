@@ -550,9 +550,11 @@ img {
 }
 .custom_scroll:hover::-webkit-scrollbar {
   width: 7px;
+  height: 10px;
 }
 .custom_scroll::-webkit-scrollbar {
   width: 0px;
+  height: 0px;
 }
 .custom_scroll::-webkit-scrollbar-track {
   background: var(--brand_color2);
@@ -1142,9 +1144,10 @@ input.form_checkbox:checked::after {
   padding: 10px;
   position: absolute;
   backdrop-filter: blur(8px);
-  background: rgba(41, 45, 54, 0.5803921569);
+  background: rgba(54, 64, 74, 0.92);
   top: calc(100% + 5px);
   width: 100%;
+  z-index: 9;
 }
 .custom_drop_down .drop_down_items .drop_down_data_search {
   display: flex;
@@ -1604,7 +1607,7 @@ input.form_checkbox:checked::after {
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 40px;
+  line-height: 20px;
   top: 0;
   left: 0;
   padding-left: 10px;

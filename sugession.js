@@ -11,4 +11,10 @@
     nominee parcentange
 
 8. user form designation asignation
+
+pm2 start npm --name admin.uniflexlimited -- run server -- -p 5002
+
+sudo certbot --apache -d admin.uniflexlimited.com -d admin.uniflexlimited.com
+sudo certbot --apache -d srv541106.hstgr.cloud -d srv541106.hstgr.cloud
+
  */

@@ -11,7 +11,8 @@ import storeSlice from './config/store';
 import { update } from './config/store/async_actions/update';
 import { anyObject } from '../../../common_types/object';
 import Input from './components/management_data_page/Input';
-export interface Props {}
+import InputImage from './components/management_data_page/InputImage';
+export interface Props { }
 
 const Edit: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -94,174 +95,192 @@ const Edit: React.FC<Props> = (props: Props) => {
                                     name="id"
                                     defaultValue={state.item.id}
                                 />
-                                {/* ..............  */}
-                                                            {/* Project Information */}
-                            <div>
-                                <h5 className="mb-4">Personal Informations</h5>
-                                <div className="form_auto_fit">
-                                    {[
-                                        {
-                                            name: 'project_name',
-                                            placeholder: 'Enter project name',
-                                            type: 'text',
-                                            label: 'Name',
-                                        },
-                                        {
-                                            name: 'project_location',
-                                            placeholder: 'Enter Location',
-                                            type: 'text',
-                                            label: 'Location',
-                                        },
-                                        {
-                                            name: 'project_per_share_cost',
-                                            placeholder:
-                                                'Enter Project Per Share Cost',
-                                            type: 'text',
-                                            label: 'Per Share Cost',
-                                        },
-                                    ].map((field) => (
-                                        <div
-                                            className="form-group form-vertical"
-                                            key={field.name}
-                                        >
-                                            <Input
-                                                name={field.name}
-                                                placeholder={field.placeholder}
-                                                type={field.type}
-                                                label={field.label}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="form-group form-vertical">
-                                    <label htmlFor="description">
-                                        Description:
-                                    </label>
-                                    <textarea
-                                        id="description"
-                                        name="description"
-                                        rows={10}
-                                        cols={170}
-                                    />
-                                </div>
-                            </div>
-                            {/* Documents Repeater */}
-                            <div>
-                                <h5 className="mb-4">Documents</h5>
-                                {entries.map((entry, index) => (
-                                    <div key={entry.id}>
-                                        <div>
-                                            {/* Button */}
-                                            {entries.length > 1 && (
-                                                <i
-                                                    style={{
-                                                        float: 'right',
-                                                        cursor: 'pointer',
-                                                    }}
-                                                    onClick={() =>
-                                                        removeEntry(entry.id)
-                                                    }
-                                                    className="fa fa-trash"
-                                                    aria-hidden="true"
-                                                ></i>
-                                            )}
-                                        </div>
-                                        <div
-                                            className="repeater-group form_auto_fit"
-                                        >
-                                            {/* Dropdown for type */}
-                                            <div className="form-group form-vertical form_elements">
-                                                <label htmlFor={`type-${entry.id}`}>
-                                                    Select Input Type:
-                                                </label>
-                                                <select
-                                                    style={{"width":"100%"}}
-                                                    id={`type-${entry.id}`}
-                                                    name={`type-${entry.id}`}
-                                                    value={entry.type}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            entry.id,
-                                                            'type',
-                                                            e.target.value,
-                                                        )
-                                                    }
-                                                >
-                                                    <option value="file">File</option>
-                                                    <option value="url">URL</option>
-                                                </select>
+                                <div>
+                                    <h5 className="mb-4">Personal Informations</h5>
+                                    <div className="form_auto_fit">
+                                        {[
+                                            {
+                                                name: 'uid',
+                                                placeholder: 'Project ID',
+                                                type: 'text',
+                                                label: 'Project ID',
+                                            },
+                                            {
+                                                name: 'title',
+                                                placeholder: 'Project name',
+                                                type: 'text',
+                                                label: 'Project Name',
+                                            },
+                                            {
+                                                name: 'location',
+                                            },
+                                            {
+                                                name: 'aveneue',
+                                            },
+                                            {
+                                                name: 'plot',
+                                            },
+                                            {
+                                                name: 'road',
+                                            },
+                                            {
+                                                name: 'per_share_cost',
+                                            },
+                                            {
+                                                name: 'video',
+                                            },
+                                        ].map((field) => (
+                                            <div
+                                                className="form-group form-vertical"
+                                                key={field.name}
+                                            >
+                                                <Input
+                                                    name={field.name}
+                                                    placeholder={field.placeholder}
+                                                    type={field.type}
+                                                    label={field.label}
+                                                    value={state.item[field.name]}
+                                                />
                                             </div>
+                                        ))}
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label htmlFor="description">
+                                            Description
+                                        </label>
+                                        <textarea
+                                            id="description"
+                                            name="description"
+                                            className="form-control"
+                                            defaultValue={state.item.description}
+                                        />
+                                    </div>
+                                    <div className="form-group grid_full_width form-vertical">
+                                        <InputImage
+                                            label={'image'}
+                                            name={'image'}
+                                            defalut_preview={state.item.image || null}
+                                        />
+                                    </div>
+                                </div>
 
-                                            {/* Conditional File or URL input */}
-                                            {entry.type === 'file' ? (
-                                                <div className="form-group form-vertical">
-                                                    <Input
-                                                        name={`file-${entry.id}`}
-                                                        placeholder="Upload File"
-                                                        type="file"
-                                                        label="Upload File"
+                                {/* Documents Repeater */}
+                                <div className="d-none">
+                                    <h5 className="mb-4">Documents</h5>
+                                    {entries.map((entry, index) => (
+                                        <div key={entry.id}>
+                                            <div>
+                                                {/* Button */}
+                                                {entries.length > 1 && (
+                                                    <i
+                                                        style={{
+                                                            float: 'right',
+                                                            cursor: 'pointer',
+                                                        }}
+                                                        onClick={() =>
+                                                            removeEntry(entry.id)
+                                                        }
+                                                        className="fa fa-trash"
+                                                        aria-hidden="true"
+                                                    ></i>
+                                                )}
+                                            </div>
+                                            <div
+                                                className="repeater-group form_auto_fit"
+                                            >
+                                                {/* Dropdown for type */}
+                                                <div className="form-group form-vertical form_elements">
+                                                    <label htmlFor={`type-${entry.id}`}>
+                                                        Select Input Type:
+                                                    </label>
+                                                    <select
+                                                        style={{ "width": "100%" }}
+                                                        id={`type-${entry.id}`}
+                                                        name={`type-${entry.id}`}
+                                                        value={entry.type}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 entry.id,
-                                                                'file',
-                                                                e?.target
-                                                                    ?.files?.[0],
+                                                                'type',
+                                                                e.target.value,
                                                             )
                                                         }
-                                                    />
+                                                    >
+                                                        <option value="file">File</option>
+                                                        <option value="url">URL</option>
+                                                    </select>
                                                 </div>
-                                            ) : (
+
+                                                {/* Conditional File or URL input */}
+                                                {entry.type === 'file' ? (
+                                                    <div className="form-group form-vertical">
+                                                        <Input
+                                                            name={`file-${entry.id}`}
+                                                            placeholder="Upload File"
+                                                            type="file"
+                                                            label="Upload File"
+                                                            onChange={(e) =>
+                                                                handleChange(
+                                                                    entry.id,
+                                                                    'file',
+                                                                    e?.target
+                                                                        ?.files?.[0],
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="form-group form-vertical">
+                                                        <Input
+                                                            label="Enter URL"
+                                                            type="text"
+                                                            name={`url-${entry.id}`}
+                                                            placeholder="Enter URL"
+                                                            value={entry.url}
+                                                            onChange={(e) =>
+                                                                handleChange(
+                                                                    entry.id,
+                                                                    'url',
+                                                                    e.target.value,
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
+
+                                                {/* Description */}
                                                 <div className="form-group form-vertical">
                                                     <Input
-                                                        label="Enter URL"
+                                                        name={`description-${entry.id}`}
+                                                        placeholder="Enter Description"
                                                         type="text"
-                                                        name={`url-${entry.id}`}
-                                                        placeholder="Enter URL"
-                                                        value={entry.url}
+                                                        label="Description"
+                                                        value={entry.description}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 entry.id,
-                                                                'url',
+                                                                'description',
                                                                 e.target.value,
                                                             )
                                                         }
                                                     />
                                                 </div>
-                                            )}
-
-                                            {/* Description */}
-                                            <div className="form-group form-vertical">
-                                                <Input
-                                                    name={`description-${entry.id}`}
-                                                    placeholder="Enter Description"
-                                                    type="text"
-                                                    label="Description"
-                                                    value={entry.description}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            entry.id,
-                                                            'description',
-                                                            e.target.value,
-                                                        )
-                                                    }
-                                                />
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
 
-                                {/* Add Another */}
+                                    {/* Add Another */}
 
-                                <i
-                                    style={{
-                                        float: 'right',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={addEntry}
-                                    className="fa fa-plus"
-                                    aria-hidden="true"
-                                ></i>
-                            </div>
+                                    <i
+                                        style={{
+                                            float: 'right',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={addEntry}
+                                        className="fa fa-plus"
+                                        aria-hidden="true"
+                                    ></i>
+                                </div>
 
                                 {/* ....  */}
 

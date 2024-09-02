@@ -26,6 +26,8 @@ import visit_history from '../views/pages/project_visit/menus/visit_history/conf
 
 import project_payment from '../views/pages/project/menus/project_payment/config/store';
 
+import contact_management_store from '../views/pages/contact_management/config/store';
+
 const store = configureStore({
     reducer: {
         users: users.reducer,
@@ -50,7 +52,9 @@ const store = configureStore({
         project_report: project_report.reducer,
         assign_visit: assign_visit.reducer,
         visit_history: visit_history.reducer,
-        project_payment: project_payment.reducer
+        project_payment: project_payment.reducer,
+        
+        contact_management: contact_management_store.reducer,
     },
     devTools: true,
 });

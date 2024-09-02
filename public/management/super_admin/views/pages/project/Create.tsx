@@ -5,8 +5,9 @@ import setup from './config/setup';
 import { useAppDispatch } from '../../../store';
 import { store } from './config/store/async_actions/store';
 import Input from './components/management_data_page/Input';
+import InputImage from './components/management_data_page/InputImage';
 
-export interface Props {}
+export interface Props { }
 
 const Create: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
@@ -58,23 +59,34 @@ const Create: React.FC<Props> = (props: Props) => {
                                 <div className="form_auto_fit">
                                     {[
                                         {
-                                            name: 'project_name',
-                                            placeholder: 'Enter project name',
+                                            name: 'uid',
+                                            placeholder: 'Project ID',
                                             type: 'text',
-                                            label: 'Name',
+                                            label: 'Project ID',
                                         },
                                         {
-                                            name: 'project_location',
-                                            placeholder: 'Enter Location',
+                                            name: 'title',
+                                            placeholder: 'Project name',
                                             type: 'text',
-                                            label: 'Location',
+                                            label: 'Project Name',
+                                        },
+                                        {
+                                            name: 'location',
+                                        },
+                                        {
+                                            name: 'aveneue',
+                                        },
+                                        {
+                                            name: 'plot',
+                                        },
+                                        {
+                                            name: 'road',
                                         },
                                         {
                                             name: 'project_per_share_cost',
-                                            placeholder:
-                                                'Enter Project Per Share Cost',
-                                            type: 'text',
-                                            label: 'Per Share Cost',
+                                        },
+                                        {
+                                            name: 'video',
                                         },
                                     ].map((field) => (
                                         <div
@@ -97,13 +109,18 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <textarea
                                         id="description"
                                         name="description"
-                                        rows={10}
-                                        cols={170}
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className="form-group grid_full_width form-vertical">
+                                    <InputImage
+                                        label={'image'}
+                                        name={'image'}
                                     />
                                 </div>
                             </div>
                             {/* Documents Repeater */}
-                            <div>
+                            <div className='d-none'>
                                 <h5 className="mb-4">Documents</h5>
                                 {entries.map((entry, index) => (
                                     <div key={entry.id}>
@@ -132,7 +149,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     Select Input Type:
                                                 </label>
                                                 <select
-                                                    style={{"width":"100%"}}
+                                                    style={{ "width": "100%" }}
                                                     id={`type-${entry.id}`}
                                                     name={`type-${entry.id}`}
                                                     value={entry.type}

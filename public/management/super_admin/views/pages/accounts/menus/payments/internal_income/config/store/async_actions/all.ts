@@ -4,9 +4,9 @@ import { initialState } from '../inital_state';
 import setup from '../../setup';
 import { end_point } from '../../../../../../../../../config/api';
 import storeSlice from '..';
-import fetchDataAndUpdateCache from '../../../../../../../../../config/http';
 import { anyObject } from '../../../../../../../../../common_types/object';
 import commonStore from '../../../../../../../../../store/slices/common_slice';
+import fetchDataAndUpdateCache from '../../../../../../../../../config/http';
 
 type ReturnType = void;
 type PayloadType = { [key: string]: any };

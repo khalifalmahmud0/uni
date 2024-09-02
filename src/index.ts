@@ -33,6 +33,7 @@ async function boot() {
                     '.ico',
                     '.jpg',
                     '.jpeg',
+                    '.webp',
                     '.png',
                     '.gif',
                     '.svg',
@@ -56,7 +57,7 @@ async function boot() {
 
     /** conver input files into buffer string */
     async function onFile(part: any) {
-        if (part.type == 'file') {
+        if (part.type == 'file' && part.filename) {
             const buff = await part.toBuffer();
             part.value = {};
             if (part.filename) {

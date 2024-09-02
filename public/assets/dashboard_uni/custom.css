@@ -21,15 +21,20 @@
     }
 }
 
-thead, tbody, tfoot, tr, td, th {
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
     border-color: #515151;
 }
 
-.details_page_profile_image{
+.details_page_profile_image {
     text-align: center;
     padding: 20px 0px;
 
-    img{
+    img {
         height: 200px;
         width: 200px;
         border-radius: 50%;
@@ -46,4 +51,28 @@ body[main-theme-layout="main-theme-layout-4"] .loader-wrapper {
 
 body[main-theme-layout="main-theme-layout-4"] .loader-wrapper .loader {
     background-color: #30384100 !important;
+}
+
+.tree_ul {
+    ul {
+        padding-left: 20px;
+        border-left: 1px solid gray;
+        margin-top: 20px;
+
+        li {
+            padding: 10px 0px;
+            padding-top: 0;
+            position: relative;
+            padding-left: 10px;
+            &::after{
+                content: '';
+                left: -20px;
+                top: 10px;
+                background-color: gray;
+                position: absolute;
+                height: 1px;
+                width: 20px;
+            }
+        }
+    }
 }

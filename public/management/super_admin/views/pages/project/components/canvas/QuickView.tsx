@@ -5,7 +5,7 @@ import storeSlice from '../../config/store';
 import { initialState } from '../../config/store/inital_state';
 import { useSelector } from 'react-redux';
 import setup from '../../config/setup';
-export interface Props {}
+export interface Props { }
 
 const modalRoot = document.getElementById('filter-root');
 
@@ -18,6 +18,16 @@ const QuickView: React.FC<Props> = (props: Props) => {
 
     function close_canvas(action: boolean = true) {
         dispatch(storeSlice.actions.set_show_quick_view_canvas(action));
+    }
+
+    function get_value(key) {
+        try {
+            if (state.item[key]) return state.item[key];
+            if (state.item?.info[key]) return state.item?.info[key];
+        } catch (error) {
+            return '';
+        }
+        return '';
     }
 
     if (modalRoot && state.show_quick_view_canvas) {
@@ -40,15 +50,56 @@ const QuickView: React.FC<Props> = (props: Props) => {
                         <table className="table quick_modal_table">
                             <tbody>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>:</th>
-                                    <th>{state.item.name}</th>
+                                    <td colSpan={3}>
+                                        <div className="text-center">
+                                            <img
+                                                style={{ maxHeight: '150px', }}
+                                                src={
+                                                    state.item.image
+                                                        ? `/${state.item.image}`
+                                                        : ''
+                                                }
+                                            />
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th>Preffered name</th>
-                                    <th>:</th>
-                                    <th>{state.item.email}</th>
-                                </tr>
+                                {[
+                                    {
+                                        "name": "title",
+                                        "label": "Project Title"
+                                    },
+                                    {
+                                        "name": "location",
+                                        "label": "Location"
+                                    },
+                                    {
+                                        "name": "aveneue",
+                                        "label": "Aveneue"
+                                    },
+                                    {
+                                        "name": "plot",
+                                        "label": "Plot"
+                                    },
+                                    {
+                                        "name": "road",
+                                        "label": "Road"
+                                    },
+                                    {
+                                        "name": "per_share_cost",
+                                        "label": "Per Share"
+                                    },
+                                    {
+                                        "name": "description",
+                                        "label": "Description"
+                                    },
+                                ]
+                                    .map((i) => (
+                                        <tr>
+                                            <td>{i['label']}</td>
+                                            <td>:</td>
+                                            <td>{get_value(i['name'])}</td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>

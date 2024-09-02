@@ -5,7 +5,7 @@ import storeSlice from '../../config/store';
 import { initialState } from '../../config/store/inital_state';
 import { useSelector } from 'react-redux';
 import setup from '../../config/setup';
-export interface Props {}
+export interface Props { }
 
 const modalRoot = document.getElementById('filter-root');
 
@@ -40,14 +40,42 @@ const QuickView: React.FC<Props> = (props: Props) => {
                         <table className="table quick_modal_table">
                             <tbody>
                                 <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        <img
+                                            src={
+                                                state.item.image
+                                                    ? `/${state.item.image}`
+                                                    : '/assets/dashboard/images/avatar.png'
+                                            }
+                                            alt=""
+                                            style={{
+                                                height: 30,
+                                            }}
+                                        />
+
+                                    </th>
+                                </tr>
+                                <tr>
                                     <th>Name</th>
                                     <th>:</th>
                                     <th>{state.item.name}</th>
                                 </tr>
                                 <tr>
-                                    <th>Preffered name</th>
+                                    <th>Role</th>
+                                    <th>:</th>
+                                    <th>{state.item.role}</th>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
                                     <th>:</th>
                                     <th>{state.item.email}</th>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <th>:</th>
+                                    <th>{state.item.phone_number}</th>
                                 </tr>
                             </tbody>
                         </table>

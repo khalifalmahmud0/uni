@@ -16,23 +16,30 @@ import moment from 'moment';
 async function validate(req: Request) {
     let field = '';
     let fields = [
+        'designation',
         'uid',
         'name',
-        'email',
-        'father_name',
-        'mother_name',
-        'husband_spouse',
-        'phone_number',
         'nid',
-        'education',
-        'permanent_address',
-        'present_address',
-        'reference',
+        'phone_number',
         'password',
+        
+        // 'reference',
+        // 'mo',
+        // 'agm',
+        // 'gm',
+        // 'ed',
 
-        'bank_name',
-        'branch_name',
-        'bank_account_no',
+        // 'email',
+        // 'father_name',
+        // 'mother_name',
+        // 'husband_spouse',
+        // 'education',
+        // 'permanent_address',
+        // 'present_address',
+
+        // 'bank_name',
+        // 'branch_name',
+        // 'bank_account_no',
     ];
 
     for (let index = 0; index < fields.length; index++) {
@@ -46,22 +53,25 @@ async function validate(req: Request) {
             .run(req);
     }
 
-    field = 'reference';
-    await body(field)
-        .not()
-        .isEmpty()
-        .custom(async (value) => {
-            const length = value.length;
-            if (length <= 2) {
-                throw new Error(
-                    `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
-                );
-            }
-        })
-        .withMessage(
-            `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
-        )
-        .run(req);
+    let check_array = ['reference','ed','mo','agm','gm'];
+    for (let index = 0; index < check_array.length; index++) {
+        const field = check_array[index];
+        await body(field)
+            .not()
+            .isEmpty()
+            .custom(async (value) => {
+                const length = value.length;
+                if (length <= 2) {
+                    throw new Error(
+                        `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
+                    );
+                }
+            })
+            .withMessage(
+                `the <b>${field.replaceAll('_', ' ')}</b> field is required`,
+            )
+            .run(req);
+    }
 
     let result = await validationResult(req);
 
@@ -91,24 +101,58 @@ async function store(
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
     let password = await bcrypt.hash(body.password, saltRounds);
+    let image_path = "avatar.png";
 
-    let image_path =
-        'uploads/users/' +
-        moment().format('YYYYMMDDHHmmss') +
-        body['image'].ext;
-    await (fastify_instance as any).upload(body['image'], image_path);
+    if(body['image'].ext){
+        image_path =
+            'uploads/users/' +
+            moment().format('YYYYMMDDHHmmss') +
+            body['image'].ext;
+        await (fastify_instance as any).upload(body['image'], image_path);
+    }
 
     let reference = JSON.parse(body.reference)[0];
 
+    let mo = null;
+    let agm = null;
+    let gm = null;
+    let ed = null;
+    let nominees = [];
+
+    if(body.mo){
+        mo = JSON.parse(body.mo)[0];
+    }
+    if(body.agm){
+        agm = JSON.parse(body.agm)[0];
+    }
+    if(body.gm){
+        gm = JSON.parse(body.gm)[0];
+    }
+    if(body.ed){
+        ed = JSON.parse(body.ed)[0];
+    }
+    if(body.nominees){
+        try {
+            nominees = JSON.parse(body.nominees);
+        } catch (error) {
+            
+        }
+    }
+    
     let inputs: InferCreationAttributes<typeof data> = {
         uid: body.uid,
         name: body.name,
         email: body.email,
         phone_number: body.phone_number,
-        designation: body.designation,
         image: image_path,
         password: password,
+
+        designation: body.designation,
         reference: reference,
+        mo: mo,
+        agm: agm,
+        gm: gm,
+        ed: ed,
     };
 
     let user_information_inputs: InferCreationAttributes<
@@ -132,7 +176,7 @@ async function store(
     };
 
     /** print request data into console */
-    console.clear();
+    // console.clear();
     // (fastify_instance as any).print(inputs);
 
     /** store data into database */
@@ -141,6 +185,21 @@ async function store(
         if (data) {
             user_information_inputs.user_id = data.id || 1;
             (await user_information.update(user_information_inputs)).save();
+
+            let nominee_instance = new models.UserNomineeModel();
+            type NomineeType = InferCreationAttributes< typeof nominee_instance >
+            
+            for (let index = 0; index < nominees.length; index++) {
+                const nominee = nominees[index] as NomineeType;
+                let user_nominee = new models.UserNomineeModel();
+                user_nominee.user_id = data.id || 1;
+                user_nominee.name = nominee.name;
+                user_nominee.relation = nominee.relation;
+                user_nominee.age = nominee.age;
+                user_nominee.mobile_number = nominee.mobile_number;
+                user_nominee.percentage = nominee.percentage;
+                await user_nominee.save();
+            }
         }
 
         return response(201, 'data created', {
@@ -150,6 +209,7 @@ async function store(
     } catch (error: any) {
         let uid = await error_trace(models, error, req.url, req.body);
         throw new custom_error('server error', 500, error.message, uid);
+        // throw error;
     }
 }
 

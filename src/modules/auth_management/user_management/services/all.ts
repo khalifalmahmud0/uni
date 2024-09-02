@@ -58,6 +58,7 @@ async function all(
     const { Op } = require('sequelize');
     let search_key = query_param.search_key;
     let orderByCol = query_param.orderByCol || 'id';
+    let role = query_param.role || null;
     let orderByAsc = query_param.orderByAsc || 'true';
     let show_active_data = query_param.show_active_data || 'true';
     let paginate = parseInt((req.query as any).paginate) || 10;
@@ -79,10 +80,14 @@ async function all(
         // include: [models.Project],
     };
 
-    query.attributes = {
-        include: select_fields,
-        exclude: exclude_fields,
-    };
+    query.attributes = select_fields;
+
+    if(role && role != 'all'){
+        query.where = {
+            ...query.where,
+            role: role,
+        }
+    }
 
     if (search_key) {
         query.where = {
