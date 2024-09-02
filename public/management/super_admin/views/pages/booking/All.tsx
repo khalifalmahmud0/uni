@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, image',
+                'id,have_to_pay_amount,paid,date'
             ),
         );
         dispatch(all({}));
@@ -117,7 +117,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                     {/* ID  */}
                                                     <td>{i.id}</td>
                                                     {/* Customer ID  */}
-                                                    <td>{i.id}</td>
+                                                    <td>{i.customer?.id}</td>
                                                     {/* Image  */}
                                                     <td>
                                                         <img
@@ -140,7 +140,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                             //     quick_view(i)
                                                             // }
                                                         >
-                                                           Raseal Dunel
+                                                           { i.user?.name }
                                                         </span>
                                                     </td>
                                                     {/* Project Name  */}
@@ -148,39 +148,27 @@ const All: React.FC<Props> = (props: Props) => {
                                                         <span
                                                             // className="quick_view_trigger"
                                                         >
-                                                           Bashundhara Residential Area
+                                                           { i.project?.title }
                                                         </span>
                                                     </td>
                                                     {/* Share  */}
                                                      <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
+                                                        { i.project?.per_share_cost }
                                                         /-
                                                     </td>
                                                     {/* Payabale Amount  */}
                                                      <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
+                                                        {i.have_to_pay_amount}
                                                         /-
                                                     </td>
                                                     {/* Paid  */}
                                                      <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
+                                                        {i.paid}
                                                         /-
                                                     </td>
                                                     {/* Due  */}
                                                      <td>
-                                                        {Math.round(
-                                                            Math.random() *
-                                                                10000,
-                                                        )}
+                                                        { i.have_to_pay_amount - i.paid}
                                                         /-
                                                     </td>
                                                 </tr>

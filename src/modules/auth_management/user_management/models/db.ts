@@ -82,6 +82,23 @@ const db = async function (): Promise<models> {
         foreignKey: 'user_id',
         as: 'nominee_infos',
     });
+
+    UserModel.hasMany(UserModel, {
+        foreignKey: 'ed',
+        as: 'eds',
+    });
+    UserModel.hasMany(UserModel, {
+        foreignKey: 'ed',
+        as: 'gms',
+    });
+    UserModel.hasMany(UserModel, {
+        foreignKey: 'gm',
+        as: 'agms',
+    });
+    UserModel.hasMany(UserModel, {
+        foreignKey: 'agm',
+        as: 'mos',
+    });
     
 
     // User.hasMany(Project, {

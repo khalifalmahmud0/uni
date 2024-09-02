@@ -8,7 +8,7 @@ const setup: setup_type = {
     route_prefix: 'project',
 
     api_host: location.origin,
-    api_prefix: 'projets',
+    api_prefix: 'projects',
 
     store_prefix: 'project',
     layout_title: prefix + ' Management',

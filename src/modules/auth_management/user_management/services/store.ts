@@ -53,7 +53,13 @@ async function validate(req: Request) {
             .run(req);
     }
 
-    let check_array = ['reference','ed','mo','agm','gm'];
+    let check_array:any = [
+        // 'reference',
+        // 'ed',
+        // 'mo',
+        // 'agm',
+        // 'gm'
+    ];
     for (let index = 0; index < check_array.length; index++) {
         const field = check_array[index];
         await body(field)
@@ -103,7 +109,7 @@ async function store(
     let password = await bcrypt.hash(body.password, saltRounds);
     let image_path = "avatar.png";
 
-    if(body['image'].ext){
+    if(body['image']?.ext){
         image_path =
             'uploads/users/' +
             moment().format('YYYYMMDDHHmmss') +
@@ -143,6 +149,7 @@ async function store(
         uid: body.uid,
         name: body.name,
         email: body.email,
+        role: body.role,
         phone_number: body.phone_number,
         image: image_path,
         password: password,

@@ -20,15 +20,26 @@ const Input: React.FC<Props> = ({
                 {label ? label : name.replaceAll('_', ' ')}
             </label>
             <div className="form_elements">
-                <input
-                    type={type ? type : 'text'}
-                    placeholder={
-                        placeholder ? placeholder : name.replaceAll('_', ' ')
-                    }
-                    name={name}
-                    id={name}
-                    defaultValue={value}
-                />
+                {
+                    type != 'file' &&
+                    (<input
+                        type={type ? type : 'text'}
+                        placeholder={
+                            placeholder ? placeholder : name.replaceAll('_', ' ')
+                        }
+                        name={name}
+                        id={name}
+                        defaultValue={value}
+                    />)
+                }
+                {
+                    type == 'file' &&
+                    (<input
+                        type='file'
+                        name={name}
+                        id={name}
+                    />)
+                }
             </div>
         </>
     );

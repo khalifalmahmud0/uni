@@ -3,6 +3,10 @@ import {
     Sequelize,
 } from 'sequelize';
 import * as project_model from './project_model';
+import * as project_customer_model from './project_customer';
+import * as project_customer_information_model from './project_customer_information';
+import * as project_payment_model from './project_payment';
+import * as user_model from './user_model';
 // import * as project_model from '../../user_admin copy/models/project_model';
 require('dotenv').config();
 
@@ -26,26 +30,43 @@ const sequelize = new Sequelize(db_string, {
 
 interface models {
     ProjectModel: typeof project_model.DataModel;
+    ProjectCustomerModel: typeof project_customer_model.DataModel;
+    ProjectCustomerInfomationModel: typeof project_customer_information_model.DataModel;
+    ProjectPaymentModel: typeof project_payment_model.DataModel;
+    UserModels: typeof user_model.DataModel;
     // Project: typeof project_model.DataModel;
     sequelize: Sequelize;
 }
 const db = async function (): Promise<models> {
     const ProjectModel = project_model.init(sequelize);
+    const ProjectCustomerModel = project_customer_model.init(sequelize);
+    const ProjectCustomerInfomationModel = project_customer_information_model.init(sequelize);
+    const ProjectPaymentModel = project_payment_model.init(sequelize);
+    const UserModels = user_model.init(sequelize);
     // const Project = project_model.init(sequelize);
 
     await sequelize.sync();
 
-    // User.hasMany(Project, {
-    //     sourceKey: 'id',
-    //     foreignKey: 'user_id',
-    //     as: 'projects',
-    // });
-
-    // User.hasOne(Project, {
-    //     sourceKey: 'id',
-    //     foreignKey: 'user_id',
-    //     as: 'project',
-    // });
+    UserModels.hasMany(ProjectCustomerModel,{
+        foreignKey: 'user_id',
+        as: 'projects',
+    });
+    ProjectCustomerModel.belongsTo(ProjectModel,{
+        foreignKey: 'project_id',
+        as: 'project'
+    });
+    ProjectCustomerModel.belongsTo(UserModels,{
+        foreignKey: 'user_id',
+        as: 'customer'
+    });
+    ProjectCustomerModel.belongsTo(UserModels,{
+        foreignKey: 'user_id',
+        as: 'reference'
+    });
+    ProjectCustomerModel.hasOne(ProjectCustomerInfomationModel,{
+        foreignKey: 'project_customer_id',
+        as: 'details'
+    });
 
     // Project.belongsToMany(User, {
     //     through: 'project_user',
@@ -56,6 +77,10 @@ const db = async function (): Promise<models> {
 
     let models: models = {
         ProjectModel,
+        ProjectCustomerModel,
+        ProjectCustomerInfomationModel,
+        ProjectPaymentModel,
+        UserModels,
         // Project,
 
         sequelize,

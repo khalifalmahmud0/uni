@@ -7,7 +7,7 @@ const setup: setup_type = {
     route_prefix: 'project_payment',
 
     api_host: location.origin,
-    api_prefix: 'users',
+    api_prefix: 'accounts/payment-entry',
 
     store_prefix: 'project_payment',
     layout_title: prefix + ' Management',
