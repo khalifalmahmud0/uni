@@ -10,16 +10,20 @@ import UserDropDown from '../users/components/dropdown/DropDown';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import InputImage from './components/management_data_page/InputImage';
+import { useNavigate } from 'react-router-dom';
 export interface Props {}
 
 const Create: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     async function handle_submit(e) {
         e.preventDefault();
         const response = await dispatch(store(new FormData(e.target)) as any);
         if (!Object.prototype.hasOwnProperty.call(response, 'error')) {
             e.target.reset();
+            let id = response.payload.data.data.id;
+            navigate(`/booking/edit/${id}`);
         }
     }
 
@@ -54,6 +58,22 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div className="form-group form-vertical">
                                         <label>Reference</label>
                                         <UserDropDown multiple={false} name={"reference_user_id"}/>
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>MO</label>
+                                        <UserDropDown multiple={false} name={"mo_id"}/>
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>AGM</label>
+                                        <UserDropDown multiple={false} name={"agm_id"}/>
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>GM</label>
+                                        <UserDropDown multiple={false} name={"gm_id"}/>
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <label>ED</label>
+                                        <UserDropDown multiple={false} name={"ed_id"}/>
                                     </div>
                                 </div>
                             </div>
@@ -356,13 +376,13 @@ const Create: React.FC<Props> = (props: Props) => {
                                 <h5 className="mb-4">Property Details</h5>
                                 <div className="form_auto_fit">
                                     {[
-                                        {
-                                            name: 'property_location',
-                                            placeholder:
-                                                'Enter plot location',
-                                            type: 'text',
-                                            label: 'Property Location',
-                                        },
+                                        // {
+                                        //     name: 'property_location',
+                                        //     placeholder:
+                                        //         'Enter plot location',
+                                        //     type: 'text',
+                                        //     label: 'Property Location',
+                                        // },
                                         {
                                             name: 'file_id_no',
                                             placeholder: 'Enter file / ID no.',
@@ -393,12 +413,12 @@ const Create: React.FC<Props> = (props: Props) => {
                                             type: 'text',
                                             label: 'Sector No.',
                                         },
-                                        {
-                                            name: 'property_type',
-                                            placeholder: 'Enter plot type',
-                                            type: 'text',
-                                            label: 'Property Type',
-                                        },
+                                        // {
+                                        //     name: 'property_type',
+                                        //     placeholder: 'Enter plot type',
+                                        //     type: 'text',
+                                        //     label: 'Property Type',
+                                        // },
                                         {
                                             name: 'size_of_property_katha',
                                             placeholder:
@@ -407,10 +427,10 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label: 'Size Of Property (Katha)',
                                         },
                                         {
-                                            name: 'size_Of_property_land_percentage',
+                                            name: 'size_of_property_land_percentage',
                                             placeholder:
                                                 'Size Of Property Land (Percentage)',
-                                            type: 'text',
+                                            type: 'number',
                                             label: 'Size Of Property Land (Percentage)',
                                         },
                                         {
@@ -427,12 +447,12 @@ const Create: React.FC<Props> = (props: Props) => {
                                             type: 'text',
                                             label: 'Property Price (Text)',
                                         },
-                                        {
-                                            name: 'payment_type',
-                                            placeholder: 'Enter payment type',
-                                            type: 'text',
-                                            label: 'Payment Type (Booking/Down/Full)',
-                                        },
+                                        // {
+                                        //     name: 'payment_type',
+                                        //     placeholder: 'Enter payment type',
+                                        //     type: 'text',
+                                        //     label: 'Payment Type (Booking/Down/Full)',
+                                        // },
                                         {
                                             name: 'payment_digit',
                                             placeholder:
@@ -446,13 +466,13 @@ const Create: React.FC<Props> = (props: Props) => {
                                             type: 'text',
                                             label: 'Payment (Text)',
                                         },
-                                        {
-                                            name: 'check_cash_po_dd_no',
-                                            placeholder:
-                                                'Enter check / cash / P.O. / D.D. no.',
-                                            type: 'text',
-                                            label: 'Check / Cash / P.O. / D.D. No.',
-                                        },
+                                        // {
+                                        //     name: 'check_cash_po_dd_no',
+                                        //     placeholder:
+                                        //         'Enter check / cash / P.O. / D.D. no.',
+                                        //     type: 'text',
+                                        //     label: 'Check / Cash / P.O. / D.D. No.',
+                                        // },
                                         {
                                             name: 'branch',
                                             placeholder: 'Enter branch',
@@ -496,39 +516,70 @@ const Create: React.FC<Props> = (props: Props) => {
                             {/* Proof Of Payment  */}
                             <div>
                                 <h5 className="mb-4">Proof Of Payment</h5>
-                                <div className="form-group form-vertical">
-                                    <Select
-                                        label="Payment Method"
-                                        name="payment_method"
-                                        values={[
-                                            {
-                                                text: '--select--',
-                                                value: '',
-                                            },
-                                            {
-                                                text: 'BOOKING MONEY',
-                                                value: 'booking_money',
-                                            },
-                                            {
-                                                text: 'DOWNPAYMENT',
-                                                value: 'downpayment',
-                                            },
-                                            {
-                                                text: 'INSTALLMENT',
-                                                value: 'installment',
-                                            },
-                                            {
-                                                text: 'OTHERS',
-                                                value: 'others',
-                                            },
-                                        ]}
-                                    />
+                                <div className="form_auto_fit">
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Payment Method"
+                                            name="payment_method"
+                                            values={[
+                                                {
+                                                    text: '--select--',
+                                                    value: '',
+                                                },
+                                                {
+                                                    text: 'BOOKING MONEY',
+                                                    value: 'booking_money',
+                                                },
+                                                {
+                                                    text: 'DOWNPAYMENT',
+                                                    value: 'downpayment',
+                                                },
+                                                {
+                                                    text: 'INSTALLMENT',
+                                                    value: 'installment',
+                                                },
+                                                {
+                                                    text: 'OTHERS',
+                                                    value: 'others',
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <Select
+                                            label="Payment By"
+                                            name="check_cash_po_dd_no"
+                                            values={[
+                                                {
+                                                    text: '--select--',
+                                                    value: '',
+                                                },
+                                                {
+                                                    text: 'Check',
+                                                    value: 'check',
+                                                },
+                                                {
+                                                    text: 'Cash',
+                                                    value: 'cash',
+                                                },
+                                                {
+                                                    text: 'P.O',
+                                                    value: 'p.o',
+                                                },
+                                                {
+                                                    text: 'D.D',
+                                                    value: 'd.d',
+                                                },
+                                            ]}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="form-group form-vertical">
                                     <Select
                                         label="Are you a loan recipient?"
                                         name="r_u_a_loan_recipient"
                                         values={[
+                                            { text: '--select--', value: '' },
                                             { text: 'YES', value: 'yes' },
                                             { text: 'NO', value: 'no' },
                                         ]}
@@ -537,10 +588,10 @@ const Create: React.FC<Props> = (props: Props) => {
                                 <div className="form_auto_fit">
                                     {[
                                         {
-                                            name: 'date',
+                                            name: 'payment_date',
                                             placeholder: 'Select date',
                                             type: 'date',
-                                            label: 'Date',
+                                            label: 'Payment Date',
                                         },
                                         {
                                             name: 'total_share',
@@ -618,61 +669,61 @@ const Create: React.FC<Props> = (props: Props) => {
                                 </h5>
                                 <div className="form_auto_fit">
                                     {[
-                                        {
-                                            name: 'office_only_booking',
-                                            placeholder: 'Booking',
-                                            type: 'text',
-                                            label: 'Booking',
-                                        },
+                                        // {
+                                        //     name: 'office_only_booking',
+                                        //     placeholder: 'Booking',
+                                        //     type: 'text',
+                                        //     label: 'Booking',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_property_no',
+                                        //     placeholder: 'Enter property no.',
+                                        //     type: 'text',
+                                        //     label: 'Property No.',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_road_no',
+                                        //     placeholder: 'Enter road no.',
+                                        //     type: 'text',
+                                        //     label: 'Road No.',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_block_no',
+                                        //     placeholder: 'Enter block no.',
+                                        //     type: 'text',
+                                        //     label: 'Block No.',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_sector_no',
+                                        //     placeholder: 'Enter sector no.',
+                                        //     type: 'text',
+                                        //     label: 'Sector No.',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_property_type',
+                                        //     placeholder: 'Enter property type',
+                                        //     type: 'text',
+                                        //     label: 'Property Type',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_size_of_property_katha',
+                                        //     placeholder:
+                                        //         'Enter size of property (Katha)',
+                                        //     type: 'number',
+                                        //     label: 'Size of Property (Katha)',
+                                        // },
+                                        // {
+                                        //     name: 'office_only_size_of_property_land_percentage',
+                                        //     placeholder:
+                                        //         'Enter size of property land (Percentage)',
+                                        //     type: 'number',
+                                        //     label: 'Size of Property Land (Percentage)',
+                                        // },
                                         {
                                             name: 'office_only_booking_others',
                                             placeholder: 'Others',
                                             type: 'text',
                                             label: 'Others',
-                                        },
-                                        {
-                                            name: 'office_only_property_no',
-                                            placeholder: 'Enter property no.',
-                                            type: 'text',
-                                            label: 'Property No.',
-                                        },
-                                        {
-                                            name: 'office_only_road_no',
-                                            placeholder: 'Enter road no.',
-                                            type: 'text',
-                                            label: 'Road No.',
-                                        },
-                                        {
-                                            name: 'office_only_block_no',
-                                            placeholder: 'Enter block no.',
-                                            type: 'text',
-                                            label: 'Block No.',
-                                        },
-                                        {
-                                            name: 'office_only_sector_no',
-                                            placeholder: 'Enter sector no.',
-                                            type: 'text',
-                                            label: 'Sector No.',
-                                        },
-                                        {
-                                            name: 'office_only_property_type',
-                                            placeholder: 'Enter property type',
-                                            type: 'text',
-                                            label: 'Property Type',
-                                        },
-                                        {
-                                            name: 'office_only_size_of_property_katha',
-                                            placeholder:
-                                                'Enter size of property (Katha)',
-                                            type: 'number',
-                                            label: 'Size of Property (Katha)',
-                                        },
-                                        {
-                                            name: 'office_only_size_of_property_land_percentage',
-                                            placeholder:
-                                                'Enter size of property land (Percentage)',
-                                            type: 'number',
-                                            label: 'Size of Property Land (Percentage)',
                                         },
                                         {
                                             name: 'office_only_money_receipt_no',

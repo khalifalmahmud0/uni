@@ -1,12 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 export interface Props {
     name: string;
     label: string;
+    preview_url?: string,
 }
 
-const InputImage: React.FC<Props> = ({ name, label, ...props }: Props) => {
+const InputImage: React.FC<Props> = ({ name, label, preview_url, ...props }: Props) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [preview, setPreview] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (preview_url) {
+            setPreview(preview_url);
+        };
+
+        return () => {
+            setPreview(null)
+        }
+    }, [])
 
     const handleFileChange = () => {
         const fileInput = fileInputRef.current;

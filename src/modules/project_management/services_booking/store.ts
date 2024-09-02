@@ -22,6 +22,12 @@ async function validate(req: Request) {
         'applicant_name_english',
         'application_date',
         'mobile',
+        'payment_digit',
+        'payment_text',
+        'have_to_pay_amount',
+        'office_only_money_receipt_no',
+        'check_cash_po_dd_no',
+        'payment_method',
     ];
 
     for (let index = 0; index < fields.length; index++) {
@@ -35,7 +41,14 @@ async function validate(req: Request) {
             .run(req);
     }
 
-    field = ['project_id', 'reference_user_id'];
+    field = [
+        'project_id', 
+        'reference_user_id',
+        'mo_id',
+        'agm_id',
+        'gm_id',
+        'ed_id',
+    ];
     for (let index = 0; index < field.length; index++) {
         const element = field[index];
         await body(element)
@@ -95,55 +108,82 @@ async function store(
     }
     
     if(body['nominee_photo_1']?.ext){
-        image_path =
+        nominee_photo_1 =
             'uploads/projects/' +
             moment().format('YYYYMMDDHHmmss') +
             body['nominee_photo_1'].ext;
-        await (fastify_instance as any).upload(body['nominee_photo_1'], image_path);
+        await (fastify_instance as any).upload(body['nominee_photo_1'], nominee_photo_1);
     }
     
     if(body['nominee_photo_2']?.ext){
-        image_path =
+        nominee_photo_2 =
             'uploads/projects/' +
             moment().format('YYYYMMDDHHmmss') +
             body['nominee_photo_2'].ext;
-        await (fastify_instance as any).upload(body['nominee_photo_2'], image_path);
+        await (fastify_instance as any).upload(body['nominee_photo_2'], nominee_photo_2);
     }
 
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
     let password = await bcrypt.hash(body.customer_password, saltRounds);
     
-    let user_inputs: InferCreationAttributes<typeof user_model> = {
-        name: body.applicant_name_english,
-        email: body.email,
-        phone_number: body.mobile,
-        password: password,
-        image: image_path,
-    };
-
     let project_id = null;
     let reference_user_id = null;
+    let mo_id = null;
+    let agm_id = null;
+    let gm_id = null;
+    let ed_id = null;
     if(body.project_id){
         project_id = JSON.parse(body.project_id)[0];
     }
     if(body.reference_user_id){
         reference_user_id = JSON.parse(body.reference_user_id)[0];
     }
+    if(body.mo_id){
+        mo_id = JSON.parse(body.mo_id)[0];
+    }
+    if(body.agm_id){
+        agm_id = JSON.parse(body.agm_id)[0];
+    }
+    if(body.gm_id){
+        gm_id = JSON.parse(body.gm_id)[0];
+    }
+    if(body.ed_id){
+        ed_id = JSON.parse(body.ed_id)[0];
+    }
+
+    let user_inputs: InferCreationAttributes<typeof user_model> = {
+        name: body.applicant_name_english,
+        uid: body.customer_id,
+        email: body.email,
+        phone_number: body.mobile,
+        password: password,
+        image: image_path,
+        reference: reference_user_id,
+        mo: mo_id,
+        agm: agm_id,
+        gm: gm_id,
+        ed: ed_id,
+    };
 
     let inputs: InferCreationAttributes<typeof data> = {
         project_id: project_id,
         reference_user_id: reference_user_id,
+        mo_id: mo_id,
+        agm_id: agm_id,
+        gm_id: gm_id,
+        ed_id: ed_id,
         user_id: 0,
-        have_to_pay_amount: 0,
+        have_to_pay_amount: body.have_to_pay_amount,
         date: body.application_date,
-        paid: 0,
-        total_share: 0,
+        paid: body.payment_digit,
+        total_share: body.total_share,
     };
 
     let keysToRemove = [
-        'project_id', 'reference_user_id', 'customer_image',
-        'nominee_photo_1', 'nominee_photo_2',
+        'customer_image',
+        'nominee_photo_1', 
+        'nominee_photo_2',
     ];
 
     let obj = body;
@@ -151,17 +191,31 @@ async function store(
         customer_informations: {
             nominee_photo_1: '',
             nominee_photo_2: '',
+            customer_image: '',
         },
     };
-    project_customer_info_inputs.customer_informations = Object.keys(obj).reduce((acc:anyObject, key) => {
+
+    /** sort keys */
+    obj = Object.keys(obj)
+        .sort()
+        .reduce((acc:anyObject, key) => {
+            acc[key] = obj[key];
+            return acc;
+        }, {});
+    
+    /** set values */
+    project_customer_info_inputs.customer_informations = Object.keys(obj)
+        .reduce((acc:anyObject, key) => {
         if (!keysToRemove.includes(key)) {
             acc[key] = obj[key];
         }
         return acc;
     }, {});
+
     project_customer_info_inputs.customer_informations.nominee_photo_1 = nominee_photo_1;
     project_customer_info_inputs.customer_informations.nominee_photo_2 = nominee_photo_2;
-
+    project_customer_info_inputs.customer_informations.customer_image = image_path;
+    
     /** print request data into console */
     // console.clear();
     // (fastify_instance as any).print(inputs);
@@ -176,12 +230,15 @@ async function store(
         (await data.update(inputs)).save();
 
         if(data.id){
+            /** store customer information */
             project_customer_info_inputs.project_id = data.project_id;
+            project_customer_info_inputs.project_customer_id = data.id;
             project_customer_info_inputs.user_id = data.user_id;
             project_customer_info_inputs.reference_user_id = data.reference_user_id;
-            project_customer_info_inputs.project_customer_id = data.id;
-            // project_customer_info_inputs.customer_informations = 
-            //     JSON.stringify(project_customer_info_inputs.customer_informations);
+            project_customer_info_inputs.mo_id = data.mo_id;
+            project_customer_info_inputs.agm_id = data.agm_id;
+            project_customer_info_inputs.gm_id = data.gm_id;
+            project_customer_info_inputs.ed_id = data.ed_id;
 
             (await project_customer_info.update(project_customer_info_inputs)).save();
         }

@@ -63,38 +63,38 @@ const All: React.FC<Props> = (props: Props) => {
                                         <TableHeading
                                             label={`Customer ID`}
                                             col_name={`uid`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <th>Image</th>
                                         <TableHeading
                                             label={`Name`}
                                             col_name={`name`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                          <TableHeading
                                             label={`Project Name`}
                                             col_name={`project_name`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Share`}
                                             col_name={`share`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Payable Amount`}
                                             col_name={`payable_amount`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Paid`}
                                             col_name={`paid`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Due`}
                                             col_name={`Due`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                     </tr>
                                 </thead>
@@ -117,13 +117,13 @@ const All: React.FC<Props> = (props: Props) => {
                                                     {/* ID  */}
                                                     <td>{i.id}</td>
                                                     {/* Customer ID  */}
-                                                    <td>{i.customer?.id}</td>
+                                                    <td>{i.customer?.uid}</td>
                                                     {/* Image  */}
                                                     <td>
                                                         <img
                                                             src={
-                                                                i.image
-                                                                    ? `/${i.image}`
+                                                                i.customer?.image
+                                                                    ? `/${i.customer.image}`
                                                                     : '/assets/dashboard/images/avatar.png'
                                                             }
                                                             alt=""
@@ -140,7 +140,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                             //     quick_view(i)
                                                             // }
                                                         >
-                                                           { i.user?.name }
+                                                           { i.customer?.name }
                                                         </span>
                                                     </td>
                                                     {/* Project Name  */}
@@ -153,8 +153,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     {/* Share  */}
                                                      <td>
-                                                        { i.project?.per_share_cost }
-                                                        /-
+                                                        { i.details?.customer_informations.total_share }
                                                     </td>
                                                     {/* Payabale Amount  */}
                                                      <td>

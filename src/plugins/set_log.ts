@@ -60,7 +60,7 @@ export default fp(function (fastify, opts = {}, done) {
                 };
                 if (stacks.length && stacks[1]) {
                     const regex = /services[^)]*\)/;
-                    console.log(stacks);
+                    console.log('staks \n',stacks);
                     
                     if (Object.prototype.hasOwnProperty.call(stacks[1], 'match')) {
                         const match = stacks[1].match(regex);
