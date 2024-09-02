@@ -42,6 +42,8 @@ async function boot() {
                     '.pdf',
                     '.css',
                     '.js',
+                    '.js.map',
+                    '.map',
                     '.ttf',
                     '.woff',
                     '.woff2',
