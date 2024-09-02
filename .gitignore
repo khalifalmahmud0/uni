@@ -15,3 +15,5 @@ package-lock.json
 *.lock
 .env
 ./logs
+public/uploads
+public/management_build
