@@ -34,6 +34,10 @@ class DataModel extends Model<Infer, InferCreation> {
     declare user_id?: number;
     declare reference_user_id?: number;
     declare project_customer_id?: number;
+    declare mo_id: number;
+    declare agm_id: number;
+    declare gm_id: number;
+    declare ed_id: number;
 
     declare customer_informations?: string;
 
@@ -61,6 +65,22 @@ function init(sequelize: Sequelize) {
                 allowNull: true,
             },
             reference_user_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
+                allowNull: true,
+            },
+            mo_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
+                allowNull: true,
+            },
+            agm_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
+                allowNull: true,
+            },
+            gm_id: {
+                type: new DataTypes.BIGINT().UNSIGNED,
+                allowNull: true,
+            },
+            ed_id: {
                 type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
