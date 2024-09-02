@@ -26,9 +26,37 @@ async function details(
             },
             include: [
                 {
+                    model: models.ProjectModel,
+                    as: 'project'
+                },
+                {
                     model: models.ProjectCustomerInfomationModel,
                     as: 'details'
-                }
+                },
+                {
+                    model: models.UserModels,
+                    as: 'customer'
+                },
+                {
+                    model: models.UserModels,
+                    as: 'reference'
+                },
+                {
+                    model: models.UserModels,
+                    as: 'ed'
+                },
+                {
+                    model: models.UserModels,
+                    as: 'gm'
+                },
+                {
+                    model: models.UserModels,
+                    as: 'agm'
+                },
+                {
+                    model: models.UserModels,
+                    as: 'mo'
+                },
             ]
         });
 
