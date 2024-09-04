@@ -5,17 +5,18 @@ import {
 import * as user_model from './user_model';
 import * as user_information_model from './user_information_model';
 import * as user_nominee_model from './user_nominee_model';
+import { app_config } from '../../../../configs/app.config';
 // import * as project_model from '../../user_admin copy/models/project_model';
 require('dotenv').config();
 
-let host = process?.env.DB_HOST || '';
-let port = process?.env.DB_PORT || '';
-let user = process?.env.DB_USER || '';
-let pass = process?.env.DB_PASSWORD || '';
-let database = process?.env.DB_DATABASE || '';
-let db_string = `mysql://${user}:${pass}@${host}:${port}/${database}`;
+// const host = encodeURIComponent(process?.env.DB_HOST || '');
+// const port = encodeURIComponent(process?.env.DB_PORT || '');
+// const user = encodeURIComponent(process?.env.DB_USER || '');
+// const pass = encodeURIComponent(process?.env.DB_PASSWORD || '');
+// const database = encodeURIComponent(process?.env.DB_DATABASE || '');
+// const db_string = `mysql://${user}:${pass}@${host}:${port}/${database}`;
 
-const sequelize = new Sequelize(db_string, {
+const sequelize = new Sequelize(app_config.DB_string, {
     logging: false,
     dialectOptions: {
         charset: 'utf8mb4',
