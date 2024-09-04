@@ -52,39 +52,39 @@ function init(sequelize: Sequelize) {
     DataModel.init(
         {
             id: {
-                type: DataTypes.BIGINT.UNSIGNED,
+                type: DataTypes.BIGINT().UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true,
             },
             account_id: {
-                type: new DataTypes.BIGINT.UNSIGNED,
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
             account_number_id: {
-                type: new DataTypes.BIGINT.UNSIGNED,
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
             user_id: {
-                type: new DataTypes.BIGINT.UNSIGNED,
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
             account_category_id: {
-                type: new DataTypes.BIGINT.UNSIGNED,
-                defaultValue: 'active',
+                type: new DataTypes.BIGINT().UNSIGNED,
+                allowNull: true,
             },
             
             uid: {
                 type: new DataTypes.STRING(50),
-                defaultValue: 'active',
+                allowNull: true,
             },
             
             date: {
                 type: new DataTypes.DATE,
-                defaultValue: 'active',
+                allowNull: true,
             },
             amount: {
-                type: new DataTypes.FLOAT.UNSIGNED,
-                defaultValue: 'active',
+                type: new DataTypes.FLOAT().UNSIGNED,
+                allowNull: true,
             },
 
             creator: {
@@ -93,6 +93,10 @@ function init(sequelize: Sequelize) {
                 defaultValue: null,
             },
 
+            status: {
+                type: new DataTypes.ENUM('active', 'deactive', 'block'),
+                defaultValue: 'active',
+            },
             created_at: DataTypes.DATE,
             updated_at: DataTypes.DATE,
         },

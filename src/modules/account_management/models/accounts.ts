@@ -45,7 +45,7 @@ function init(sequelize: Sequelize) {
     DataModel.init(
         {
             id: {
-                type: DataTypes.BIGINT.UNSIGNED,
+                type: DataTypes.BIGINT().UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true,
             },

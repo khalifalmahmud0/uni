@@ -51,12 +51,12 @@ function init(sequelize: Sequelize) {
     DataModel.init(
         {
             id: {
-                type: DataTypes.BIGINT.UNSIGNED,
+                type: DataTypes.BIGINT().UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true,
             },
             approved_by: {
-                type: new DataTypes.BIGINT.UNSIGNED,
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
             date: {
@@ -64,19 +64,19 @@ function init(sequelize: Sequelize) {
                 allowNull: true,
             },
             openning_balance: {
-                type: new DataTypes.FLOAT,
+                type: new DataTypes.FLOAT(),
                 allowNull: true,
             },
             closing_balance: {
-                type: new DataTypes.FLOAT,
+                type: new DataTypes.FLOAT(),
                 allowNull: true,
             },
             total_income: {
-                type: new DataTypes.FLOAT,
+                type: new DataTypes.FLOAT(),
                 allowNull: true,
             },
             total_expense: {
-                type: new DataTypes.FLOAT,
+                type: new DataTypes.FLOAT(),
                 allowNull: true,
             },
             is_approved: {

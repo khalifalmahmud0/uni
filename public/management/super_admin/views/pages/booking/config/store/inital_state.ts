@@ -22,7 +22,7 @@ export const initialState = {
     paginate: 13,
     search_key: ``,
     orderByCol: 'id',
-    orderByAsc: true,
+    orderByAsc: false,
     show_active_data: true, // show all active data
     only_latest_data: false, // if true then first fectch from cache then update
 

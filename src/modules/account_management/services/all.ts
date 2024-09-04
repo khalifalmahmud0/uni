@@ -69,7 +69,10 @@ async function all(
         select_fields = query_param.select_fields.replace(/\s/g, '').split(',');
         select_fields = [...select_fields, 'id', 'status'];
     } else {
-        select_fields = ['id', 'title', 'description', 'location', 'image', 'status'];
+        select_fields = [
+            'id', 'account_id', 'account_number_id', 'account_category_id', 
+            'date', 'uid', 'date', 'amount', 'status'
+        ];
     }
 
     let query: FindAndCountOptions = {
@@ -104,7 +107,7 @@ async function all(
     try {
         let data = await (fastify_instance as anyObject).paginate(
             req,
-            models.ProjectModel,
+            models.AccountLogModel,
             paginate,
             query,
         );

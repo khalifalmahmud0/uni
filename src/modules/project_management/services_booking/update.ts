@@ -120,6 +120,11 @@ async function update(
 
         if(project_customer_info && project_customer_info.customer_informations){
             customer_informations = project_customer_info.customer_informations;
+            try {
+                customer_informations = JSON.parse(project_customer_info.customer_informations);
+            } catch (error) {
+                
+            }
         }
     }
     
@@ -130,7 +135,7 @@ async function update(
     if(body['customer_image']?.ext){
         image_path =
             'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
+            moment().format('YYYYMMDDHHmmss1') +
             body['customer_image'].ext;
         await (fastify_instance as any).upload(body['customer_image'], image_path);
     }
@@ -138,7 +143,7 @@ async function update(
     if(body['nominee_photo_1']?.ext){
         nominee_photo_1 =
             'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
+            moment().format('YYYYMMDDHHmmss2') +
             body['nominee_photo_1'].ext;
         await (fastify_instance as any).upload(body['nominee_photo_1'], nominee_photo_1);
     }
@@ -146,7 +151,7 @@ async function update(
     if(body['nominee_photo_2']?.ext){
         nominee_photo_2 =
             'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
+            moment().format('YYYYMMDDHHmmss3') +
             body['nominee_photo_2'].ext;
         await (fastify_instance as any).upload(body['nominee_photo_2'], nominee_photo_2);
     }
@@ -206,10 +211,10 @@ async function update(
         gm_id: gm_id || 0,
         ed_id: ed_id || 0,
         user_id: 0,
-        have_to_pay_amount: 0,
+        have_to_pay_amount: body.have_to_pay_amount,
         date: body.application_date,
-        paid: 0,
-        total_share: 0,
+        paid: body.payment_digit,
+        total_share: body.total_share,
     };
 
     let keysToRemove = [
@@ -233,8 +238,7 @@ async function update(
     }, {});
     project_customer_info_inputs.customer_informations.nominee_photo_1 = nominee_photo_1;
     project_customer_info_inputs.customer_informations.nominee_photo_2 = nominee_photo_2;
-
-
+    
     /** print request data into console */
     // console.clear();
     // (fastify_instance as any).print(inputs);
@@ -242,7 +246,7 @@ async function update(
     /** store data into database */
     try {
         if (data) {
-            console.log(data, user_model);
+            // console.log(data, user_model);
             
             if(user_model){
                 (await user_model.update(user_inputs)).save();

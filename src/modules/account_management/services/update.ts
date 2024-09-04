@@ -56,7 +56,7 @@ async function update(
     /** initializations */
     let models = await db();
     let body = req.body as anyObject;
-    let user_model = new models.ProjectModel();
+    let user_model = new models.AccountLogModel();
 
     let inputs: InferCreationAttributes<typeof user_model> = {
         uid: body.uid,
@@ -81,7 +81,7 @@ async function update(
 
     /** store data into database */
     try {
-        let data = await models.ProjectModel.findByPk(body.id);
+        let data = await models.AccountLogModel.findByPk(body.id);
         if (data) {
             data.update(inputs);
             await data.save();

@@ -16,14 +16,14 @@ export const initialState = {
 
     /* data filters */
     role: 'all',
-    select_fields: 'id,uid,role,designation,name,email,image,status',
+    select_fields: 'id,uid,role,designation,mo,agm,gm,ed,name,email,image,status',
     filter_criteria: {} as anyObject,
     all_data_count: 0, // total data in database
     page: 1,
     paginate: 13,
     search_key: ``,
     orderByCol: 'id',
-    orderByAsc: true,
+    orderByAsc: false,
     show_active_data: true, // show all active data
     only_latest_data: false, // if true then first fectch from cache then update
 

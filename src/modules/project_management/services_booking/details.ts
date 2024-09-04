@@ -1,6 +1,6 @@
 import db from '../models/db';
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { responseObject } from '../../../common_types/object';
+import { anyObject, responseObject } from '../../../common_types/object';
 import response from '../helpers/response';
 import error_trace from '../helpers/error_trace';
 import custom_error from '../helpers/custom_error';
@@ -20,6 +20,7 @@ async function details(
     let params = req.params as any;
 
     try {
+        let select_fields = ['id', 'uid', 'name' ];
         let data = await models.ProjectCustomerModel.findOne({
             where: {
                 id: params.id,
@@ -55,11 +56,28 @@ async function details(
                 },
                 {
                     model: models.UserModels,
-                    as: 'mo'
+                    as: 'mo',
+                    include: [
+                        {
+                            model: models.UserModels,
+                            as: 'agm_info',
+                            attributes: select_fields,
+                        },
+                        {
+                            model: models.UserModels,
+                            as: 'gm_info',
+                            attributes: select_fields,
+                        },
+                        {
+                            model: models.UserModels,
+                            as: 'ed_info',
+                            attributes: select_fields,
+                        },
+                    ]
                 },
             ]
         });
-
+        
         if (data) {
             return response(200, 'data found', data);
         } else {

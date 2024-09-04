@@ -6,6 +6,7 @@ import store from './store/index.js';
 import dashboard_routes from './routes/index.js';
 import axios from 'axios';
 import { anyObject } from '../../../src/common_types/object.js';
+import "./helpers/enToBn.js";
 
 function Component() {
     const router = createHashRouter(dashboard_routes);
@@ -22,6 +23,13 @@ if (container) {
     );
 }
 
+(window as any).loader = (type = 'in') => {
+    if (type == 'in')
+        (window as any).$('.loader-wrapper').fadeIn('slow');
+    if (type == 'out')
+        (window as any).$('.loader-wrapper').fadeOut('slow');
+}
+
 axios.interceptors.request.use(
     function (config) {
         let form_errors = document.querySelectorAll('.form_error');
@@ -29,8 +37,12 @@ axios.interceptors.request.use(
         let has_errors = document.querySelectorAll('.has_error');
         [...has_errors].forEach((e) => e.classList.remove('has_error'));
 
+        // if(event && event.type == 'submit'){
+        //     (window as any).loader('in')
+        // }
         // eslint-disable-next-line no-undef
-        (window as any).$('.loader-wrapper').fadeIn('slow', function () {});
+        (window as any).loader('in')
+        
         return config;
     },
     function (error) {
@@ -40,11 +52,11 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     function (response) {
-        (window as any).$('.loader-wrapper').fadeOut('slow', function () {});
+        (window as any).loader('out')
         return response;
     },
     function (error) {
-        (window as any).$('.loader-wrapper').fadeOut('slow', function () {});
+        (window as any).loader('out')
         if (error.response.data.status === 422) {
             let errors = error.response.data.data;
             errors.forEach((error) => {

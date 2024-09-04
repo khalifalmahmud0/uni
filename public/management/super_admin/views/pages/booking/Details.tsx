@@ -25,14 +25,28 @@ const Details: React.FC<Props> = (props: Props) => {
     }, []);
 
     function get_value(key) {
-        // console.log(state.item);
+        let customer_information = {};
+        try {
+            customer_information = JSON.parse(state.item?.details.customer_informations);
+        } catch (error) {
+            console.error(error);
+        }
 
         try {
-            if (state.item[key]) 
+            if (state.item[key]) {
                 return state.item[key];
-            if (state.item?.details.customer_informations[key])
-                return state.item?.details.customer_informations[key];
+            }
+            else if (state.item?.customer[key]) {
+                return state.item?.customer[key];
+            }
+            else if (state.item?.project[key]) {
+                return state.item?.project[key];
+            }
+            else if (customer_information[key]) {
+                return customer_information[key];
+            };
         } catch (error) {
+            console.error(key, error, state.item);
             return '';
         }
         return '';
@@ -49,8 +63,8 @@ const Details: React.FC<Props> = (props: Props) => {
                             <div className="details_page_profile_image">
                                 <img
                                     src={
-                                        state.item.image
-                                            ? `/${state.item.image}`
+                                        get_value('image')
+                                            ? `/${get_value('image')}`
                                             : '/assets/dashboard/images/avatar.png'
                                     }
                                 />
@@ -67,7 +81,7 @@ const Details: React.FC<Props> = (props: Props) => {
                                             "label": "Customer ID"
                                         },
                                         {
-                                            "name": "project_name",
+                                            "name": "title",
                                             "label": "Project Name"
                                         },
                                         {
@@ -159,10 +173,6 @@ const Details: React.FC<Props> = (props: Props) => {
                                             "label": "Profession"
                                         },
                                         {
-                                            "name": "customer_image",
-                                            "label": "Customer photo"
-                                        },
-                                        {
                                             "name": "nominee_name_1",
                                             "label": "Nominee's Name (1st)"
                                         },
@@ -180,7 +190,8 @@ const Details: React.FC<Props> = (props: Props) => {
                                         },
                                         {
                                             "name": "nominee_photo_1",
-                                            "label": "Nominee's Photo (1st)"
+                                            "label": "Nominee's Photo (1st)",
+                                            "type": "photo"
                                         },
                                         {
                                             "name": "nominee_name_2",
@@ -200,10 +211,11 @@ const Details: React.FC<Props> = (props: Props) => {
                                         },
                                         {
                                             "name": "nominee_photo_2",
-                                            "label": "Nominee's Photo (2nd)"
+                                            "label": "Nominee's Photo (2nd)",
+                                            "type": "photo",
                                         },
                                         {
-                                            "name": "property_location",
+                                            "name": "location",
                                             "label": "Property Location"
                                         },
                                         {
@@ -227,7 +239,7 @@ const Details: React.FC<Props> = (props: Props) => {
                                             "label": "Sector No."
                                         },
                                         {
-                                            "name": "property_type",
+                                            "name": "booking_type",
                                             "label": "Property Type"
                                         },
                                         {
@@ -235,7 +247,7 @@ const Details: React.FC<Props> = (props: Props) => {
                                             "label": "Size Of Property (Katha)"
                                         },
                                         {
-                                            "name": "size_Of_property_land_percentage",
+                                            "name": "size_of_property_land_percentage",
                                             "label": "Size Of Property Land (Percentage)"
                                         },
                                         {
@@ -247,7 +259,7 @@ const Details: React.FC<Props> = (props: Props) => {
                                             "label": "Property Price (Text)"
                                         },
                                         {
-                                            "name": "payment_type",
+                                            "name": "payment_method",
                                             "label": "Payment Type (Booking/Down/Full)"
                                         },
                                         {
@@ -311,39 +323,35 @@ const Details: React.FC<Props> = (props: Props) => {
                                             "label": "Witness's Address (2nd)"
                                         },
                                         {
-                                            "name": "office_only_booking",
-                                            "label": "Booking"
-                                        },
-                                        {
                                             "name": "office_only_booking_others",
                                             "label": "Others"
                                         },
                                         {
-                                            "name": "office_only_property_no",
+                                            "name": "property_no",
                                             "label": "Property No."
                                         },
                                         {
-                                            "name": "office_only_road_no",
+                                            "name": "road_no",
                                             "label": "Road No."
                                         },
                                         {
-                                            "name": "office_only_block_no",
+                                            "name": "block_no",
                                             "label": "Block No."
                                         },
                                         {
-                                            "name": "office_only_sector_no",
+                                            "name": "sector_no",
                                             "label": "Sector No."
                                         },
                                         {
-                                            "name": "office_only_property_type",
+                                            "name": "booking_type",
                                             "label": "Property Type"
                                         },
                                         {
-                                            "name": "office_only_size_of_property_katha",
+                                            "name": "size_of_property_katha",
                                             "label": "Size of Property (Katha)"
                                         },
                                         {
-                                            "name": "office_only_size_of_property_land_percentage",
+                                            "name": "size_of_property_land_percentage",
                                             "label": "Size of Property Land (Percentage)"
                                         },
                                         {
@@ -359,7 +367,14 @@ const Details: React.FC<Props> = (props: Props) => {
                                             <tr>
                                                 <td>{i['label']}</td>
                                                 <td>:</td>
-                                                <td>{get_value(i['name'])}</td>
+                                                <td>
+                                                    {
+                                                        i['type'] == 'photo' ?
+                                                            <img src={`/${get_value(i['name'])}`} style={{ height: "20px", }} />
+                                                            :
+                                                            get_value(i['name'])
+                                                    }
+                                                </td>
                                             </tr>
                                         ))}
                                 </tbody>

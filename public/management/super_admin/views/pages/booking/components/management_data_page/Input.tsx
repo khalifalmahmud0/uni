@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { anyObject } from '../../../../../common_types/object';
 import InputImage from './InputImage';
 export interface Props {
     label?: string;
     name: string;
     placeholder?: string;
-    type?: string;
+    type: string;
     value?: string;
+    callback?: (e: ChangeEvent, value: string) => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const Input: React.FC<Props> = ({
     placeholder,
     type,
     value,
+    callback,
 }: Props) => {
     function convertToValidNumber(input) {
         try {
@@ -26,7 +28,7 @@ const Input: React.FC<Props> = ({
         }
     }
 
-    function format_value(type, value) {
+    function format_value(type: string, value) {
         if (type == 'date') {
             try {
                 return new Date(value).toISOString().substring(0, 10)
@@ -40,6 +42,21 @@ const Input: React.FC<Props> = ({
         }
         else {
             return value;
+        }
+    }
+
+    function input_onchange_handler(e: ChangeEvent<HTMLInputElement>) {
+        let value = e.target.value;
+        if (e.target.type == 'number') {
+            if(value){
+                value = format_value('number', e.target.value);
+            }else{
+                value = "";
+            }
+            e.target.value = value;
+        }
+        if (callback) {
+            callback(e, value);
         }
     }
     return (
@@ -58,6 +75,7 @@ const Input: React.FC<Props> = ({
                                 }
                                 name={name}
                                 id={name}
+                                onChange={(e) => input_onchange_handler(e)}
                                 defaultValue={format_value(type, value)}
                             />
                         </div>

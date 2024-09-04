@@ -2,18 +2,18 @@ import {
     // Model,
     Sequelize,
 } from 'sequelize';
-import * as project_model from './account_logs';
-// import * as project_model from '../../user_admin copy/models/project_model';
+import * as account_logs_model from './account_logs';
+import * as account_numbers_model from './account_numbers';
+import * as account_report_approval_docs_model from './account_report_approval_docs';
+import * as account_report_approvals_model from './account_report_approvals';
+import * as accounts_model from './accounts';
+import * as account_category_model from './account_categories';
+import * as account_user_sales_insentive_model from './account_user_sales_insentive';
+import * as account_user_sales_insentive_calculation_model from './account_user_sales_insentive_calculation';
+import { app_config } from '../../../configs/app.config';
 require('dotenv').config();
 
-let host = process?.env.DB_HOST || '';
-let port = process?.env.DB_PORT || '';
-let user = process?.env.DB_USER || '';
-let pass = process?.env.DB_PASSWORD || '';
-let database = process?.env.DB_DATABASE || '';
-let db_string = `mysql://${user}:${pass}@${host}:${port}/${database}`;
-
-const sequelize = new Sequelize(db_string, {
+const sequelize = new Sequelize(app_config.DB_string, {
     logging: false,
     dialectOptions: {
         charset: 'utf8mb4',
@@ -25,13 +25,26 @@ const sequelize = new Sequelize(db_string, {
 });
 
 interface models {
-    ProjectModel: typeof project_model.DataModel;
+    AccountLogModel: typeof account_logs_model.DataModel;
+    AccountNumberModel: typeof account_numbers_model.DataModel;
+    AccountReportApprovalDocModel: typeof account_report_approval_docs_model.DataModel;
+    AccountReportApprovalModel: typeof account_report_approvals_model.DataModel;
+    AccountModel: typeof accounts_model.DataModel;
+    AccountCategoryModel: typeof account_category_model.DataModel;
+    AccountUserSalesInsentiveModel: typeof account_user_sales_insentive_model.DataModel;
+    AccountUserSalesInsentiveCalculationModel: typeof account_user_sales_insentive_calculation_model.DataModel;
     // Project: typeof project_model.DataModel;
     sequelize: Sequelize;
 }
 const db = async function (): Promise<models> {
-    const ProjectModel = project_model.init(sequelize);
-    // const Project = project_model.init(sequelize);
+    const AccountLogModel = account_logs_model.init(sequelize);
+    const AccountNumberModel = account_numbers_model.init(sequelize);
+    const AccountReportApprovalDocModel = account_report_approval_docs_model.init(sequelize);
+    const AccountReportApprovalModel = account_report_approvals_model.init(sequelize);
+    const AccountModel = accounts_model.init(sequelize);
+    const AccountCategoryModel = account_category_model.init(sequelize);
+    const AccountUserSalesInsentiveModel = account_user_sales_insentive_model.init(sequelize);
+    const AccountUserSalesInsentiveCalculationModel = account_user_sales_insentive_calculation_model.init(sequelize);
 
     await sequelize.sync();
 
@@ -55,9 +68,15 @@ const db = async function (): Promise<models> {
     // });
 
     let models: models = {
-        ProjectModel,
+        AccountLogModel,
+        AccountNumberModel,
+        AccountReportApprovalDocModel,
+        AccountReportApprovalModel,
+        AccountModel,
+        AccountCategoryModel,
+        AccountUserSalesInsentiveModel,
+        AccountUserSalesInsentiveCalculationModel,
         // Project,
-
         sequelize,
     };
     return models;

@@ -20,8 +20,8 @@ import {
     CreationOptional,
 } from 'sequelize';
 
-const tableName = 'projects';
-const modelName = 'ProjectModel';
+const tableName = 'account_categories';
+const modelName = 'AccountCategoryModel';
 
 type Infer = InferAttributes<DataModel>;
 type InferCreation = InferCreationAttributes<DataModel>;
@@ -30,20 +30,8 @@ type status = 'active' | 'deactive' | 'block';
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
 
-    declare uid: string;
-    declare title: string;
-
+    declare title?: string;
     declare description?: string;
-    declare location?: string;
-    declare map?: string;
-    declare aveneue?: string;
-    declare plot?: string;
-    declare road?: string;
-
-    declare per_share_cost?: number;
-
-    declare video?: string;
-    declare image?: string;
 
     declare status?: status;
     declare creator?: number;
@@ -60,52 +48,15 @@ function init(sequelize: Sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            uid: {
-                type: new DataTypes.STRING(20),
-                allowNull: true,
-            },
             title: {
-                type: DataTypes.TEXT,
+                type: new DataTypes.STRING(150),
                 allowNull: true,
             },
-            video: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            image: {
-                type: DataTypes.STRING(100),
-                allowNull: true,
-            },
-            location: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            map: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            aveneue: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            plot: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            road: {
-                type: DataTypes.TEXT,
-                allowNull: true,
-            },
-            per_share_cost: {
-                type: DataTypes.DOUBLE,
-                allowNull: true,
-            },
-          
             description: {
-                type: DataTypes.TEXT,
+                type: new DataTypes.TEXT,
                 allowNull: true,
             },
-          
+            
             status: {
                 type: new DataTypes.ENUM('active', 'deactive', 'block'),
                 defaultValue: 'active',

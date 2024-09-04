@@ -44,12 +44,12 @@ function init(sequelize: Sequelize) {
     DataModel.init(
         {
             id: {
-                type: DataTypes.BIGINT.UNSIGNED,
+                type: DataTypes.BIGINT().UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true,
             },
             account_id: {
-                type: new DataTypes.BIGINT,
+                type: new DataTypes.BIGINT().UNSIGNED,
                 allowNull: true,
             },
             number: {

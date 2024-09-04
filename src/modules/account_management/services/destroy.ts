@@ -38,7 +38,7 @@ async function destroy(
     let body = req.body as { [key: string]: any };
 
     try {
-        let data = await models.ProjectModel.findOne({
+        let data = await models.AccountLogModel.findOne({
             where: {
                 id: body.id,
             },

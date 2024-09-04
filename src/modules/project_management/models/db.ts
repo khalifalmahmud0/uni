@@ -82,7 +82,23 @@ const db = async function (): Promise<models> {
     });
     ProjectCustomerModel.belongsTo(UserModels,{
         foreignKey: 'mo_id',
-        as: 'mo'
+        as: 'mo',
+    });
+
+    UserModels.belongsTo(UserModels, {
+        foreignKey: 'agm',
+        targetKey: 'id',
+        as: 'agm_info',
+    });
+    UserModels.belongsTo(UserModels, {
+        foreignKey: 'gm',
+        targetKey: 'id',
+        as: 'gm_info',
+    });
+    UserModels.belongsTo(UserModels, {
+        foreignKey: 'ed',
+        targetKey: 'id',
+        as: 'ed_info',
     });
 
     // Project.belongsToMany(User, {

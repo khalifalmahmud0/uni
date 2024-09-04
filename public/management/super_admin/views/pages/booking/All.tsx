@@ -40,6 +40,16 @@ const All: React.FC<Props> = (props: Props) => {
         dispatch(storeSlice.actions.set_show_quick_view_canvas(true));
     }
 
+    function get_customer_information(item, key){
+        let customer_information = {};
+        try {
+            customer_information = JSON.parse(item?.details.customer_informations);
+            return customer_information[key];
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className="page_content">
             <div className="explore_window fixed_size">
@@ -153,7 +163,7 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                     {/* Share  */}
                                                      <td>
-                                                        { i.details?.customer_informations.total_share }
+                                                        { get_customer_information(i, 'total_share') }
                                                     </td>
                                                     {/* Payabale Amount  */}
                                                      <td>

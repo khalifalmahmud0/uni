@@ -1,4 +1,5 @@
 import db from '../models/db';
+import account_db from '../../account_management/models/db';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import { body, validationResult } from 'express-validator';
 import {
@@ -11,6 +12,8 @@ import { InferCreationAttributes } from 'sequelize';
 import custom_error from '../helpers/custom_error';
 import error_trace from '../helpers/error_trace';
 import moment from 'moment';
+import project_payment_entry from '../../account_management/services/project_payment_entry';
+import account_insentive_entry from '../../account_management/services/account_insentive_entry';
 
 /** validation rules */
 async function validate(req: Request) {
@@ -23,7 +26,7 @@ async function validate(req: Request) {
         'application_date',
         'mobile',
         'payment_digit',
-        'payment_text',
+        'property_price_digit',
         'have_to_pay_amount',
         'office_only_money_receipt_no',
         'check_cash_po_dd_no',
@@ -102,7 +105,7 @@ async function store(
     if(body['customer_image']?.ext){
         image_path =
             'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
+            moment().format('YYYYMMDDHHmmss1') +
             body['customer_image'].ext;
         await (fastify_instance as any).upload(body['customer_image'], image_path);
     }
@@ -110,7 +113,7 @@ async function store(
     if(body['nominee_photo_1']?.ext){
         nominee_photo_1 =
             'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
+            moment().format('YYYYMMDDHHmmss2') +
             body['nominee_photo_1'].ext;
         await (fastify_instance as any).upload(body['nominee_photo_1'], nominee_photo_1);
     }
@@ -118,7 +121,7 @@ async function store(
     if(body['nominee_photo_2']?.ext){
         nominee_photo_2 =
             'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
+            moment().format('YYYYMMDDHHmmss3') +
             body['nominee_photo_2'].ext;
         await (fastify_instance as any).upload(body['nominee_photo_2'], nominee_photo_2);
     }
@@ -227,6 +230,7 @@ async function store(
         if(user_model.id){
             inputs.user_id = user_model.id;
         }
+
         (await data.update(inputs)).save();
 
         if(data.id){
@@ -241,6 +245,62 @@ async function store(
             project_customer_info_inputs.ed_id = data.ed_id;
 
             (await project_customer_info.update(project_customer_info_inputs)).save();
+
+            /** store account infos */
+            let account_models = await account_db();
+            let category: InstanceType<typeof account_models.AccountCategoryModel> | null = null;
+            let account: InstanceType<typeof account_models.AccountModel> | null = null;
+            category = await account_models.AccountCategoryModel.findOne({
+                where: {
+                    'title': body.payment_method,
+                }
+            });
+            account = await account_models.AccountModel.findOne({
+                where: {
+                    'title': body.check_cash_po_dd_no,
+                }
+            });
+
+            let category_id = 4;
+            let acccount_id = 1;
+            let user_id = 0;
+            if(category && category.id) category_id = category.id;
+            if(account && account.id) acccount_id = account.id;
+            if(user_model && user_model.id) user_id = user_model.id;
+
+            let log = await project_payment_entry(fastify_instance, req, {
+                account_category_id: category_id,
+                account_id: acccount_id,
+                account_number_id: acccount_id,
+                amount: body.payment_digit,
+                type: 'income',
+                user_id: user_id,
+            });
+
+            /*** track project payment */
+            let project_payment = new models.ProjectPaymentModel();
+            project_payment.project_id = project_id;
+            project_payment.account_log_id = (log as any).id;
+            project_payment.user_id = user_id;
+            project_payment.reference_user_id = data.reference_user_id;
+            project_payment.amount = body.payment_digit;
+            project_payment.date = moment().toString();
+            project_payment.type = body.payment_method;
+            await project_payment.save();
+
+            /** insentive calculation */
+            let user_insentive_calculations = account_insentive_entry(fastify_instance, req, {
+                project_payment_id: project_payment.id || 1,
+                customer_id: user_id,
+                mo_id: mo_id,
+                agm_id: agm_id,
+                gm_id: gm_id,
+                ed_id: ed_id,
+                date: moment().format('YYYY-MM-DD'),
+                amount: body.payment_digit,
+                type: body.payment_method,
+            })
+
         }
 
         return response(201, 'data created', {
