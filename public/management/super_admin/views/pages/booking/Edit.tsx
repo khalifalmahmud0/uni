@@ -137,7 +137,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 {moInfo.gm_info?.uid} -
                                                 {moInfo.gm_info?.name}
                                             </div>
-                                            <input type="hidden" name="agm_id" value={`[${moInfo.gm}]`} />
+                                            <input type="hidden" name="gm_id" value={`[${moInfo.gm}]`} />
                                             {/* <UserDropDown multiple={false} name={"gm_id"} /> */}
                                         </div>
                                         <div className="form-group form-vertical">
@@ -146,7 +146,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 {moInfo.ed_info?.uid} -
                                                 {moInfo.ed_info?.name}
                                             </div>
-                                            <input type="hidden" name="agm_id" value={`[${moInfo.ed}]`} />
+                                            <input type="hidden" name="ed_id" value={`[${moInfo.ed}]`} />
                                             {/* <UserDropDown multiple={false} name={"ed_id"} /> */}
                                         </div>
                                     </div>
@@ -517,6 +517,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter property price (digit)',
                                                 type: 'number',
                                                 label: 'Property Price (Digit)',
+                                                readonly: true,
                                                 callback: function (e, value) {
                                                     let el = document.querySelector('#property_price_text') as HTMLInputElement | null;
                                                     let el2 = document.querySelector('#property_price_text_bangla') as HTMLInputElement | null;
@@ -532,6 +533,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter property price (text)',
                                                 type: 'text',
                                                 label: 'Property Price (Text)',
+                                                readonly: true,
                                             },
                                             {
                                                 name: 'property_price_text_bangla',
@@ -539,6 +541,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter property price (bangla text)',
                                                 type: 'text',
                                                 label: 'Property Price (Bangla Text)',
+                                                readonly: true,
                                             },
                                             // {
                                             //     name: 'payment_type',
@@ -552,6 +555,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter payment (digit)',
                                                 type: 'number',
                                                 label: 'Payment (Digit)',
+                                                readonly: true,
                                                 callback: function (e, value) {
                                                     let el = document.querySelector('#payment_text') as HTMLInputElement | null;
                                                     let el2 = document.querySelector('#payment_text_bangla') as HTMLInputElement | null;
@@ -566,12 +570,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 placeholder: 'Enter payment (text)',
                                                 type: 'text',
                                                 label: 'Payment (Text)',
+                                                readonly: true,
                                             },
                                             {
                                                 name: 'payment_text_bangla',
                                                 placeholder: 'Enter payment (bangla text)',
                                                 type: 'text',
                                                 label: 'Payment ( Bangla Text)',
+                                                readonly: true,
                                             },
                                             // {
                                             //     name: 'check_cash_po_dd_no',
@@ -617,6 +623,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     label={field.label}
                                                     value={get_value(field.name)}
                                                     callback={field.callback}
+                                                    readonly={field.readonly}
                                                 />
                                             </div>
                                         ))}
@@ -642,16 +649,12 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     },
                                                     {
                                                         text: 'DOWNPAYMENT',
-                                                        value: 'downpayment',
+                                                        value: 'down_payment',
                                                     },
                                                     {
                                                         text: 'INSTALLMENT',
                                                         value: 'installment',
-                                                    },
-                                                    {
-                                                        text: 'OTHERS',
-                                                        value: 'others',
-                                                    },
+                                                    }
                                                 ]}
                                             />
                                         </div>
@@ -770,6 +773,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     "Enter witness's address (2nd)",
                                                 type: 'text',
                                                 label: "Witness's Address (2nd)",
+                                                readonly: false,
                                             },
                                         ].map((field) => (
                                             <div
@@ -783,6 +787,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     label={field.label}
                                                     value={get_value(field.name)}
                                                     callback={field.callback}
+                                                    readonly={field.readonly}
                                                 />
                                             </div>
                                         ))}
@@ -807,6 +812,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter money receipt no.',
                                                 type: 'text',
                                                 label: 'Money Receipt No.',
+                                                readonly: true,
                                             },
                                             {
                                                 name: 'office_only_booking_chart_making',
@@ -826,6 +832,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     type={field.type}
                                                     label={field.label}
                                                     value={get_value(field.name)}
+                                                    readonly={field.readonly}
                                                 />
                                             </div>
                                         ))}
@@ -842,7 +849,22 @@ const Create: React.FC<Props> = (props: Props) => {
                             </form>
                         </div>
                     )}
-                    <Footer></Footer>
+                    <Footer>
+                        <li>
+                            <a className="outline btn-outline-warning"
+                                target="_blank"
+                                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                                    e.preventDefault();
+                                    localStorage.setItem('booking', JSON.stringify(state.item))
+                                    window.open(e.currentTarget.href, '_blank')
+                                }}
+                                href={"/print-invoice?" + state.item.id}>
+                                <span className="material-symbols-outlined fill">print</span>
+                                <div className="text">Print</div>
+                            </a>
+                        </li>
+
+                    </Footer>
                 </div>
             </div>
         </>
