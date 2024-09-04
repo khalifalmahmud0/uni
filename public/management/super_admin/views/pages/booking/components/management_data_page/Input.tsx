@@ -7,6 +7,7 @@ export interface Props {
     placeholder?: string;
     type: string;
     value?: string;
+    readonly?: true | false,
     callback?: (e: ChangeEvent, value: string) => void;
 }
 
@@ -17,6 +18,7 @@ const Input: React.FC<Props> = ({
     type,
     value,
     callback,
+    readonly,
 }: Props) => {
     function convertToValidNumber(input) {
         try {
@@ -24,7 +26,7 @@ const Input: React.FC<Props> = ({
             return extractedNumber ? parseFloat(extractedNumber.join('')) : '';
         } catch (error) {
             // console.error(error);
-            return 0;
+            return '';
         }
     }
 
@@ -48,9 +50,9 @@ const Input: React.FC<Props> = ({
     function input_onchange_handler(e: ChangeEvent<HTMLInputElement>) {
         let value = e.target.value;
         if (e.target.type == 'number') {
-            if(value){
+            if (value) {
                 value = format_value('number', e.target.value);
-            }else{
+            } else {
                 value = "";
             }
             e.target.value = value;
@@ -67,18 +69,34 @@ const Input: React.FC<Props> = ({
                         <label htmlFor={name}>
                             {label ? label : name.replaceAll('_', ' ')}
                         </label>
-                        <div className="form_elements">
-                            <input
-                                type={type ? type : 'text'}
-                                placeholder={
-                                    placeholder ? placeholder : name.replaceAll('_', ' ')
-                                }
-                                name={name}
-                                id={name}
-                                onChange={(e) => input_onchange_handler(e)}
-                                defaultValue={format_value(type, value)}
-                            />
-                        </div>
+                        {
+                            readonly == true ?
+                                <div className="form_elements">
+                                    <div className="form-control">
+                                        {format_value(type, value)}
+                                        <input
+                                            name={name}
+                                            id={name}
+                                            type="hidden"
+                                            onChange={(e) => input_onchange_handler(e)}
+                                            defaultValue={format_value(type, value)}
+                                        />
+                                    </div>
+                                </div>
+                                :
+                                <div className="form_elements">
+                                    <input
+                                        type={type ? type : 'text'}
+                                        placeholder={
+                                            placeholder ? placeholder : name.replaceAll('_', ' ')
+                                        }
+                                        name={name}
+                                        id={name}
+                                        onChange={(e) => input_onchange_handler(e)}
+                                        defaultValue={format_value(type, value)}
+                                    />
+                                </div>
+                        }
                     </div>
                 )
             }
