@@ -967,27 +967,29 @@ input.form_checkbox:checked::after {
 }
 
 .px-1 {
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .py-1 {
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .pt-1 {
-  padding: 10px;
+  padding-top: 10px;
 }
 
 .pr-1 {
-  padding: 10px;
+  padding-right: 10px;
 }
 
 .pb-1 {
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 .pl-1 {
-  padding: 10px;
+  padding-left: 10px;
 }
 
 .p-2 {
@@ -995,27 +997,29 @@ input.form_checkbox:checked::after {
 }
 
 .px-2 {
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .py-2 {
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .pt-2 {
-  padding: 20px;
+  padding-top: 20px;
 }
 
 .pr-2 {
-  padding: 20px;
+  padding-right: 20px;
 }
 
 .pb-2 {
-  padding: 20px;
+  padding-bottom: 20px;
 }
 
 .pl-2 {
-  padding: 20px;
+  padding-left: 20px;
 }
 
 .p-3 {
@@ -1023,27 +1027,29 @@ input.form_checkbox:checked::after {
 }
 
 .px-3 {
-  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .py-3 {
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .pt-3 {
-  padding: 30px;
+  padding-top: 30px;
 }
 
 .pr-3 {
-  padding: 30px;
+  padding-right: 30px;
 }
 
 .pb-3 {
-  padding: 30px;
+  padding-bottom: 30px;
 }
 
 .pl-3 {
-  padding: 30px;
+  padding-left: 30px;
 }
 
 .p-4 {
@@ -1051,27 +1057,29 @@ input.form_checkbox:checked::after {
 }
 
 .px-4 {
-  padding: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .py-4 {
-  padding: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .pt-4 {
-  padding: 40px;
+  padding-top: 40px;
 }
 
 .pr-4 {
-  padding: 40px;
+  padding-right: 40px;
 }
 
 .pb-4 {
-  padding: 40px;
+  padding-bottom: 40px;
 }
 
 .pl-4 {
-  padding: 40px;
+  padding-left: 40px;
 }
 
 .p-5 {
@@ -1079,27 +1087,29 @@ input.form_checkbox:checked::after {
 }
 
 .px-5 {
-  padding: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .py-5 {
-  padding: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .pt-5 {
-  padding: 50px;
+  padding-top: 50px;
 }
 
 .pr-5 {
-  padding: 50px;
+  padding-right: 50px;
 }
 
 .pb-5 {
-  padding: 50px;
+  padding-bottom: 50px;
 }
 
 .pl-5 {
-  padding: 50px;
+  padding-left: 50px;
 }
 
 .custom_drop_down {
