@@ -17,7 +17,7 @@ import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 import TableRowAction from './components/all_data_page/TableRowAction';
 import SelectItem from './components/all_data_page/SelectItem';
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
+                'id,project_id,user_id,reference_user_id,account_log_id,date,amount,type,status,creator',
             ),
         );
         dispatch(all({}));
@@ -63,17 +63,17 @@ const All: React.FC<Props> = (props: Props) => {
                                         <TableHeading
                                             label={`Project Name`}
                                             col_name={`project_name`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
-                                            label={`Customer ID`}
+                                            label={`Customer`}
                                             col_name={`customer_id`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Payment Type`}
                                             col_name={`payment_type`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Amount`}
@@ -88,7 +88,7 @@ const All: React.FC<Props> = (props: Props) => {
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {/* {(state.all as any)?.data?.map(
+                                    {(state.all as any)?.data?.map(
                                         (i: { [key: string]: any }) => {
                                             return (
                                                 <tr
@@ -105,35 +105,20 @@ const All: React.FC<Props> = (props: Props) => {
                                                     </td>
                                                    
                                                     <td>{i.id}</td>
+                                                    <td>{i.project_info?.title}</td>
+                                                    <td>{i.user_info?.name}</td>
+                                                    <td>{i.type}</td>
+                                                    <td>{i.amount}</td>
+                                                    <td>{new Date(i.date).toDateString()}</td>
                                                    
                                                 </tr>
                                             );
                                         },
-                                    )} */}
-                                    {/* Dummy Data  */}
-                                    {  projectPayment.map((i) => (
-                                        <tr key={i.id} className={`table_rows table_row_${i.id}`}>
-                                            <td>
-                                                <TableRowAction item={i} />
-                                            </td>
-                                            <td>
-                                                <SelectItem item={i} />
-                                            </td>
-                                            <td>{i.id}</td>
-                                            <td>{i.project_name}</td>
-                                            <td>{i.customer_id}</td>
-                                            <td>{i.payment_type}</td>
-                                            <td>{i.amount}</td>
-                                            <td>{i.date}</td>
-                                        </tr>
-                                    ))}
-
+                                    )}
+                                    
                                 </tbody>
-                               
                             </table>
-                           
                         </div>
-
                         <Paginate
                             set_url={storeSlice.actions.set_url}
                             set_paginate={storeSlice.actions.set_paginate}
