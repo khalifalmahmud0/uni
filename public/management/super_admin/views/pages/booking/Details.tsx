@@ -384,17 +384,32 @@ const Details: React.FC<Props> = (props: Props) => {
 
                     <Footer>
                         {state.item?.id && (
-                            <li>
-                                <Link
-                                    to={`/${setup.route_prefix}/edit/${state.item.id}`}
-                                    className="btn-outline-info outline"
-                                >
-                                    <span className="material-symbols-outlined fill">
-                                        edit_square
-                                    </span>
-                                    <div className="text">Edit</div>
-                                </Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link
+                                        to={`/${setup.route_prefix}/edit/${state.item.id}`}
+                                        className="btn-outline-info outline"
+                                    >
+                                        <span className="material-symbols-outlined fill">
+                                            edit_square
+                                        </span>
+                                        <div className="text">Edit</div>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <a className="outline btn-outline-warning"
+                                        target="_blank"
+                                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                                            e.preventDefault();
+                                            localStorage.setItem('booking', JSON.stringify(state.item))
+                                            window.open(e.currentTarget.href, '_blank')
+                                        }}
+                                        href={"/print-invoice?" + state.item.id}>
+                                        <span className="material-symbols-outlined fill">print</span>
+                                        <div className="text">Print</div>
+                                    </a>
+                                </li>
+                            </>
                         )}
                     </Footer>
                 </div>
