@@ -1,5 +1,6 @@
 "use strict"
 import { Sequelize } from 'sequelize';
+import { app_config } from '../configs/app.config';
 require('dotenv').config();
 
 interface Database {
@@ -14,16 +15,16 @@ export interface sequelize_response {
 export const sequelize = function (): Promise<sequelize_response> {
     return new Promise(async (resolve, reject) => {
 
-        let db = process.env.DB_DATABASE || '';
-        let user = process.env.DB_USER || '';
-        let pass = process.env.DB_PASSWORD || '';
-        let host = process.env.DB_HOST || '';
-        let port = process.env.DB_PORT || '';
+        const DBhost = encodeURIComponent(process?.env.DB_HOST || '');
+        const DBport = encodeURIComponent(process?.env.DB_PORT || '');
+        const DBuser = encodeURIComponent(process?.env.DB_USER || '');
+        const DBpass = encodeURIComponent(process?.env.DB_PASSWORD || '');
+        const DBdatabase = encodeURIComponent(process?.env.DB_DATABASE || '');
 
-        const sequelize: Sequelize = new Sequelize(db, user, pass, {
-            host,
+        const sequelize: Sequelize = new Sequelize(app_config.DB_string, {
+            // host: DBhost,
             dialect: 'mysql',
-            port: parseInt(port),
+            // port: parseInt(DBport),
             dialectOptions: {
                 charset: 'utf8mb4',
             },
