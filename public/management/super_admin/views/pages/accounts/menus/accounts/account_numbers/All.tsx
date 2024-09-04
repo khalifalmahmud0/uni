@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
+                'id, account_id,number, status',
             ),
         );
         dispatch(all({}));
@@ -113,7 +113,9 @@ const All: React.FC<Props> = (props: Props) => {
                                                     {/* Customer ID  */}
                                                     <td>Bkash</td>
                                                     {/* Image  */}
-                                                    <td>5566770923423</td>
+                                                    <td>
+                                                        {i.number}
+                                                    </td>
                                                     <td>1200/-</td>
                                                     <td>1300/-</td>
                                                     <td>1400/-</td>
