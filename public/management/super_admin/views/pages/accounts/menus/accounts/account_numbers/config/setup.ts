@@ -8,7 +8,7 @@ const setup: setup_type = {
     route_prefix: 'account_numbers',
 
     api_host: location.origin,
-    api_prefix: 'users',
+    api_prefix: 'account/numbers',
 
     store_prefix: 'account_numbers',
     layout_title: prefix + ' Management',
