@@ -15,6 +15,7 @@ import destroy from './services/destroy';
 import block from './services/block';
 import data_import from './services/import';
 import tree from './services/tree';
+import customer_details from './services/customer_details';
 
 export default function (fastify: FastifyInstance) {
     return {
@@ -28,6 +29,11 @@ export default function (fastify: FastifyInstance) {
 
         find: async function (req: FastifyRequest, res: FastifyReply) {
             let data = await details(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        customer_details: async function (req: FastifyRequest, res: FastifyReply) {
+            let data = await customer_details(fastify, req);
             res.code(data.status).send(data);
         },
 
