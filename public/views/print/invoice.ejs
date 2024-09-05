@@ -77,174 +77,142 @@
             font-size: 14px;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
 </head>
 
 <body style="max-width: 900px;margin:auto;">
-    <div class="wrapper-div">
-        <h1>
-            <img style="position: relative; left: 0rem; top: .4rem" src="./images/logo.png" alt="logo" width="38px" />
-            Uniflex Limited
-        </h1>
-        <p>
-            73, Wahid Masafi Center, Purana Paltan Line, Dhaka-1000 <br />
-            Website: www.uniflexlimited.com , Mobile : 01898886555
-        </p>
-        <div class="title">
-            <h2>MONEY RECEIPT</h2>
-            <h2>OFFICE COPY</h2>
+    <div id="app">
+        <div class="wrapper-div" v-for="invoice_for in ['OFFICE COPY', 'CUSTOMER COPY']" :key="invoice_for">
+            <h1>
+                <img src="https://uniflexlimited.com/wp-content/uploads/2024/05/Untitled-1-2.png" alt="logo" height="38px" />
+                <!-- Uniflex Limited -->
+            </h1>
+            <p>
+                73, Wahid Masafi Center, Purana Paltan Line, Dhaka-1000 <br />
+                Website: www.uniflexlimited.com , Mobile : 01898886555
+            </p>
+            <div class="title">
+                <h2>MONEY RECEIPT</h2>
+                <h2>
+                    {{ invoice_for }}
+                </h2>
+            </div>
+            <table>
+                <tr>
+                    <td>Customer ID</td>
+                    <td>: {{ booking.customer?.uid }}</td>
+                </tr>
+                <tr>
+                    <td>Customer Name</td>
+                    <td>: {{ booking.customer?.name }}</td>
+                    <td>Receipt No.</td>
+                    <td>: {{ customer_informations.office_only_money_receipt_no }}</td>
+                </tr>
+                <tr>
+                    <td>Mobile Number</td>
+                    <td>: {{ customer_informations.mobile }}</td>
+                    <td>Receipt Date</td>
+                    <td>: {{ new Date(customer_informations.date).toDateString().substr(4) }}</td>
+                </tr>
+                <tr>
+                    <td>Plot Description</td>
+                    <td>
+                        : 
+                        Plot No- {{ customer_informations.property_no }},
+                        katha-{{ customer_informations.size_of_property_katha }},
+                        Block-{{ customer_informations.block_no }}, 
+                        Road-{{ customer_informations.road_no }}
+                    </td>
+                    <td>Purpose</td>
+                    <td>: {{ customer_informations.booking_type }}</td>
+                </tr>
+                <tr>
+                    <td>Term</td>
+                    <td>: 06 Year</td>
+                    <td></td>
+                    <td></td>
+                    <!-- <td>Cheque No. & Date</td>
+                    <td>: &nbsp;</td> -->
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>: {{ new Date(customer_informations.date).toDateString().substr(4) }}</td>
+                    <td></td>
+                    <td></td>
+                    <!-- <td>Bank & Branch</td>
+                    <td>: &nbsp;</td> -->
+                </tr>
+                <tr>
+                    <td>Plot/Flat Total Price</td>
+                    <td>: {{ customer_informations.have_to_pay_amount }}</td>
+                    <td>Agency ID</td>
+                    <td>: {{ booking.mo?.uid }}</td>
+                </tr>
+                <tr>
+                    <td>Booking Amount</td>
+                    <td>: {{customer_informations.payment_digit}}</td>
+                </tr>
+                <tr>
+                    <td>Received Amount</td>
+                    <td>: {{customer_informations.payment_digit}}</td>
+                </tr>
+                <tr>
+                    <td>In word</td>
+                    <td>: {{customer_informations.payment_text}}</td>
+                </tr>
+            </table>
+            <table class="table-summery">
+                <tr>
+                    <td>No Of Installment Paid</td>
+                    <td>
+                        <input type="text" v-model="installment_count" style="border: 1px solid rgb(242, 242, 242);">
+                    </td>
+                    <td>Total Tk Paid</td>
+                    <td>{{customer_informations.payment_text}}</td>
+                    <td>Next Date</td>
+                    <td>
+                        <label for="">
+                            <div>{{ new Date(next_date).toDateString().substr(4) }}</div>
+                            <!-- <input v-model="next_date" type="date" style="border: 1px solid rgb(242, 242, 242);"> -->
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <div class="footer">
+                <bold>Cashier</bold>
+                <bold>Authorised</bold>
+            </div>
         </div>
-        <table>
-            <tr>
-                <td>Customer ID</td>
-                <td>: U00001</td>
-            </tr>
-            <tr>
-                <td>Customer Name</td>
-                <td>: Md. Salim Hossain</td>
-                <td>Receipt No.</td>
-                <td>: 0005935724</td>
-            </tr>
-            <tr>
-                <td>Mobile Number</td>
-                <td>: 01813-037031</td>
-                <td>Receipt Date</td>
-                <td>: 01 Jan 2024</td>
-            </tr>
-            <tr>
-                <td>Plot Description</td>
-                <td>: Plot No- 50,katha-5,Block-A, Road-15/A,</td>
-                <td>Purpose</td>
-                <td>: Booking</td>
-            </tr>
-            <tr>
-                <td>Term</td>
-                <td>: 06 Year</td>
-                <td>Cheque No. & Date</td>
-                <td>: &nbsp;</td>
-            </tr>
-            <tr>
-                <td>Start Date</td>
-                <td>: 01 Jan 2024</td>
-                <td>Bank & Branch</td>
-                <td>: &nbsp;</td>
-            </tr>
-            <tr>
-                <td>Plot/Flat Total Price</td>
-                <td>: 40,00,000</td>
-                <td>Agency ID</td>
-                <td>: 001</td>
-            </tr>
-            <tr>
-                <td>Booking Amount</td>
-                <td>: 1,00,000</td>
-            </tr>
-            <tr>
-                <td>Received Amount</td>
-                <td>: 1,00,000</td>
-            </tr>
-            <tr>
-                <td>In word</td>
-                <td>: One Lac Tk Only</td>
-            </tr>
-        </table>
-        <table class="table-summery">
-            <tr>
-                <td>No Of Installment Paid</td>
-                <td>000</td>
-                <td>Total Tk Paid</td>
-                <td>100,0000</td>
-                <td>Next Date</td>
-                <td>01-02-2024</td>
-            </tr>
-        </table>
-        <div class="footer">
-            <bold>Cashier</bold>
-            <bold>Authorised</bold>
-        </div>
+    
     </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: ()=>({
+                booking: {},
+                customer_informations: {},
+                next_date: new Date(),
+                installment_count: '001'
+            }),
+            mounted: function(){
+                this.booking = JSON.parse(localStorage.getItem('booking'));
+                try {
+                    this.customer_informations = JSON.parse(this.booking.details.customer_informations);
+                } catch (error) {
+                    
+                }
 
-    <div class="wrapper-div">
-        <h1>
-            <img style="position: relative; left: 0rem; top: .4rem" src="./images/logo.png" alt="logo" width="38px" />
-            Uniflex Limited
-        </h1>
-        <p>
-            73, Wahid Masafi Center, Purana Paltan Line, Dhaka-1000 <br />
-            Website: www.uniflexlimited.com , Mobile : 01818-7687879
-        </p>
-        <div class="title">
-            <h2>MONEY RECEIPT</h2>
-            <h2>CUSTOMER COPY</h2>
-        </div>
-        <table>
-            <tr>
-                <td>Customer ID</td>
-                <td>: U00001</td>
-            </tr>
-            <tr>
-                <td>Customer Name</td>
-                <td>: Md. Salim Hossain</td>
-                <td>Receipt No.</td>
-                <td>: 0005935724</td>
-            </tr>
-            <tr>
-                <td>Mobile Number</td>
-                <td>: 01813-037031</td>
-                <td>Receipt Date</td>
-                <td>: 01 Jan 2024</td>
-            </tr>
-            <tr>
-                <td>Plot Description</td>
-                <td>: Plot No- 50,katha-5,Block-A, Road-15/A,</td>
-                <td>Purpose</td>
-                <td>: Booking</td>
-            </tr>
-            <tr>
-                <td>Term</td>
-                <td>: 06 Year</td>
-                <td>Cheque No. & Date</td>
-                <td>: &nbsp;</td>
-            </tr>
-            <tr>
-                <td>Start Date</td>
-                <td>: 01 Jan 2024</td>
-                <td>Bank & Branch</td>
-                <td>: &nbsp;</td>
-            </tr>
-            <tr>
-                <td>Plot/Flat Total Price</td>
-                <td>: 40,00,000</td>
-                <td>Agency ID</td>
-                <td>: 001</td>
-            </tr>
-            <tr>
-                <td>Booking Amount</td>
-                <td>: 1,00,000</td>
-            </tr>
-            <tr>
-                <td>Received Amount</td>
-                <td>: 1,00,000</td>
-            </tr>
-            <tr>
-                <td>In word</td>
-                <td>: One Lac Tk Only</td>
-            </tr>
-        </table>
-        <table class="table-summery">
-            <tr>
-                <td>No Of Installment Paid</td>
-                <td>000</td>
-                <td>Total Tk Paid</td>
-                <td>100,0000</td>
-                <td>Next Date</td>
-                <td>01-02-2024</td>
-            </tr>
-        </table>
-        <div class="footer">
-            <bold>Cashier</bold>
-            <bold>Authorised</bold>
-        </div>
-    </div>
+                this.next_date = moment(this.booking.payment_date).add(30,'days').format('yyyy-MM-DD');
+
+                console.log(
+                    this.booking, 
+                    this.customer_informations
+                );
+                
+            }
+        })
+    </script>
 </body>
 
 </html>
