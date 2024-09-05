@@ -10,6 +10,7 @@ module.exports = async function (fastify: FastifyInstance) {
     fastify
         .get(`${prefix}`, controllerInstance.all)
         .get(`${prefix}/:id`, controllerInstance.find)
+        .get(`${prefix}/customer/:id`, controllerInstance.customer_details)
         .get(`${prefix}/:id/tree`,{
             preHandler: check_auth,
         } , controllerInstance.tree)
