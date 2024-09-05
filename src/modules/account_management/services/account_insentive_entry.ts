@@ -52,67 +52,151 @@ async function account_insentive_entry(
         let gm_amount = 0;
         let ed_amount = 0;
 
+        let base_amount = +param.amount;
+
         if(param.type == 'booking_money'){
-            mo_amount = (+param.amount) * .40;
-            agm_amount = mo_amount * .15;
-            gm_amount = agm_amount * .10;
-            ed_amount = gm_amount * .05;
+            mo_amount = base_amount * .40;
+            agm_amount = base_amount * .15;
+            gm_amount = base_amount * .10;
+            ed_amount = base_amount * .05;
         }
         
         if(param.type == 'down_payment'){
-            mo_amount = (+param.amount) * .15;
-            agm_amount = mo_amount * .07;
-            gm_amount = agm_amount * .05;
-            ed_amount = gm_amount * .03;
+            mo_amount = base_amount * .15;
+            agm_amount = base_amount * .07;
+            gm_amount = base_amount * .05;
+            ed_amount = base_amount * .03;
         }
         
         if(param.type == 'installment'){
-            mo_amount = (+param.amount) * .08;
-            agm_amount = mo_amount * .05;
-            gm_amount = agm_amount * .04;
-            ed_amount = gm_amount * .03;
+            mo_amount = base_amount * .08;
+            agm_amount = base_amount * .05;
+            gm_amount = base_amount * .04;
+            ed_amount = base_amount * .03;
         }
 
-        await models.AccountUserSalesInsentiveCalculationModel.create({
-            project_payment_id: param.project_payment_id,
-            customer_id: param.customer_id,
-            mo_id: param.mo_id,
+        async function insert_data(
+            project_payment_id:any,
+            customer_id:any,
+            mo_id:any = null,
+            agm_id:any = null,
+            gm_id:any = null,
+            ed_id:any = null,
+            reference_id:any = null,
     
-            date: moment().toString(),
-            amount: mo_amount,
-            type: param.type,
-
-        });
+            date:any,
+            amount:any,
+            type:any,
+        ){
+            await models.AccountUserSalesInsentiveCalculationModel.create({
+                project_payment_id: project_payment_id,
+                customer_id: customer_id,
+                mo_id: mo_id,
+                agm_id: agm_id,
+                gm_id: gm_id,
+                ed_id: ed_id,
+                reference_id: reference_id,
         
-        await models.AccountUserSalesInsentiveCalculationModel.create({
-            project_payment_id: param.project_payment_id,
-            customer_id: param.customer_id,
-            agm_id: param.agm_id,
-    
-            date: moment().toString(),
-            amount: agm_amount,
-            type: param.type,
-        });
+                date: date,
+                amount: amount,
+                type: type,
+            });
 
-        await models.AccountUserSalesInsentiveCalculationModel.create({
-            project_payment_id: param.project_payment_id,
-            customer_id: param.customer_id,
-            gm_id: param.gm_id,
-    
-            date: moment().toString(),
-            amount: gm_amount,
-            type: param.type,
-        });
-        
-        await models.AccountUserSalesInsentiveCalculationModel.create({
-            project_payment_id: param.project_payment_id,
-            customer_id: param.customer_id,
-            ed_id: param.ed_id,
-    
-            date: moment().toString(),
-            amount: ed_amount,
-            type: param.type,
-        });
+            let user_id = mo_id || agm_id || gm_id || ed_id;
+            if(user_id){
+                let user = await models.UserModel.findOne({
+                    where: {
+                        id: user_id,
+                    }
+                });
+
+                /** reference input */
+                await insert_data(
+                    param.project_payment_id,
+                    param.customer_id,
+                    null,
+                    null,
+                    null,
+                    null,
+                    user?.reference,
+                    moment().toString(), 
+                    amount * .1, 
+                    param.type
+                );
+
+            }
+        }
+
+        /** inert mo commision */
+        await insert_data(
+            param.project_payment_id, 
+            param.customer_id, 
+            param.mo_id, 
+            null,
+            null,
+            null,
+            null,
+            moment().toString(), 
+            mo_amount, 
+            param.type
+        );
+
+        /** inert agm commision */
+        await insert_data(
+            param.project_payment_id, 
+            param.customer_id, 
+            null, 
+            param.agm_id,
+            null,
+            null,
+            null,
+            moment().toString(), 
+            agm_amount, 
+            param.type
+        );
+
+        /** inert gm commision */
+        await insert_data(
+            param.project_payment_id, 
+            param.customer_id, 
+            null, 
+            null,
+            param.gm_id,
+            null,
+            null,
+            moment().toString(), 
+            gm_amount, 
+            param.type
+        );
+
+        /** inert ed commision */
+        await insert_data(
+            param.project_payment_id, 
+            param.customer_id, 
+            null, 
+            null,
+            null,
+            param.ed_id,
+            null,
+            moment().toString(), 
+            ed_amount, 
+            param.type
+        );
+
+
+        /** reference commisions */
+        // await insert_data(
+        //     param.project_payment_id, 
+        //     param.customer_id, 
+        //     null, 
+        //     null,
+        //     null,
+        //     null,
+        //     null,
+        //     moment().toString(), 
+        //     ed_amount, 
+        //     param.type
+        // );
 
         return data;
     } catch (error: any) {
