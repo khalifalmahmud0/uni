@@ -2,6 +2,7 @@ import {
     // Model,
     Sequelize,
 } from 'sequelize';
+import * as user_model from './user_model';
 import * as account_logs_model from './account_logs';
 import * as account_numbers_model from './account_numbers';
 import * as account_report_approval_docs_model from './account_report_approval_docs';
@@ -25,6 +26,7 @@ const sequelize = new Sequelize(app_config.DB_string, {
 });
 
 interface models {
+    UserModel: typeof user_model.DataModel;
     AccountLogModel: typeof account_logs_model.DataModel;
     AccountNumberModel: typeof account_numbers_model.DataModel;
     AccountReportApprovalDocModel: typeof account_report_approval_docs_model.DataModel;
@@ -37,6 +39,7 @@ interface models {
     sequelize: Sequelize;
 }
 const db = async function (): Promise<models> {
+    const UserModel = user_model.init(sequelize);
     const AccountLogModel = account_logs_model.init(sequelize);
     const AccountNumberModel = account_numbers_model.init(sequelize);
     const AccountReportApprovalDocModel = account_report_approval_docs_model.init(sequelize);
@@ -68,6 +71,7 @@ const db = async function (): Promise<models> {
     // });
 
     let models: models = {
+        UserModel,
         AccountLogModel,
         AccountNumberModel,
         AccountReportApprovalDocModel,
