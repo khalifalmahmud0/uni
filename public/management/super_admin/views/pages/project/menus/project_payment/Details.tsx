@@ -8,7 +8,7 @@ import { details } from './config/store/async_actions/details';
 import { initialState } from './config/store/inital_state';
 import { Link, useParams } from 'react-router-dom';
 import storeSlice from './config/store';
-export interface Props {}
+export interface Props { }
 
 const Details: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -26,7 +26,6 @@ const Details: React.FC<Props> = (props: Props) => {
     function get_value(key) {
         try {
             if (state.item[key]) return state.item[key];
-            if (state.item?.info[key]) return state.item?.info[key];
         } catch (error) {
             return '';
         }
@@ -41,25 +40,36 @@ const Details: React.FC<Props> = (props: Props) => {
 
                     {Object.keys(state.item).length && (
                         <div className="content_body custom_scroll">
-                             
                             <table className="table quick_modal_table table-hover">
                                 <tbody>
-                                    {[
-                                        'customer_id',
-                                        'project',
-                                        'date',
-                                        'payment_type',
-                                        'amount',
-                                        'amount_in_text',
-                                        'payment_attachment',
-                                    ].map((i) => (
-                                        <tr>
-                                            <td>{i.replaceAll('_', ' ')}</td>
-                                            <td>:</td>
-                                            <td>{get_value(i)}</td>
-                                        </tr>
-                                    ))}
-                                   
+                                    <tr>
+                                        <td>customer</td>
+                                        <td>:</td>
+                                        <td>{state.item.user_info?.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>reference</td>
+                                        <td>:</td>
+                                        <td>{state.item.reference_info?.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>project</td>
+                                        <td>:</td>
+                                        <td>{state.item.project_info?.title}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>amount</td>
+                                        <td>:</td>
+                                        <td>{state.item?.amount}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>amount</td>
+                                        <td>:</td>
+                                        <td>
+                                            {(window as any).convertAmount(state.item.amount).bn}
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -68,15 +78,17 @@ const Details: React.FC<Props> = (props: Props) => {
                     <Footer>
                         {state.item?.id && (
                             <li>
-                                <Link
-                                    to={`/${setup.route_prefix}/edit/${state.item.id}`}
-                                    className="btn-outline-info outline"
-                                >
-                                    <span className="material-symbols-outlined fill">
-                                        edit_square
-                                    </span>
-                                    <div className="text">Edit</div>
-                                </Link>
+                                <a className="outline btn-outline-warning"
+                                    target="_blank"
+                                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                                        e.preventDefault();
+                                        localStorage.setItem('booking', JSON.stringify(state.item))
+                                        window.open(e.currentTarget.href, '_blank')
+                                    }}
+                                    href={"/print-payment-invoice?id=" + state.item.id}>
+                                    <span className="material-symbols-outlined fill">print</span>
+                                    <div className="text">Print</div>
+                                </a>
                             </li>
                         )}
                     </Footer>
