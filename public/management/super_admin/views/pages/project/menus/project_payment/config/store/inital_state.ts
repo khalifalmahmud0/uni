@@ -15,14 +15,14 @@ export const initialState = {
     url: '',
 
     /* data filters */
-    select_fields: 'name',
+    select_fields: 'id,project_id,user_id,reference_user_id,account_log_id,date,amount,type,status,creator',
     filter_criteria: {} as anyObject,
     all_data_count: 0, // total data in database
     page: 1,
     paginate: 13,
     search_key: ``,
     orderByCol: 'id',
-    orderByAsc: true,
+    orderByAsc: false,
     show_active_data: true, // show all active data
     only_latest_data: false, // if true then first fectch from cache then update
 
