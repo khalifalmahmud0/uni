@@ -23,10 +23,10 @@ async function validate(req: Request) {
         'applicant_name_english',
         'application_date',
         'mobile',
-        'payment_digit',
-        'payment_text',
+        // 'payment_digit',
+        // 'payment_text',
         'have_to_pay_amount',
-        'office_only_money_receipt_no',
+        // 'office_only_money_receipt_no',
         'check_cash_po_dd_no',
         'payment_method',
     ];
