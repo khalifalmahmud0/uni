@@ -26,7 +26,7 @@ const modelName = 'ProjectPaymentModel';
 type Infer = InferAttributes<DataModel>;
 type InferCreation = InferCreationAttributes<DataModel>;
 type status = 'active' | 'deactive' | 'block';
-type payemnt_types = 'booking_money' | 'down_payments' | 'installments';
+type payemnt_types = 'booking_money' | 'down_payment' | 'installment';
 
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
@@ -38,6 +38,9 @@ class DataModel extends Model<Infer, InferCreation> {
 
     declare date?: string;
     declare amount?: string;
+    declare amount_in_text?: string;
+    declare installment_no?: number;
+    declare receipt_no?: string;
     declare type?: payemnt_types;
 
     declare status?: status;
@@ -80,9 +83,21 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.FLOAT().UNSIGNED,
                 allowNull: true,
             },
+            amount_in_text: {
+                type: DataTypes.STRING(200),
+                allowNull: true,
+            },
+            receipt_no: {
+                type: DataTypes.STRING(50),
+                allowNull: true,
+            },
+            installment_no: {
+                type: DataTypes.INTEGER().UNSIGNED,
+                allowNull: true,
+            },
 
             type: {
-                type: DataTypes.ENUM('booking_money','down_payments','installments'),
+                type: DataTypes.ENUM('booking_money','down_payment','installment'),
                 allowNull: true,
             },
           
