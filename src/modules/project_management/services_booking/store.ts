@@ -25,12 +25,21 @@ async function validate(req: Request) {
         'applicant_name_english',
         'application_date',
         'mobile',
+
+        'size_of_property_land_percentage',
+        'size_of_property_katha',
+        'property_price_text',
+
         'payment_digit',
+        'payment_text',
+
         'property_price_digit',
         'have_to_pay_amount',
+
         'office_only_money_receipt_no',
         'check_cash_po_dd_no',
         'payment_method',
+        'total_share',
     ];
 
     for (let index = 0; index < fields.length; index++) {
@@ -278,19 +287,28 @@ async function store(
             });
 
             /*** track project payment */
+            let installment_no = await models.ProjectPaymentModel.count({
+                where:{
+                    project_id: project_id,
+                    user_id: user_id,
+                }
+            })
             let project_payment = new models.ProjectPaymentModel();
             project_payment.project_id = project_id;
             project_payment.account_log_id = (log as any).id;
             project_payment.user_id = user_id;
             project_payment.reference_user_id = data.reference_user_id;
             project_payment.amount = body.payment_digit;
+            project_payment.amount_in_text = body.payment_text;
+            project_payment.installment_no = installment_no + 1;
+            project_payment.receipt_no = body.office_only_money_receipt_no;
             project_payment.date = moment().toString();
             project_payment.type = body.payment_method;
             await project_payment.save();
 
             /** insentive calculation */
             let user_insentive_calculations = account_insentive_entry(fastify_instance, req, {
-                project_payment_id: project_payment.id || 1,
+                project_payment_id: project_payment.id  || 1,
                 customer_id: user_id,
                 mo_id: mo_id,
                 agm_id: agm_id,
