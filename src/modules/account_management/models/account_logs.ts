@@ -86,6 +86,10 @@ function init(sequelize: Sequelize) {
                 type: new DataTypes.FLOAT().UNSIGNED,
                 allowNull: true,
             },
+            type: {
+                type: new DataTypes.ENUM('income','expense'),
+                defaultValue: 'income',
+            },
 
             creator: {
                 type: new DataTypes.TINYINT(),
