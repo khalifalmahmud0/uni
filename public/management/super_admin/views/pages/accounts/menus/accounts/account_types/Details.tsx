@@ -8,7 +8,7 @@ import { details } from './config/store/async_actions/details';
 import { initialState } from './config/store/inital_state';
 import { Link, useParams } from 'react-router-dom';
 import storeSlice from './config/store';
-export interface Props {}
+export interface Props { }
 
 const Details: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -46,7 +46,6 @@ const Details: React.FC<Props> = (props: Props) => {
                                     {[
                                         'title',
                                         'description',
-                                        'opening_date',
                                     ].map((i) => (
                                         <tr>
                                             <td>{i.replaceAll('_', ' ')}</td>
@@ -54,7 +53,12 @@ const Details: React.FC<Props> = (props: Props) => {
                                             <td>{get_value(i)}</td>
                                         </tr>
                                     ))}
-                                    
+                                    <tr>
+                                        <td>Openning Date</td>
+                                        <td>:</td>
+                                        <td>{ new Date(get_value('openning_date')).toDateString()}</td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
