@@ -104,8 +104,22 @@ const All: React.FC<Props> = (props: Props) => {
                                                         <SelectItem item={i} />
                                                     </td>
                                                    
-                                                    <td>{i.id}</td>
-                                                    <td>{i.project_info?.title}</td>
+                                                    <td>
+                                                        <a className="outline btn-outline-warning d-flex"
+                                                            target="_blank"
+                                                            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                                                                e.preventDefault();
+                                                                localStorage.setItem('booking', JSON.stringify(state.item))
+                                                                window.open(e.currentTarget.href, '_blank')
+                                                            }}
+                                                            href={"/print-payment-invoice?id=" + i.id}>
+                                                            <span className="material-symbols-outlined fill">print</span>
+                                                            <div className="text"> {i.id} </div>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        {i.project_info?.title}
+                                                    </td>
                                                     <td>{i.user_info?.name}</td>
                                                     <td>{i.type}</td>
                                                     <td>{i.amount}</td>
