@@ -35,17 +35,17 @@ const Create: React.FC<Props> = (props: Props) => {
                                   <div className="form-group form-vertical">
                                         <Select
                                             label="Account Type"
-                                            name="account_type"
+                                            name="account_id"
                                             values={[
-                                                { text: 'bkash', value: 'bkash' },
-                                                { text: 'nagad', value: 'nagad' },
-                                                { text: 'bank', value: 'bank' },
-                                                { text: 'rocket', value: 'rocket' },
+                                                { text: '--select--', value: '' },
+                                                { text: 'bank', value: '2' },
+                                                { text: 'bkash', value: '3' },
+                                                { text: 'rocket', value: '4' },
                                             ]}
                                         />
                                     </div>
                                     {[
-                                        'account_number',
+                                        'number',
                                     ].map((i) => (
                                         <div className="form-group form-vertical">
                                             <Input name={i} />
@@ -53,8 +53,6 @@ const Create: React.FC<Props> = (props: Props) => {
                                     ))}
                                 </div>
                             </div>
-
-
 
                             <div className="form-group form-vertical">
                                 <label></label>
