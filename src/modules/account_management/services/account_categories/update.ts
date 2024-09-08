@@ -17,6 +17,7 @@ async function validate(req: Request) {
     let field = '';
     let fields = [
         'title',
+        'description',
     ];
 
     for (let index = 0; index < fields.length; index++) {
