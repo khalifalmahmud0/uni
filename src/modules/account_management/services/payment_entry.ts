@@ -71,7 +71,7 @@ async function payment_entry(
     /** initializations */
     let models = await db();
     let body = req.body as anyObject;
-    let data = new models.ProjectModel();
+    let data = new models.AccountLogModel();
 
     let image_path = "";
 

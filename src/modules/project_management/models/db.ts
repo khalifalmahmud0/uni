@@ -47,10 +47,11 @@ const db = async function (): Promise<models> {
 
     await sequelize.sync();
 
-    UserModels.hasMany(ProjectCustomerModel,{
-        foreignKey: 'user_id',
-        as: 'projects',
-    });
+    // UserModels.hasMany(ProjectCustomerModel,{
+    //     foreignKey: 'user_id',
+    //     as: 'projects',
+    // });
+
     ProjectCustomerModel.belongsTo(ProjectModel,{
         foreignKey: 'project_id',
         as: 'project'
@@ -82,7 +83,46 @@ const db = async function (): Promise<models> {
     });
     ProjectCustomerModel.belongsTo(UserModels,{
         foreignKey: 'mo_id',
-        as: 'mo'
+        as: 'mo',
+    });
+
+    UserModels.belongsTo(UserModels, {
+        foreignKey: 'agm',
+        targetKey: 'id',
+        as: 'agm_info',
+    });
+    UserModels.belongsTo(UserModels, {
+        foreignKey: 'gm',
+        targetKey: 'id',
+        as: 'gm_info',
+    });
+    UserModels.belongsTo(UserModels, {
+        foreignKey: 'ed',
+        targetKey: 'id',
+        as: 'ed_info',
+    });
+
+    /** project payment model relations */
+    ProjectPaymentModel.belongsTo(UserModels, {
+        foreignKey: 'user_id',
+        targetKey: 'id',
+        as: 'user_info',
+    });
+    ProjectPaymentModel.belongsTo(UserModels, {
+        foreignKey: 'reference_user_id',
+        targetKey: 'id',
+        as: 'reference_info',
+    });
+    ProjectPaymentModel.belongsTo(ProjectModel, {
+        foreignKey: 'project_id',
+        targetKey: 'id',
+        as: 'project_info',
+    });
+
+    UserModels.hasOne(ProjectCustomerInfomationModel, {
+        foreignKey: 'user_id',
+        sourceKey: 'id',
+        as: 'project_customer_information',
     });
 
     // Project.belongsToMany(User, {

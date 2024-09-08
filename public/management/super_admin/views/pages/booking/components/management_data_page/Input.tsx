@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { anyObject } from '../../../../../common_types/object';
 import InputImage from './InputImage';
 export interface Props {
     label?: string;
     name: string;
     placeholder?: string;
-    type?: string;
+    type: string;
     value?: string;
+    readonly?: true | false,
+    callback?: (e: ChangeEvent, value: string) => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -15,6 +17,8 @@ const Input: React.FC<Props> = ({
     placeholder,
     type,
     value,
+    callback,
+    readonly,
 }: Props) => {
     function convertToValidNumber(input) {
         try {
@@ -22,11 +26,11 @@ const Input: React.FC<Props> = ({
             return extractedNumber ? parseFloat(extractedNumber.join('')) : '';
         } catch (error) {
             // console.error(error);
-            return 0;
+            return '';
         }
     }
 
-    function format_value(type, value) {
+    function format_value(type: string, value) {
         if (type == 'date') {
             try {
                 return new Date(value).toISOString().substring(0, 10)
@@ -42,6 +46,21 @@ const Input: React.FC<Props> = ({
             return value;
         }
     }
+
+    function input_onchange_handler(e: ChangeEvent<HTMLInputElement>) {
+        let value = e.target.value;
+        if (e.target.type == 'number') {
+            if (value) {
+                value = format_value('number', e.target.value);
+            } else {
+                value = "";
+            }
+            e.target.value = value;
+        }
+        if (callback) {
+            callback(e, value);
+        }
+    }
     return (
         <>
             {
@@ -50,17 +69,34 @@ const Input: React.FC<Props> = ({
                         <label htmlFor={name}>
                             {label ? label : name.replaceAll('_', ' ')}
                         </label>
-                        <div className="form_elements">
-                            <input
-                                type={type ? type : 'text'}
-                                placeholder={
-                                    placeholder ? placeholder : name.replaceAll('_', ' ')
-                                }
-                                name={name}
-                                id={name}
-                                defaultValue={format_value(type, value)}
-                            />
-                        </div>
+                        {
+                            readonly == true ?
+                                <div className="form_elements">
+                                    <div className="form-control">
+                                        {format_value(type, value)}
+                                        <input
+                                            name={name}
+                                            id={name}
+                                            type="hidden"
+                                            onChange={(e) => input_onchange_handler(e)}
+                                            defaultValue={format_value(type, value)}
+                                        />
+                                    </div>
+                                </div>
+                                :
+                                <div className="form_elements">
+                                    <input
+                                        type={type ? type : 'text'}
+                                        placeholder={
+                                            placeholder ? placeholder : name.replaceAll('_', ' ')
+                                        }
+                                        name={name}
+                                        id={name}
+                                        onChange={(e) => input_onchange_handler(e)}
+                                        defaultValue={format_value(type, value)}
+                                    />
+                                </div>
+                        }
                     </div>
                 )
             }

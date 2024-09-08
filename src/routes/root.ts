@@ -48,7 +48,14 @@ module.exports = async function (fastify: FastifyInstance) {
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 return reply.view('print/invoice.ejs');
             },
-        );
+        )
+        .get(
+            '/print-payment-invoice',
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.view('print/payment_invoice.ejs');
+            },
+        )
+        ;
 
     // .get(
     //     '/dashboard/login',

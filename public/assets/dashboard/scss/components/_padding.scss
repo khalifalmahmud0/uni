@@ -19,26 +19,28 @@
     }
 
     .px-#{$i} {
-        padding: $i * 10px;
+        padding-left: $i * 10px;
+        padding-right: $i * 10px;
     }
 
     .py-#{$i} {
-        padding: $i * 10px;
+        padding-top: $i * 10px;
+        padding-bottom: $i * 10px;
     }
 
     .pt-#{$i} {
-        padding: $i * 10px;
+        padding-top: $i * 10px;
     }
 
     .pr-#{$i} {
-        padding: $i * 10px;
+        padding-right: $i * 10px;
     }
 
     .pb-#{$i} {
-        padding: $i * 10px;
+        padding-bottom: $i * 10px;
     }
 
     .pl-#{$i} {
-        padding: $i * 10px;
+        padding-left: $i * 10px;
     }
 }

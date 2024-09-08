@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 1rem;
+        }
+
+        .wrapper-div {
+            width: 100%;
+            font-weight: bold;
+            border: 1px solid #000;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border: none;
+        }
+
+        h1 {
+            text-align: center;
+            color: green;
+            font-size: 28px;
+            padding: 0;
+            margin-bottom: .5rem;
+        }
+
+        p {
+            text-align: center;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .table-summery {
+            margin-top: 1rem;
+            font-size: 14px;
+        }
+
+        .table-summery td {
+            border: 1px solid black;
+            padding-left: 5px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin: 2.5rem 0 0;
+            font-size: 14px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            margin-bottom: .3rem;
+        }
+
+        .title h2 {
+            border: 1px solid black;
+            padding: 0 1rem;
+            font-size: 14px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+</head>
+
+<body style="max-width: 900px;margin:auto;">
+    <div id="app">
+        <div class="wrapper-div" v-for="invoice_for in ['OFFICE COPY', 'CUSTOMER COPY']" :key="invoice_for">
+            <h1>
+                <img src="https://uniflexlimited.com/wp-content/uploads/2024/05/Untitled-1-2.png" alt="logo"
+                    height="38px" />
+                <!-- Uniflex Limited -->
+            </h1>
+            <p>
+                73, Wahid Masafi Center, Purana Paltan Line, Dhaka-1000 <br />
+                Website: www.uniflexlimited.com , Mobile : 01898886555
+            </p>
+            <div class="title">
+                <h2>MONEY RECEIPT</h2>
+                <h2>
+                    {{ invoice_for }}
+                </h2>
+            </div>
+            <table>
+                <tr>
+                    <td>Customer ID</td>
+                    <td>: {{ customer_informations?.customer_id }}</td>
+                </tr>
+                <tr>
+                    <td>Customer Name</td>
+                    <td>: {{ customer_informations?.applicant_name_english }}</td>
+                    <td>Receipt No.</td>
+                    <td>: {{ customer_informations.office_only_money_receipt_no }}</td>
+                </tr>
+                <tr>
+                    <td>Mobile Number</td>
+                    <td>: {{ customer_informations.mobile }}</td>
+                    <td>Receipt Date</td>
+                    <td>: {{ new Date(customer_informations.date).toDateString().substr(4) }}</td>
+                </tr>
+                <tr>
+                    <td>Plot Description</td>
+                    <td>
+                        :
+                        Plot No- {{ customer_informations.property_no }},
+                        katha-{{ customer_informations.size_of_property_katha }},
+                        Block-{{ customer_informations.block_no }},
+                        Road-{{ customer_informations.road_no }}
+                    </td>
+                    <td>Purpose</td>
+                    <td>: {{ customer_informations.booking_type }}</td>
+                </tr>
+                <tr>
+                    <td>Term</td>
+                    <td>: 06 Year</td>
+                    <td></td>
+                    <td></td>
+                    <!-- <td>Cheque No. & Date</td>
+                    <td>: &nbsp;</td> -->
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>: {{ new Date(customer_informations.date).toDateString().substr(4) }}</td>
+                    <td></td>
+                    <td></td>
+                    <!-- <td>Bank & Branch</td>
+                    <td>: &nbsp;</td> -->
+                </tr>
+                <!-- <tr>
+                    <td>Plot/Flat Total Price</td>
+                    <td>: {{ customer_informations.have_to_pay_amount }}</td>
+                    <td>Agency ID</td>
+                    <td>: {{ booking.mo?.uid }}</td>
+                </tr> -->
+                <!-- <tr>
+                    <td>Booking Amount</td>
+                    <td>: {{customer_informations.payment_digit}}</td>
+                </tr> -->
+                <tr>
+                    <td>Received Amount</td>
+                    <td>: {{payment_info.amount}}</td>
+                </tr>
+                <tr>
+                    <td>In word</td>
+                    <td>: {{payment_info.amount_in_text}}</td>
+                </tr>
+            </table>
+            <table class="table-summery">
+                <tr>
+                    <td>No Of Installment Paid</td>
+                    <td>
+                        <input type="text" v-model="installment_count" style="border: 1px solid rgb(242, 242, 242);">
+                    </td>
+                    <td>Total Tk Paid</td>
+                    <td>{{customer_informations.payment_text}}</td>
+                    <td>Next Date</td>
+                    <td>
+                        <label for="">
+                            <div>{{ new Date(next_date).toDateString().substr(4) }}</div>
+                            <!-- <input v-model="next_date" type="date" style="border: 1px solid rgb(242, 242, 242);"> -->
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <div class="footer">
+                <bold>Cashier</bold>
+                <bold>Authorised</bold>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: () => ({
+                booking: {},
+                customer_informations: {},
+                next_date: new Date(),
+                installment_count: '001',
+                payment_info: {},
+            }),
+            mounted: function () {
+                let url = new URL(location.href);
+                let id = url.searchParams.get('id');
+                fetch('/api/v1/project/payments/details/' + id)
+                    .then(res => res.json())
+                    .then(({ data }) => {
+                        console.log(data);
+                        this.payment_info = data;
+                        try {
+                            this.customer_informations = JSON.parse(data.user_info.project_customer_information.customer_informations);
+                        } catch (error) {
+
+                        }
+                    })
+                // this.booking = JSON.parse(localStorage.getItem('booking'));
+                // try {
+                //     this.customer_informations = JSON.parse(this.booking.details.customer_informations);
+                // } catch (error) {
+
+                // }
+
+                // this.next_date = moment(this.booking.payment_date).add(30,'days').format('yyyy-MM-DD');
+
+                // console.log(
+                //     this.booking, 
+                //     this.customer_informations
+                // );
+
+            }
+        })
+    </script>
+</body>
+
+</html>

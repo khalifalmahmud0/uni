@@ -69,7 +69,7 @@ async function all(
         select_fields = query_param.select_fields.replace(/\s/g, '').split(',');
         select_fields = [...select_fields, 'id', 'status'];
     } else {
-        select_fields = ['id', 'uid', 'email', 'status', 'name', 'phone_number'];
+        select_fields = ['id', 'uid', 'email','mo','agm','gm','ed', 'status', 'name', 'phone_number'];
     }
 
     let query: FindAndCountOptions = {
@@ -78,6 +78,28 @@ async function all(
             status: show_active_data == 'true' ? 'active' : 'deactive',
         },
         // include: [models.Project],
+        include: [
+            {
+                model: models.UserModel,
+                as: 'mo_info',
+                attributes: select_fields,
+            },
+            {
+                model: models.UserModel,
+                as: 'agm_info',
+                attributes: select_fields,
+            },
+            {
+                model: models.UserModel,
+                as: 'gm_info',
+                attributes: select_fields,
+            },
+            {
+                model: models.UserModel,
+                as: 'ed_info',
+                attributes: select_fields,
+            },
+        ]
     };
 
     query.attributes = select_fields;

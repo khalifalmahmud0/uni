@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/management_data_page/Header';
 import Footer from './components/management_data_page/Footer';
 import setup from './config/setup';
@@ -23,16 +23,9 @@ const Create: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
         (state: RootState) => state[setup.module_name],
     );
+    const [moInfo, setMoInfo] = useState<anyObject>({});
     const dispatch = useAppDispatch();
     const params = useParams();
-
-    // async function handle_submit(e) {
-    //     e.preventDefault();
-    //     const response = await dispatch(store(new FormData(e.target)) as any);
-    //     if (!Object.prototype.hasOwnProperty.call(response, 'error')) {
-    //         e.target.reset();
-    //     }
-    // }
 
     useEffect(() => {
         dispatch(storeSlice.actions.set_item({}));
@@ -53,17 +46,25 @@ const Create: React.FC<Props> = (props: Props) => {
     }
 
     function get_value(key) {
+        let customer_information = {};
+        try {
+            customer_information = JSON.parse(state.item?.details.customer_informations);
+        } catch (error) {
+            console.error(error);
+        }
+
         try {
             if (state.item[key]) {
-                return state.item[key]
+                return state.item[key];
             }
             else if (state.item?.customer[key]) {
-                return state.item?.customer[key]
+                return state.item?.customer[key];
             }
-            else if (state.item?.details.customer_informations[key]){
-                return state.item?.details.customer_informations[key]
+            else if (customer_information[key]) {
+                return customer_information[key];
             };
         } catch (error) {
+            console.error(key, error, state.item);
             return '';
         }
         return '';
@@ -115,19 +116,38 @@ const Create: React.FC<Props> = (props: Props) => {
                                         </div>
                                         <div className="form-group form-vertical">
                                             <label>MO</label>
-                                            <UserDropDown default_value={get_relation('mo')} multiple={false} name={"mo_id"} />
+                                            <UserDropDown default_value={get_relation('mo')} multiple={false} name={"mo_id"} get_selected_data={(data) => {
+                                                // console.log(data);
+                                                data.selectedList.length &&
+                                                    setMoInfo(data.selectedList[0]);
+                                            }} />
                                         </div>
                                         <div className="form-group form-vertical">
                                             <label>AGM</label>
-                                            <UserDropDown default_value={get_relation('agm')} multiple={false} name={"agm_id"} />
+                                            <div className="form-control">
+                                                {moInfo.agm_info?.uid} -
+                                                {moInfo.agm_info?.name}
+                                            </div>
+                                            <input type="hidden" name="agm_id" value={`[${moInfo.agm}]`} />
+                                            {/* <UserDropDown multiple={false} name={"agm_id"} /> */}
                                         </div>
                                         <div className="form-group form-vertical">
                                             <label>GM</label>
-                                            <UserDropDown default_value={get_relation('gm')} multiple={false} name={"gm_id"} />
+                                            <div className="form-control">
+                                                {moInfo.gm_info?.uid} -
+                                                {moInfo.gm_info?.name}
+                                            </div>
+                                            <input type="hidden" name="gm_id" value={`[${moInfo.gm}]`} />
+                                            {/* <UserDropDown multiple={false} name={"gm_id"} /> */}
                                         </div>
                                         <div className="form-group form-vertical">
                                             <label>ED</label>
-                                            <UserDropDown default_value={get_relation('ed')} multiple={false} name={"ed_id"} />
+                                            <div className="form-control">
+                                                {moInfo.ed_info?.uid} -
+                                                {moInfo.ed_info?.name}
+                                            </div>
+                                            <input type="hidden" name="ed_id" value={`[${moInfo.ed}]`} />
+                                            {/* <UserDropDown multiple={false} name={"ed_id"} /> */}
                                         </div>
                                     </div>
                                 </div>
@@ -497,6 +517,15 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter property price (digit)',
                                                 type: 'number',
                                                 label: 'Property Price (Digit)',
+                                                readonly: true,
+                                                callback: function (e, value) {
+                                                    let el = document.querySelector('#property_price_text') as HTMLInputElement | null;
+                                                    let el2 = document.querySelector('#property_price_text_bangla') as HTMLInputElement | null;
+                                                    if (el && el2) {
+                                                        el.value = (window as any).convertAmount(value).en + ` taka only`;
+                                                        el2.value = (window as any).convertAmount(value).bn + ` টাকা মাত্র`;
+                                                    }
+                                                }
                                             },
                                             {
                                                 name: 'property_price_text',
@@ -504,6 +533,15 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter property price (text)',
                                                 type: 'text',
                                                 label: 'Property Price (Text)',
+                                                readonly: true,
+                                            },
+                                            {
+                                                name: 'property_price_text_bangla',
+                                                placeholder:
+                                                    'Enter property price (bangla text)',
+                                                type: 'text',
+                                                label: 'Property Price (Bangla Text)',
+                                                readonly: true,
                                             },
                                             // {
                                             //     name: 'payment_type',
@@ -517,12 +555,29 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter payment (digit)',
                                                 type: 'number',
                                                 label: 'Payment (Digit)',
+                                                readonly: true,
+                                                callback: function (e, value) {
+                                                    let el = document.querySelector('#payment_text') as HTMLInputElement | null;
+                                                    let el2 = document.querySelector('#payment_text_bangla') as HTMLInputElement | null;
+                                                    if (el && el2) {
+                                                        el.value = (window as any).convertAmount(value).en + ` taka only`;
+                                                        el2.value = (window as any).convertAmount(value).bn + ` টাকা মাত্র`;
+                                                    }
+                                                }
                                             },
                                             {
                                                 name: 'payment_text',
                                                 placeholder: 'Enter payment (text)',
                                                 type: 'text',
                                                 label: 'Payment (Text)',
+                                                readonly: true,
+                                            },
+                                            {
+                                                name: 'payment_text_bangla',
+                                                placeholder: 'Enter payment (bangla text)',
+                                                type: 'text',
+                                                label: 'Payment ( Bangla Text)',
+                                                readonly: true,
                                             },
                                             // {
                                             //     name: 'check_cash_po_dd_no',
@@ -567,6 +622,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     type={field.type}
                                                     label={field.label}
                                                     value={get_value(field.name)}
+                                                    callback={field.callback}
+                                                    readonly={field.readonly}
                                                 />
                                             </div>
                                         ))}
@@ -579,6 +636,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                         <div className="form-group form-vertical">
                                             <Select
                                                 label="Payment Method"
+                                                value={get_value('payment_method')}
                                                 name="payment_method"
                                                 values={[
                                                     {
@@ -591,22 +649,19 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     },
                                                     {
                                                         text: 'DOWNPAYMENT',
-                                                        value: 'downpayment',
+                                                        value: 'down_payment',
                                                     },
                                                     {
                                                         text: 'INSTALLMENT',
                                                         value: 'installment',
-                                                    },
-                                                    {
-                                                        text: 'OTHERS',
-                                                        value: 'others',
-                                                    },
+                                                    }
                                                 ]}
                                             />
                                         </div>
                                         <div className="form-group form-vertical">
                                             <Select
                                                 label="Payment By"
+                                                value={get_value('check_cash_po_dd_no')}
                                                 name="check_cash_po_dd_no"
                                                 values={[
                                                     {
@@ -664,6 +719,18 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 placeholder: 'Have to pay amount',
                                                 type: 'text',
                                                 label: 'Have to pay amount',
+                                                callback: function (e, value) {
+                                                    let el = document.querySelector('#have_to_pay_amount_text') as HTMLInputElement | null;
+                                                    if (el) {
+                                                        el.value = (window as any).convertAmount(value).en + ` taka only`;
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                name: 'have_to_pay_amount_text',
+                                                placeholder: 'Have to pay amount in text',
+                                                type: 'text',
+                                                label: 'Have to pay amount in text',
                                             },
                                             {
                                                 name: 'witness_name_1',
@@ -706,6 +773,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     "Enter witness's address (2nd)",
                                                 type: 'text',
                                                 label: "Witness's Address (2nd)",
+                                                readonly: false,
                                             },
                                         ].map((field) => (
                                             <div
@@ -718,6 +786,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     type={field.type}
                                                     label={field.label}
                                                     value={get_value(field.name)}
+                                                    callback={field.callback}
+                                                    readonly={field.readonly}
                                                 />
                                             </div>
                                         ))}
@@ -742,6 +812,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     'Enter money receipt no.',
                                                 type: 'text',
                                                 label: 'Money Receipt No.',
+                                                readonly: true,
                                             },
                                             {
                                                 name: 'office_only_booking_chart_making',
@@ -761,6 +832,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     type={field.type}
                                                     label={field.label}
                                                     value={get_value(field.name)}
+                                                    readonly={field.readonly}
                                                 />
                                             </div>
                                         ))}
@@ -777,7 +849,22 @@ const Create: React.FC<Props> = (props: Props) => {
                             </form>
                         </div>
                     )}
-                    <Footer></Footer>
+                    <Footer>
+                        <li>
+                            <a className="outline btn-outline-warning"
+                                target="_blank"
+                                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                                    e.preventDefault();
+                                    localStorage.setItem('booking', JSON.stringify(state.item))
+                                    window.open(e.currentTarget.href, '_blank')
+                                }}
+                                href={"/print-invoice?" + state.item.id}>
+                                <span className="material-symbols-outlined fill">print</span>
+                                <div className="text">Print</div>
+                            </a>
+                        </li>
+
+                    </Footer>
                 </div>
             </div>
         </>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/management_data_page/Header';
 import Footer from './components/management_data_page/Footer';
 import setup from './config/setup';
@@ -11,11 +11,14 @@ import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import InputImage from './components/management_data_page/InputImage';
 import { useNavigate } from 'react-router-dom';
-export interface Props {}
+import { details } from './config/store/async_actions/details';
+import { anyObject } from '../../../common_types/object';
+export interface Props { }
 
 const Create: React.FC<Props> = (props: Props) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const [moInfo, setMoInfo] = useState<anyObject>({});
 
     async function handle_submit(e) {
         e.preventDefault();
@@ -53,27 +56,46 @@ const Create: React.FC<Props> = (props: Props) => {
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>Project</label>
-                                        <ProjectDropDown multiple={false} name={"project_id"}/>
+                                        <ProjectDropDown multiple={false} name={"project_id"} />
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>Reference</label>
-                                        <UserDropDown multiple={false} name={"reference_user_id"}/>
+                                        <UserDropDown multiple={false} name={"reference_user_id"} />
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>MO</label>
-                                        <UserDropDown multiple={false} name={"mo_id"}/>
+                                        <UserDropDown multiple={false} name={"mo_id"} get_selected_data={(data) => {
+                                            // console.log(data);
+                                            data.selectedList.length &&
+                                                setMoInfo(data.selectedList[0]);
+                                        }} />
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>AGM</label>
-                                        <UserDropDown multiple={false} name={"agm_id"}/>
+                                        <div className="form-control">
+                                            {moInfo.agm_info?.uid} - 
+                                            {moInfo.agm_info?.name}
+                                        </div>
+                                        <input type="hidden" name="agm_id" value={`[${moInfo.agm}]`} />
+                                        {/* <UserDropDown multiple={false} name={"agm_id"} /> */}
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>GM</label>
-                                        <UserDropDown multiple={false} name={"gm_id"}/>
+                                        <div className="form-control">
+                                            {moInfo.gm_info?.uid} - 
+                                            {moInfo.gm_info?.name}
+                                        </div>
+                                        <input type="hidden" name="gm_id" value={`[${moInfo.gm}]`} />
+                                        {/* <UserDropDown multiple={false} name={"gm_id"} /> */}
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>ED</label>
-                                        <UserDropDown multiple={false} name={"ed_id"}/>
+                                        <div className="form-control">
+                                            {moInfo.ed_info?.uid} - 
+                                            {moInfo.ed_info?.name}
+                                        </div>
+                                        <input type="hidden" name="ed_id" value={`[${moInfo.ed}]`} />
+                                        {/* <UserDropDown multiple={false} name={"ed_id"} /> */}
                                     </div>
                                 </div>
                             </div>
@@ -439,6 +461,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 'Enter property price (digit)',
                                             type: 'number',
                                             label: 'Property Price (Digit)',
+                                            callback: function (e, value) {
+                                                let el = document.querySelector('#property_price_text') as HTMLInputElement | null;
+                                                let el2 = document.querySelector('#property_price_text_bangla') as HTMLInputElement | null;
+                                                if (el && el2) {
+                                                    el.value = (window as any).convertAmount(value).en + ` taka only`;
+                                                    el2.value = (window as any).convertAmount(value).bn + ` টাকা মাত্র`;
+                                                }
+                                            }
                                         },
                                         {
                                             name: 'property_price_text',
@@ -446,6 +476,13 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 'Enter property price (text)',
                                             type: 'text',
                                             label: 'Property Price (Text)',
+                                        },
+                                        {
+                                            name: 'property_price_text_bangla',
+                                            placeholder:
+                                                'Enter property price (bangla text)',
+                                            type: 'text',
+                                            label: 'Property Price (Bangla Text)',
                                         },
                                         // {
                                         //     name: 'payment_type',
@@ -459,12 +496,26 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 'Enter payment (digit)',
                                             type: 'number',
                                             label: 'Payment (Digit)',
+                                            callback: function (e, value) {
+                                                let el = document.querySelector('#payment_text') as HTMLInputElement | null;
+                                                let el2 = document.querySelector('#payment_text_bangla') as HTMLInputElement | null;
+                                                if (el && el2) {
+                                                    el.value = (window as any).convertAmount(value).en + ` taka only`;
+                                                    el2.value = (window as any).convertAmount(value).bn + ` টাকা মাত্র`;
+                                                }
+                                            }
                                         },
                                         {
                                             name: 'payment_text',
                                             placeholder: 'Enter payment (text)',
                                             type: 'text',
                                             label: 'Payment (Text)',
+                                        },
+                                        {
+                                            name: 'payment_text_bangla',
+                                            placeholder: 'Enter payment (bangla text)',
+                                            type: 'text',
+                                            label: 'Payment ( Bangla Text)',
                                         },
                                         // {
                                         //     name: 'check_cash_po_dd_no',
@@ -508,6 +559,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 placeholder={field.placeholder}
                                                 type={field.type}
                                                 label={field.label}
+                                                callback={field.callback}
                                             />
                                         </div>
                                     ))}
@@ -532,15 +584,11 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 },
                                                 {
                                                     text: 'DOWNPAYMENT',
-                                                    value: 'downpayment',
+                                                    value: 'down_payment',
                                                 },
                                                 {
                                                     text: 'INSTALLMENT',
                                                     value: 'installment',
-                                                },
-                                                {
-                                                    text: 'OTHERS',
-                                                    value: 'others',
                                                 },
                                             ]}
                                         />
@@ -555,20 +603,16 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     value: '',
                                                 },
                                                 {
-                                                    text: 'Check',
-                                                    value: 'check',
+                                                    text: 'Bank',
+                                                    value: 'bank',
                                                 },
                                                 {
                                                     text: 'Cash',
                                                     value: 'cash',
                                                 },
                                                 {
-                                                    text: 'P.O',
-                                                    value: 'p.o',
-                                                },
-                                                {
-                                                    text: 'D.D',
-                                                    value: 'd.d',
+                                                    text: 'Gateway',
+                                                    value: 'surjopay',
                                                 },
                                             ]}
                                         />
@@ -604,6 +648,18 @@ const Create: React.FC<Props> = (props: Props) => {
                                             placeholder: 'Have to pay amount',
                                             type: 'text',
                                             label: 'Have to pay amount',
+                                            callback: function (e, value) {
+                                                let el = document.querySelector('#have_to_pay_amount_text') as HTMLInputElement | null;
+                                                if (el) {
+                                                    el.value = (window as any).convertAmount(value).en + ` taka only`;
+                                                }
+                                            }
+                                        },
+                                        {
+                                            name: 'have_to_pay_amount_text',
+                                            placeholder: 'Have to pay amount in text',
+                                            type: 'text',
+                                            label: 'Have to pay amount in text',
                                         },
                                         {
                                             name: 'witness_name_1',
@@ -657,6 +713,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 placeholder={field.placeholder}
                                                 type={field.type}
                                                 label={field.label}
+                                                callback={field.callback}
                                             />
                                         </div>
                                     ))}
