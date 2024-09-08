@@ -1,4 +1,4 @@
-import { FindAndCountOptions } from 'sequelize';
+import { FindAndCountOptions, Sequelize } from 'sequelize';
 import db from '../../models/db';
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import response from '../../helpers/response';
@@ -69,7 +69,7 @@ async function all(
         select_fields = query_param.select_fields.replace(/\s/g, '').split(',');
         select_fields = [...select_fields, 'id', 'status'];
     } else {
-        select_fields = ['id', 'title', 'description', 'location', 'image', 'status'];
+        select_fields = ['id', 'title', 'description', 'openning_date', 'status'];
     }
 
     let query: FindAndCountOptions = {
@@ -80,26 +80,53 @@ async function all(
         // include: [models.Project],
     };
 
-    query.attributes = select_fields;
-
-    if(role && role != 'all'){
-        query.where = {
-            ...query.where,
-            role: role,
-        }
-    }
+    query.attributes = [
+        ...select_fields,
+        [
+            Sequelize.literal(`(
+                        SELECT SUM(logs.amount)
+                        FROM account_logs AS logs
+                        WHERE
+                            logs.account_id = AccountModel.id
+                            AND
+                            logs.type = "income"
+                    )`),
+            'total_income',
+        ],
+        [
+            Sequelize.literal(`(
+                        SELECT SUM(logs.amount)
+                        FROM account_logs AS logs
+                        WHERE
+                            logs.account_id = AccountModel.id
+                            AND
+                            logs.type = "expense"
+                    )`),
+            'total_expense',
+        ],
+    ];
 
     if (search_key) {
         query.where = {
             ...query.where,
             [Op.or]: [
-                { name: { [Op.like]: `%${search_key}%` } },
-                { email: { [Op.like]: `%${search_key}%` } },
+                { title: { [Op.like]: `%${search_key}%` } },
                 { status: { [Op.like]: `%${search_key}%` } },
                 { id: { [Op.like]: `%${search_key}%` } },
             ],
         };
     }
+
+    let total_income = await models.AccountLogModel.sum('amount',{
+        where:{
+            type: 'income',
+        }
+    });
+    let total_expense = await models.AccountLogModel.sum('amount',{
+        where:{
+            type: 'expense',
+        }
+    });
 
     try {
         let data = await (fastify_instance as anyObject).paginate(
@@ -108,6 +135,8 @@ async function all(
             paginate,
             query,
         );
+        data.total_income = total_income;
+        data.total_expense = total_expense;
         return response(200, 'data fetched', data);
     } catch (error: any) {
         let uid = await error_trace(models, error, req.url, req.query);
