@@ -3,6 +3,8 @@ import {
     Sequelize,
 } from 'sequelize';
 import * as user_model from './user_model';
+import * as project_model from './project_model';
+import * as project_payment_model from './project_payment';
 import * as account_logs_model from './account_logs';
 import * as account_numbers_model from './account_numbers';
 import * as account_report_approval_docs_model from './account_report_approval_docs';
@@ -27,6 +29,8 @@ const sequelize = new Sequelize(app_config.DB_string, {
 
 interface models {
     UserModel: typeof user_model.DataModel;
+    ProjectModel: typeof project_model.DataModel;
+    ProjectPaymentModel: typeof project_payment_model.DataModel;
     AccountLogModel: typeof account_logs_model.DataModel;
     AccountNumberModel: typeof account_numbers_model.DataModel;
     AccountReportApprovalDocModel: typeof account_report_approval_docs_model.DataModel;
@@ -40,6 +44,8 @@ interface models {
 }
 const db = async function (): Promise<models> {
     const UserModel = user_model.init(sequelize);
+    const ProjectPaymentModel = project_payment_model.init(sequelize);
+    const ProjectModel = project_model.init(sequelize);
     const AccountLogModel = account_logs_model.init(sequelize);
     const AccountNumberModel = account_numbers_model.init(sequelize);
     const AccountReportApprovalDocModel = account_report_approval_docs_model.init(sequelize);
@@ -49,7 +55,52 @@ const db = async function (): Promise<models> {
     const AccountUserSalesInsentiveModel = account_user_sales_insentive_model.init(sequelize);
     const AccountUserSalesInsentiveCalculationModel = account_user_sales_insentive_calculation_model.init(sequelize);
 
-    await sequelize.sync();
+    // await sequelize.sync();
+
+    AccountNumberModel.belongsTo(AccountModel,{
+        foreignKey: 'account_id',
+        targetKey: 'id',
+        as: 'account'
+    });
+
+    AccountNumberModel.hasMany(AccountLogModel,{
+        foreignKey: 'account_number_id',
+        sourceKey: 'id',
+        as: 'log'
+    });
+
+    /** account log relations */
+    AccountLogModel.belongsTo(AccountModel,{
+        foreignKey: 'account_id',
+        targetKey: 'id',
+        as: 'account'
+    });
+    AccountLogModel.belongsTo(AccountNumberModel,{
+        foreignKey: 'account_number_id',
+        targetKey: 'id',
+        as: 'account_number'
+    });
+    AccountLogModel.belongsTo(UserModel,{
+        foreignKey: 'user_id',
+        targetKey: 'id',
+        as: 'user'
+    });
+    AccountLogModel.belongsTo(AccountCategoryModel,{
+        foreignKey: 'account_category_id',
+        targetKey: 'id',
+        as: 'category'
+    });
+    AccountLogModel.hasOne(ProjectPaymentModel,{
+        foreignKey: 'account_log_id',
+        sourceKey: 'id',
+        as: 'project_payment',
+    });
+
+    ProjectPaymentModel.belongsTo(ProjectModel,{
+        foreignKey: 'project_id',
+        targetKey: 'id',
+        as: 'project'
+    })
 
     // User.hasMany(Project, {
     //     sourceKey: 'id',
@@ -72,6 +123,8 @@ const db = async function (): Promise<models> {
 
     let models: models = {
         UserModel,
+        ProjectPaymentModel,
+        ProjectModel,
         AccountLogModel,
         AccountNumberModel,
         AccountReportApprovalDocModel,
