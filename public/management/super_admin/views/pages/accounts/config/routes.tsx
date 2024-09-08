@@ -1,11 +1,12 @@
 import React from 'react';
-import setup from './setup.js';
-import Layout from '../Layout.js';
-import All from '../All.js';
-import Create from '../Create.js';
-import Details from '../Details.js';
-import Edit from '../Edit.js';
-import History from '../History.js';
+import setup from './setup';
+import Layout from '../Layout';
+import AllIncome from '../AllIncome';
+import AllExpense from '../AllExpense';
+import Create from '../Create';
+import Details from '../Details';
+import Edit from '../Edit';
+import History from '../History';
 
 
 // export { default as DashboardCounterAll} from "./All.jsx";
@@ -15,8 +16,12 @@ export default {
     element: <Layout />,
     children: [
         {
-            path: '',
-            element: <All />,
+            path: 'incomes',
+            element: <AllIncome />,
+        },
+        {
+            path: 'expense',
+            element: <AllExpense />,
         },
         {
             path: 'history',
