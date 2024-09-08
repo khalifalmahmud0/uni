@@ -36,6 +36,8 @@ module.exports = async function (fastify: FastifyInstance) {
     prefix = '/account/logs';
     fastify
         .get(`${prefix}`, AccountLogControllerInstance.all)
+        .get(`${prefix}/incomes`, AccountLogControllerInstance.all_incomes)
+        .get(`${prefix}/expenses`, AccountLogControllerInstance.all_expense)
         .get(`${prefix}/:id`, AccountLogControllerInstance.find)
         .post(`${prefix}/store`, AccountLogControllerInstance.store)
         .post(`${prefix}/update`, AccountLogControllerInstance.update)
