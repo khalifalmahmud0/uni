@@ -45,7 +45,7 @@ const db = async function (): Promise<models> {
     const UserModels = user_model.init(sequelize);
     // const Project = project_model.init(sequelize);
 
-    await sequelize.sync();
+    // await sequelize.sync();
 
     // UserModels.hasMany(ProjectCustomerModel,{
     //     foreignKey: 'user_id',
