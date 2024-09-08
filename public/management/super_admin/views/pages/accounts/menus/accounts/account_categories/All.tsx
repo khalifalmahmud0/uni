@@ -17,7 +17,7 @@ import SelectItem from './components/all_data_page/SelectItem';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
+                'id, title, description, status',
             ),
         );
         dispatch(all({}));
@@ -102,34 +102,31 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>{i.id}</td>
                                                     {/* Title  */}
                                                     <td>
-                                                        Bill
+                                                        {i.title}
                                                     </td>
                                                     {/* Description  */}
                                                     <td>
-                                                        Lorem Ipsum
+                                                        {i.description}
                                                     </td>
                                                     <td>
-                                                        1200/-
+                                                        {i.total_income}/-
                                                     </td>
                                                     <td>
-                                                        1400/-
+                                                        {i.total_expense}/-
                                                     </td>
                                                 </tr>
                                             );
                                         },
                                     )}
-                                    <tr style={{ backgroundColor: 'gray' }}>
-                                        <td></td>
-                                        <td></td>
-                                        {/* ID  */}
-                                        <td></td>
-                                        {/* Title  */}
-                                        <td></td>
-                                        <td></td>
-                                        <td>total: 1000/-</td>
-                                        <td>total: 1000/-</td>
-                                    </tr>
+
                                 </tbody>
+                                <tfoot>
+                                    <tr style={{ backgroundColor: 'gray' }}>
+                                        <td colSpan={5}></td>
+                                        <td>total: {(state.all as any)?.total_income}/-</td>
+                                        <td>total: {(state.all as any)?.total_expense}/-</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 

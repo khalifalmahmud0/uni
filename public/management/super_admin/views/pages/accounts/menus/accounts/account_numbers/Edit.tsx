@@ -12,7 +12,7 @@ import { update } from './config/store/async_actions/update';
 import Input from './components/management_data_page/Input';
 import Select from './components/management_data_page/Select';
 import { anyObject } from '../../../../../../common_types/object';
-export interface Props {}
+export interface Props { }
 
 const Edit: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -75,30 +75,31 @@ const Edit: React.FC<Props> = (props: Props) => {
                                     name="id"
                                     defaultValue={state.item.id}
                                 />
-<div>
-                                <h5 className="mb-4">Edit Account Number</h5>
-                                <div className="form_auto_fit">
-                                  <div className="form-group form-vertical">
-                                        <Select
-                                            label="Account Type"
-                                            name="account_type"
-                                            values={[
-                                                { text: 'bkash', value: 'bkash' },
-                                                { text: 'nagad', value: 'nagad' },
-                                                { text: 'bank', value: 'bank' },
-                                                { text: 'rocket', value: 'rocket' },
-                                            ]}
-                                        />
-                                    </div>
-                                    {[
-                                        'account_number',
-                                    ].map((i) => (
+                                <div>
+                                    <h5 className="mb-4">Edit Account Number</h5>
+                                    <div className="form_auto_fit">
                                         <div className="form-group form-vertical">
-                                            <Input name={i} />
+                                            <Select
+                                                label="Account Type"
+                                                name="account_id"
+                                                value={state.item.account_id}
+                                                values={[
+                                                    { text: '--select--', value: '' },
+                                                    { text: 'bank', value: '2' },
+                                                    { text: 'bkash', value: '3' },
+                                                    { text: 'rocket', value: '4' },
+                                                ]}
+                                            />
                                         </div>
-                                    ))}
+                                        {[
+                                            'number',
+                                        ].map((i) => (
+                                            <div className="form-group form-vertical">
+                                                <Input name={i} value={state.item.number} />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
 
                                 <div className="form-group form-vertical">
                                     <label></label>

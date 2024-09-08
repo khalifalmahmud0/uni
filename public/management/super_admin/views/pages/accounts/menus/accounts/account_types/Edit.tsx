@@ -11,7 +11,7 @@ import storeSlice from './config/store';
 import { update } from './config/store/async_actions/update';
 import { anyObject } from '../../../../../../common_types/object';
 import Input from './components/management_data_page/Input';
-export interface Props {}
+export interface Props { }
 
 const Edit: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -77,36 +77,41 @@ const Edit: React.FC<Props> = (props: Props) => {
                                 <div>
                                     <h5 className="mb-4">Edit Account Type</h5>
                                     <div className="form_auto_fit">
-                                        {/* <div className="form-group form-vertical">
-                                        <Select
-                                            label="Title"
-                                            name="title"
-                                            values={[
-                                                { text: 'Bkash', value: 'bkash' },
-                                                { text: 'Nagad', value: 'nagad' },
-                                                { text: 'Bank', value: 'bank' },
-                                                { text: 'Rocket', value: 'rocket' },
-                                            ]}
-                                        />
-                                    </div> */}
+                                        {/*
+                                        <div className="form-group form-vertical">
+                                            <Select
+                                                label="Title"
+                                                name="title"
+                                                values={[
+                                                    { text: 'Bkash', value: 'bkash' },
+                                                    { text: 'Nagad', value: 'nagad' },
+                                                    { text: 'Bank', value: 'bank' },
+                                                    { text: 'Rocket', value: 'rocket' },
+                                                ]}
+                                            />
+                                        </div> 
+                                        */}
                                         {[
                                             {
                                                 name: 'title',
                                                 placeholder: 'Title',
                                                 type: 'text',
                                                 label: 'Title',
+                                                value: state.item.title
                                             },
                                             {
-                                                name: 'description',
+                                                name: 'account_description',
                                                 placeholder: 'Description',
                                                 type: 'text',
                                                 label: 'Description',
+                                                value: state.item.description
                                             },
                                             {
-                                                name: 'opening_date',
+                                                name: 'openning_date',
                                                 placeholder: 'Opening Date',
                                                 type: 'date',
                                                 label: 'Opening Date',
+                                                value: new Date(state.item.openning_date).toISOString().substring(0,10)
                                             },
                                         ].map((field) => (
                                             <div
@@ -120,6 +125,7 @@ const Edit: React.FC<Props> = (props: Props) => {
                                                     }
                                                     type={field.type}
                                                     label={field.label}
+                                                    value={field.value}
                                                 />
                                             </div>
                                         ))}

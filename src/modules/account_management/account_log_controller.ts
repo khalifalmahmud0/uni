@@ -15,11 +15,27 @@ import destroy from './services/destroy';
 import block from './services/block';
 import data_import from './services/import';
 import payment_entry from './services/payment_entry';
+import all_incomes from './services/all_incomes';
+import all_expense from './services/all_expense';
 
 export default function (fastify: FastifyInstance) {
     return {
         all: async function (req: FastifyRequest, res: FastifyReply) {
             let data: responseObject = await all(fastify, req);
+            res
+            .code(data.status)
+            .header('Cache-Control', 'public, max-age=30') 
+            .send(data);
+        },
+        all_incomes: async function (req: FastifyRequest, res: FastifyReply) {
+            let data: responseObject = await all_incomes(fastify, req);
+            res
+            .code(data.status)
+            .header('Cache-Control', 'public, max-age=30') 
+            .send(data);
+        },
+        all_expense: async function (req: FastifyRequest, res: FastifyReply) {
+            let data: responseObject = await all_expense(fastify, req);
             res
             .code(data.status)
             .header('Cache-Control', 'public, max-age=30') 

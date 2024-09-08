@@ -17,7 +17,7 @@ import SelectItem from './components/all_data_page/SelectItem';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
 
-export interface Props {}
+export interface Props { }
 
 const All: React.FC<Props> = (props: Props) => {
     const state: typeof initialState = useSelector(
@@ -73,22 +73,17 @@ const All: React.FC<Props> = (props: Props) => {
                                         <TableHeading
                                             label={`Income`}
                                             col_name={`income`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Expence`}
                                             col_name={`expence`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Balance`}
                                             col_name={`balance`}
-                                            sort={true}
-                                        />
-                                        <TableHeading
-                                            label={`Total`}
-                                            col_name={`total`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                     </tr>
                                 </thead>
@@ -108,38 +103,42 @@ const All: React.FC<Props> = (props: Props) => {
                                                     <td>
                                                         <SelectItem item={i} />
                                                     </td>
-                                                    {/* ID  */}
                                                     <td>{i.id}</td>
-                                                    {/* Customer ID  */}
-                                                    <td>Bkash</td>
-                                                    {/* Image  */}
+                                                    <td>
+                                                        {i.account?.title}
+                                                    </td>
                                                     <td>
                                                         {i.number}
                                                     </td>
-                                                    <td>1200/-</td>
-                                                    <td>1300/-</td>
-                                                    <td>1400/-</td>
-                                                    <td>1000/-</td>
+                                                    <td>
+                                                        {i.total_income || 0}/-
+                                                    </td>
+                                                    <td>
+                                                        {i.total_expense || 0}/-
+                                                    </td>
+                                                    <td>
+                                                        {(i.total_income - i.total_expense) || 0}/-
+                                                    </td>
                                                 </tr>
                                             );
                                         },
                                     )}
-                                     <tr style={{ backgroundColor: 'gray' }}>
-                                        <td></td>
-                                        <td></td>
-                                        {/* ID  */}
-                                        <td></td>
-                                        {/* Title  */}
-                                        <td></td>
-                                        {/* Description  */}
-                                        <td></td>
-                                      
-                                        <td>total: 1000/-</td>
-                                        <td>total: 1000/-</td>
-                                        <td>total: 1000/-</td>
-                                        <td>total: 1000/-</td>
-                                    </tr>
+                                    
                                 </tbody>
+                                <tfoot>
+                                    <tr style={{ backgroundColor: '#20232a' }}>
+                                        <td colSpan={5}></td>
+                                        <td>
+                                            total: {(state.all as any)?.total_income}/-
+                                        </td>
+                                        <td>
+                                            total: {(state.all as any)?.total_expense || 0}/-
+                                        </td>
+                                        <td>
+                                            total: {(state.all as any)?.total_income - (state.all as any)?.total_expense}/-
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 

@@ -150,7 +150,7 @@ async function store(
             type: body.type,
         })
 
-        return response(201, 'data created', {});
+        return response(201, 'data created', project_payment);
     } catch (error: any) {
         let uid = await error_trace(models, error, req.url, req.body);
         throw new custom_error('server error', 500, error.message, uid);

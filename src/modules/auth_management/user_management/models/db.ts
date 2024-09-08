@@ -49,7 +49,7 @@ const db = async function (): Promise<models> {
     const UserProjectCustomerInformationModel = project_customer_information_model.init(sequelize);
     // const Project = project_model.init(sequelize);
 
-    await sequelize.sync();
+    // await sequelize.sync();
 
     UserModel.belongsTo(UserInformationModel, {
         foreignKey: 'id',
