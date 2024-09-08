@@ -16,8 +16,9 @@ import moment from 'moment';
 async function validate(req: Request) {
     let field = '';
     let fields = [
-        'uid',
         'title',
+        'openning_date',
+        'account_description',
     ];
 
     for (let index = 0; index < fields.length; index++) {
@@ -73,31 +74,10 @@ async function store(
     let body = req.body as anyObject;
     let data = new models.AccountModel();
 
-    let image_path = "";
-
-    if(body['image'].ext){
-        image_path =
-            'uploads/projects/' +
-            moment().format('YYYYMMDDHHmmss') +
-            body['image'].ext;
-        await (fastify_instance as any).upload(body['image'], image_path);
-    }
-    
     let inputs: InferCreationAttributes<typeof data> = {
-        // uid: body.uid,
-        // title: body.title,
-
-        // description: body.description,
-        // location: body.location,
-        // map: body.map,
-        // aveneue: body.aveneue,
-        // plot: body.plot,
-        // road: body.road,
-
-        // per_share_cost: body.per_share_cost || 0,
-
-        // video: body.video,
-        // image: image_path,
+        title: body.title,
+        description: body.account_description,
+        openning_date: body.openning_date,
     };
 
     /** print request data into console */
