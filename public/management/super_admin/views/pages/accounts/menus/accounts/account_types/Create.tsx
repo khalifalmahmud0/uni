@@ -51,13 +51,13 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label: 'Title',
                                         },
                                         {
-                                            name: 'description',
+                                            name: 'account_description',
                                             placeholder: 'Description',
                                             type: 'text',
                                             label: 'Description',
                                         },
                                         {
-                                            name: 'opening_date',
+                                            name: 'openning_date',
                                             placeholder: 'Opening Date',
                                             type: 'date',
                                             label: 'Opening Date',
