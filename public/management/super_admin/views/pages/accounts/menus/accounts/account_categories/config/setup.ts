@@ -1,6 +1,6 @@
 import setup_type from './setup_type';
 
-const prefix: string = 'account_categories';
+const prefix: string = 'account categories';
 const setup: setup_type = {
     prefix,
     module_name: 'account_categories',
@@ -8,7 +8,7 @@ const setup: setup_type = {
     route_prefix: 'account_categories',
 
     api_host: location.origin,
-    api_prefix: 'users',
+    api_prefix: 'account/categories',
 
     store_prefix: 'account_categories',
     layout_title: prefix + ' Management',
