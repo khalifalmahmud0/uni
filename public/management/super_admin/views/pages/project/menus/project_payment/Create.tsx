@@ -26,6 +26,8 @@ const Create: React.FC<Props> = (props: Props) => {
         const response = await dispatch(store(new FormData(e.target)) as any);
         if (!Object.prototype.hasOwnProperty.call(response, 'error')) {
             e.target.reset();
+            localStorage.setItem('booking', JSON.stringify(response.payload.data))
+            window.open("/print-payment-invoice?id=" + response.payload.data?.id, '_blank')
         }
     }
 
@@ -59,11 +61,11 @@ const Create: React.FC<Props> = (props: Props) => {
     }
 
     function get_selected_user(data) {
-        console.log(data);
+        // console.log(data);
         if (data.ids) {
             axios.get('/api/v1/users/customer/' + data.ids)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setUserDetails(res.data.data);
                 });
         }
