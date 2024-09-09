@@ -41,7 +41,11 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data, multiple, default_
         // console.log(selectedList);
         const ids = selectedList.map((i) => i.id).join(',');
         if (selected_items_input && selected_items_input.current) {
-            selected_items_input.current.value = `[${ids}]`;
+            if(multiple){
+                selected_items_input.current.value = `[${ids}]`;
+            }else{
+                selected_items_input.current.value = `${ids}`;
+            }
         }
 
         if (typeof get_selected_data === 'function') {
@@ -98,7 +102,7 @@ const DropDown: React.FC<Props> = ({ name, get_selected_data, multiple, default_
                                                     />
                                                 </div>
                                                 <div className="label">
-                                                    {i.name}
+                                                    {i.title}
                                                 </div>
                                             </label>
                                         </li>
