@@ -4,6 +4,7 @@ import account_category_controller from './account_category_controller';
 import account_controller from './account_controller';
 import account_log_controller from './account_log_controller';
 import account_number_controller from './account_number_controller';
+import check_auth from '../auth_management/authetication/services/check_auth';
 
 module.exports = async function (fastify: FastifyInstance) {
     let prefix: string = '/account/categories';
@@ -40,7 +41,14 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(`${prefix}/expenses`, AccountLogControllerInstance.all_expense)
         .get(`${prefix}/:id`, AccountLogControllerInstance.find)
         .post(`${prefix}/store`, AccountLogControllerInstance.store)
-        .post(`${prefix}/store-expense`, AccountLogControllerInstance.store_expense)
+        
+        .post(`${prefix}/store-expense`,AccountLogControllerInstance.store_expense)
+
+        /** store log after a successful payment */
+        .post(`${prefix}/store-gateway-payment-on-success`,{
+            preHandler: check_auth,
+        }, AccountLogControllerInstance.store_gateway_payment)
+        
         .post(`${prefix}/update`, AccountLogControllerInstance.update)
         .post(`${prefix}/soft-delete`, AccountLogControllerInstance.soft_delete)
         .post(`${prefix}/restore`, AccountLogControllerInstance.restore)
