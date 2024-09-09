@@ -64,8 +64,7 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(
             '/payment-response',
             async (_req: FastifyRequest, reply: FastifyReply) => {
-                return reply.send("ok");
-                // return reply.view('print/payment_invoice.ejs');
+                return reply.view('print/payment_invoice.ejs');
             },
         )
         .post(
