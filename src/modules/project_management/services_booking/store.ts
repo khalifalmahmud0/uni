@@ -284,6 +284,7 @@ async function store(
                 amount: body.payment_digit,
                 type: 'income',
                 user_id: user_id,
+                date: body.payment_date,
             });
 
             /*** track project payment */
@@ -302,7 +303,7 @@ async function store(
             project_payment.amount_in_text = body.payment_text;
             project_payment.installment_no = installment_no + 1;
             project_payment.receipt_no = body.office_only_money_receipt_no;
-            project_payment.date = moment().toString();
+            project_payment.date = moment(body.payment_date).format('YYYY-MM-DD');
             project_payment.type = body.payment_method;
             await project_payment.save();
 
@@ -314,7 +315,7 @@ async function store(
                 agm_id: agm_id,
                 gm_id: gm_id,
                 ed_id: ed_id,
-                date: moment().format('YYYY-MM-DD'),
+                date: moment(body.payment_date).format('YYYY-MM-DD'),
                 amount: body.payment_digit,
                 type: body.payment_method,
             })
