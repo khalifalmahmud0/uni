@@ -24,7 +24,7 @@ $.sidebarMenu = function (menu) {
     }
   });
 }
-$.sidebarMenu($('.sidebar-menu'));
+// $.sidebarMenu($('.sidebar-menu'));
 // $(".mobile-sidebar .switch-state").click(function(){
 //   $(".page-body-wrapper").toggleClass("sidebar-close");
 // });

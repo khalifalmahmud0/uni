@@ -5,6 +5,7 @@ export interface Props {
     placeholder?: string;
     type?: string;
     value?: string;
+    callback?: (e) => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -13,6 +14,8 @@ const Input: React.FC<Props> = ({
     placeholder,
     type,
     value,
+    callback,
+
 }: Props) => {
     return (
         <>
@@ -28,6 +31,7 @@ const Input: React.FC<Props> = ({
                     name={name}
                     id={name}
                     defaultValue={value}
+                    onChange={(e) => callback? callback(e) : ''}
                 />
             </div>
         </>

@@ -44,10 +44,11 @@ const All: React.FC<Props> = (props: Props) => {
         let customer_information = {};
         try {
             customer_information = JSON.parse(item?.details.customer_informations);
-            return customer_information[key];
         } catch (error) {
-            console.error(error);
+            customer_information = item?.details?.customer_informations;
+            // console.error(error);
         }
+        return customer_information[key];
     }
 
     return (

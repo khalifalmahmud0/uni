@@ -50,7 +50,8 @@ const Create: React.FC<Props> = (props: Props) => {
         try {
             customer_information = JSON.parse(state.item?.details.customer_informations);
         } catch (error) {
-            console.error(error);
+            // console.error(error);
+            customer_information = state.item?.details.customer_informations;
         }
 
         try {

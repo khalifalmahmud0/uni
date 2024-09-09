@@ -2,6 +2,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import check_auth_and_redirect from '../modules/auth_management/authetication/services/check_auth_and_redirect';
 import check_is_loged_in from '../modules/auth_management/authetication/services/check_is_loged_in';
+import logout from '../modules/auth_management/authetication/services/logout';
 // import minified_view from '../helpers/minified_view';
 
 module.exports = async function (fastify: FastifyInstance) {
@@ -26,6 +27,7 @@ module.exports = async function (fastify: FastifyInstance) {
             '/admin',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.role != 'admin') reply.redirect(301, '/');
                 return reply.view('dashboard/admin_uni.ejs');
             },
         )
@@ -33,14 +35,18 @@ module.exports = async function (fastify: FastifyInstance) {
             '/customer',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
+                console.log((_req as any).user);
+                
+                if((_req as any).user.role != 'customer') reply.redirect(301, '/');
                 return reply.view('dashboard/customer.ejs');
             },
         )
         .get(
-            '/employee',
+            '/mo',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
-                return reply.view('dashboard/employee.ejs');
+                if((_req as any).user.role != 'marketing') reply.redirect(301, '/');
+                return reply.view('dashboard/mo.ejs');
             },
         )
         .get(
@@ -53,6 +59,22 @@ module.exports = async function (fastify: FastifyInstance) {
             '/print-payment-invoice',
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 return reply.view('print/payment_invoice.ejs');
+            },
+        )
+        .get(
+            '/payment-response',
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.view('print/payment_invoice.ejs');
+            },
+        )
+        .post(
+            '/logout',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                let res = await logout(fastify, _req);
+                reply.clearCookie('token', {path: '/'});
+                return reply.redirect(301, '/login');
+                // return reply.view('print/payment_invoice.ejs');
             },
         )
         ;

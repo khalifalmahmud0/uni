@@ -19,20 +19,20 @@ const Footer: React.FC<Props> = (props: Props) => {
         <div className="footer">
             <div className="action_btns">
                 <ul>
-                    <li>
+                    {/* <li>
                         <Link to={`/${route_prefix}/create`}>
                             <span className="material-symbols-outlined fill">
                                 add
                             </span>
                             <div className="text">create new</div>
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <ExportSelected />
                     </li>
-                    <li>
+                    {/* <li>
                         <AllDeactivatedData />
-                    </li>
+                    </li> */}
                     {/* <li>
                         <a href="#">
                             <span className="material-symbols-outlined fill">

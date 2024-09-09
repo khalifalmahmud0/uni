@@ -44,7 +44,7 @@ const AllExpense: React.FC<Props> = (props: Props) => {
     return (
         <div className="page_content">
             <div className="explore_window fixed_size">
-                <Header></Header>
+                <Header title='All Expenses'></Header>
 
                 <div className="content_body">
                     <div className="data_list">
@@ -59,7 +59,7 @@ const AllExpense: React.FC<Props> = (props: Props) => {
                                         <TableHeading
                                             label={`ID`}
                                             col_name={`id`}
-                                            sort={true}
+                                            sort={false}
                                         />
                                         <TableHeading
                                             label={`Customer ID`}

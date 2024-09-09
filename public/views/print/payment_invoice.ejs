@@ -108,13 +108,13 @@
                     <td>Customer Name</td>
                     <td>: {{ customer_informations?.applicant_name_english }}</td>
                     <td>Receipt No.</td>
-                    <td>: {{ customer_informations.office_only_money_receipt_no }}</td>
+                    <td>: {{ payment_info.receipt_no }}</td>
                 </tr>
                 <tr>
                     <td>Mobile Number</td>
                     <td>: {{ customer_informations.mobile }}</td>
                     <td>Receipt Date</td>
-                    <td>: {{ new Date(customer_informations.date).toDateString().substr(4) }}</td>
+                    <td>: {{ new Date(payment_info.date).toDateString().substr(4) }}</td>
                 </tr>
                 <tr>
                     <td>Plot Description</td>
@@ -138,7 +138,7 @@
                 </tr>
                 <tr>
                     <td>Start Date</td>
-                    <td>: {{ new Date(customer_informations.date).toDateString().substr(4) }}</td>
+                    <td>: {{ new Date(payment_info.date).toDateString().substr(4) }}</td>
                     <td></td>
                     <td></td>
                     <!-- <td>Bank & Branch</td>
@@ -170,7 +170,7 @@
                         <input type="text" v-model="installment_count" style="border: 1px solid rgb(242, 242, 242);">
                     </td>
                     <td>Total Tk Paid</td>
-                    <td>{{customer_informations.payment_text}}</td>
+                    <td>{{payment_info.amount_in_text}}</td>
                     <td>Next Date</td>
                     <td>
                         <label for="">
@@ -203,28 +203,17 @@
                 fetch('/api/v1/project/payments/details/' + id)
                     .then(res => res.json())
                     .then(({ data }) => {
-                        console.log(data);
+                        // console.log(data);
                         this.payment_info = data;
                         try {
                             this.customer_informations = JSON.parse(data.user_info.project_customer_information.customer_informations);
                         } catch (error) {
-
+                            this.customer_informations = data.user_info.project_customer_information.customer_informations;
                         }
+                        this.next_date = moment(this.payment_info.date).add(30,'days').format('yyyy-MM-DD');
+                        this.installment_count = (this.payment_info.installment_no)?.toString().padStart(4, '0');
                     })
-                // this.booking = JSON.parse(localStorage.getItem('booking'));
-                // try {
-                //     this.customer_informations = JSON.parse(this.booking.details.customer_informations);
-                // } catch (error) {
-
-                // }
-
-                // this.next_date = moment(this.booking.payment_date).add(30,'days').format('yyyy-MM-DD');
-
-                // console.log(
-                //     this.booking, 
-                //     this.customer_informations
-                // );
-
+                    
             }
         })
     </script>

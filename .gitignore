@@ -17,3 +17,4 @@ package-lock.json
 ./logs
 public/uploads
 public/management_build
+shurjopay_config.js

@@ -39,7 +39,9 @@ class DataModel extends Model<Infer, InferCreation> {
 
     declare date?: string;
     declare amount?: number;
-    declare type?: transaction_type;
+    declare amount_in_text?: string;
+    declare description?: string;
+    declare type?: string;
 
     declare status?: status;
     declare creator?: number;
@@ -86,8 +88,16 @@ function init(sequelize: Sequelize) {
                 type: new DataTypes.FLOAT().UNSIGNED,
                 allowNull: true,
             },
+            amount_in_text: {
+                type: new DataTypes.STRING(150),
+                allowNull: true,
+            },
+            description: {
+                type: new DataTypes.TEXT(),
+                allowNull: true,
+            },
             type: {
-                type: new DataTypes.ENUM('income','expense'),
+                type: new DataTypes.STRING(20),
                 defaultValue: 'income',
             },
 

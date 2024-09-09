@@ -7,6 +7,7 @@ import Create from '../Create';
 import Details from '../Details';
 import Edit from '../Edit';
 import History from '../History';
+import NewExpense from '../NewExpense';
 
 
 // export { default as DashboardCounterAll} from "./All.jsx";
@@ -30,6 +31,10 @@ export default {
         {
             path: 'create',
             element: <Create />,
+        },
+        {
+            path: 'new-expense',
+            element: <NewExpense />,
         },
         {
             path: 'edit/:id',

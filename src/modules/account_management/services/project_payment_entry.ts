@@ -19,7 +19,7 @@ export const generateUID = function() {
     const month = String(now.getMonth() + 1).padStart(2, '0'); // Add 1 to month since it's zero-based
     const day = String(now.getDate()).padStart(2, '0');
     const randomNum = Math.floor(Math.random() * 9000) + 1000;
-    const uid = `${year}${month}${day}-${randomNum}`;
+    const uid = `${year}${month}${day}${randomNum}`;
     return uid;
 }
 
@@ -33,6 +33,7 @@ async function project_payment_entry(
         user_id: number,
         type: 'income' | 'expense',
         amount: number,
+        date?: string,
     }
 ): Promise<object> {
 
@@ -48,7 +49,7 @@ async function project_payment_entry(
         user_id: param.user_id,
         type: param.type,
         amount: param.amount,
-        date: moment().toString(),
+        date: moment(param.date).format('YYYY-MM-DD'),
     };
 
     /** store data into database */
