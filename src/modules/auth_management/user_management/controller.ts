@@ -16,6 +16,7 @@ import block from './services/block';
 import data_import from './services/import';
 import tree from './services/tree';
 import customer_details from './services/customer_details';
+import insetive_calculation from './services/insetive_calculation';
 
 export default function (fastify: FastifyInstance) {
     return {
@@ -39,6 +40,11 @@ export default function (fastify: FastifyInstance) {
 
         tree: async function (req: FastifyRequest, res: FastifyReply) {
             let data = await tree(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        insetive_calculation: async function (req: FastifyRequest, res: FastifyReply) {
+            let data = await insetive_calculation(fastify, req);
             res.code(data.status).send(data);
         },
 
