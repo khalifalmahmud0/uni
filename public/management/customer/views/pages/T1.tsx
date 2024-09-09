@@ -1,8 +1,43 @@
 import React from 'react';
+import {  makePayment, verifyPayment } from "shurjopay-js";
 export interface Props { }
 
 const T1: React.FC<Props> = (props: Props) => {
+
+    async function make_payment(){
+
+        const makePayment_details= await makePayment('1001', {
+            prefix: 'uniflex',
+            store_id: '1',
+            return_url: location.origin+'/payment-response',
+            cancel_url: location.origin+'/payment-response',
+            amount: 20,
+            order_id: "1001",
+            currency: 'BDT',
+            customer_name: 'shefat',
+            customer_address: 'paltan',
+            customer_phone: '+8801234569874',
+            customer_city: 'dhaka',
+            customer_email: 'a@g.com',
+            customer_post_code: "2154",
+            client_ip: "12.12.23.25",
+        });
+
+        console.log(makePayment_details);
+        
+    }
+
+    async function verify_payment(){
+        let payment = await verifyPayment('uniflex66dee6111158c');
+        console.log(payment);
+        payment = await verifyPayment('uniflex66dee785cbfd4');
+        console.log(payment);
+    }
+
     return <div>
+        <button onClick={()=>make_payment()}>try</button>
+        <button onClick={()=>verify_payment()}>try verify</button>
+
         <div className="row">
             <div className="col-md-4">
                 <div className="card bg-dark my-4">
