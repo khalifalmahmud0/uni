@@ -200,7 +200,7 @@
                 try {
                     this.customer_informations = JSON.parse(this.booking.details.customer_informations);
                 } catch (error) {
-                    
+                    this.customer_informations = this.booking.details.customer_informations
                 }
 
                 this.next_date = moment(this.booking.payment_date).add(30,'days').format('yyyy-MM-DD');
