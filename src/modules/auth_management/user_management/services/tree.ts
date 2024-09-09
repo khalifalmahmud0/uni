@@ -20,6 +20,8 @@ async function tree(
     let params = req.params as any;
 
     let auth_user_id = (req as anyObject).user.id;
+    console.log(auth_user_id);
+    
     try {
         let data = await models.UserModel.findOne({
             where: {
@@ -29,14 +31,6 @@ async function tree(
                 exclude: ['password', 'token', 'forget_code', 'user_agent'],
             },
             include: [
-                {
-                    model: models.UserInformationModel,
-                    as: 'info',
-                },
-                {
-                    model: models.UserNomineeModel,
-                    as: 'nominee_infos',
-                },
                 {
                     model: models.UserModel,
                     as: 'reference_info',
@@ -62,46 +56,46 @@ async function tree(
                 //     model: models.UserModel,
                 //     as: 'eds',
                 // },
+                
                 {
                     model: models.UserModel,
                     as: 'gms',
-                    where: {
-                        'gm': null,
-                    },
-                    include: [
-                        {
-                            model: models.UserModel,
-                            as: 'agms',
-                            where: {
-                                'agm': null,
-                            },
-                            include: [
-                                {
-                                    model: models.UserModel,
-                                    as: 'mos',
-                                    where: {
-                                        'mo': null,
-                                    },
-                                    include: [
-                                        {
-                                            model: models.UserModel,
-                                            as: 'reference_info',
-                                        },
-                                    ]
-                                },
-                                {
-                                    model: models.UserModel,
-                                    as: 'reference_info',
-                                },
-                            ]
-                        },
-                        {
-                            model: models.UserModel,
-                            as: 'reference_info',
-                        },
-                    ],
+                    // where: {
+                    //     'gm': null,
+                    // },
+                    // include: [
+                    //     {
+                    //         model: models.UserModel,
+                    //         as: 'agms',
+                    //         where: {
+                    //             'agm': null,
+                    //         },
+                    //         include: [
+                    //             {
+                    //                 model: models.UserModel,
+                    //                 as: 'mos',
+                    //                 where: {
+                    //                     'mo': null,
+                    //                 },
+                    //                 include: [
+                    //                     {
+                    //                         model: models.UserModel,
+                    //                         as: 'reference_info',
+                    //                     },
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 model: models.UserModel,
+                    //                 as: 'reference_info',
+                    //             },
+                    //         ]
+                    //     },
+                    //     {
+                    //         model: models.UserModel,
+                    //         as: 'reference_info',
+                    //     },
+                    // ],
                 },
-                
                 
             ],
         });
