@@ -74,22 +74,6 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.BIGINT.UNSIGNED,
                 allowNull: true,
             },
-            mo: {
-                type: DataTypes.BIGINT.UNSIGNED,
-                allowNull: true,
-            },
-            agm: {
-                type: DataTypes.BIGINT.UNSIGNED,
-                allowNull: true,
-            },
-            gm: {
-                type: DataTypes.BIGINT.UNSIGNED,
-                allowNull: true,
-            },
-            ed: {
-                type: DataTypes.BIGINT.UNSIGNED,
-                allowNull: true,
-            },
             role: {
                 type: new DataTypes.ENUM(
                     'super_admin',
@@ -108,6 +92,24 @@ function init(sequelize: Sequelize) {
                 type: new DataTypes.ENUM('ed', 'gm', 'agm', 'mo', 'office_incharge'),
                 allowNull: true,
             },
+            mo: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            agm: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            gm: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            ed: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: true,
+            },
+            
+            
             name: {
                 type: new DataTypes.STRING(120),
                 allowNull: true,
