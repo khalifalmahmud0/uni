@@ -21,8 +21,14 @@ const check_is_loged_in = async (
     let user = await models.UserModel.findByPk(decoded.id);
 
     if (user && user.token == decoded.token) {
-        (request as anyObject).user = decoded;
-        return reply.redirect('/admin');
+        (request as anyObject).user = user;
+        if(user.role == 'customer'){
+            return reply.redirect('/customer');
+        }else if(user.role == 'admin'){
+            return reply.redirect('/admin');
+        }else if(user.role == 'marketing'){
+            return reply.redirect('/mo');
+        }
     } else {
         return;
     }
