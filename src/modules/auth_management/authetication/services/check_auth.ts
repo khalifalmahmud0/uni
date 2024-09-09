@@ -24,7 +24,7 @@ const check_auth = async (request: FastifyRequest, reply: FastifyReply) => {
             user.token == decoded.token &&
             decoded.user_agent == user_agent
         ) {
-            (request as anyObject).user = decoded;
+            (request as anyObject).user = user;
             return;
         } else {
             reply.code(401).send({ error: 'Unauthorized' });
