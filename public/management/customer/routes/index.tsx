@@ -8,6 +8,7 @@ import Profile from '../views/pages/Profile/Profile';
 
 import Payment from '../views/pages/Payment/Payment';
 import PaymentHistory from '../views/pages/Payment/PaymentHistory';
+import PaymentResponse from '../views/pages/Payment/PaymentResponse';
 
 
 interface RouteTypes extends NonIndexRouteObject { }
@@ -31,6 +32,10 @@ const router: RouteTypes[] = [
             {
                 path: 'payment-histories',
                 element: <PaymentHistory />,
+            },
+            {
+                path: 'payment-response',
+                element: <PaymentResponse />,
             },
             user_branch_staff_routes,
 
