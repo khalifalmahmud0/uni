@@ -27,6 +27,7 @@ module.exports = async function (fastify: FastifyInstance) {
             '/admin',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.role != 'admin') reply.redirect(301, '/');
                 return reply.view('dashboard/admin_uni.ejs');
             },
         )
@@ -34,6 +35,9 @@ module.exports = async function (fastify: FastifyInstance) {
             '/customer',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
+                console.log((_req as any).user);
+                
+                if((_req as any).user.role != 'customer') reply.redirect(301, '/');
                 return reply.view('dashboard/customer.ejs');
             },
         )
@@ -41,6 +45,7 @@ module.exports = async function (fastify: FastifyInstance) {
             '/mo',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.role != 'marketing') reply.redirect(301, '/');
                 return reply.view('dashboard/mo.ejs');
             },
         )
