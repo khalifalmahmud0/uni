@@ -11,9 +11,15 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(`${prefix}`, controllerInstance.all)
         .get(`${prefix}/:id`, controllerInstance.find)
         .get(`${prefix}/customer/:id`, controllerInstance.customer_details)
+        
         .get(`${prefix}/:id/tree`,{
             preHandler: check_auth,
         } , controllerInstance.tree)
+
+        .get(`${prefix}/:id/insentive-calculation`,{
+            preHandler: check_auth,
+        } , controllerInstance.insetive_calculation)
+
         .post(`${prefix}/store`, controllerInstance.store)
         .post(`${prefix}/update`, controllerInstance.update)
         .post(`${prefix}/soft-delete`, controllerInstance.soft_delete)
