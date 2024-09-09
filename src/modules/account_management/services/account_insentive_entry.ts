@@ -119,7 +119,7 @@ async function account_insentive_entry(
                     null,
                     null,
                     user?.reference,
-                    moment().toString(), 
+                    param.date, 
                     amount * .1, 
                     param.type
                 );
@@ -136,7 +136,7 @@ async function account_insentive_entry(
             null,
             null,
             null,
-            moment().toString(), 
+            param.date, 
             mo_amount, 
             param.type
         );
@@ -150,7 +150,7 @@ async function account_insentive_entry(
             null,
             null,
             null,
-            moment().toString(), 
+            param.date, 
             agm_amount, 
             param.type
         );
@@ -164,7 +164,7 @@ async function account_insentive_entry(
             param.gm_id,
             null,
             null,
-            moment().toString(), 
+            param.date, 
             gm_amount, 
             param.type
         );
@@ -178,7 +178,7 @@ async function account_insentive_entry(
             null,
             param.ed_id,
             null,
-            moment().toString(), 
+            param.date, 
             ed_amount, 
             param.type
         );
@@ -193,7 +193,7 @@ async function account_insentive_entry(
         //     null,
         //     null,
         //     null,
-        //     moment().toString(), 
+        //     param.date, 
         //     ed_amount, 
         //     param.type
         // );
