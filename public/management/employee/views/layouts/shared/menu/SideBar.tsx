@@ -20,7 +20,16 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 <MenuSingle to="/profile" icon="icon-dashboard" label="Profile" />
                 <MenuSingle to="/business-model" icon="icon-dashboard" label="Business Model" />
                 <MenuSingle to="/payment-histories" icon="icon-dashboard" label="Payments and Revenues" />
-                
+                <li>
+                    <a className="sidebar-header" href="/logout" onClick={(e) => {
+                        e.preventDefault();
+                        return (window as any).confirm('logout!!') &&
+                            (document.getElementById('logout_form') as HTMLFormElement)?.submit();
+                    }}>
+                        <i className="icon-lock"></i>
+                        <span> Logout</span>
+                    </a>
+                </li>
             </ul>
         </>
     );
