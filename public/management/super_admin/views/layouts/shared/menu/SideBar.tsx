@@ -3,7 +3,7 @@ import React from 'react';
 import MenuDropDown from './MenuDropDown';
 import MenuDropDownItem from './MenuDropDownItem';
 import MenuSingle from './MenuSingle';
-export interface Props {}
+export interface Props { }
 
 const SideBar: React.FC<Props> = (props: Props) => {
     setTimeout(() => {
@@ -47,6 +47,7 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 <MenuDropDown group_title="Account" icon="icon-desktop">
                     <MenuDropDownItem label="Incomes" to="/accounts/incomes" />
                     <MenuDropDownItem label="Expenses" to="/accounts/expense" />
+                    <MenuDropDownItem label="Expense Entry" to="/accounts/new-expense" />
                     <MenuDropDownItem label="All Account" to="/account_types" />
                     <MenuDropDownItem label="All Account Number" to="/account_numbers" />
                     <MenuDropDownItem label="All Account Categories" to="/account_categories" />
@@ -68,6 +69,17 @@ const SideBar: React.FC<Props> = (props: Props) => {
                     <MenuDropDownItem label="Assign Visit" to="/visit_history" />
                 </MenuDropDown>
 
+                <li>
+                    <a className="sidebar-header" href="/logout" onClick={(e) => {
+                        e.preventDefault();
+                        return (window as any).confirm('logout!!') &&
+                            (document.getElementById('logout_form') as HTMLFormElement)?.submit();
+                    }}>
+                        <i className="icon-lock"></i>
+                        <span> Logout</span>
+                    </a>
+                </li>
+
             </ul>
         </>
     );
@@ -79,7 +91,14 @@ function active_link(hash) {
     (window as any)
         .$(`.sidebar-submenu a[href="${url.hash}"]`)
         .addClass('active');
+    (window as any)
+        .$(`.sidebar-submenu a[href="${url.hash}"]`)
+        .parent('li')
+        .parent('ul').css({ display: 'block' }).addClass('menu-open')
+        .parent('li').addClass('active')
+
 }
+
 function init_nav_action() {
     var animationSpeed = 300,
         subMenuSelector = '.sidebar-submenu';
