@@ -120,6 +120,7 @@ async function store(
             amount: body.amount,
             type: 'income',
             user_id: body.user_id,
+            date: body.date,
         });
 
         /*** track project payment */
@@ -133,7 +134,7 @@ async function store(
         project_payment.amount_in_text = body.amount_in_text;
         project_payment.installment_no = body.installment_no;
         project_payment.receipt_no = body.receipt_no;
-        project_payment.date = moment().toString();
+        project_payment.date = body.date;
         project_payment.type = body.type;
         await project_payment.save();
 
