@@ -1,9 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../store';
+import { get_insentive_calculation } from './users/config/store/async_actions/get_insentive_calculation';
+import { anyObject } from '../../common_types/object';
 export interface Props { }
 
 const T1: React.FC<Props> = (props: Props) => {
+    const dispatch = useAppDispatch();
+    const [balance, setBalance] = useState<anyObject>({});
+
+    useEffect(() => {
+        let response = dispatch(get_insentive_calculation({}) as any);
+        console.log(response.payload.data);
+        
+    }, [])
+    
     return <div>
         <div className="row">
+            <div className="col-12">
+                <div className="card height-equal w-100 equal-height-lg" style={{ minHeight: 463.375 }}>
+                    <div className="card-header">
+                        <h5>
+                            Todays Insentives
+                        </h5>
+                        <div className="card-header-right">
+                        </div>
+                    </div>
+                    <div className="card-body">
+                        <div className="height-scroll custom-scrollbar">
+                            <table className="table text-center table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" colSpan={2} className="">Booking Money</th>
+                                        <th scope="col" colSpan={2} className="">Down Payment</th>
+                                        <th scope="col" colSpan={2} className="">Installment</th>
+                                        <th scope="col" colSpan={2} className="">Reference</th>
+                                        <th scope="col" className=""></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Previous</th>
+                                        <th>Today</th>
+
+                                        <th>Previous</th>
+                                        <th>Today</th>
+
+                                        <th>Previous</th>
+                                        <th>Today</th>
+
+                                        <th>Previous</th>
+                                        <th>Today</th>
+
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        [40000].map(el => {
+
+                                            return (
+                                                <tr>
+                                                    <td className="digits">{el} TK</td>
+                                                    <td className="digits">{el} TK</td>
+
+                                                    <td className="digits">{el} TK</td>
+                                                    <td className="digits">{el} TK</td>
+
+                                                    <td className="digits">{el} TK</td>
+                                                    <td className="digits">{el} TK</td>
+
+                                                    <td className="digits">{el} TK</td>
+                                                    <td className="digits">{el} TK</td>
+
+                                                    <td>
+
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div className="row d-none">
             <div className="col-md-4">
                 <div className="card bg-dark my-4 w-100">
                     <div className="card-body">
@@ -65,60 +147,7 @@ const T1: React.FC<Props> = (props: Props) => {
             </div>
 
         </div>
-        <div className="row">
-            <div className="col-xl-6 col-lg-12">
-                <div className="card height-equal equal-height-lg" style={{ minHeight: 463.375 }}>
-                    <div className="card-header">
-                        <h5>
-                            Payment Histories
-                        </h5>
-                        <div className="card-header-right">
-                        </div>
-                    </div>
-                    <div className="card-body">
-                        <div className="user-status height-scroll custom-scrollbar">
-                            <table className="table table-bordernone">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" className="pt-0">Project</th>
-                                        <th scope="col" className="pt-0">Customer</th>
-                                        <th scope="col" className="pt-0">Date</th>
-                                        <th scope="col" className="pt-0">Amount</th>
-                                        <th scope="col" className="pt-0">Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        [40000, 55000, 24000, 60000].map(el => {
-
-                                            return (<tr>
-                                                <td>
-                                                    Basundara river view
-                                                </td>
-                                                <td>
-                                                    Mr. Sharifuddin
-                                                </td>
-                                                <td className="digits">
-                                                    {new Date().toDateString()}
-                                                </td>
-                                                <td className="digits">{el} TK</td>
-                                                <td className="font-secondary">Pending</td>
-                                                <td>
-                                                    <a href="/print-invoice" target="_blank" className="btn btn-info">
-                                                        Print
-                                                    </a>
-                                                </td>
-                                            </tr>)
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>;
 };
 
