@@ -56,6 +56,13 @@ module.exports = async function (fastify: FastifyInstance) {
                 return reply.view('print/payment_invoice.ejs');
             },
         )
+        .get(
+            '/payment-response',
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.send("ok");
+                // return reply.view('print/payment_invoice.ejs');
+            },
+        )
         .post(
             '/logout',
             { preHandler: check_auth_and_redirect },
