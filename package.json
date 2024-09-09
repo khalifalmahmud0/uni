@@ -70,10 +70,13 @@
     "test": "jest",
     "server": "nodemon",
     "serve": "ts-node src/index.ts",
+
     "super-admin": "vite build --config vite-config-super-admin.js --watch --sourcemap",
     "employee": "vite build --config vite-config-employee.js --watch --sourcemap",
+    "mo": "vite build --config vite-config-mo.js --watch --sourcemap",
     "customer": "vite build --config vite-config-customer.js --watch --sourcemap",
     "admin": "vite build --config vite-config-admin.js --watch",
+
     "server:lint": "npx esw --ext .ts src --fix",
     "server:lint:watch": "npx esw  --watch --ext .ts src --fix",
     "client:lint": "npx esw --ext .tsx public/management  --config .eslintrc.react.json --fix",
