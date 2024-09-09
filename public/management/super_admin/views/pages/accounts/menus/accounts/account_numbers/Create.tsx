@@ -38,9 +38,9 @@ const Create: React.FC<Props> = (props: Props) => {
                                             name="account_id"
                                             values={[
                                                 { text: '--select--', value: '' },
+                                                { text: 'cash', value: '1' },
                                                 { text: 'bank', value: '2' },
-                                                { text: 'bkash', value: '3' },
-                                                { text: 'rocket', value: '4' },
+                                                { text: 'surjopay', value: '3' },
                                             ]}
                                         />
                                     </div>
