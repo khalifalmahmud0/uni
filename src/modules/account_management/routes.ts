@@ -40,6 +40,7 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(`${prefix}/expenses`, AccountLogControllerInstance.all_expense)
         .get(`${prefix}/:id`, AccountLogControllerInstance.find)
         .post(`${prefix}/store`, AccountLogControllerInstance.store)
+        .post(`${prefix}/store-expense`, AccountLogControllerInstance.store_expense)
         .post(`${prefix}/update`, AccountLogControllerInstance.update)
         .post(`${prefix}/soft-delete`, AccountLogControllerInstance.soft_delete)
         .post(`${prefix}/restore`, AccountLogControllerInstance.restore)
