@@ -20,7 +20,7 @@ const check_auth_and_redirect = async (
     let models = await db();
     let user = await models.UserModel.findByPk(decoded.id);
     if (user && user.token == decoded.token) {
-        (request as anyObject).user = decoded;
+        (request as anyObject).user = user;
         return;
     } else {
         return reply.redirect('/login');
