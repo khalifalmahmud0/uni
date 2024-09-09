@@ -55,7 +55,9 @@ const db = async function (): Promise<models> {
     const AccountUserSalesInsentiveModel = account_user_sales_insentive_model.init(sequelize);
     const AccountUserSalesInsentiveCalculationModel = account_user_sales_insentive_calculation_model.init(sequelize);
 
-    // await sequelize.sync();
+    // await sequelize.sync({
+    // //    force: true,
+    // });
 
     AccountNumberModel.belongsTo(AccountModel,{
         foreignKey: 'account_id',
