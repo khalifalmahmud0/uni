@@ -42,7 +42,7 @@ const TopHeader: React.FC<Props> = (props: Props) => {
                           </div>
                       </form>
                   </li> */}
-                            <li>
+                            {/* <li>
                                 <a href="#!" className="text-dark">
                                     <img
                                         className="align-self-center pull-right me-2"
@@ -50,8 +50,8 @@ const TopHeader: React.FC<Props> = (props: Props) => {
                                         alt="header-browser"
                                     />
                                 </a>
-                            </li>
-                            <li className="onhover-dropdown">
+                            </li> */}
+                            {/* <li className="onhover-dropdown">
                                 <div className="d-flex align-items-center">
                                     <img
                                         className="align-self-center pull-right flex-shrink-0 me-2"
@@ -79,7 +79,7 @@ const TopHeader: React.FC<Props> = (props: Props) => {
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> */}
                         </ul>
                         <div className="d-lg-none mobile-toggle">
                             <i className="icon-more" />
