@@ -1,12 +1,28 @@
-import React from 'react';
-import Input from './components/Input';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { commnStoreInitialState } from '../../../store/slices/common_slice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import { anyObject } from '../../../common_types/object';
 export interface Props { }
 
 const PaymentHistory: React.FC<Props> = (props: Props) => {
+    const state: typeof commnStoreInitialState = useSelector(
+        (state: RootState) => state['common_store'],
+    );
+    const [payments, setPayments] = useState<anyObject[]>([]);
+    
+    useEffect(() => {
+        axios.get('/api/v1/project/payments/customer/' + (state.auth_user as any)?.user?.id)
+            .then(res => {
+                setPayments(res.data.data);
+            })
+    }, [state.auth_user])
+
     return <div className="page_content">
-        <div className="row">
-            <div className="col-12">
-                <div className="card w-100 mt-4">
+        <div className="row mt-5">
+            <div className="col-xl-10 col-lg-12">
+                <div className="card w-100" style={{ minHeight: 463.375 }}>
                     <div className="card-header">
                         <h5>
                             Payment Histories
@@ -15,47 +31,42 @@ const PaymentHistory: React.FC<Props> = (props: Props) => {
                         </div>
                     </div>
                     <div className="card-body">
-                        <div className="user-status height-scroll custom-scrollbar">
+                        <div className="table-responsive">
                             <table className="table table-bordernone">
                                 <thead>
                                     <tr>
-                                        <th scope="col" className="pt-0">Project</th>
+                                        <th scope="col" className="pt-0">Type</th>
                                         <th scope="col" className="pt-0">Date</th>
                                         <th scope="col" className="pt-0">Amount</th>
-                                        <th scope="col" className="pt-0">Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                        [40000, 55000, 24000, 60000].map(el => {
+                                        payments.map(el => {
 
                                             return (<tr>
                                                 <td>
-                                                    Basundara river view
+                                                    {el.type}
                                                 </td>
                                                 <td className="digits">
-                                                    {new Date().toDateString()}
+                                                    {new Date(el.date).toDateString()}
                                                 </td>
-                                                <td className="digits">{el} TK</td>
-                                                <td className="font-secondary">Pending</td>
+                                                <td className="digits">{el.amount} TK</td>
                                                 <td>
-                                                    <a href="/print-invoice" target="_blank" className="btn btn-info">
+                                                    <a href={`/print-customer-payment-invoice?id=${el.id}`} target="_blank" className="btn btn-info">
                                                         Print
                                                     </a>
                                                 </td>
                                             </tr>)
-
                                         })
                                     }
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>;
 };
