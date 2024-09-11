@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../store';
-import { get_insentive_calculation } from './users/config/store/async_actions/get_insentive_calculation';
 import { anyObject } from '../../common_types/object';
+import axios from 'axios';
 export interface Props { }
 
 const T1: React.FC<Props> = (props: Props) => {
@@ -13,9 +13,9 @@ const T1: React.FC<Props> = (props: Props) => {
     }, []);
 
     async function get_data() {
-        let response = await dispatch(get_insentive_calculation({}) as any);
+        let response = await axios.get('/api/v1/users/34/insentive-calculation');
         // console.log(response);
-        setBalance(response.payload.data)
+        setBalance(response.data.data)
     }
 
     function get_amount(key) {
@@ -76,14 +76,14 @@ const T1: React.FC<Props> = (props: Props) => {
                                             {get_amount('prev_down_payment')}
                                         </td>
                                         <td className="digits">
-                                            {get_amount('prev_down_payment')}
+                                            {get_amount('today_down_payment')}
                                         </td>
 
                                         <td className="digits">
                                             {get_amount('prev_installment')}
                                         </td>
                                         <td className="digits">
-                                            {get_amount('total_installment')}
+                                            {get_amount('today_installment')}
                                         </td>
 
                                         <td className="digits">
