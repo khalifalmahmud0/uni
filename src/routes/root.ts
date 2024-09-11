@@ -63,6 +63,22 @@ module.exports = async function (fastify: FastifyInstance) {
             },
         )
         .get(
+            '/gm',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.designation != 'gm') reply.redirect(301, '/');
+                return reply.view('dashboard/gm.ejs');
+            },
+        )
+        .get(
+            '/ed',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.designation != 'ed') reply.redirect(301, '/');
+                return reply.view('dashboard/ed.ejs');
+            },
+        )
+        .get(
             '/print-invoice',
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 return reply.view('print/invoice.ejs');
