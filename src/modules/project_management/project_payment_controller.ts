@@ -15,6 +15,7 @@ import destroy from './services_project_payment/destroy';
 import block from './services_project_payment/block';
 import data_import from './services_project_payment/import';
 import details_full from './services_project_payment/details_full';
+import customer_payments from './services_project_payment/customer_payments';
 
 export default function (fastify: FastifyInstance) {
     return {
@@ -28,6 +29,11 @@ export default function (fastify: FastifyInstance) {
 
         find_full_details: async function (req: FastifyRequest, res: FastifyReply) {
             let data = await details_full(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        customer_payments: async function (req: FastifyRequest, res: FastifyReply) {
+            let data = await customer_payments(fastify, req);
             res.code(data.status).send(data);
         },
 
