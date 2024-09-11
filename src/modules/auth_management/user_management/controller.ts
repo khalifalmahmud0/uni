@@ -18,6 +18,7 @@ import tree from './services/tree';
 import customer_details from './services/customer_details';
 import insetive_calculation from './services/insetive_calculation';
 import update_profile from './services/update_profile';
+import employee_details from './services/employee_details';
 
 export default function (fastify: FastifyInstance) {
     return {
@@ -36,6 +37,11 @@ export default function (fastify: FastifyInstance) {
 
         customer_details: async function (req: FastifyRequest, res: FastifyReply) {
             let data = await customer_details(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        employee_details: async function (req: FastifyRequest, res: FastifyReply) {
+            let data = await employee_details(fastify, req);
             res.code(data.status).send(data);
         },
 
