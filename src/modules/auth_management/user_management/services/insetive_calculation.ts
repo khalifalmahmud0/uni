@@ -24,7 +24,7 @@ async function insetive_calculation(
     let params = req.params as any;
 
     let auth_user_id = (req as anyObject).user.id;
-    console.log(auth_user_id);
+    // console.log(auth_user_id);
     
     try {
         let data = await models.UserModel.findOne({
