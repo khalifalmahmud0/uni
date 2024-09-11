@@ -31,7 +31,7 @@ type designation = 'ed' | 'gm' | 'agm' | 'mo' | 'office_incharge';
 
 class DataModel extends Model<Infer, InferCreation> {
     declare id?: CreationOptional<number>;
-    declare uid: string;
+    declare uid?: string;
     declare name: string;
     declare role?: role;
 
@@ -42,7 +42,7 @@ class DataModel extends Model<Infer, InferCreation> {
     declare gm?: number;
     declare ed?: number;
 
-    declare email: string | null;
+    declare email?: string | null;
     declare phone_number?: string | null;
     declare image?: string | null;
 
