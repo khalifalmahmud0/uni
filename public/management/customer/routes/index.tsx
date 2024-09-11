@@ -2,7 +2,6 @@ import React from 'react';
 import { NonIndexRouteObject } from 'react-router-dom';
 import DashboardLayout from '../views/layouts/DashboardLayout';
 import T1 from '../views/pages/T1';
-import user_branch_staff_routes from '../views/pages/users/config/routes';
 
 import Profile from '../views/pages/Profile/Profile';
 
@@ -37,8 +36,6 @@ const router: RouteTypes[] = [
                 path: 'payment-response',
                 element: <PaymentResponse />,
             },
-            user_branch_staff_routes,
-
         ],
     },
 ];

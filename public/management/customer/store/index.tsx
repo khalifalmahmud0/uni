@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import commonStore from './slices/common_slice';
-import users from '../views/pages/users/config/store';
+// import users from '../views/pages/users/config/store';
 
 const store = configureStore({
     reducer: {
-        users: users.reducer,
+        // users: users.reducer,
         common_store: commonStore.reducer,
     },
     devTools: true,
