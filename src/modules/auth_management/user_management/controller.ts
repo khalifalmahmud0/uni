@@ -17,6 +17,7 @@ import data_import from './services/import';
 import tree from './services/tree';
 import customer_details from './services/customer_details';
 import insetive_calculation from './services/insetive_calculation';
+import update_profile from './services/update_profile';
 
 export default function (fastify: FastifyInstance) {
     return {
@@ -55,6 +56,11 @@ export default function (fastify: FastifyInstance) {
 
         update: async function (req: FastifyRequest, res: FastifyReply) {
             let data: responseObject = await update(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        update_profile: async function (req: FastifyRequest, res: FastifyReply) {
+            let data: responseObject = await update_profile(fastify, req);
             res.code(data.status).send(data);
         },
 
