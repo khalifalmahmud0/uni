@@ -1,8 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from './components/Input';
+import axios from 'axios';
+import { commnStoreInitialState } from '../../../store/slices/common_slice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import { anyObject } from '../../../common_types/object';
+import useRef from 'react';
+
 export interface Props { }
 
 const Profile: React.FC<Props> = (props: Props) => {
+    const state: typeof commnStoreInitialState = useSelector(
+        (state: RootState) => state['common_store'],
+    );
+
+    const [user, setUser] = useState<anyObject>({})
+
+    function submit_handler(e) {
+        e.preventDefault();
+        let form_data = new FormData(e.target);
+        axios.post('/api/v1/users/update-profile', form_data)
+            .then(res => {
+                // console.log(res);
+                (window as any).toaster('Profile Information updated');
+            })
+    }
+
+    useEffect(() => {
+        setUser((state.auth_user as anyObject)?.user)
+    }, [state.auth_user])
+
     return <div className="page_content">
         <div className="row">
             <div className="col-12">
@@ -10,41 +37,45 @@ const Profile: React.FC<Props> = (props: Props) => {
                     <div className="card-header">
                         <h3>Update Profile</h3>
                     </div>
-                    {/* 
-                        code,
-                        name,
-                        mobile_number,
-                        nid,
-                        nominee info,
-                        accounts,
-                    */}
-                    <div className="card-body">
-                        <form action="">
-                            <div className="form-group form-vertical">
-                                <Input
-                                    name={'name'}
-                                    label="Name"
-                                />
-                            </div>
-                            <div className="form-group form-vertical">
-                                <Input
-                                    name={'email'}
-                                    label="Email"
-                                />
-                            </div>
-                            <div className="form-group form-vertical">
-                                <Input
-                                    name={'phone_number'}
-                                    label="Phone Number"
-                                />
-                            </div>
-                            <div className="form-group form-vertical">
-                                <button className="btn btn-info">
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                    {
+                        (user && Object.keys(user).length) &&
+                        <div className="card-body">
+                            <form action="" onSubmit={submit_handler}>
+                                <div className="form-group form-vertical">
+                                    <Input
+                                        name={'name'}
+                                        label="Name"
+                                        value={user.name}
+                                    />
+                                </div>
+                                <div className="form-group form-vertical">
+                                    <Input
+                                        name={'email'}
+                                        label="Email"
+                                        value={user.email}
+                                    />
+                                </div>
+                                <div className="form-group form-vertical">
+                                    <Input
+                                        name={'phone_number'}
+                                        label="Phone Number"
+                                        value={user.phone_number}
+                                    />
+                                </div>
+                                <div className="form-group form-vertical">
+                                    <Input
+                                        name={'password'}
+                                        label="Password"
+                                    />
+                                </div>
+                                <div className="form-group form-vertical">
+                                    <button className="btn btn-info">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    }
                 </div>
             </div>
 
