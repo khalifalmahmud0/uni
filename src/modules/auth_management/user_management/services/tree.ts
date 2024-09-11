@@ -23,7 +23,7 @@ async function tree(
     let user = (req as anyObject).user;
     // console.log(auth_user_id);
     
-    let attributes = ['id','uid','reference','name','mo','agm','gm','ed','image'];
+    let attributes = ['id','uid','reference','role','designation','name','mo','agm','gm','ed','image'];
 
     let agm_relation = [
         {
@@ -41,28 +41,22 @@ async function tree(
             model: models.UserModel,
             as: 'agms',
             attributes: attributes,
-            includes: [
-                {
-                    model: models.UserModel,
-                    as: 'mos',
-                    attributes: attributes,
-                }
-            ]
+            where: {
+                designation: 'agm',
+            },
+            include: agm_relation,
         }
     ];
     
     let ed_relation = [
         {
             model: models.UserModel,
-            as: 'agms',
+            as: 'gms',
             attributes: attributes,
-            includes: [
-                {
-                    model: models.UserModel,
-                    as: 'mos',
-                    attributes: attributes,
-                }
-            ]
+            where: {
+                designation: 'gm',
+            },
+            include: gm_relation
         }
     ];
 
