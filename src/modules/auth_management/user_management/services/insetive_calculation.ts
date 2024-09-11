@@ -81,7 +81,7 @@ async function insetive_calculation(
                 where: {
                     reference_id: auth_user_id,
                     date: {
-                        [Op.lt]: moment().subtract(1,'days').format('YYYY-MM-DD'),  // End of today
+                        [Op.lte]: moment().subtract(1,'days').format('YYYY-MM-DD'),  // End of today
                     },
                 }
             });
@@ -89,7 +89,8 @@ async function insetive_calculation(
                 where: {
                     reference_id: auth_user_id,
                     date: {
-                        [Op.lt]: moment().subtract(0,'days').format('YYYY-MM-DD'),  // End of today
+                        [Op.gte]: moment().subtract(0,'days').format('YYYY-MM-DD'), // Start of today
+                        [Op.lte]: moment().add(1,'days').format('YYYY-MM-DD') 
                     },
                 }
             });
