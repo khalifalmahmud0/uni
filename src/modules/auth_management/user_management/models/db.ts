@@ -97,12 +97,16 @@ const db = async function (): Promise<models> {
         foreignKey: 'ed',
         as: 'eds',
     });
+
+    /** ed has multiple gms */
     UserModel.hasMany(UserModel, {
-        foreignKey: 'gm',
+        foreignKey: 'ed',
         as: 'gms',
     });
+
+    /** gm has multiple agms */
     UserModel.hasMany(UserModel, {
-        foreignKey: 'agm',
+        foreignKey: 'gm',
         as: 'agms',
     });
 
