@@ -11,6 +11,9 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(`${prefix}`, controllerInstance.all)
         .get(`${prefix}/:id`, controllerInstance.find)
         .get(`${prefix}/customer/:id`, controllerInstance.customer_details)
+        .get(`${prefix}/auth-customer`,{
+            preHandler: check_auth,
+        }, controllerInstance.customer_details)
         
         .get(`${prefix}/:id/tree`,{
             preHandler: check_auth,
@@ -22,6 +25,11 @@ module.exports = async function (fastify: FastifyInstance) {
 
         .post(`${prefix}/store`, controllerInstance.store)
         .post(`${prefix}/update`, controllerInstance.update)
+
+        .post(`${prefix}/update-profile`,{
+            preHandler: check_auth,
+        }, controllerInstance.update_profile)
+
         .post(`${prefix}/soft-delete`, controllerInstance.soft_delete)
         .post(`${prefix}/restore`, controllerInstance.restore)
         .post(`${prefix}/destroy`, controllerInstance.destroy)
