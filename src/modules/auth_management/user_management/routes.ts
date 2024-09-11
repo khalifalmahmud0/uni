@@ -15,6 +15,10 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(`${prefix}/auth-customer`,{
             preHandler: check_auth,
         }, controllerInstance.customer_details)
+
+        .get(`${prefix}/user-refered-customers`,{
+            preHandler: check_auth,
+        }, controllerInstance.refered_customers)
         
         .get(`${prefix}/auth-employee`,{
             preHandler: check_auth,
