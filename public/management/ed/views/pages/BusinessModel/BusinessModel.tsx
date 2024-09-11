@@ -46,36 +46,30 @@ const BusinessModel: React.FC<Props> = (props: Props) => {
                         <div style={{ minWidth: '400px' }}>
                             <Tree label={tree_item(tree)}>
                                 {
-                                    (tree as anyObject)?.mos?.map(mo => {
+                                    (tree as anyObject)?.gms?.map(gm => {
                                         return (
-                                            <TreeNode label={tree_item(mo)}>
-                                                {/* <TreeNode label={<div>Grand Child</div>} /> */}
+                                            <TreeNode label={tree_item(gm)}>
+                                                {
+                                                    gm.agms?.map(agm => {
+                                                        return (
+                                                            <TreeNode label={tree_item(agm)}>
+                                                                {
+                                                                    agm.mos?.map(mo => {
+                                                                        return (
+                                                                            <TreeNode label={tree_item(mo)} />
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </TreeNode>
+                                                        )
+                                                    })
+                                                }
                                             </TreeNode>
                                         )
                                     })
                                 }
                             </Tree>
                         </div>
-
-                        {/* <div className="tree_ul">
-                            <ul>
-                                <li>
-                                    {tree.uid} - {tree.name}
-                                    <ul>
-                                        {
-                                            (tree as anyObject)?.mos?.map(mo => {
-                                                return (
-                                                    <li>
-                                                        {mo.uid} - {mo.name}
-                                                    </li>
-                                                );
-                                            })
-                                        }
-                                    </ul>
-                                </li>
-
-                            </ul>
-                        </div> */}
 
                     </div>
                 </div>
