@@ -124,14 +124,20 @@
                     else if(res.data.data.role == 'admin'){
                         return location.href = "/management";
                     }
-                    else if(res.data.data.role == 'marketing'){
-                        return location.href = "/mo";
-                    }
-                    else if(res.data.data.role == 'employee'){
-                        return location.href = "/employee";
-                    }
                     else if(res.data.data.role == 'super_admin'){
                         return location.href = "/management";
+                    }
+                    else if(res.data.data.designation == 'mo'){
+                        return location.href = "/mo";
+                    }
+                    else if(res.data.data.designation == 'agm'){
+                        return location.href = "/agm";
+                    }
+                    else if(res.data.data.designation == 'gm'){
+                        return location.href = "/gm";
+                    }
+                    else if(res.data.data.designation == 'ed'){
+                        return location.href = "/ed";
                     }
                 })
                 .catch(err => {

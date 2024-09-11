@@ -20,89 +20,72 @@ async function tree(
     let params = req.params as any;
 
     let auth_user_id = (req as anyObject).user.id;
-    console.log(auth_user_id);
+    let user = (req as anyObject).user;
+    // console.log(auth_user_id);
     
+    let attributes = ['id','uid','reference','name','mo','agm','gm','ed','image'];
+
+    let agm_relation = [
+        {
+            model: models.UserModel,
+            as: 'mos',
+            attributes: attributes,
+            where: {
+                designation: 'mo',
+            }
+        }
+    ];
+    
+    let gm_relation = [
+        {
+            model: models.UserModel,
+            as: 'agms',
+            attributes: attributes,
+            includes: [
+                {
+                    model: models.UserModel,
+                    as: 'mos',
+                    attributes: attributes,
+                }
+            ]
+        }
+    ];
+    
+    let ed_relation = [
+        {
+            model: models.UserModel,
+            as: 'agms',
+            attributes: attributes,
+            includes: [
+                {
+                    model: models.UserModel,
+                    as: 'mos',
+                    attributes: attributes,
+                }
+            ]
+        }
+    ];
+
+    function get_include(){
+        if(user.designation == 'agm'){
+            return agm_relation;
+        }else if(user.designation == 'gm'){
+            return gm_relation;
+        }else if(user.designation == 'ed'){
+            return  ed_relation;
+        }
+    }
+
     try {
         let data = await models.UserModel.findOne({
             where: {
                 id: auth_user_id,
             },
-            attributes: {
-                exclude: ['password', 'token', 'forget_code', 'user_agent'],
-            },
-            include: [
-                {
-                    model: models.UserModel,
-                    as: 'reference_info',
-                },
-                {
-                    model: models.UserModel,
-                    as: 'mo_info',
-                },
-                {
-                    model: models.UserModel,
-                    as: 'gm_info',
-                },
-                {
-                    model: models.UserModel,
-                    as: 'agm_info',
-                },
-                {
-                    model: models.UserModel,
-                    as: 'ed_info',
-                },
-                
-                // {
-                //     model: models.UserModel,
-                //     as: 'eds',
-                // },
-                
-                {
-                    model: models.UserModel,
-                    as: 'gms',
-                    // where: {
-                    //     'gm': null,
-                    // },
-                    // include: [
-                    //     {
-                    //         model: models.UserModel,
-                    //         as: 'agms',
-                    //         where: {
-                    //             'agm': null,
-                    //         },
-                    //         include: [
-                    //             {
-                    //                 model: models.UserModel,
-                    //                 as: 'mos',
-                    //                 where: {
-                    //                     'mo': null,
-                    //                 },
-                    //                 include: [
-                    //                     {
-                    //                         model: models.UserModel,
-                    //                         as: 'reference_info',
-                    //                     },
-                    //                 ]
-                    //             },
-                    //             {
-                    //                 model: models.UserModel,
-                    //                 as: 'reference_info',
-                    //             },
-                    //         ]
-                    //     },
-                    //     {
-                    //         model: models.UserModel,
-                    //         as: 'reference_info',
-                    //     },
-                    // ],
-                },
-                
-            ],
+            attributes: attributes,
+            include: get_include(),
         });
 
-        if (data) {
-            console.log((req as anyObject).user);
-            
+        if (data) {            
             return response(200, 'data found', data);
         } else {
             throw new custom_error('not found', 404, 'data not found');
