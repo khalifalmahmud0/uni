@@ -76,6 +76,8 @@
     "employee": "vite build --config vite-config-employee.js --watch --sourcemap",
     "mo": "vite build --config vite-config-mo.js --watch --sourcemap",
     "agm": "vite build --config vite-config-agm.js --watch --sourcemap",
+    "gm": "vite build --config vite-config-gm.js --watch --sourcemap",
+    "ed": "vite build --config vite-config-ed.js --watch --sourcemap",
     "customer": "vite build --config vite-config-customer.js --watch --sourcemap",
     "admin": "vite build --config vite-config-admin.js --watch",
     "server:lint": "npx esw --ext .ts src --fix",
