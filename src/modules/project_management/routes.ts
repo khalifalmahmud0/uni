@@ -43,6 +43,7 @@ module.exports = async function (fastify: FastifyInstance) {
         .post(`${project_payment_prefix}/destroy`, project_payment_controllerInstance.destroy)
         .post(`${project_payment_prefix}/block`, project_payment_controllerInstance.block)
         .get(`${project_payment_prefix}/details/:id`, project_payment_controllerInstance.find_full_details)
+        .get(`${project_payment_prefix}/customer/:id`, project_payment_controllerInstance.customer_payments)
         .get(`${project_payment_prefix}/:id`, project_payment_controllerInstance.find)
         .post(`${project_payment_prefix}/import`, project_payment_controllerInstance.import);
 };
