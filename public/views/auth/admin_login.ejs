@@ -122,7 +122,7 @@
                         return location.href = "/customer";
                     }
                     else if(res.data.data.role == 'admin'){
-                        return location.href = "/admin";
+                        return location.href = "/management";
                     }
                     else if(res.data.data.role == 'marketing'){
                         return location.href = "/mo";
@@ -131,7 +131,7 @@
                         return location.href = "/employee";
                     }
                     else if(res.data.data.role == 'super_admin'){
-                        return location.href = "/admin";
+                        return location.href = "/management";
                     }
                 })
                 .catch(err => {
