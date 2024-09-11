@@ -270,7 +270,7 @@ async function store(
                 }
             });
 
-            let category_id = 4;
+            let category_id = 1;
             let acccount_id = 1;
             let user_id = 0;
             if(category && category.id) category_id = category.id;
@@ -318,7 +318,7 @@ async function store(
                 date: moment(body.payment_date).format('YYYY-MM-DD'),
                 amount: body.payment_digit,
                 type: body.payment_method,
-            })
+            });
 
         }
 
