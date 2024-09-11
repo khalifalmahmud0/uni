@@ -11,7 +11,7 @@ const check_auth_and_redirect = async (
     const jwt = require('jsonwebtoken');
     // const token = request.headers.authorization;
     const token = request.cookies.token;
-
+    
     if (!token || !token.startsWith('Bearer ')) {
         return reply.redirect('/login');
     }
@@ -25,6 +25,7 @@ const check_auth_and_redirect = async (
     } else {
         return reply.redirect('/login');
     }
+    
 };
 
 export default check_auth_and_redirect;
