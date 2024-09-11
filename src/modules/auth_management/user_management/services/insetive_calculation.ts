@@ -25,7 +25,7 @@ async function insetive_calculation(
 
     let auth_user_id = (req as anyObject).user.id;
     // console.log(auth_user_id);
-    
+    let designation = (req as anyObject).user.designation;
     try {
         let data = await models.UserModel.findOne({
             where: {
@@ -40,9 +40,9 @@ async function insetive_calculation(
             let prev_money = await account_models.AccountUserSalesInsentiveCalculationModel.sum('amount',{
                 where: {
                     type: type,
-                    mo_id: auth_user_id,
+                    [designation+"_id"]: auth_user_id,
                     date: {
-                        [Op.lt]: moment().subtract(0,'days').format('YYYY-MM-DD'),  // End of today
+                        [Op.lte]: moment().subtract(1,'days').format('YYYY-MM-DD'),  // End of today
                     } ,
                 }
             });
@@ -54,7 +54,7 @@ async function insetive_calculation(
             let today_money = await account_models.AccountUserSalesInsentiveCalculationModel.sum('amount',{
                 where: {
                     type: type,
-                    mo_id: auth_user_id,
+                    [designation+"_id"]: auth_user_id,
                     date: {
                         [Op.gte]: moment().subtract(0,'days').format('YYYY-MM-DD'), // Start of today
                         [Op.lte]: moment().add(1,'days').format('YYYY-MM-DD')    // End of today
@@ -69,7 +69,7 @@ async function insetive_calculation(
             let total_money = await account_models.AccountUserSalesInsentiveCalculationModel.sum('amount',{
                 where: {
                     type: type,
-                    mo_id: auth_user_id,
+                    [designation+"_id"]: auth_user_id,
                 }
             });
 
@@ -81,7 +81,7 @@ async function insetive_calculation(
                 where: {
                     reference_id: auth_user_id,
                     date: {
-                        [Op.lt]: moment().subtract(0,'days').format('YYYY-MM-DD'),  // End of today
+                        [Op.lt]: moment().subtract(1,'days').format('YYYY-MM-DD'),  // End of today
                     },
                 }
             });
@@ -147,6 +147,9 @@ async function insetive_calculation(
                 total_insentive: total_insentive,
                 total_withdraw: total_withdraw,
                 balance: total_insentive - total_withdraw,
+
+                prev: moment().subtract(1,'days').format('YYYY-MM-DD'),
+                today: moment().subtract(0,'days').format('YYYY-MM-DD'),
             });
 
         } else {

@@ -105,12 +105,14 @@ const db = async function (): Promise<models> {
         foreignKey: 'agm',
         as: 'agms',
     });
+
+    /** agm has multiple mo */
     UserModel.hasMany(UserModel, {
-        foreignKey: 'mo',
+        foreignKey: 'agm',
         as: 'mos',
     });
 
-    /** user projec information */
+    /** user project information */
     UserModel.hasOne(UserProjectCustomerInformationModel, {
         foreignKey: 'user_id',
         sourceKey: 'id',

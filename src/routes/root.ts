@@ -50,8 +50,16 @@ module.exports = async function (fastify: FastifyInstance) {
             '/mo',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
-                if((_req as any).user.role != 'marketing') reply.redirect(301, '/');
+                if((_req as any).user.designation != 'mo') reply.redirect(301, '/');
                 return reply.view('dashboard/mo.ejs');
+            },
+        )
+        .get(
+            '/agm',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.designation != 'agm') reply.redirect(301, '/');
+                return reply.view('dashboard/agm.ejs');
             },
         )
         .get(
