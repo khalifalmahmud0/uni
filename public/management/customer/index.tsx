@@ -6,6 +6,7 @@ import store from './store/index.js';
 import dashboard_routes from './routes/index.js';
 import axios from 'axios';
 import { anyObject } from '../../../src/common_types/object.js';
+import "./helpers/enToBn.js";
 
 function Component() {
     const router = createHashRouter(dashboard_routes);
