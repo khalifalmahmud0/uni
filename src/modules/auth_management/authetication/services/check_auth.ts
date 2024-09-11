@@ -20,7 +20,7 @@ const check_auth = async (request: FastifyRequest, reply: FastifyReply) => {
         const decoded = jwt.verify(token.slice(7), secretKey);
         let models = await db();
         let user = await models.UserModel.findByPk(decoded.id);
-        console.log(user, );
+        // console.log(user, );
         
         if (
             user &&
