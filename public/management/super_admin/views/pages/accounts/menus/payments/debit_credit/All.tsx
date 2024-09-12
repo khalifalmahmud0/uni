@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 // import setup from './config/setup';
 import { RootState, useAppDispatch } from '../../../../../../store';
@@ -14,6 +14,7 @@ import storeSlice from './config/store';
 import { anyObject } from '../../../../../../common_types/object';
 import SelectAll from './components/all_data_page/SelectIAll';
 import TableHeading from './components/all_data_page/TableHeading';
+import axios from 'axios';
 
 export interface Props { }
 
@@ -24,13 +25,19 @@ const All: React.FC<Props> = (props: Props) => {
 
     const dispatch = useAppDispatch();
 
+    const [logs, setLog] = useState<anyObject[]>([])
+
     useEffect(() => {
-        dispatch(
-            storeSlice.actions.set_select_fields(
-                'id, name, email, image, status',
-            ),
-        );
-        dispatch(all({}));
+        // dispatch(
+        //     storeSlice.actions.set_select_fields(
+        //         'id, name, email, image, status',
+        //     ),
+        // );
+        // dispatch(all({}));
+        axios.get('/api/v1/account/logs/debit-credit')
+            .then(res => {
+                setLog(res.data.data)
+            })
     }, []);
 
     function quick_view(data: anyObject = {}) {
@@ -41,88 +48,21 @@ const All: React.FC<Props> = (props: Props) => {
     interface data {
         [key: string]: any;
     }
-    const datas: data[] = [
-        {
-            id: 1,
-            date: '10 Feb, 2024',
-            amount_in_text: 'Three thousand taka only',
-            purpose: 'hostel rent',
-            credit: '',
-            debit: '3000',
-            balance: '-3000',
-            name: 'Shahin',
-        },
-        {
-            id: 2,
-            date: '14 Feb, 2024',
-            amount_in_text: 'Ten thousand taka only',
-            purpose: 'admission bill',
-            credit: '3000',
-            debit: '',
-            balance: '',
-            name: 'Tamim',
-        },
-        {
-            id: 3,
-            date: '15 Feb, 2024',
-            amount_in_text: 'Five thousand taka only',
-            purpose: 'transport bill',
-            credit: '3000',
-            debit: '',
-            balance: '3000',
-            name: 'Ramim',
-        },
-        {
-            id: 4,
-            date: '23 Feb, 2024',
-            amount_in_text: 'Threee thousand taka only',
-            purpose: 'Tution fee',
-            credit: '3000',
-            debit: '',
-            balance: '6000',
-            name: 'Ramim',
-        },
-        {
-            id: 5,
-            date: '23 Feb, 2024',
-            amount_in_text: 'Fifteen thousand taka only',
-            purpose: 'Tution fee',
-            credit: '15000',
-            debit: '',
-            balance: '21000',
-            name: 'Riaz',
-        },
-        {
-            id: 6,
-            date: '23 Feb, 2024',
-            amount_in_text: 'Twenty thousand taka only',
-            purpose: 'Tution fee',
-            credit: '20000',
-            debit: '',
-            balance: '41000',
-            name: 'Areeba',
-        },
-        {
-            id: 7,
-            date: '23 Feb, 2024',
-            amount_in_text: 'Twenty thousand taka only',
-            purpose: 'Sallary',
-            credit: '',
-            debit: '20000',
-            balance: '21000',
-            name: 'Employee1',
-        },
-        {
-            id: 8,
-            date: '23 Feb, 2024',
-            amount_in_text: 'Ten thousand taka only',
-            purpose: 'Sallary',
-            credit: '',
-            debit: '10000',
-            balance: '11000',
-            name: 'Employee2',
-        },
-    ];
+
+    let final_amount = 0;
+    let final_debit = 0;
+    let final_credit = 0;
+
+    function get_final_amount(item) {
+        if (item.type == 'income') {
+            final_amount += item.amount;
+            final_credit += item.amount
+        } else {
+            final_amount -= item.amount;
+            final_debit += item.amount
+        }
+        return final_amount;
+    }
 
     return (
         <div className="page_content">
@@ -147,35 +87,51 @@ const All: React.FC<Props> = (props: Props) => {
                                     </tr>
                                 </thead>
                                 <tbody id="all_list">
-                                    {datas?.map((i: { [key: string]: any }) => {
+                                    <tr>
+                                        <td colSpan={5}></td>
+                                        <td>Closing Balance</td>
+                                        <td>{final_debit} </td>
+                                        <td>{final_credit} </td>
+                                        <td>{final_amount} </td>
+                                    </tr>
+                                    {logs?.map((log: { [key: string]: any }) => {
                                         return (
                                             <tr>
                                                 <td></td>
-                                                <td>{i.id}</td>
-                                                <td>{i.purpose}</td>
-                                                <td>{i.name}</td>
-                                                <td>{i.date}</td>
-                                                <td>{i.amount_in_text}</td>
-                                                <td>{i.debit} tk</td>
-                                                <td>{i.credit} tk</td>
-                                                <td>{i.balance} tk</td>
+                                                <td>{log.id}</td>
+                                                <td>{log.category.title}</td>
+                                                <td>{log.user.name}</td>
+                                                <td>{new Date(log.date).toDateString()}</td>
+                                                <td>{log.amount_in_text}</td>
+                                                <td>
+                                                    {
+                                                        log.type == 'expense' ?
+                                                            log.amount :
+                                                            0
+                                                    }
+                                                </td>
+                                                <td>
+                                                    {
+                                                        log.type == 'income' ?
+                                                            log.amount :
+                                                            0
+                                                    }
+                                                </td>
+                                                <td>
+                                                    {get_final_amount(log)}
+                                                </td>
                                             </tr>
                                         );
                                     })}
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colSpan={5}></td>
                                         <td>Total:</td>
-                                        <td>dbt : 33000 tk</td>
-                                        <td>Cr : 44000 tk</td>
-                                        <td>Bal : 11000 tk</td>
+                                        <td>dbt : {final_debit} </td>
+                                        <td>Cr : {final_credit} </td>
+                                        <td>Bal : {final_amount} </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <h1> In Progress .. </h1>
                         </div>
 
                         <Paginate
