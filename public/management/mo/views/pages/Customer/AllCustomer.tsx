@@ -24,7 +24,7 @@ const AllCustomer: React.FC<Props> = (props: Props) => {
                         </div>
                     </div>
                     <div className="card-body">
-                        <div className="user-status height-scroll custom-scrollbar" style={{maxHeight: "calc(100vh - 246px)"}}>
+                        <div className="user-status height-scroll custom-scrollbar" style={{ maxHeight: "calc(100vh - 246px)" }}>
                             <table className="table table-bordernone  table-hover">
                                 <thead className="bg-dark position-sticky top-0">
                                     <tr>
@@ -45,13 +45,15 @@ const AllCustomer: React.FC<Props> = (props: Props) => {
                                 </thead>
                                 <tbody>
                                     {
-                                        customers.map((item: anyObject) => {
+                                        customers.map((item: anyObject, index) => {
                                             let project_info = item.project_customer_information?.project_info;
                                             let customer_info: anyObject = {};
                                             try {
-                                                customer_info = JSON.parse(item.project_customer_information.customer_informations);
+                                                customer_info = JSON.parse(item?.project_customer_information?.customer_informations);
                                             } catch (error) {
-                                                customer_info = item.project_customer_information.customer_informations;
+                                                console.log({ item, index });
+
+                                                customer_info = item?.project_customer_information?.customer_informations;
                                             }
                                             return (<tr>
                                                 <td>
@@ -66,13 +68,13 @@ const AllCustomer: React.FC<Props> = (props: Props) => {
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    {project_info.title}
+                                                    {project_info?.title}
                                                 </td>
                                                 <td className="digits">
-                                                    {new Date(customer_info.date).toDateString()}
+                                                    {new Date(customer_info?.date).toDateString()}
                                                 </td>
                                                 <td className="digits">
-                                                    {customer_info.have_to_pay_amount} TK
+                                                    {customer_info?.have_to_pay_amount} TK
                                                 </td>
                                                 <td className="digits">
                                                     {item.total_booking_money} TK
@@ -87,7 +89,7 @@ const AllCustomer: React.FC<Props> = (props: Props) => {
                                                     {item.total_paid} TK
                                                 </td>
                                                 <td className="digits">
-                                                    {customer_info.have_to_pay_amount - item.total_paid} TK
+                                                    {customer_info?.have_to_pay_amount - item?.total_paid} TK
                                                 </td>
                                                 <td>
                                                     <button className="btn btn-info">
