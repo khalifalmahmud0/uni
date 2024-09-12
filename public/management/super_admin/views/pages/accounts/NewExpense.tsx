@@ -29,14 +29,13 @@ const NewExpense: React.FC<Props> = (props: Props) => {
         <>
             <div className="page_content">
                 <div className="explore_window fixed_size">
-                    <Header page_title={setup.create_page_title}></Header>
+                    <Header page_title={"Entry new Expense"} back_url={'accounts/expense'}></Header>
                     <div className="content_body custom_scroll">
                         <form
                             onSubmit={(e) => handle_submit(e)}
                             className="mx-auto pt-3"
                         >
                             <div>
-                                <h5 className="mb-4">Entry new Expense</h5>
 
                                 <input type="hidden" name="type" value="expense" />
                                 <input type="hidden" name="account_id" value="" />
@@ -79,8 +78,18 @@ const NewExpense: React.FC<Props> = (props: Props) => {
                                         />
                                     </div>
                                     <div className="form-group form-vertical">
-                                        <Input type="date" value={moment().format('YYYY-MM-DD')} name={"date"} />
+                                        <label htmlFor="date">Date</label>
+                                        <div className="form_elements">
+                                            <b className="form-control">
+                                                {new Date().toDateString()}
+                                            </b>
+                                            <input type="hidden" placeholder="date" name="date" id="date" value={new Date().toISOString().substr(0, 10)} />
+                                        </div>
                                     </div>
+                                    {/* <div className="form-group form-vertical">
+                                        <Input type="date" value={moment().format('YYYY-MM-DD')} name={"date"} />
+                                    </div> */}
+
                                     <div className="form-group form-vertical">
                                         <Input name={"amount"} callback={(e) => {
                                             let el = document.querySelector('input[name="amount_in_text"]');
@@ -108,7 +117,7 @@ const NewExpense: React.FC<Props> = (props: Props) => {
                             </div>
                         </form>
                     </div>
-                    <Footer></Footer>
+                    {/* <Footer></Footer> */}
                 </div>
             </div>
         </>
