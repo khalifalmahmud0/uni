@@ -3,6 +3,7 @@ import setup from '../../config/setup';
 import { Link } from 'react-router-dom';
 export interface Props {
     page_title: string;
+    back_url?: string;
 }
 
 const Header: React.FC<Props> = (props: Props) => {
@@ -20,7 +21,7 @@ const Header: React.FC<Props> = (props: Props) => {
                 <div className="control">
                     <ul>
                         <li>
-                            <Link to={`/${setup.route_prefix}`}>
+                            <Link to={`/${props.back_url || setup.route_prefix}`}>
                                 <span className="material-symbols-outlined fill">
                                     arrow_back
                                 </span>
