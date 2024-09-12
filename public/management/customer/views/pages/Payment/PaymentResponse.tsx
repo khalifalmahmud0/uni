@@ -21,7 +21,7 @@ const T1: React.FC<Props> = (props: Props) => {
         if (payment.length) {
             setPaymentInfo(payment[0]);
             console.log(payment[0]);
-            if (payment[0].bank_status == "Success") {
+            if (payment[0].sp_massage == "Success") {
                 axios.post('/api/v1/account/logs/store-gateway-payment-on-success', {
                     ...payment[0],
                 })
@@ -54,10 +54,10 @@ const T1: React.FC<Props> = (props: Props) => {
                             (paymentInfo && !isProcessing) &&
                             <div>
                                 {
-                                    paymentInfo.bank_status == "Success" ?
+                                    paymentInfo.sp_massage == "Success" ?
                                         <div>
                                             <h1 className="text-success">
-                                                {paymentInfo.bank_status}
+                                                {paymentInfo.sp_massage}
                                             </h1>
                                             <button onClick={print_invoice} className="btn btn-info" type='button'>
                                                 Print Invoice
