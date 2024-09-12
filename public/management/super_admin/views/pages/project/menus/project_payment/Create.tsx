@@ -167,7 +167,16 @@ const Create: React.FC<Props> = (props: Props) => {
                                             value={""}
                                         />
                                     </div>
-                                    <div className="form-group form-vertical" >
+                                    <div className="form-group form-vertical">
+                                        <label htmlFor="date">Payment Date</label>
+                                        <div className="form_elements">
+                                            <b className="form-control">
+                                                {new Date().toDateString()}
+                                            </b>
+                                            <input type="hidden" placeholder="date" name="date" id="date" value={new Date().toISOString().substr(0, 10)} />
+                                        </div>
+                                    </div>
+                                    {/* <div className="form-group form-vertical" >
                                         <Input
                                             name={"date"}
                                             placeholder={""}
@@ -175,7 +184,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             label={"Payment Date"}
                                             value={new Date().toISOString().substr(0, 10)}
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="form-group form-vertical" >
                                         <Input
                                             name={"amount"}
