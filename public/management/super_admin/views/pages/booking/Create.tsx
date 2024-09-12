@@ -65,7 +65,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div className="form-group form-vertical">
                                         <label>MO</label>
                                         <UserDropDown multiple={false} name={"mo_id"} get_selected_data={(data) => {
-                                            // console.log(data);
+                                            console.log(data);
                                             data.selectedList.length &&
                                                 setMoInfo(data.selectedList[0]);
                                         }} />
@@ -76,7 +76,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             {moInfo.agm_info?.uid} - 
                                             {moInfo.agm_info?.name}
                                         </div>
-                                        <input type="hidden" name="agm_id" value={`[${moInfo.agm}]`} />
+                                        <input type="hidden" name="agm_id" value={`[${moInfo.agm_info?.id}]`} />
                                         {/* <UserDropDown multiple={false} name={"agm_id"} /> */}
                                     </div>
                                     <div className="form-group form-vertical">
@@ -85,7 +85,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             {moInfo.gm_info?.uid} - 
                                             {moInfo.gm_info?.name}
                                         </div>
-                                        <input type="hidden" name="gm_id" value={`[${moInfo.gm}]`} />
+                                        <input type="hidden" name="gm_id" value={`[${moInfo.gm_info?.id}]`} />
                                         {/* <UserDropDown multiple={false} name={"gm_id"} /> */}
                                     </div>
                                     <div className="form-group form-vertical">
@@ -94,7 +94,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             {moInfo.ed_info?.uid} - 
                                             {moInfo.ed_info?.name}
                                         </div>
-                                        <input type="hidden" name="ed_id" value={`[${moInfo.ed}]`} />
+                                        <input type="hidden" name="ed_id" value={`[${moInfo.ed_info?.id}]`} />
                                         {/* <UserDropDown multiple={false} name={"ed_id"} /> */}
                                     </div>
                                 </div>
