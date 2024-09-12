@@ -47,8 +47,8 @@ const T1: React.FC<Props> = (props: Props) => {
 
             const make_payment_details = await makePayment(order_id, {
                 prefix: 'UFX',
-                // store_id: '949',
-                store_id: '1',
+                store_id: '949',
+                // store_id: '1',
                 return_url: location.origin + '/customer#/payment-response',
                 cancel_url: location.origin + '/customer#/payment-response',
                 amount: paymentAmount,
