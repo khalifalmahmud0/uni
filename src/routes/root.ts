@@ -79,6 +79,23 @@ module.exports = async function (fastify: FastifyInstance) {
             },
         )
         .get(
+            '/accountant-manager',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                console.log((_req as any).user);
+                if((_req as any).user.role != 'account_manager') return reply.redirect(301, '/');
+                return reply.view('dashboard/account_manager.ejs');
+            },
+        )
+        .get(
+            '/account-officer',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.role != 'account_officer') reply.redirect(301, '/');
+                return reply.view('dashboard/account_officer.ejs');
+            },
+        )
+        .get(
             '/print-invoice',
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 return reply.view('print/invoice.ejs');
