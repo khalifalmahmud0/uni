@@ -6,7 +6,7 @@ export interface Props {
     name: string;
     placeholder?: string;
     type: string;
-    value?: string;
+    value?: string | number;
     readonly?: true | false,
     callback?: (e: ChangeEvent, value: string) => void;
 }
@@ -22,6 +22,7 @@ const Input: React.FC<Props> = ({
 }: Props) => {
     function convertToValidNumber(input) {
         try {
+            if (typeof input == 'number') return input;
             const extractedNumber = input.match(/-?\d+(\.\d+)?/g);
             return extractedNumber ? parseFloat(extractedNumber.join('')) : '';
         } catch (error) {
@@ -106,7 +107,7 @@ const Input: React.FC<Props> = ({
                     <InputImage
                         name={name}
                         label={label ? label : name.replaceAll('_', ' ')}
-                        preview_url={value}
+                        preview_url={typeof value == 'string' ? value : ''}
                     />
                 )
             }

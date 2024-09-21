@@ -648,14 +648,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                                         text: 'BOOKING MONEY',
                                                         value: 'booking_money',
                                                     },
-                                                    {
-                                                        text: 'DOWNPAYMENT',
-                                                        value: 'down_payment',
-                                                    },
-                                                    {
-                                                        text: 'INSTALLMENT',
-                                                        value: 'installment',
-                                                    }
+                                                    // {
+                                                    //     text: 'DOWNPAYMENT',
+                                                    //     value: 'down_payment',
+                                                    // },
+                                                    // {
+                                                    //     text: 'INSTALLMENT',
+                                                    //     value: 'installment',
+                                                    // },
                                                 ]}
                                             />
                                         </div>
@@ -670,20 +670,16 @@ const Create: React.FC<Props> = (props: Props) => {
                                                         value: '',
                                                     },
                                                     {
-                                                        text: 'Check',
-                                                        value: 'check',
+                                                        text: 'Bank',
+                                                        value: 'bank',
                                                     },
                                                     {
                                                         text: 'Cash',
                                                         value: 'cash',
                                                     },
                                                     {
-                                                        text: 'P.O',
-                                                        value: 'p.o',
-                                                    },
-                                                    {
-                                                        text: 'D.D',
-                                                        value: 'd.d',
+                                                        text: 'Gateway',
+                                                        value: 'surjopay',
                                                     },
                                                 ]}
                                             />

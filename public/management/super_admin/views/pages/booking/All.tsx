@@ -43,12 +43,15 @@ const All: React.FC<Props> = (props: Props) => {
     function get_customer_information(item, key){
         let customer_information = {};
         try {
-            customer_information = JSON.parse(item?.details.customer_informations);
+            customer_information = JSON.parse(item?.details?.customer_informations);
         } catch (error) {
             customer_information = item?.details?.customer_informations;
             // console.error(error);
         }
-        return customer_information[key];
+        if(customer_information?.hasOwnProperty(key)){
+            return customer_information[key];
+        }
+        return '';
     }
 
     return (

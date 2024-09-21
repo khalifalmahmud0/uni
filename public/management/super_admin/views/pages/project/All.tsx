@@ -29,7 +29,7 @@ const All: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(
             storeSlice.actions.set_select_fields(
-                'id,uid,title,location,image,per_share_cost,aveneue,plot,road,description',
+                'id,uid,title,location,image,per_share_plot_cost,per_share_flat_cost,aveneue,plot,road,description',
             ),
         );
         dispatch(all({}));
@@ -92,8 +92,13 @@ const All: React.FC<Props> = (props: Props) => {
                                             sort={true}
                                         />
                                         <TableHeading
-                                            label={`Per Share Cost`}
-                                            col_name={`per_share_cost`}
+                                            label={`Per Share Plot Cost`}
+                                            col_name={`per_share_plot_cost`}
+                                            sort={true}
+                                        />
+                                        <TableHeading
+                                            label={`Per Share Flat Cost`}
+                                            col_name={`per_share_flat_cost`}
                                             sort={true}
                                         />
                                     </tr>
@@ -159,7 +164,8 @@ const All: React.FC<Props> = (props: Props) => {
                                                             {i.road}
                                                         </span>
                                                     </td>
-                                                    <td>{i.per_share_cost}/-</td>
+                                                    <td>{i.per_share_plot_cost}/-</td>
+                                                    <td>{i.per_share_flat_cost}/-</td>
                                                 </tr>
                                             );
                                         },

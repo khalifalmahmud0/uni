@@ -20,14 +20,70 @@ const Create: React.FC<Props> = (props: Props) => {
     const navigate = useNavigate();
     const [moInfo, setMoInfo] = useState<anyObject>({});
 
+    const [project, setProject] = useState<anyObject>({});
+    const [bookingType, setBookingType] = useState<string>("plot");
+    const [totalShare, setTotalShare] = useState<number>(0);
+
     async function handle_submit(e) {
         e.preventDefault();
+        let have_to_pay_amount = document.getElementById('have_to_pay_amount') as HTMLInputElement;
+        let payment_digit = document.getElementById('payment_digit') as HTMLInputElement;
+
+        let confirm = await (window as any).s_confirm(`
+                পেমেন্ট করতে হবেঃ\n 
+                ( ${have_to_pay_amount.value} ) \n
+                ${(window as any).convertAmount(have_to_pay_amount.value || 0).bn} টাকা \n
+
+                পেমেন্ট করেছেনঃ\n 
+                ( ${payment_digit.value} ) \n
+                ${(window as any).convertAmount(payment_digit.value || 0).bn} টাকা \n
+            `);
+
+        if (!confirm) return;
+
         const response = await dispatch(store(new FormData(e.target)) as any);
         if (!Object.prototype.hasOwnProperty.call(response, 'error')) {
             e.target.reset();
             let id = response.payload.data.data.id;
             navigate(`/booking/edit/${id}`);
         }
+    }
+
+    function get_selected_project({ ids, selectedList }) {
+        if (selectedList.length) {
+            setProject(selectedList[0]);
+        } else {
+            setProject({});
+        }
+    }
+
+    function set_booking_cost(e) {
+        let total_share = e?.target.value;
+        setTotalShare(total_share);
+
+        if (!project.title) {
+            e.target.value = 0;
+            return window.alert('no project is selected.');
+        };
+
+        let property_price_digit = document.getElementById('property_price_digit') as HTMLInputElement;
+        let property_price_text = document.getElementById('property_price_text') as HTMLInputElement;
+        let property_price_text_bangla = document.getElementById('property_price_text_bangla') as HTMLInputElement;
+        let have_to_pay_amount = document.getElementById('have_to_pay_amount') as HTMLInputElement;
+        let have_to_pay_amount_text = document.getElementById('have_to_pay_amount_text') as HTMLInputElement;
+
+        let cost = project[`per_share_${bookingType}_cost`];
+        let have_to_pay = cost * total_share;
+
+        property_price_digit.value = cost.toString();
+        property_price_text.value = (window as any).convertAmount(cost).en;
+        property_price_text_bangla.value = (window as any).convertAmount(cost).bn;
+
+        have_to_pay_amount.value = have_to_pay.toString();
+        have_to_pay_amount_text.value = (window as any).convertAmount(have_to_pay).en;
+
+        // console.log(cost, project);
+
     }
 
     return (
@@ -45,8 +101,10 @@ const Create: React.FC<Props> = (props: Props) => {
                                 <div className="form_auto_fit">
                                     <div className="form-group form-vertical">
                                         <Select
+                                            callback={(e) => setBookingType(e.target.value)}
                                             label="Booking Type"
                                             name="booking_type"
+                                            value={'plot'}
                                             values={[
                                                 { text: '--select--', value: '' },
                                                 { text: 'FLAT', value: 'flat' },
@@ -56,7 +114,20 @@ const Create: React.FC<Props> = (props: Props) => {
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>Project</label>
-                                        <ProjectDropDown multiple={false} name={"project_id"} />
+                                        <ProjectDropDown
+                                            get_selected_data={get_selected_project}
+                                            multiple={false}
+                                            name={"project_id"} />
+                                    </div>
+                                    <div className="form-group form-vertical">
+                                        <Input
+                                            name={'total_share'}
+                                            placeholder={'total_share'}
+                                            type={'number'}
+                                            label={'total_share'}
+                                            callback={set_booking_cost}
+                                            value={0}
+                                        />
                                     </div>
                                     <div className="form-group form-vertical">
                                         <label>Reference</label>
@@ -65,7 +136,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div className="form-group form-vertical">
                                         <label>MO</label>
                                         <UserDropDown multiple={false} name={"mo_id"} get_selected_data={(data) => {
-                                            console.log(data);
+                                            // console.log(data);
                                             data.selectedList.length &&
                                                 setMoInfo(data.selectedList[0]);
                                         }} />
@@ -73,7 +144,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div className="form-group form-vertical">
                                         <label>AGM</label>
                                         <div className="form-control">
-                                            {moInfo.agm_info?.uid} - 
+                                            {moInfo.agm_info?.uid} -
                                             {moInfo.agm_info?.name}
                                         </div>
                                         <input type="hidden" name="agm_id" value={`[${moInfo.agm_info?.id}]`} />
@@ -82,7 +153,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div className="form-group form-vertical">
                                         <label>GM</label>
                                         <div className="form-control">
-                                            {moInfo.gm_info?.uid} - 
+                                            {moInfo.gm_info?.uid} -
                                             {moInfo.gm_info?.name}
                                         </div>
                                         <input type="hidden" name="gm_id" value={`[${moInfo.gm_info?.id}]`} />
@@ -91,7 +162,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                     <div className="form-group form-vertical">
                                         <label>ED</label>
                                         <div className="form-control">
-                                            {moInfo.ed_info?.uid} - 
+                                            {moInfo.ed_info?.uid} -
                                             {moInfo.ed_info?.name}
                                         </div>
                                         <input type="hidden" name="ed_id" value={`[${moInfo.ed_info?.id}]`} />
@@ -395,7 +466,9 @@ const Create: React.FC<Props> = (props: Props) => {
                             </div>
                             {/* Property Details  */}
                             <div>
-                                <h5 className="mb-4">Property Details</h5>
+                                <h5 className="mb-4">
+                                    Property Details
+                                </h5>
                                 <div className="form_auto_fit">
                                     {[
                                         // {
@@ -461,6 +534,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 'Enter property price (digit)',
                                             type: 'number',
                                             label: 'Property Price (Digit)',
+                                            value: project.hasOwnProperty(`per_share_${bookingType}_cost`) ? project[`per_share_${bookingType}_cost`] : '',
                                             callback: function (e, value) {
                                                 let el = document.querySelector('#property_price_text') as HTMLInputElement | null;
                                                 let el2 = document.querySelector('#property_price_text_bangla') as HTMLInputElement | null;
@@ -541,6 +615,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             placeholder: 'Enter date',
                                             type: 'date',
                                             label: 'Date',
+                                            readonly: true,
                                         },
                                         {
                                             name: 'swift_code_routing_no',
@@ -560,6 +635,8 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 type={field.type}
                                                 label={field.label}
                                                 callback={field.callback}
+                                                value={field.value}
+                                                readonly={field.readonly}
                                             />
                                         </div>
                                     ))}
@@ -573,6 +650,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                         <Select
                                             label="Payment Method"
                                             name="payment_method"
+                                            value={"booking_money"}
                                             values={[
                                                 {
                                                     text: '--select--',
@@ -582,14 +660,14 @@ const Create: React.FC<Props> = (props: Props) => {
                                                     text: 'BOOKING MONEY',
                                                     value: 'booking_money',
                                                 },
-                                                {
-                                                    text: 'DOWNPAYMENT',
-                                                    value: 'down_payment',
-                                                },
-                                                {
-                                                    text: 'INSTALLMENT',
-                                                    value: 'installment',
-                                                },
+                                                // {
+                                                //     text: 'DOWNPAYMENT',
+                                                //     value: 'down_payment',
+                                                // },
+                                                // {
+                                                //     text: 'INSTALLMENT',
+                                                //     value: 'installment',
+                                                // },
                                             ]}
                                         />
                                     </div>
@@ -636,12 +714,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                             placeholder: 'Select date',
                                             type: 'date',
                                             label: 'Payment Date',
-                                        },
-                                        {
-                                            name: 'total_share',
-                                            placeholder: 'Total Share',
-                                            type: 'text',
-                                            label: 'Total Share',
+                                            readonly: true,
                                         },
                                         {
                                             name: 'have_to_pay_amount',
@@ -714,6 +787,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 type={field.type}
                                                 label={field.label}
                                                 callback={field.callback}
+                                                readonly={field.readonly}
                                             />
                                         </div>
                                     ))}
