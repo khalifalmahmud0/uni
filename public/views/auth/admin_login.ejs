@@ -139,6 +139,12 @@
                     else if(res.data.data.designation == 'ed'){
                         return location.href = "/ed";
                     }
+                    else if(res.data.data.role == 'account_officer'){
+                        return location.href = "/account-officer";
+                    }
+                    else if(res.data.data.role == 'account_manager'){
+                        return location.href = "/accountant";
+                    }
                 })
                 .catch(err => {
                     let { message, data } = err.response.data;
