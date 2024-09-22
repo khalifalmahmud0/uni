@@ -1,42 +1,42 @@
 "use strict";
-$(document).ready(function(){
-    $(".mobile-toggle").click(function(){
-        $(".nav-menus").toggleClass("open");
+jQuery(document).ready(function(){
+    jQuery(".mobile-toggle").click(function(){
+        jQuery(".nav-menus").toggleClass("open");
     });
-    $(".mobile-search").click(function(){
-        $(".form-control-plaintext").toggleClass("open");
+    jQuery(".mobile-search").click(function(){
+        jQuery(".form-control-plaintext").toggleClass("open");
     });
 });
 
-$(window).on('load',function(){
-    // $('.loader-wrapper').fadeOut('slow', function() {
-    //     $(this).remove();
+jQuery(window).on('load',function(){
+    // jQuery('.loader-wrapper').fadeOut('slow', function() {
+    //     jQuery(this).remove();
     // });
-    window.$('.loader-wrapper').fadeOut('slow', function () {});
+    window.jQuery('.loader-wrapper').fadeOut('slow', function () {});
 })
 
-$(window).on('scroll', function() {
-    if ($(this).scrollTop() > 600) {
-        $('.tap-top').fadeIn();
+jQuery(window).on('scroll', function() {
+    if (jQuery(this).scrollTop() > 600) {
+        jQuery('.tap-top').fadeIn();
     } else {
-        $('.tap-top').fadeOut();
+        jQuery('.tap-top').fadeOut();
     }
 });
-$('.tap-top').click( function() {
-    $("html, body").animate({
+jQuery('.tap-top').click( function() {
+    jQuery("html, body").animate({
         scrollTop: 0
     }, 600);
     return false;
 });
-$(document).ready(function(){
-    if($( window ).width() <= 991 ) {
-        $("#sidebar-toggle").prop('checked', false);
-        $(".page-body-wrapper").addClass("sidebar-close");
+jQuery(document).ready(function(){
+    if(jQuery( window ).width() <= 991 ) {
+        jQuery("#sidebar-toggle").prop('checked', false);
+        jQuery(".page-body-wrapper").addClass("sidebar-close");
     }
-    $("#sidebar-toggle").change(function(){
-        if($("#sidebar-toggle").attr('checked', true))
+    jQuery("#sidebar-toggle").change(function(){
+        if(jQuery("#sidebar-toggle").attr('checked', true))
         {
-            $(".page-sidebar").addClass("page-sidebar-open");
+            jQuery(".page-sidebar").addClass("page-sidebar-open");
         }
     });
 });
@@ -60,28 +60,28 @@ function toggleFullScreen() {
         }
     }
 }
-(function($, window, document, undefined) {
+(function(jQuery, window, document, undefined) {
     "use strict";
-    var $ripple = $(".js-ripple");
-    $ripple.on("click.ui.ripple", function(e) {
-        var $this = $(this);
-        var $offset = $this.parent().offset();
-        var $circle = $this.find(".c-ripple__circle");
-        var x = e.pageX - $offset.left;
-        var y = e.pageY - $offset.top;
-        $circle.css({
+    var jQueryripple = jQuery(".js-ripple");
+    jQueryripple.on("click.ui.ripple", function(e) {
+        var jQuerythis = jQuery(this);
+        var jQueryoffset = jQuerythis.parent().offset();
+        var jQuerycircle = jQuerythis.find(".c-ripple__circle");
+        var x = e.pageX - jQueryoffset.left;
+        var y = e.pageY - jQueryoffset.top;
+        jQuerycircle.css({
             top: y + "px",
             left: x + "px"
         });
-        $this.addClass("is-active");
+        jQuerythis.addClass("is-active");
     });
-    $ripple.on(
+    jQueryripple.on(
         "animationend webkitAnimationEnd oanimationend MSAnimationEnd",
         function(e) {
-            $(this).removeClass("is-active");
+            jQuery(this).removeClass("is-active");
         });
 })(jQuery, window, document);
 
-$(".chat-menu-icons .toogle-bar").click(function(){
-    $(".chat-menu").toggleClass("show");
+jQuery(".chat-menu-icons .toogle-bar").click(function(){
+    jQuery(".chat-menu").toggleClass("show");
 });
