@@ -39,11 +39,11 @@ module.exports = async function (fastify: FastifyInstance) {
         .get(`${prefix}`, AccountLogControllerInstance.all)
         .get(`${prefix}/incomes`, AccountLogControllerInstance.all_incomes)
         .get(`${prefix}/expenses`, AccountLogControllerInstance.all_expense)
-        .get(`${prefix}/:id`, AccountLogControllerInstance.find)
         .post(`${prefix}/store`, AccountLogControllerInstance.store)
         
         .post(`${prefix}/store-expense`,AccountLogControllerInstance.store_expense)
-
+        .get(`${prefix}/debit-credit`,AccountLogControllerInstance.debit_credit)
+        
         /** store log after a successful payment */
         .post(`${prefix}/store-gateway-payment-on-success`,{
             preHandler: check_auth,
@@ -54,7 +54,8 @@ module.exports = async function (fastify: FastifyInstance) {
         .post(`${prefix}/restore`, AccountLogControllerInstance.restore)
         .post(`${prefix}/destroy`, AccountLogControllerInstance.destroy)
         .post(`${prefix}/block`, AccountLogControllerInstance.block)
-        .post(`${prefix}/import`, AccountLogControllerInstance.import);
+        .post(`${prefix}/import`, AccountLogControllerInstance.import)
+        .get(`${prefix}/:id`, AccountLogControllerInstance.find);
 
     const AccountNumberControllerInstance = account_number_controller(fastify);
     prefix = '/account/numbers';

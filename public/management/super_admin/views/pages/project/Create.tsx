@@ -43,6 +43,13 @@ const Create: React.FC<Props> = (props: Props) => {
         );
     };
 
+    const convertAmount = (selector, event) => {
+        let el = document.getElementById(selector) as HTMLInputElement;
+        if (el) {
+            el.value = (window as any).convertAmount(event.target.value).bn;
+        }
+    };
+
     return (
         <>
             <div className="page_content">
@@ -83,10 +90,25 @@ const Create: React.FC<Props> = (props: Props) => {
                                             name: 'road',
                                         },
                                         {
-                                            name: 'project_per_share_cost',
+                                            name: 'video',
                                         },
                                         {
-                                            name: 'video',
+                                            name: 'per_share_plot_cost',
+                                            onchange: function () {
+                                                convertAmount('per_share_plot_cost_in_text', event);
+                                            }
+                                        },
+                                        {
+                                            name: 'per_share_plot_cost_in_text',
+                                        },
+                                        {
+                                            name: 'per_share_flat_cost',
+                                            onchange: function () {
+                                                convertAmount('per_share_flat_cost_in_text', event);
+                                            }
+                                        },
+                                        {
+                                            name: 'per_share_flat_cost_in_text',
                                         },
                                     ].map((field) => (
                                         <div
@@ -98,6 +120,7 @@ const Create: React.FC<Props> = (props: Props) => {
                                                 placeholder={field.placeholder}
                                                 type={field.type}
                                                 label={field.label}
+                                                onChange={field.onchange || (() => '')}
                                             />
                                         </div>
                                     ))}

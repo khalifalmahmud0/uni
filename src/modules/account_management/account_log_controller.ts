@@ -19,6 +19,7 @@ import all_incomes from './services/all_incomes';
 import all_expense from './services/all_expense';
 import store_expense from './services/store_expense';
 import store_gateway_payment from './services/store_gateway_payment';
+import debit_credit from './services/debit_credit';
 
 export default function (fastify: FastifyInstance) {
     return {
@@ -56,6 +57,16 @@ export default function (fastify: FastifyInstance) {
 
         store_expense: async function (req: FastifyRequest, res: FastifyReply) {
             let data: responseObject = await store_expense(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        details: async function (req: FastifyRequest, res: FastifyReply) {
+            let data: responseObject = await details(fastify, req);
+            res.code(data.status).send(data);
+        },
+
+        debit_credit: async function (req: FastifyRequest, res: FastifyReply) {
+            let data: responseObject = await debit_credit(fastify, req);
             res.code(data.status).send(data);
         },
 

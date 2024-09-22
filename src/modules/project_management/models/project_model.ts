@@ -40,7 +40,10 @@ class DataModel extends Model<Infer, InferCreation> {
     declare plot?: string;
     declare road?: string;
 
-    declare per_share_cost?: number;
+    declare per_share_plot_cost?: string;
+    declare per_share_flat_cost?: string;
+    declare per_share_plot_cost_in_text?: string;
+    declare per_share_flat_cost_in_text?: string;
 
     declare video?: string;
     declare image?: string;
@@ -92,12 +95,26 @@ function init(sequelize: Sequelize) {
                 type: DataTypes.TEXT,
                 allowNull: true,
             },
-            road: {
-                type: DataTypes.TEXT,
+
+            per_share_plot_cost: {
+                type: DataTypes.FLOAT(),
                 allowNull: true,
             },
-            per_share_cost: {
-                type: DataTypes.DOUBLE,
+            per_share_flat_cost: {
+                type: DataTypes.FLOAT(),
+                allowNull: true,
+            },
+            per_share_plot_cost_in_text: {
+                type: DataTypes.STRING(255),
+                allowNull: true,
+            },
+            per_share_flat_cost_in_text: {
+                type: DataTypes.STRING(255),
+                allowNull: true,
+            },
+            
+            road: {
+                type: DataTypes.TEXT,
                 allowNull: true,
             },
           

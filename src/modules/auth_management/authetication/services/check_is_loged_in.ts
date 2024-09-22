@@ -24,10 +24,24 @@ const check_is_loged_in = async (
         (request as anyObject).user = user;
         if(user.role == 'customer'){
             return reply.redirect('/customer');
-        }else if(user.role == 'admin'){
-            return reply.redirect('/admin');
-        }else if(user.role == 'marketing'){
+        }
+        else if(user.role == 'admin'){
+            return reply.redirect('/management');
+        }
+        else if(user.role == 'super_admin'){
+            return reply.redirect('/management');
+        }
+        else if(user.designation == 'mo'){
             return reply.redirect('/mo');
+        }
+        else if(user.designation == 'agm'){
+            return reply.redirect('/agm');
+        }
+        else if(user.designation == 'gm'){
+            return reply.redirect('/gm');
+        }
+        else if(user.designation == 'ed'){
+            return reply.redirect('/ed');
         }
     } else {
         return;

@@ -16,6 +16,17 @@ import project_payment_entry from '../../account_management/services/project_pay
 import account_insentive_entry from '../../account_management/services/account_insentive_entry';
 
 /** validation rules */
+function incrementString(str:string) {
+    let numPart = str.match(/\d+/);
+    let nonNumPart = str.replace(/\d+/g, '');
+    
+    if (numPart) {
+        let num = parseInt(numPart[0], 10);
+        num++;
+        return nonNumPart + num.toString().padStart(5,'0'); 
+    }
+    return str;
+}
 async function validate(req: Request) {
     let field:string[] = [];
     let fields = [
@@ -52,6 +63,38 @@ async function validate(req: Request) {
             )
             .run(req);
     }
+
+    var element = 'customer_id';
+    await body(element)
+            .not()
+            .isEmpty()
+            .custom(async (value) => {
+                let models = await db();
+                let user = await models.UserModels.findOne({
+                    where: {
+                        'uid': value,
+                    }
+                });
+
+                if(user){
+                    let user = await models.UserModels.findOne({
+                        where: {
+                            'role': 'customer',
+                        },
+                        order: [['id','DESC']],
+                    });
+
+                    let latest = user?.uid;
+
+                    throw new Error(
+                        `the <b>${value}</b> is taken. use ${incrementString(latest || 'uc00001')}`,
+                    );
+                }
+            })
+            // .withMessage(
+            //     `the <b>UID </b> is taken`,
+            // )
+            .run(req);
 
     field = [
         'project_id', 
@@ -270,7 +313,7 @@ async function store(
                 }
             });
 
-            let category_id = 4;
+            let category_id = 1;
             let acccount_id = 1;
             let user_id = 0;
             if(category && category.id) category_id = category.id;
@@ -318,7 +361,7 @@ async function store(
                 date: moment(body.payment_date).format('YYYY-MM-DD'),
                 amount: body.payment_digit,
                 type: body.payment_method,
-            })
+            });
 
         }
 

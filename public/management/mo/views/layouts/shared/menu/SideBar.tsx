@@ -18,7 +18,7 @@ const SideBar: React.FC<Props> = (props: Props) => {
                 <MenuSingle to="/" icon="icon-dashboard" label="Dashboard" />
                 <MenuSingle to="/customers" icon="icon-dashboard" label="Customers" />
                 <MenuSingle to="/profile" icon="icon-dashboard" label="Profile" />
-                <MenuSingle to="/business-model" icon="icon-dashboard" label="Business Model" />
+                {/* <MenuSingle to="/business-model" icon="icon-dashboard" label="Business Model" /> */}
                 {/* <MenuSingle to="/payment-histories" icon="icon-dashboard" label="Payments and Revenues" /> */}
                 <li>
                     <a className="sidebar-header" href="/logout" onClick={(e) => {

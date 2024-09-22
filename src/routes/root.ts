@@ -24,10 +24,15 @@ module.exports = async function (fastify: FastifyInstance) {
         )
 
         .get(
-            '/admin',
-            { preHandler: check_auth_and_redirect },
+            '/management',
+            // { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
-                if((_req as any).user.role != 'admin') reply.redirect(301, '/');
+                let role = (_req as any).user?.role;
+                console.log(role);
+                
+                if(['admin','super_admin'].includes(role)) 
+                    reply.redirect(301, '/');
+
                 return reply.view('dashboard/admin_uni.ejs');
             },
         )
@@ -45,8 +50,49 @@ module.exports = async function (fastify: FastifyInstance) {
             '/mo',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
-                if((_req as any).user.role != 'marketing') reply.redirect(301, '/');
+                if((_req as any).user.designation != 'mo') reply.redirect(301, '/');
                 return reply.view('dashboard/mo.ejs');
+            },
+        )
+        .get(
+            '/agm',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.designation != 'agm') reply.redirect(301, '/');
+                return reply.view('dashboard/agm.ejs');
+            },
+        )
+        .get(
+            '/gm',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.designation != 'gm') reply.redirect(301, '/');
+                return reply.view('dashboard/gm.ejs');
+            },
+        )
+        .get(
+            '/ed',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.designation != 'ed') reply.redirect(301, '/');
+                return reply.view('dashboard/ed.ejs');
+            },
+        )
+        .get(
+            '/accountant-manager',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                console.log((_req as any).user);
+                if((_req as any).user.role != 'account_manager') return reply.redirect(301, '/');
+                return reply.view('dashboard/account_manager.ejs');
+            },
+        )
+        .get(
+            '/account-officer',
+            { preHandler: check_auth_and_redirect },
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                if((_req as any).user.role != 'account_officer') reply.redirect(301, '/');
+                return reply.view('dashboard/account_officer.ejs');
             },
         )
         .get(
@@ -59,6 +105,12 @@ module.exports = async function (fastify: FastifyInstance) {
             '/print-payment-invoice',
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 return reply.view('print/payment_invoice.ejs');
+            },
+        )
+        .get(
+            '/print-customer-payment-invoice',
+            async (_req: FastifyRequest, reply: FastifyReply) => {
+                return reply.view('print/customer_payment_invoice.ejs');
             },
         )
         .get(

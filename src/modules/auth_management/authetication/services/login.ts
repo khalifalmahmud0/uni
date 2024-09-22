@@ -114,7 +114,7 @@ async function login(
                 }
             }
         }
-        return response(201, 'authentication success', { token, role: data.role });
+        return response(201, 'authentication success', { token, role: data.role, designation: data.designation });
     } catch (error: any) {
         let uid = await error_trace(models, error, req.url, req.params);
         if (error instanceof custom_error) {

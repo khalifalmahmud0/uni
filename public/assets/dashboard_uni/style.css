@@ -35642,3 +35642,7 @@ body .page-wrapper .page-body-wrapper .page-sidebar.native-image-bg .sidebar-use
     min-width: 34%;
   }
 }
+
+body[main-theme-layout="main-theme-layout-4"] .page-wrapper .page-body-wrapper .page-sidebar {
+  z-index: 99;
+}

@@ -36,6 +36,7 @@ class DataModel extends Model<Infer, InferCreation> {
     declare uid?: string;
     declare account_category_id?: number;
     declare user_id?: number;
+    declare trx_id?: string;
 
     declare date?: string;
     declare amount?: number;
@@ -76,6 +77,10 @@ function init(sequelize: Sequelize) {
             },
             
             uid: {
+                type: new DataTypes.STRING(50),
+                allowNull: true,
+            },
+            trx_id: {
                 type: new DataTypes.STRING(50),
                 allowNull: true,
             },

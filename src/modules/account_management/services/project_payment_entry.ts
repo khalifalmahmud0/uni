@@ -29,11 +29,14 @@ async function project_payment_entry(
     param: {
         account_id: number,
         account_number_id: number,
-        account_category_id: number,
         user_id: number,
+        account_category_id: number,
         type: 'income' | 'expense',
-        amount: number,
+        trx_id?: string,
         date?: string,
+        amount: number,
+        amount_in_text?: string,
+        description?: string,
     }
 ): Promise<object> {
 
@@ -45,11 +48,14 @@ async function project_payment_entry(
         uid: generateUID(),
         account_id: param.account_id,
         account_number_id: param.account_number_id,
-        account_category_id: param.account_category_id,
         user_id: param.user_id,
+        account_category_id: param.account_category_id,
         type: param.type,
+        trx_id: param.trx_id,
+        date: moment(param.date).format('YYYY-MM-DD HH:mm:ss'),
         amount: param.amount,
-        date: moment(param.date).format('YYYY-MM-DD'),
+        amount_in_text: param.amount_in_text,
+        description: param.description,
     };
 
     /** store data into database */

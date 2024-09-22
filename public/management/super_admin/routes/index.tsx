@@ -5,6 +5,7 @@ import T1 from '../views/pages/T1';
 import user_branch_staff_routes from '../views/pages/users/config/routes';
 import booking from '../views/pages/booking/config/routes';
 import project from '../views/pages/project/config/routes';
+
 import accounts from '../views/pages/accounts/config/routes';
 import account_types from '../views/pages/accounts/menus/accounts/account_types/config/routes';
 import account_categories from '../views/pages/accounts/menus/accounts/account_categories/config/routes';
@@ -14,6 +15,7 @@ import internal_income from '../views/pages/accounts/menus/payments/internal_inc
 import expense from '../views/pages/accounts/menus/payments/expense/config/routes';
 import debit_credit from '../views/pages/accounts/menus/payments/debit_credit/config/routes';
 import closing_balance from '../views/pages/reports/menus/closing_balance/config/routes';
+
 import customer_report from '../views/pages/reports/menus/customer_report/config/routes';
 import due_report from '../views/pages/reports/menus/due_report/config/routes';
 import expense_statement from '../views/pages/reports/menus/expense_statement/config/routes';

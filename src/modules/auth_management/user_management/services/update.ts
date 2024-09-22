@@ -134,7 +134,7 @@ async function update(
         phone_number: body.phone_number,
         designation: body.designation,
         // image: image_path,
-        password: password,
+        // password: password,
 
         reference: reference,
         mo: mo,

@@ -69,11 +69,13 @@ async function update(
         plot: body.plot,
         road: body.road,
 
-        per_share_cost: body.per_share_cost || 0,
+        per_share_plot_cost: body.per_share_plot_cost || 0,
+        per_share_flat_cost: body.per_share_flat_cost || 0,
+        per_share_plot_cost_in_text: body.per_share_plot_cost_in_text || '',
+        per_share_flat_cost_in_text: body.per_share_flat_cost_in_text || '',
 
         video: body.video,
     };
-
 
     /** print request data into console */
     // console.clear();
