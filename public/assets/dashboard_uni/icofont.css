@@ -8,7 +8,7 @@
 @font-face {
   font-family: 'icofont';
   src: url("./icofont.eot?v=1.0.0-beta");
-  src: url("./icofont.eot?v=1.0.0-beta#iefix") format("embedded-opentype"), url("./icofont.ttf?v=1.0.0-beta") format("truetype"), url("./icofont.woff?v=1.0.0-beta") format("woff"), url("./icofont.svg?v=1.0.0-beta#icofont") format("svg");
+  src: url("./icofont.eot?v=1.0.0-beta#iefix") format("embedded-opentype"), url("./icofont.ttf") format("truetype"), url("./icofont.woff") format("woff"), url("./icofont.svg#icofont") format("svg");
   font-weight: normal;
   font-style: normal; }
 .icofont {
