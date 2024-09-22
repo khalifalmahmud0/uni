@@ -167,7 +167,7 @@ img {
 
 :root {
   --border: 1px solid red;
-  --brand_color: #282c35;
+  --brand_color: #36404a;
   --brand_color2: #5e6169;
   --brand_color3: #2d313a;
   --brand_color4: #292d36;
@@ -607,6 +607,7 @@ img {
   color: var(--brand_white2);
   position: relative;
   width: fit-content;
+  width: 100%;
 }
 .card::after {
   background-color: var(--brand_color);
@@ -623,6 +624,10 @@ img {
 .card > div {
   position: relative;
   z-index: 9;
+}
+
+.chart_tool_tip {
+  z-index: 99999 !important;
 }
 
 input.form_checkbox {

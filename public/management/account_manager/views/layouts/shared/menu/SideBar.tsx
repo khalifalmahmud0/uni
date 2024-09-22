@@ -17,12 +17,16 @@ const SideBar: React.FC<Props> = (props: Props) => {
 
                 {/* Dashboard  */}
                 <MenuSingle to="/" icon="icon-dashboard" label="Dashboard" />
+
+                <MenuSingle to="/booking/create" icon="icon-plus" label="New Booking" />
+                <MenuSingle to="/project_payment/create" icon="icon-plus" label="Take Payment" />
                
                 {/* Account  */}
                 <MenuDropDown group_title="Account" icon="icon-desktop">
                     <MenuDropDownItem label="Incomes" to="/accounts/incomes" />
                     <MenuDropDownItem label="Expenses" to="/accounts/expense" />
                     <MenuDropDownItem label="Expense Entry" to="/accounts/new-expense" />
+                    <MenuDropDownItem label="Project Payment" to="/project_payment" />
                     <MenuDropDownItem label="All Account" to="/account_types" />
                     <MenuDropDownItem label="All Account Number" to="/account_numbers" />
                     <MenuDropDownItem label="All Account Categories" to="/account_categories" />
@@ -47,12 +51,12 @@ const SideBar: React.FC<Props> = (props: Props) => {
 
 function active_link(hash) {
     let url = new URL(hash);
-    (window as any).$(`.sidebar-submenu a`).removeClass('active');
+    (window as any).jQuery(`.sidebar-submenu a`).removeClass('active');
     (window as any)
-        .$(`.sidebar-submenu a[href="${url.hash}"]`)
+        .jQuery(`.sidebar-submenu a[href="${url.hash}"]`)
         .addClass('active');
     (window as any)
-        .$(`.sidebar-submenu a[href="${url.hash}"]`)
+        .jQuery(`.sidebar-submenu a[href="${url.hash}"]`)
         .parent('li')
         .parent('ul').css({ display: 'block' }).addClass('menu-open')
         .parent('li').addClass('active')
@@ -62,8 +66,8 @@ function active_link(hash) {
 function init_nav_action() {
     var animationSpeed = 300,
         subMenuSelector = '.sidebar-submenu';
-    (window as any).$('.sidebar-menu').on('click', 'li a', function (e) {
-        var $this = (window as any).$(this);
+    (window as any).jQuery('.sidebar-menu').on('click', 'li a', function (e) {
+        var $this = (window as any).jQuery(this);
         var checkElement = $this.next();
         if (checkElement.is(subMenuSelector) && checkElement.is(':visible')) {
             checkElement.slideUp(animationSpeed, function () {

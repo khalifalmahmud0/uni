@@ -88,7 +88,7 @@ module.exports = async function (fastify: FastifyInstance) {
             },
         )
         .get(
-            '/account-officer',
+            '/accountant-officer',
             { preHandler: check_auth_and_redirect },
             async (_req: FastifyRequest, reply: FastifyReply) => {
                 if((_req as any).user.role != 'account_officer') reply.redirect(301, '/');
